@@ -2,11 +2,7 @@
 /*
 Plugin Name: List category posts.
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
-Description: List Category Posts is a simple WordPress plugin which allows you to list some posts from a category into a post/page using [catlist=ID],
-where ID stands for the Category Id. You can list several categories on the same page/post. You can use [catlist=ID] as many times as needed with different Id’s.
-You may also define a limit of posts to show. Great to use WordPress as a CMS, and create pages with several categories posts.
-<br/><br/>Inspired by Category Page: http://wordpress.org/extend/plugins/page2cat/<br/>Category Page is a good plugin, but too complicated and big for what I needed. 
-I just needed to list posts from a certain category, and be able to use several category id's to list on one page.
+Description: List Category Posts is a simple WordPress plugin which allows you to list some posts from a category into a post/page using [catlist=ID], where ID stands for the Category Id. You can list several categories on the same page/post. You can use [catlist=ID] as many times as needed with different Id’s. You may also define a limit of posts to show. Great to use WordPress as a CMS, and create pages with several categories posts. <br/><br/>Inspired by Category Page: http://wordpress.org/extend/plugins/page2cat/<br/>Category Page is a good plugin, but too complicated and big for what I needed. I just needed to list posts from a certain category, and be able to use several category id's to list on one page. 
 Version: 0.1
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/wordpress/
