@@ -54,7 +54,7 @@ return $content;
 }
 
 function lcp_add_option_page(){
-	add_options_page('Category List', 'Category List', 'manage_options','listcat/list_cat_posts_options.php');
+	add_options_page('Category List', 'Category List', 'manage_options','list-category-posts/list_cat_posts_options.php');
 }
 
 add_filter('the_content','list_category_posts');
