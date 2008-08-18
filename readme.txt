@@ -25,3 +25,12 @@ List category posts was written with Geany - http://geany.uvena.de/
 ==Usage==
 
 When writing a post/page, use [catlist=ID] where ID is the Id for a specific category. You can change the way List Category Posts shows the posts in your CSS by editing "lcp_catlist". The generated code is: <ul class="lcp_catlist">, and a <li> for each post in the category.
+
+==Other notes==
+
+0.1.1
+  * Fixed major bug, which gave 404 error when trying to use "Options" page.
+
+0.1
+  * Option page to limit number of posts.
+  * Working using [category=ID] for posts and pages, with several categories support.
