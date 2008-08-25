@@ -51,8 +51,3 @@ if ($_POST['lcp_widget_submit']){
 }
 ?>
 	<input type="hidden" id="lcp_widget_submit" name="lcp_widget_submit" value="1" />
-
-<?php	//update_options("lcp_widget_categoryid", $categoryid);
-	///update_options("lcp_widget_limit", $limit);
-	///update_options("lcp_widget_categoryid", $categoryid); 
-?>

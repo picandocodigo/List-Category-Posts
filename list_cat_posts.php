@@ -2,8 +2,8 @@
 /*
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
-Description: List Category Posts is a simple WordPress plugin which allows you to list some posts from a category into a post/page using [catlist=ID], where ID stands for the Category Id. You can list several categories on the same page/post. You can use [catlist=ID] as many times as needed with different Id’s. You may also define a limit of posts to show. Great to use WordPress as a CMS, and create pages with several categories posts. <br/><br/>Inspired by Category Page: http://wordpress.org/extend/plugins/page2cat/<br/>Category Page is a good plugin, but too complicated and big for what I needed. I just needed to list posts from a certain category, and be able to use several category id's to list on one page. 
-Version: 0.2
+Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
+Version: 0.3
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/wordpress/
 */
@@ -25,61 +25,41 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+//Shortcode [catlist parameter="value"]
+function catlist_func($atts, $content=null) {
+	$atts=shortcode_atts(array(
+		'id' => '0',
+		'name' => 'default',
+		'orderby' => 'date',
+		'order' => 'desc',
+		'numberposts' => '5'
+	), $atts);
+	return list_category_posts($atts);
+}
+add_shortcode('catlist', 'catlist_func');
 
-
-function list_category_posts($content){
-global $post;
-	if ( stristr( $content, '[catlist' )) {
-		$search = "@(?:<p>)*\s*\[catlist\s*=\s*(\w+|^\+)\]\s*(?:</p>)*@i";
-		if	(preg_match_all($search, $content, $matches)) {
-			if (is_array($matches)) {
-				$limit = get_option('lcp_limit');		
-				foreach ($matches[1] as $key =>$v0) {
-					$output = "<ul class='lcp_catlist'>";
-					$catposts = get_posts('category='.$v0."&numberposts=".$limit);
-					foreach($catposts as $single):
-						$output .= "<li><a href='".get_permalink($single->ID)."'>".$single->post_title."</a></li>";
-					endforeach;
-					$search = $matches[0][$key];
-					$output .= "</ul>";
-					$replace= $output;
-					$content= str_replace ($search, $replace, $content);
-				}
-			}
-		}
+function list_category_posts($atts){
+	$output = "<ul class='lcp_catlist'>";
+	if($atts['name']!='default' && $atts['id']!='0'){
+		$category='category_name='.$atts['name'];
+	}else{
+		$category='category='.$atts['id'];
 	}
-return $content;
+	$catposts=get_posts($category.'&numberposts='.$atts['numberposts'].'&orderby='.$atts['orderby'].'&order='.$atts['order']);
+	foreach($catposts as $single):
+		$output .= "<li><a href='".get_permalink($single->ID)."'>".$single->post_title."</a></li>";
+	endforeach;
+	$output .= "</ul>";
+	return $output;
 }
 
 function lcp_add_option_page(){
 	add_options_page('List Category Posts', 'List Category Posts', 'manage_options','list-category-posts/list_cat_posts_options.php');
 }
 
-//Sidebar widget zone:
-function lcp_load_widget() {
-	if (function_exists('register_sidebar_widget')) {
-		register_sidebar_widget('List category posts', 'lcp_widget');
-		register_widget_control('List category posts', 'lcp_widget_options', 300, 200 );
-	}
-}
-
-function lcp_widget(){//Display
-	$result = '<ul class="lcp_catlist">';
-	$catposts = get_posts('category='.$ID.'&numberposts='.$NUMBEROFPOSTS);
-	foreach($catposts as $single):
-		$result.='<li><a href="'.get_permalink($single->ID).'">'.$single->post_title.'</a></li>';
-	endforeach;
-	$result .= "</ul>";
-	echo $result;
-}
-
-function lcp_widget_options(){
-	include('lcp_widget_form.php');
-	}
-
-add_filter('the_content','list_category_posts');
-add_action('admin_head', 'lcp_add_option_page');
+//Sidebar Widget:
+include('list_cat_posts_widget.php');
+//Filters and actions:
 add_action('plugins_loaded', 'lcp_load_widget');
-
 
 ?>
