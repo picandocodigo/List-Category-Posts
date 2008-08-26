@@ -28,26 +28,26 @@ The arguments you can use are:
 If you use both arguments (wrong!), List Category Posts will show the posts from the category in 'name'.
 
 'orderby' - To customize the order. Valid values are: 
-    * 'author' - Sort by the numeric author IDs.
-    * 'category' - Sort by the numeric category IDs.
-    * 'content' - Sort by content.
-    * 'date' - Sort by creation date.
-    * 'ID' - Sort by numeric post ID.
-    * 'menu_order' - Sort by the menu order. Only useful with pages.
-    * 'mime_type' - Sort by MIME type. Only useful with attachments.
-    * 'modified' - Sort by last modified date.
-    * 'name' - Sort by stub.
-    * 'parent' - Sort by parent ID.
-    * 'password' - Sort by password.
-    * 'rand' - Randomly sort results.
-    * 'status' - Sort by status.
-    * 'title' - Sort by title.
-    * 'type' - Sort by type.
+* 'author' - Sort by the numeric author IDs.
+* 'category' - Sort by the numeric category IDs.
+* 'content' - Sort by content.
+* 'date' - Sort by creation date.
+* 'ID' - Sort by numeric post ID.
+* 'menu_order' - Sort by the menu order. Only useful with pages.
+* 'mime_type' - Sort by MIME type. Only useful with attachments.
+* 'modified' - Sort by last modified date.
+* 'name' - Sort by stub.
+* 'parent' - Sort by parent ID.
+* 'password' - Sort by password.
+* 'rand' - Randomly sort results.
+* 'status' - Sort by status.
+* 'title' - Sort by title.
+* 'type' - Sort by type.
 Ex: [catlist name=mycategory orderby=date]
 
 'order' - How to sort 'orderby'. Valid values are:
-    * 'ASC' - Ascending (lowest to highest).
-    * 'DESC' - Descending (highest to lowest).
+* 'ASC' - Ascending (lowest to highest).
+* 'DESC' - Descending (highest to lowest).
 Ex: [catlist name=mycategory orderby=title order=asc]
 
 'numberposts' - Number of posts to return. Set to 0 to use the max number of posts per page. Set to -1 to remove the limit. Default: 5 
@@ -62,15 +62,15 @@ List category posts was written with Geany - http://geany.uvena.de/
 **Changelog**
 
 0.3
-  *Broke backwards compatibility. Users of version 0.1 should update their pages and posts for the new shortcode formatting.
-  *Option to pass arguments to the plugin, in order to use name of category instead of ID, orderby, order and number of posts are passed through parameters.
+* Broke backwards compatibility. Users of version 0.1 should update their pages and posts for the new shortcode formatting.
+* Option to pass arguments to the plugin, in order to use name of category instead of ID, orderby, order and number of posts are passed through parameters.
 
 0.2
-  *Added experimental sidebar widget (use at your own risk, not ready for prime-time yet since it hasn't been tested :P )
+* Added experimental sidebar widget (use at your own risk, not ready for prime-time yet since it hasn't been tested :P )
 
 0.1.1
-  * Fixed major bug, which gave 404 error when trying to use "Options" page.
+* Fixed major bug, which gave 404 error when trying to use "Options" page.
 
 0.1
-  * Option page to limit number of posts.
-  * Working using [category=ID] for posts and pages, with several categories support.
+* Option page to limit number of posts.
+* Working using [category=ID] for posts and pages, with several categories support.
