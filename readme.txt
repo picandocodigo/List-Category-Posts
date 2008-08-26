@@ -53,7 +53,7 @@ Ex: [catlist name=mycategory orderby=title order=asc]
 'numberposts' - Number of posts to return. Set to 0 to use the max number of posts per page. Set to -1 to remove the limit. Default: 5 
 Ex: [catlist name=mycategory numberposts=10]
 
-You can customize the way List Category Posts shows the posts in your CSS by editing "lcp_catlist". The generated code is: <ul class="lcp_catlist">, and a <li> for each post in the category.
+You can customize the way List Category Posts shows the posts in your CSS by editing "lcp_catlist".
 
 Since version 0.2, List Category Posts includes a sidebar widget. This is still in development, since I dedicated more time to the arguments in [catlist]. It does work, but you're welcome to test it and comment your feedback at: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 
