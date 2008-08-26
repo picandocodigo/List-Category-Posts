@@ -10,6 +10,18 @@ Stable tag: 0.3
 List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Great to use WordPress as a CMS, and create pages with several categories posts.
 Usage: [catlist argument1=value1 argument2=value2].
 
+==Installation==
+
+* Upload listcat directory into you wp-content/plugins/ directory.
+* Login to your WordPress Admin menu, go to Plugins, and activate it.
+* Add “lcp_catlist” class into your theme’s CSS for custom formatting.
+* You can find the List Category Posts widget in your widgets. Hasn't been tested, still in development, but usable.
+
+**If you're updating List Category Posts from version 0.1**, you must change the code in the pages using it, since it's not backwards compatible. LCP now uses WordPress's shortcode API, in order to allow arguments. You should chang the previous [catlist=ID] to [catlist id=ID].
+
+==Other notes==
+
+**Usage**
 The arguments you can use are:
 'name' - To display posts from a category using the category's name. Ex: [catlist name=mycategory]
 'id' - To display posts from a category using the category's id. Ex: [catlist id=24]
@@ -47,17 +59,7 @@ Since version 0.2, List Category Posts includes a sidebar widget. This is still 
 
 List category posts was written with Geany - http://geany.uvena.de/
 
-==Installation==
-
-    * Upload listcat directory into you wp-content/plugins/ directory.
-    * Login to your WordPress Admin menu, go to Plugins, and activate it.
-    * Add “lcp_catlist” class into your theme’s CSS for custom formatting.
-    * You can find the List Category Posts widget in your widgets. Hasn't been tested, still in development, but usable.
-
-If you're updating List Category Posts from version 0.1, you must change the code in the pages using it, since it's not backwards compatible. LCP now uses WordPress's shortcode API, in order to allow arguments. You should chang the previous [catlist=ID] to [catlist id=ID].
-
-==Other notes==
-Changelog
+**Changelog**
 
 0.3
   *Broke backwards compatibility. Users of version 0.1 should update their pages and posts for the new shortcode formatting.
