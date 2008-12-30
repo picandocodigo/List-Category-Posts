@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.5
 Tested up to: 2.7
-Stable tag: 0.4
+Stable tag: 0.4.1
 
 == Description ==
 List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Great to use WordPress as a CMS, and create pages with several categories posts.
@@ -64,6 +64,10 @@ List category posts was written initially with Geany - http://geany.uvena.de/.
 Now it's being written with GNU Emacs - http://www.gnu.org/software/emacs/
 
 **Changelog**
+
+**0.4.1**
+
+* Fixed some code to enable PHP 4 compatibility. Shouldn't hosting services update to PHP 5?
 
 **0.4**
 
