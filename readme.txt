@@ -3,8 +3,8 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Tags: list, categories, posts, cms
 Requires at least: 2.5
-Tested up to: 2.7
-Stable tag: 0.4.1
+Tested up to: 2.8.4
+Stable tag: 0.5
 
 == Description ==
 List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Great to use WordPress as a CMS, and create pages with several categories posts.
@@ -50,53 +50,58 @@ The arguments you can use are:
 
 * 'numberposts' - Number of posts to return. Set to 0 to use the max number of posts per page. Set to -1 to remove the limit. Default: 5. Ex: [catlist name=mycategory numberposts=10]
 
-* 'date' - Display the date of the post next to the title. Default is 'no', use date=yes to activate it.
+* 'date' - Display post's date next to the title. Default is 'no', use date=yes to activate it.
 
-* 'author' - Display the author of the post next to the title. Default is 'no', use author=yes to activate it.
+* 'author' - Display the post's author next to the title. Default is 'no', use author=yes to activate it.
 
-You can customize the way List Category Posts shows the posts in your CSS by editing "lcp_catlist".
+* 'dateformat' - Format of the date output. Default is get_option('date_format')
+
+* 'template' - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default' that means template in code of plugin not in template file, that's an unordered list (ul html tag) with a CSS class: 'lcp_catlist'
+
+* 'excerpt' - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it.
 
 Since version 0.2, List Category Posts includes a sidebar widget. It works pretty much the same as the plugin itself.
 
 Your comments and feedback are welcome at: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 
-List category posts was written initially with Geany - http://geany.uvena.de/.
-Now it's being written with GNU Emacs - http://www.gnu.org/software/emacs/
+== Frequently Asked Questions ==
+ Got any question?
+http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 
-**Changelog**
+== Changelog ==
 
-**0.4.1**
+= 0.5 =
+* Readme.txt validation.
+* Added 'excerpt' parameter. You can now show the excerpt for each post.
+* Added 'dateformat' parameter. Format of the date output. Default is get_option('date_format') - by Verex
+* Added 'template' parameter. Now you can choose template for output of the plugin. File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default' that means template in code of plugin not in template file -by Verex
+
+= 0.4.1 =
 
 * Fixed some code to enable PHP 4 compatibility. Shouldn't hosting services update to PHP 5?
 
-**0.4**
+ = 0.4 =
 
 * Added 'date' parameter. Now you can show the post's date when listed.
-
 * Added 'author' parameter. You can also show the post's author.
-
 * Sidebar Widget now allows you to add a title in h2 tags.
-
 * Changed some variable names, to keep better compatibility with other plugins/wordpress variables.
-
 * Tested with Wordpress 2.7.
 
-**0.3**
+ = 0.3 =
 
 * Broke backwards compatibility. Users of version 0.1 should update their pages and posts for the new shortcode formatting.
-
 * Option to pass arguments to the plugin, in order to use name of category instead of ID, orderby, order and number of posts are passed through parameters.
 
-**0.2**
+ = 0.2 =
 
 * Added experimental sidebar widget (use at your own risk, not ready for prime-time yet since it hasn't been tested :P )
 
-**0.1.1**
+ = 0.1.1 =
 
 * Fixed major bug, which gave 404 error when trying to use "Options" page.
 
-**0.1**
+ = 0.1 =
 
 * Option page to limit number of posts.
-
 * Working using [category=ID] for posts and pages, with several categories support.
