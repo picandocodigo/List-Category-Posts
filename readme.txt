@@ -14,7 +14,7 @@ Usage: [catlist argument1=value1 argument2=value2].
 
 * Upload listcat directory into you wp-content/plugins/ directory.
 * Login to your WordPress Admin menu, go to Plugins, and activate it.
-* Add “lcp_catlist” class into your theme’s CSS for custom formatting.
+* Add "lcp_catlist" class into your theme’s CSS for custom formatting, or create a new php file in templates directory and use it as a parameter.
 * You can find the List Category Posts widget in your widgets. Hasn't been tested, still in development, but usable.
 
 **If you're updating List Category Posts from version 0.1**, you must change the code in the pages using it, since it's not backwards compatible. LCP now uses WordPress's shortcode API, in order to allow arguments. You should chang the previous [catlist=ID] to [catlist id=ID].
@@ -63,6 +63,8 @@ The arguments you can use are:
 Since version 0.2, List Category Posts includes a sidebar widget. It works pretty much the same as the plugin itself.
 
 Your comments and feedback are welcome at: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
+
+**New Code is welcome** :D
 
 == Frequently Asked Questions ==
  Got any question?
