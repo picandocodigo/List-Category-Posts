@@ -1,6 +1,5 @@
 <?php
 /*
-<<<<<<< .mine
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
@@ -8,15 +7,6 @@ Version: 0.5
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/wordpress/
 */
-=======
- Plugin Name: List category posts
- Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
- Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
- Version: 0.4.2
- Author: Fernando Briano
- Author URI: http://picandocodigo.net/wordpress/
- */
->>>>>>> .r160642
 
 /* Copyright 2008  Fernando Briano  (email : transformers.es@gmail.com)
 
@@ -37,7 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //Shortcode [catlist parameter="value"]
 function catlist_func($atts, $content=null) {
-<<<<<<< .mine
 	$atts=shortcode_atts(array(
 			'id' => '0',
 			'name' => 'default',
@@ -51,24 +40,10 @@ function catlist_func($atts, $content=null) {
 			'excerpt' => 'no'
 		), $atts);
 	return list_category_posts($atts);
-=======
-	$atts = shortcode_atts(array(
-				'id' => '0',
-				'name' => 'default',
-				'orderby' => 'date',
-				'order' => 'desc',
-				'numberposts' => '5',
-				'date' => 'no',
-				'author' => 'no'
-				), $atts);
-				return list_category_posts($atts);
->>>>>>> .r160642
 }
 add_shortcode('catlist', 'catlist_func');
 
 function list_category_posts($atts){
-<<<<<<< .mine
-	
 	if($atts['name']!='default' && $atts['id']!='0'){
 		$category = 'category_name=' . $atts['name'];
 	}else{
@@ -77,19 +52,6 @@ function list_category_posts($atts){
 	/*I should check this for the next version: ('category__in' => array(2,6))
 	to allow posts from many categories.
 	http://codex.wordpress.org/Template_Tags/get_posts#Parameters:_WordPress_2.6.2B */
-=======
-	$output = "<ul class='lcp_catlist'>";
-	if($atts['name'] != 'default' && $atts['id'] != '0'){
-		$category='category_name=' . $atts['name'];
-	}else{
-		$category='category=' . $atts['id'];
-	}
-	/*I should check this for the next version: ('category__in' => array(2,6))
-	 to allow posts from many categories.
-	 http://codex.wordpress.org/Template_Tags/get_posts#Parameters:_WordPress_2.6.2B */
->>>>>>> .r160642
-
-<<<<<<< .mine
 	//Build the query for get_posts()
 	$catposts = get_posts($category.'&numberposts=' .
 				$atts['numberposts'] . '&orderby=' . $atts['orderby'] .
@@ -124,23 +86,6 @@ function list_category_posts($atts){
 	endforeach;
 	$output .= "</ul>";
 	return $output;
-=======
-	//Build the query for get_posts()
-	$catposts=get_posts($category.'&numberposts='.$atts['numberposts'].'&orderby='.$atts['orderby'].'&order='.$atts['order']);
-	foreach($catposts as $single):
-		$output .= "<li><a href='".get_permalink($single->ID)."'>".$single->post_title."</a>";
-		if($atts['date'] == 'yes'){
-			$output .= " - " . $single->post_date;
-		}
-		if($atts['author'] == 'yes'){
-			$lcp_userdata = get_userdata($single->post_author);
-			$output .= " - " . $lcp_userdata->user_nicename;
-		}
-		$output .= "</li>";
-	endforeach;
-	$output  .=  "</ul>";
-	return $output;
->>>>>>> .r160642
 }
 
 function lcp_add_option_page(){
