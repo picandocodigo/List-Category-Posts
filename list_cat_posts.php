@@ -95,4 +95,16 @@ include('list_cat_posts_widget.php');
 //Filters and actions:
 add_action('plugins_loaded', 'lcp_load_widget');
 
+
+//Requests:
+/*
+ * 1
+ * I'd like to have a shortcode that would insert, at the end of the list of posts,
+ * a link titled "More..." (or something like that) that links to the category page.
+ * http://codex.wordpress.org/Function_Reference/get_category
+ *
+ * 2
+ * http://foro.picandocodigo.net/viewtopic.php?f=27&t=221
+ * More fixes
+ */
 ?>
