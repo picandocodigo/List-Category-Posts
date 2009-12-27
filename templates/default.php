@@ -24,19 +24,24 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	$output .= "<li><a href='".get_permalink($single->ID)."'>".$single->post_title."</a>";
+	$output .= '<p><strong>' . $cat_link_string . '</strong></p>';
+	$output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
 	//Style for date:
 	if($atts['date']=='yes'){
-		$output.=" - ".get_the_time($atts['dateformat'], $single);
+		$output.= ' - ' . get_the_time($atts['dateformat'], $single);
 	}
 	//Show author?
 	if($atts['author']=='yes'){
 		$lcp_userdata = get_userdata($single->post_author);
 		$output.=" - ".$lcp_userdata->user_nicename;
 	}
-	//Show excerpt?
-	if($atts['excerpt']=='yes' && ($single->post_excerpt)){
-		$output .= "<p>$single->post_excerpt</p>";
+	//Show content?
+	if($atts['content']=='yes' && $single->post_content){
+		$output .= "<p>$single->post_content</p>";
 	}
-	$output.="</li>";
+	//Show excerpt?
+	if($atts['excerpt']=='yes' && $single->post_excerpt && !($atts['content']=='yes' && $single->post_content) ){
+		$output .= '<p>' . $single->post_excerpt . '</p>';
+	}
+	$output.='</li>';
 ?> 
