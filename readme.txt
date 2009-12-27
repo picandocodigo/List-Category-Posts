@@ -3,8 +3,8 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Tags: list, categories, posts, cms
 Requires at least: 2.6
-Tested up to: 2.8.4
-Stable tag: 0.6
+Tested up to: 2.9
+Stable tag: 0.7
 
 == Description ==
 List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Great to use WordPress as a CMS, and create pages with several categories posts.
@@ -14,7 +14,7 @@ Usage: [catlist argument1=value1 argument2=value2].
 
 * Upload listcat directory into you wp-content/plugins/ directory.
 * Login to your WordPress Admin menu, go to Plugins, and activate it.
-* Add "lcp_catlist" class into your theme’s CSS for custom formatting, or create a new php file in templates directory and use it as a parameter.
+* Edit the default.php file on templates to customize the way the categories are displayed, or use the default one included in the plugin's code. You can use several different templates if you want.
 * You can find the List Category Posts widget in your widgets. Hasn't been tested, still in development, but usable.
 
 **If you're updating List Category Posts from version 0.1**, you must change the code in the pages using it, since it's not backwards compatible. LCP now uses WordPress's shortcode API, in order to allow arguments. You should chang the previous [catlist=ID] to [catlist id=ID].
@@ -76,8 +76,9 @@ Your comments and feedback are welcome at: http://picandocodigo.net/programacion
 **New Code is welcome** :D
 
 == Frequently Asked Questions ==
- Got any question?
-http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
+* **Instructions** on how to use the plugin: http://wordpress.org/extend/plugins/list-category-posts/other_notes/
+* **Support forum** on the following URL: http://foro.picandocodigo.net/viewtopic.php?f=27&t=221
+* **New feature requests** on the following URL: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 
 == Changelog ==
 
