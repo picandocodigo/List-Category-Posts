@@ -61,6 +61,14 @@ If you use both arguments (wrong!), List Category Posts will show the posts from
 
 * **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it.
 
+* **excludeposts** - IDs of posts to exclude from the list. Ex: [catlist excludeposts=12,52,37]
+
+* **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
+
+* **content** - Show the full content of the post. Default is 'no'. Ex: [catlist content=yes]
+
+* **catlink** - Show the link to the category. Use the template system to customize its display using the variable $cat_link_string. Default is 'no'. Ex: [catlist catlink=yes].
+
 Since version 0.2, List Category Posts includes a sidebar widget. It works pretty much the same as the plugin itself.
 
 Your comments and feedback are welcome at: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
@@ -72,6 +80,12 @@ Your comments and feedback are welcome at: http://picandocodigo.net/programacion
 http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 
 == Changelog ==
+
+= 0.7 =
+* Exclude posts. Contribution by acub.
+* Offset parameter on shortcode to start listing posts with an offset. Contribution by Levi Vasquez
+* Content of the post can now be displayed. Contribution by Lang Zerner.
+* Link to the category available. By request on the plugin's forum.
 
 = 0.6 =
 * Minor fix for unclosed ul if not using templates.

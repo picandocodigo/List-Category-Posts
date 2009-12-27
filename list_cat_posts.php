@@ -35,26 +35,40 @@ function catlist_func($atts, $content=null) {
 			'numberposts' => '5',
 			'date' => 'no',
 			'author' => 'no',
-			'dateformat' => get_option('date_format'), //By Verex
+			'dateformat' => get_option('date_format'),
 			'template' => 'default',
 			'excerpt' => 'no',
-			'exclude' => '0'
+			'exclude' => '0',
+			'excludeposts' => '0',
+			'offset' => '4',
+			'catlink' => 'no'
 		), $atts);
 	return list_category_posts($atts);
 }
 add_shortcode('catlist', 'catlist_func');
 
 function list_category_posts($atts){
-	if($atts['name']!='default' && $atts['id']!='0'){
+	if($atts['name']!='default' && $atts['id']=='0'){
 		$category = 'category_name=' . $atts['name'];
+		$category_id = get_cat_ID($atts['name']);
 	}else{
 		$category = 'cat=' . $atts['id'];
+		$category_id = $atts['id'];
+	}
+	
+	//Link to the category:
+	if ($atts['catname'] == 'yes'){
+		$cat_link = get_category_link($category_id);
+		$cat_data = get_category($atts['id']);
+		$cat_title = $catdata->name;
+		$cat_link_string = '<a href=' . $cat_link . ' title="' . $cat_title . '">' . $cat_name . '<a/>';
 	}
 	//Build the query for get_posts()
 	$catposts = get_posts($category.'&numberposts=' . $atts['numberposts'] .
 				'&orderby=' . $atts['orderby'] .
-				'&order=' . $atts['order']);
-	
+				'&order=' . $atts['order'] .
+				'&exclude=' . $atts['excludeposts'] .
+				'&offset=' . $atts['offset'] );
 	//Template code:
 	$tplFileName= $atts['template'] != 'default'?dirname(__FILE__).'/templates/'.$atts['template'].'.php' : null;
 	if ((!empty($tplFileName)) && (is_readable($tplFileName))) {
@@ -76,11 +90,14 @@ function list_category_posts($atts){
 				$lcp_userdata = get_userdata($single->post_author);
 				$output.=" - ".$lcp_userdata->user_nicename . '<br/>';
 			}
-			if($atts['excerpt']=='yes' && ($single->post_excerpt)){
+			if($atts['content']=='yes' && $single->post_content){
+				$output .= "<p>$single->post_content</p>";
+			}
+			if($atts['excerpt']=='yes' && $single->post_excerpt && !($atts['content']=='yes' && $single->post_content) ){
 				$output .= "<p>$single->post_excerpt</p>";
 			}
 			$output.="</li>";
-		}
+}
 	endforeach;
 	if(!$lcpTemplate): $output .= "</ul>"; endif;
 	return $output;
@@ -95,16 +112,4 @@ include('list_cat_posts_widget.php');
 //Filters and actions:
 add_action('plugins_loaded', 'lcp_load_widget');
 
-
-//Requests:
-/*
- * 1
- * I'd like to have a shortcode that would insert, at the end of the list of posts,
- * a link titled "More..." (or something like that) that links to the category page.
- * http://codex.wordpress.org/Function_Reference/get_category
- *
- * 2
- * http://foro.picandocodigo.net/viewtopic.php?f=27&t=221
- * More fixes
- */
 ?>
