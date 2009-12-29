@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.7.1
+Version: 0.7.2
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/wordpress/
 */
@@ -24,6 +24,11 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+
+//Sidebar Widget:
+include('list_cat_posts_widget.php');
+//Filters and actions:
+add_action('plugins_loaded', 'lcp_load_widget');
 
 //Shortcode [catlist parameter="value"]
 function catlist_func($atts, $content=null) {
@@ -55,13 +60,14 @@ function list_category_posts($atts){
 		$category = 'cat=' . $atts['id'];
 		$category_id = $atts['id'];
 	}
-	
+
 	//Link to the category:
-	if ($atts['catname'] == 'yes'){
+	$cat_link_string = '';
+	if ($atts['catlink'] == 'yes'){
 		$cat_link = get_category_link($category_id);
 		$cat_data = get_category($atts['id']);
-		$cat_title = $catdata->name;
-		$cat_link_string = '<a href=' . $cat_link . ' title="' . $cat_title . '">' . $cat_name . '<a/>';
+		$cat_title = $cat_data->name;
+		$cat_link_string = '<a href=' . $cat_link . ' title="' . $cat_title . '">' . $cat_title . '<a/>';
 	}
 	//Build the query for get_posts()
 	$catposts = get_posts($category.'&numberposts=' . $atts['numberposts'] .
@@ -70,18 +76,17 @@ function list_category_posts($atts){
 				'&exclude=' . $atts['excludeposts'] .
 				'&offset=' . $atts['offset'] );
 	//Template code:
-	$tplFileName= $atts['template'] != 'default'?dirname(__FILE__).'/templates/'.$atts['template'].'.php' : null;
+	$tplFileName = $atts['template'] != 'default'?dirname(__FILE__).'/templates/'.$atts['template'].'.php' : null;
 	if ((!empty($tplFileName)) && (is_readable($tplFileName))) {
-		$lcpTemplate = true;
+		require($tplFileName);
 	}else{
-		$output = '<ul class="lcp_catlist">';//For default ul
-	}
-	
-	foreach($catposts as $single):
-		//Template idea by Verex
-		if($lcpTemplate){
-			require($tplFileName);
-		} else {
+		if ($cat_link_string != ''){
+			$output = '<p><strong>' . $cat_link_string . '</strong></p>';
+		}else{
+			$output = '';
+		}
+		$output .= '<ul class="lcp_catlist">';//For default ul
+		foreach($catposts as $single):
 			$output .= '<li><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
 			if($atts['date']=='yes'){
 				$output .=  ' - ' . get_the_time($atts['dateformat'], $single);//by Verex, great idea!
@@ -97,19 +102,14 @@ function list_category_posts($atts){
 				$output .= "<p>$single->post_excerpt</p>";
 			}
 			$output.="</li>";
-}
-	endforeach;
-	if(!$lcpTemplate): $output .= "</ul>"; endif;
+		endforeach;
+		$output .= "</ul>";
+	}
 	return $output;
 }
 
 function lcp_add_option_page(){
 	add_options_page('List Category Posts', 'List Category Posts', 'manage_options','list-category-posts/list_cat_posts_options.php');
 }
-
-//Sidebar Widget:
-include('list_cat_posts_widget.php');
-//Filters and actions:
-add_action('plugins_loaded', 'lcp_load_widget');
 
 ?>

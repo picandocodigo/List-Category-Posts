@@ -3,7 +3,7 @@
 Plugin Name: List Category Posts - Template
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: Template file for List Category Post Plugin for Wordpress which is used by plugin by argument template=value.php
-Version: 0.0.3
+Version: 0.4
 Author: Radek Uldrych & Fernando Briano 
 Author URI: http://picandocodigo.net http://radoviny.net
 */
@@ -24,7 +24,15 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-	$output .= '<p><strong>' . $cat_link_string . '</strong></p>';
+
+//Show category?
+if ($cat_link_string != ''){
+	$output = '<p><strong>' . $cat_link_string . '</strong></p>';
+}else{
+	$output = '';
+}
+//Posts loop:
+foreach($catposts as $single):
 	$output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
 	//Style for date:
 	if($atts['date']=='yes'){
@@ -44,4 +52,5 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 		$output .= '<p>' . $single->post_excerpt . '</p>';
 	}
 	$output.='</li>';
+endforeach;
 ?> 
