@@ -83,7 +83,7 @@ Your comments and feedback are welcome at: http://picandocodigo.net/programacion
 == Upgrade Notice ==
 
 = 0.7.2 =
-Template system has changed. Now the posts loop must be defined inside the template.
+Template system has changed. Now the posts loop must be defined inside the template. Check templates/default.php for an example.
 
 
 == Changelog ==
