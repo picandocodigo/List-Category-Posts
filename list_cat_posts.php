@@ -40,7 +40,7 @@ function catlist_func($atts, $content=null) {
 			'excerpt' => 'no',
 			'exclude' => '0',
 			'excludeposts' => '0',
-			'offset' => '4',
+			'offset' => '0',
 			'catlink' => 'no'
 		), $atts);
 	return list_category_posts($atts);
