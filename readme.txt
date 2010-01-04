@@ -100,6 +100,7 @@ Template system has changed. Now the posts loop must be defined inside the templ
 * Offset parameter on shortcode to start listing posts with an offset. Contribution by Levi Vasquez
 * Content of the post can now be displayed. Contribution by Lang Zerner.
 * Link to the category available. By request on the plugin's forum.
+* Fixed small bug when using category name.
 
 = 0.6 =
 * Minor fix for unclosed ul if not using templates.

@@ -67,7 +67,7 @@ function list_category_posts($atts){
 		$cat_link = get_category_link($category_id);
 		$cat_data = get_category($atts['id']);
 		$cat_title = $cat_data->name;
-		$cat_link_string = '<a href=' . $cat_link . ' title="' . $cat_title . '">' . $cat_title . '<a/>';
+		$cat_link_string = '<a href=' . $cat_link . ' title="' . $cat_title . '">' . $cat_title . '</a>';
 	}
 	//Build the query for get_posts()
 	$catposts = get_posts($category.'&numberposts=' . $atts['numberposts'] .
