@@ -2,22 +2,25 @@
 Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Tags: list, categories, posts, cms
-Requires at least: 2.6
+Requires at least: 2.8
 Tested up to: 2.9
-Stable tag: 0.7.2
+Stable tag: 0.8
 
 == Description ==
 List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Great to use WordPress as a CMS, and create pages with several categories posts.
+
+Since version 0.8, the sidebar widget has been migrated to WordPress 2.8 Widget API, so you can use as many widgets as you like. The widget has the same functionallity as the plugin, but you can customize its options on the Appearence > Widgets section.
+
 Usage: [catlist argument1=value1 argument2=value2].
+
+
 
 ==Installation==
 
 * Upload listcat directory into you wp-content/plugins/ directory.
 * Login to your WordPress Admin menu, go to Plugins, and activate it.
 * Edit the default.php file on templates to customize the way the categories are displayed, or use the default one included in the plugin's code. You can use several different templates if you want.
-* You can find the List Category Posts widget in your widgets. Hasn't been tested, still in development, but usable.
-
-**If you're updating List Category Posts from version 0.1**, you must change the code in the pages using it, since it's not backwards compatible. LCP now uses WordPress's shortcode API, in order to allow arguments. You should chang the previous [catlist=ID] to [catlist id=ID].
+* You can find the ListCategoryPostsWidget in the Appearence > Widgets section on your WordPress Dashboard.
 
 ==Other notes==
 
@@ -85,8 +88,15 @@ Your comments and feedback are welcome at: http://picandocodigo.net/programacion
 = 0.7.2 =
 Template system has changed. Now the posts loop must be defined inside the template. Check templates/default.php for an example.
 
+= 0.8 =
+Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use the widget.
+
 
 == Changelog ==
+
+= 0.8 =
+* Widget implements WP 2.8 Widget API, so at least 2.8 is required. Now you can use as many widgets as necessary, with new params.
+* Updated readme file.
 
 = 0.7.2 =
 * Fixed link to category.
