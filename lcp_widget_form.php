@@ -41,7 +41,7 @@ $instance = wp_parse_args( (array) $instance, array( 'title' => '',
 		$categoryid = strip_tags($instance['categoryid']);
 		
 ?>
-<?php var_dump($instance);?>
+<?php //var_dump($instance);?>
 <p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <br/>
 	<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" 
 	name="<?php echo $this->get_field_name('title'); ?>" type="text" 

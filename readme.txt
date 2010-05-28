@@ -3,8 +3,8 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Tags: list, categories, posts, cms
 Requires at least: 2.8
-Tested up to: 2.9.1
-Stable tag: 0.8.1
+Tested up to: 2.9.2
+Stable tag: 0.9
 
 == Description ==
 List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Great to use WordPress as a CMS, and create pages with several categories posts.
@@ -32,6 +32,8 @@ The arguments you can use are:
 * **id** - To display posts from a category using the category's id. Ex: [catlist id=24]. You can **include several categories**: Ex: [catlist id=17,24,32] or **exclude** a category with the minus (-)  
 If you use both arguments (wrong!), List Category Posts will show the posts from the category in 'name'.
 
+* **tag** - Tag support, you can display posts from a certain tag. 
+
 * **orderby** - To customize the order. Valid values are: 
   * **author** - Sort by the numeric author IDs.
   * **category** - Sort by the numeric category IDs.
@@ -48,7 +50,8 @@ If you use both arguments (wrong!), List Category Posts will show the posts from
   * **status** - Sort by status.
   * **title** - Sort by title.
   * **type** - Sort by type. Ex: [catlist name=mycategory orderby=date]
-  * **order** - How to sort **orderby**. Valid values are:
+
+* **order** - How to sort **orderby**. Valid values are:
   * **ASC** - Ascending (lowest to highest).
   * **DESC** - Descending (highest to lowest). Ex: [catlist name=mycategory orderby=title order=asc]
 
@@ -79,9 +82,8 @@ Your comments and feedback are welcome at: http://picandocodigo.net/programacion
 **New Code is welcome** :D
 
 == Frequently Asked Questions ==
-* **Instructions** on how to use the plugin: http://wordpress.org/extend/plugins/list-category-posts/other_notes/
-* **Support forum** on the following URL: http://foro.picandocodigo.net/viewtopic.php?f=27&t=221
-* **New feature requests** on the following URL: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
+* **Instructions** on how to use the plugin: http://foro.picandocodigo.net/viewtopic.php?f=28&t=251
+* **Support forum** & **New feature requests**: http://foro.picandocodigo.net/viewforum.php?f=28
 
 == Upgrade Notice ==
 
@@ -91,8 +93,15 @@ Template system has changed. Now the posts loop must be defined inside the templ
 = 0.8 =
 Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use the widget.
 
+= 0.9 = 
+Template system has changed. Custom templates should be stored in wordpress theme folder.
 
 == Changelog ==
+
+= 0.9 =
+* admin parameter now shows "display name" instead of "user nice name".
+* Template system has changed: In older version, custom templates got deleted if an automatic upgrade was done. Now templates are stored in the theme folder. (Thanks Paul Clark)
+* Added tag support - http://foro.picandocodigo.net/viewtopic.php?f=28&t=240
 
 = 0.8.1 =
 * Fixed bug for 'content'.
