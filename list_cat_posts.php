@@ -3,9 +3,9 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.8.1
+Version: 0.9
 Author: Fernando Briano
-Author URI: http://fernandobriano.com/
+Author URI: http://picandocodigo.net/
 */
 
 /* Copyright 2008-2010  Fernando Briano  (email : fernando@picandocodigo.net)
@@ -27,8 +27,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //Sidebar Widget:
 include('list_cat_posts_widget.php');
-//Filters and actions:
-//add_action('plugins_loaded', 'lcp_load_widget');
 
 //Shortcode [catlist parameter="value"]
 function catlist_func($atts, $content=null) {
@@ -46,6 +44,7 @@ function catlist_func($atts, $content=null) {
 			'exclude' => '0',
 			'excludeposts' => '0',
 			'offset' => '0',
+			'tags' => '',
 			'content' => 'no',
 			'catlink' => 'no'
 		), $atts);
@@ -75,9 +74,20 @@ function list_category_posts($atts){
 				'&orderby=' . $atts['orderby'] .
 				'&order=' . $atts['order'] .
 				'&exclude=' . $atts['excludeposts'] .
+				'&tag=' . $atts['tags'] .
 				'&offset=' . $atts['offset'] );
 	//Template code:
-	$tplFileName = $atts['template'] != 'default'?dirname(__FILE__).'/templates/'.$atts['template'].'.php' : null;
+	$tplFileName = null;
+	$possibleTemplates = array(
+		// File locations lower in list override others
+		dirname(__FILE__).'/templates/'.$atts['template'].'.php',
+		STYLESHEETPATH.'/list-category-posts/'.$atts['template'].'.php',
+	);
+	foreach($possibleTemplates as $key => $file) {
+		if (is_readable($file)) {
+			$tplFileName = $file;
+		}
+	}
 	if ((!empty($tplFileName)) && (is_readable($tplFileName))) {
 		require($tplFileName);
 	}else{
@@ -94,7 +104,7 @@ function list_category_posts($atts){
 			}
 			if($atts['author']=='yes'){
 				$lcp_userdata = get_userdata($single->post_author);
-				$output.=" - ".$lcp_userdata->user_nicename . '<br/>';
+				$output.=" - ".$lcp_userdata->display_name . '<br/>';
 			}
 			if($atts['content']=='yes' && $single->post_content){
 				$output .= "<p>$single->post_content</p>";
@@ -113,4 +123,8 @@ function lcp_add_option_page(){
 	add_options_page('List Category Posts', 'List Category Posts', 'manage_options','list-category-posts/list_cat_posts_options.php');
 }
 
+/** TODO 
+ * 	-Add auto excerpt
+ *  -Images (preview or thumbnail, whatever, I have to dig into this
+ */
 ?>

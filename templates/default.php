@@ -31,6 +31,7 @@ if ($cat_link_string != ''){
 }else{
 	$output = '';
 }
+$output .= 'Using template';
 //Posts loop:
 foreach($catposts as $single):
 	$output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
@@ -41,7 +42,7 @@ foreach($catposts as $single):
 	//Show author?
 	if($atts['author']=='yes'){
 		$lcp_userdata = get_userdata($single->post_author);
-		$output.=" - ".$lcp_userdata->user_nicename;
+		$output.=" - ".$lcp_userdata->display_name;
 	}
 	//Show content?
 	if($atts['content']=='yes' && $single->post_content){
