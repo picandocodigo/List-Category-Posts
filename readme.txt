@@ -14,7 +14,6 @@ Since version 0.8, the sidebar widget has been migrated to WordPress 2.8 Widget 
 Usage: [catlist argument1=value1 argument2=value2].
 
 
-
 ==Installation==
 
 * Upload listcat directory into you wp-content/plugins/ directory.
@@ -97,6 +96,9 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in wordpress theme folder.
 
 == Changelog ==
+
+= 0.10 =
+* Code for the_content was fixed so that the content to output filtered content (thanks DougJoseph http://wordpress.org/support/topic/399754)
 
 = 0.9 =
 * admin parameter now shows "display name" instead of "user nice name".
