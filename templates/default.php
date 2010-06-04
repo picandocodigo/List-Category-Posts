@@ -3,7 +3,7 @@
 Plugin Name: List Category Posts - Template
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: Template file for List Category Post Plugin for Wordpress which is used by plugin by argument template=value.php
-Version: 0.6
+Version: 0.6.1
 Author: Radek Uldrych & Fernando Briano 
 Author URI: http://picandocodigo.net http://radoviny.net
 */
@@ -31,6 +31,7 @@ if ($cat_link_string != ''){
 }else{
 	$output = '';
 }
+$output .= '<ul class="lcp_catlist">';//For default ul
 //Posts loop:
 foreach($catposts as $single):
 	$output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
@@ -55,4 +56,5 @@ foreach($catposts as $single):
 	}
 	$output.='</li>';
 endforeach;
+$output.='</ul>';
 ?> 
