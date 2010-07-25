@@ -144,5 +144,6 @@ function lcp_excerpt($single){
 /** TODO 
  *  -Images (preview or thumbnail, whatever, I have to dig into this
  *  -Pagination
+ *  -i18n
  */
 ?>
