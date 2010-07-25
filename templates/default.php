@@ -27,34 +27,36 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 //Show category?
 if ($cat_link_string != ''){
-	$output = '<p><strong>' . $cat_link_string . '</strong></p>';
+	$lcp_output = '<p><strong>' . $cat_link_string . '</strong></p>';
 }else{
-	$output = '';
+	$lcp_output = '';
 }
-$output .= '<ul class="lcp_catlist">';//For default ul
+$lcp_output .= '<ul class="lcp_catlist">';//For default ul
 //Posts loop:
 foreach($catposts as $single):
-	$output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
+	$lcp_output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
 	//Style for date:
 	if($atts['date']=='yes'){
-		$output.= ' - ' . get_the_time($atts['dateformat'], $single);
+		$lcp_output .= ' - ' . get_the_time($atts['dateformat'], $single);
 	}
 	//Show author?
 	if($atts['author']=='yes'){
 		$lcp_userdata = get_userdata($single->post_author);
-		$output.=" - ".$lcp_userdata->display_name;
+		$lcp_output .=" - ".$lcp_userdata->display_name;
 	}
 	//Show content?
 	if($atts['content']=='yes' && $single->post_content){
 		$lcpcontent = apply_filters('the_content', $single->post_content); // added to parse shortcodes
 		$lcpcontent = str_replace(']]>', ']]&gt', $lcpcontent); // added to parse shortcodes
-		$output.= '<p>' . $lcpcontent . '</p>'; // line tweaked to output filtered content
+		$lcp_output .= '<p>' . $lcpcontent . '</p>'; // line tweaked to output filtered content
 	}
 	//Show excerpt?
-	if($atts['excerpt']=='yes' && $single->post_excerpt && !($atts['content']=='yes' && $single->post_content) ){
-		$output .= '<p>' . $single->post_excerpt . '</p>';
+	if($atts['excerpt']=='yes' && !($atts['content']=='yes' && $single->post_content) ){
+		$lcp_output .= '<p>' . lcp_excerpt($single) . '</p>';
 	}
-	$output.='</li>';
+	$lcp_output .='</li>';
 endforeach;
-$output.='</ul>';
+$lcp_output .= '</ul>';
+
+
 ?> 
