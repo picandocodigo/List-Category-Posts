@@ -16,32 +16,34 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-$instance = wp_parse_args( (array) $instance, array( 'title' => '',
-														'categoryid' => '',
-														'limit' => '',
-														'orderby'=>'',
-														'order'=>'',
-														'date'=>'',
-														'author'=>'',
-														'excerpt'=>'',
-														'exclude'=>'',
-														'excludeposts'=>'',
-														'offset'=>'',
-														'catlink'=>'' ) );
-		$title = strip_tags($instance['title']);
-		$limit = strip_tags($instance['limit']);
-		$orderby = strip_tags($instance['orderby']);
-		$order = strip_tags($instance['order']);
-		$date = strip_tags($instance['date']);
-		$author = strip_tags($instance['author']);
-		$exclude = strip_tags($instance['exclude']);
-		$excludeposts = strip_tags($instance['excludeposts']);
-		$offset = strip_tags($instance['offset']);
-		$catlink = strip_tags($instance['catlink']);
-		$categoryid = strip_tags($instance['categoryid']);
-		
+$instance = wp_parse_args( (array) $instance, array(
+                'title' => '',
+                'categoryid' => '',
+                'limit' => '',
+                'orderby'=>'',
+                'order'=>'',
+                'show_date'=>'',
+                'show_author'=>'',
+                'show_excerpt'=>'',
+                'exclude'=>'',
+                'excludeposts'=>'',
+                'offset'=>'',
+                'show_catlink'=>'' ) );
+$title = strip_tags($instance['title']);
+$limit = strip_tags($instance['limit']);
+$orderby = strip_tags($instance['orderby']);
+$order = strip_tags($instance['order']);
+$showdate = strip_tags($instance['showdate']);
+$showauthor = strip_tags($instance['author']);
+$exclude = strip_tags($instance['exclude']);
+$excludeposts = strip_tags($instance['excludeposts']);
+$offset = strip_tags($instance['offset']);
+$showcatlink = strip_tags($instance['catlink']);
+$categoryid = strip_tags($instance['categoryid']);
+$showexcerpt = strip_tags($instance['excerpt']);
+//var_dump($instance);
 ?>
-<?php //var_dump($instance);?>
+
 <p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <br/>
 	<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" 
 	name="<?php echo $this->get_field_name('title'); ?>" type="text" 
@@ -107,20 +109,21 @@ $instance = wp_parse_args( (array) $instance, array( 'title' => '',
 
 <p>
 		<label>Show: </label><br/>
-		<input type="radio" 
-			<?php if ($date == 'on' ) : echo ' checked = "checked" '; endif; ?>
-			name="<?php echo $this->get_field_name('date'); ?>" 
-			value="<?php echo attribute_escape($date); ?>">Date<br>
-		<input type="radio" 
-			<?php if ($author == 'on' ) : echo ' checked = "checked" '; endif; ?>
-			name="<?php echo $this->get_field_name('author'); ?>" 
-			value="<?php echo attribute_escape($author); ?>">Author<br>
-		<input type="radio" 
-			<?php if ($catlink == 'on' ) : echo ' checked = "checked" '; endif; ?>
-			name="<?php echo $this->get_field_name('catlink'); ?>" 
-			value="<?php echo attribute_escape($catlink); ?>">Link to category<br>
-		<input type="radio" 
-			<?php if ($excerpt == 'on' ) : echo ' checked = "checked" '; endif; ?>
-			name="<?php echo $this->get_field_name('excerpt'); ?>" 
-			value="<?php echo attribute_escape($excerpt); ?>">Excerpt<br>
+		<p>
+                <input type="checkbox"
+                       <?php checked( (bool) $instance['show_date'], true ); ?>
+                        name="<?php echo $this->get_field_name( 'show_date' ); ?>" />Date
+		</p><p>
+                <input type="checkbox"
+                       <?php checked( (bool) $instance['show_author'], true ); ?>
+                        name="<?php echo $this->get_field_name( 'show_author' ); ?>" />Author
+                </p><p>
+                <input type="checkbox"
+                        <?php checked( (bool) $instance['show_catlink'], true ); ?>
+                        name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" />Link to category
+                </p><p>
+                        <input type="checkbox"
+                        <?php checked( (bool) $instance['show_excerpt'], true ); ?>
+                        name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" />Excerpt
+                </p>
 </p>

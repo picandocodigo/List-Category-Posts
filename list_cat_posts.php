@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.10.1
+Version: 0.11
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -46,10 +46,12 @@ function catlist_func($atts, $content=null) {
 			'offset' => '0',
 			'tags' => '',
 			'content' => 'no',
-			'catlink' => 'no'
+			'catlink' => 'no',
+                        'comments' => 'no'
 		), $atts);
 	return list_category_posts($atts);
 }
+
 add_shortcode('catlist', 'catlist_func');
 
 function list_category_posts($atts){
@@ -80,7 +82,6 @@ function list_category_posts($atts){
 	$tplFileName = null;
 	$possibleTemplates = array(
 		// File locations lower in list override others
-		dirname(__FILE__).'/templates/'.$atts['template'].'.php',
 		STYLESHEETPATH.'/list-category-posts/'.$atts['template'].'.php',
 	);
 	foreach($possibleTemplates as $key => $file) {
@@ -92,41 +93,56 @@ function list_category_posts($atts){
 		require($tplFileName);
 	}else{
 		if ($cat_link_string != ''){
-			$output = '<p><strong>' . $cat_link_string . '</strong></p>';
+			$lcp_output = '<p><strong>' . $cat_link_string . '</strong></p>';
 		}else{
-			$output = '';
+			$lcp_output = '';
 		}
-		$output .= '<ul class="lcp_catlist">';//For default ul
+		$lcp_output .= '<ul class="lcp_catlist">';//For default ul
 		foreach($catposts as $single):
-			$output .= '<li><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
+			$lcp_output .= '<li><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
 			if($atts['date']=='yes'){
-				$output .=  ' - ' . get_the_time($atts['dateformat'], $single);//by Verex, great idea!
+				$lcp_output .=  ' - ' . get_the_time($atts['dateformat'], $single);//by Verex, great idea!
 			}
 			if($atts['author']=='yes'){
 				$lcp_userdata = get_userdata($single->post_author);
-				$output.=" - ".$lcp_userdata->display_name . '<br/>';
+				$lcp_output.=" - ".$lcp_userdata->display_name . '<br/>';
 			}
 			if($atts['content']=='yes' && $single->post_content){
-				$lcpcontent = apply_filters('the_content', $single->post_content); // added to parse shortcodes
-				$lcpcontent = str_replace(']]>', ']]&gt', $lcpcontent); // added to parse shortcodes
-				$output.= '<p>' . $lcpcontent . '</p>'; // line tweaked to output filtered content
+				$lcp_output.= lcp_content($single); // line tweaked to output filtered content
 			}
-			if($atts['excerpt']=='yes' && $single->post_excerpt && !($atts['content']=='yes' && $single->post_content) ){
-				$output .= "<p>$single->post_excerpt</p>";
+			if($atts['excerpt']!='yes' && !($atts['content']=='yes' && $single->post_content) ){
+				$lcp_output .= lcp_excerpt($single);
 			}
-			$output.="</li>";
+			$lcp_output.="</li>";
 		endforeach;
-		$output .= "</ul>";
+		$lcp_output .= "</ul>";
 	}
-	return $output;
+	return $lcp_output;
 }
 
-function lcp_add_option_page(){
-	add_options_page('List Category Posts', 'List Category Posts', 'manage_options','list-category-posts/list_cat_posts_options.php');
+function lcp_content($single){
+    $lcp_content = apply_filters('the_content', $single->post_content); // added to parse shortcodes
+    $lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
+    return '<p>' . $lcp_content . '</p>';
+}
+
+function lcp_excerpt($single){
+    if($single->post_excerpt){
+        return $single->post_excerpt;
+    }
+    $lcp_excerpt = strip_tags($single->post_content);
+    if ( post_password_required($post) ) {
+        $lcp_excerpt = __('There is no excerpt because this is a protected post.');
+        return $lcp_excerpt;
+    }
+    if (strlen($lcp_excerpt) > 255) {
+        $lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
+    }
+    return '<p>' . $lcp_excerpt . '</p>';
 }
 
 /** TODO 
- * 	-Add auto excerpt
  *  -Images (preview or thumbnail, whatever, I have to dig into this
+ *  -Pagination
  */
 ?>
