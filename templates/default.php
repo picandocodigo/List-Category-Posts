@@ -52,7 +52,7 @@ foreach($catposts as $single):
 	}
 	//Show excerpt?
 	if($atts['excerpt']=='yes' && !($atts['content']=='yes' && $single->post_content) ){
-		$lcp_output .= '<p>' . lcp_excerpt($single) . '</p>';
+		$lcp_output .= lcp_excerpt($single);
 	}
 	$lcp_output .='</li>';
 endforeach;
