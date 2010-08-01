@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.11.2
+Version: 0.12
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -47,7 +47,7 @@ function catlist_func($atts, $content=null) {
 			'tags' => '',
 			'content' => 'no',
 			'catlink' => 'no',
-                        'comments' => 'no'
+			'comments' => 'no'
 		), $atts);
 	return list_category_posts($atts);
 }
@@ -67,7 +67,7 @@ function list_category_posts($atts){
 	$cat_link_string = '';
 	if ($atts['catlink'] == 'yes'){
 		$cat_link = get_category_link($category_id);
-		$cat_data = get_category($atts['id']);
+		$cat_data = get_category($category_id);
 		$cat_title = $cat_data->name;
 		$cat_link_string = '<a href=' . $cat_link . ' title="' . $cat_title . '">' . $cat_title . '</a>';
 	}
@@ -100,6 +100,9 @@ function list_category_posts($atts){
 		$lcp_output .= '<ul class="lcp_catlist">';//For default ul
 		foreach($catposts as $single):
 			$lcp_output .= '<li><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
+			if($atts['comments'] == yes){
+				$lcp_output .= ' (' . $single->comment_count . ')';
+			}
 			if($atts['date']=='yes'){
 				$lcp_output .=  ' - ' . get_the_time($atts['dateformat'], $single);//by Verex, great idea!
 			}
@@ -121,29 +124,30 @@ function list_category_posts($atts){
 }
 
 function lcp_content($single){
-    $lcp_content = apply_filters('the_content', $single->post_content); // added to parse shortcodes
-    $lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
-    return '<p>' . $lcp_content . '</p>';
+	$lcp_content = apply_filters('the_content', $single->post_content); // added to parse shortcodes
+	$lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
+	return '<p>' . $lcp_content . '</p>';
 }
 
 function lcp_excerpt($single){
-    if($single->post_excerpt){
-        return '<p>' . $single->post_excerpt . '</p>';
-    }
-    $lcp_excerpt = strip_tags($single->post_content);
-    if ( post_password_required($post) ) {
-        $lcp_excerpt = __('There is no excerpt because this is a protected post.');
-        return $lcp_excerpt;
-    }
-    if (strlen($lcp_excerpt) > 255) {
-        $lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
-    }
-    return '<p>' . $lcp_excerpt . '</p>';
+	if($single->post_excerpt){
+		return '<p>' . $single->post_excerpt . '</p>';
+	}
+	$lcp_excerpt = strip_tags($single->post_content);
+	if ( post_password_required($post) ) {
+		$lcp_excerpt = __('There is no excerpt because this is a protected post.');
+		return $lcp_excerpt;
+	}
+	if (strlen($lcp_excerpt) > 255) {
+		$lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
+	}
+	return '<p>' . $lcp_excerpt . '</p>';
 }
 
-/** TODO 
- *  -Images (preview or thumbnail, whatever, I have to dig into this
+/** TODO - These are the todo's for a 1.0 release:
+ *  -Images (preview or thumbnail, whatever, I have to dig into this)
  *  -Pagination
+ *  -Simplify template system
  *  -i18n
  */
 ?>

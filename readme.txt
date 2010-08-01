@@ -4,12 +4,14 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.0
-Stable tag: 0.11.2
+Stable tag: 0.12
 
 == Description ==
-List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Great to use WordPress as a CMS, and create pages with several categories posts.
+List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. 
 
-Since version 0.8, the sidebar widget has been migrated to WordPress 2.8 Widget API, so you can use as many widgets as you like. The widget has the same functionallity as the plugin, but you can customize its options on the Appearence > Widgets section.
+Great to use WordPress as a CMS, and create pages with several categories posts.
+
+The plugin includes a widget, which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
 
 Compatible with WordPress 3.0 and default Twenty Ten theme (http://wordpress.org/support/topic/399754)
 
@@ -77,16 +79,17 @@ If you use both arguments (wrong!), List Category Posts will show the posts from
 
 * **content** - Show the full content of the post. Default is 'no'. Ex: [catlist content=yes]
 
-* **catlink** - Show the link to the category. Use the template system to customize its display using the variable $cat_link_string. Default is 'no'. Ex: [catlist catlink=yes].
+* **catlink** - Show the title of the category with a link to the category. Use the template system to customize its display using the variable $cat_link_string. Default is 'no'. Ex: [catlist catlink=yes].
 
-Since version 0.2, List Category Posts includes a sidebar widget. It works pretty much the same as the plugin itself.
+* **comments** - Show comments count for each post. Default is 'no'. Ex: [catlist comments=yes].
 
-Your comments and feedback are welcome at: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
+Your comments and feedback are welcome at: http://foro.picandocodigo.net/viewforum.php?f=28
 
-**New Code is welcome** :D
+**New Code is welcome too** :D
 
 == Frequently Asked Questions ==
 * **Instructions** on how to use the plugin: http://foro.picandocodigo.net/viewtopic.php?f=28&t=251
+* **Template system** how to customize the way the posts are shown: http://foro.picandocodigo.net/viewtopic.php?f=28&t=253
 * **Support forum** & **New feature requests**: http://foro.picandocodigo.net/viewforum.php?f=28
 
 == Upgrade Notice ==
@@ -101,6 +104,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in wordpress theme folder.
 
 == Changelog ==
+
+= 0.12 =
+* Added comments count.
+* Updated readme file
 
 = 0.11.2 =
 * Another minimal bug fixed with the excerpt...
