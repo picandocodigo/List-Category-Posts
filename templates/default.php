@@ -3,7 +3,7 @@
 Plugin Name: List Category Posts - Template
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: Template file for List Category Post Plugin for Wordpress which is used by plugin by argument template=value.php
-Version: 0.6.1
+Version: 0.8
 Author: Radek Uldrych & Fernando Briano 
 Author URI: http://picandocodigo.net http://radoviny.net
 */
@@ -35,6 +35,10 @@ $lcp_output .= '<ul class="lcp_catlist">';//For default ul
 //Posts loop:
 foreach($catposts as $single):
 	$lcp_output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
+	//Show comments?
+	if($atts['comments'] == yes){
+		$lcp_output .= ' (' . $single->comment_count . ')';
+	}
 	//Style for date:
 	if($atts['date']=='yes'){
 		$lcp_output .= ' - ' . get_the_time($atts['dateformat'], $single);
@@ -57,6 +61,4 @@ foreach($catposts as $single):
 	$lcp_output .='</li>';
 endforeach;
 $lcp_output .= '</ul>';
-
-
 ?> 
