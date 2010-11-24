@@ -48,6 +48,10 @@ foreach($catposts as $single):
 		$lcp_userdata = get_userdata($single->post_author);
 		$lcp_output .=" - ".$lcp_userdata->display_name;
 	}
+	//Show thumbnail?
+	if($atts['thumbnail']=='yes'){
+		$lcp_output .= '<div class="lcp_thumbnail">'. lcp_thumbnails($single) . '</div>';
+	}
 	//Show content?
 	if($atts['content']=='yes' && $single->post_content){
 		$lcpcontent = apply_filters('the_content', $single->post_content); // added to parse shortcodes
