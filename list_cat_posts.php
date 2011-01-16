@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.14
+Version: 0.14.1
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -75,6 +75,15 @@ function list_category_posts($atts){
 	//Get the category posts:
 	$catposts = lcp_category($lcp_category_id, $lcp_category_name, $atts);
 	
+	$lcp_output = '';
+	
+	//Link to the category:
+	if ($atts['catlink'] == 'yes'){
+		$cat_link = get_category_link($lcp_category_id);
+		$cat_title = get_cat_name($lcp_category_id);
+		$lcp_output .= '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
+	}
+	
 	//Template code:
 	$tplFileName = null;
 	$possibleTemplates = array(
@@ -89,10 +98,13 @@ function list_category_posts($atts){
 	if ((!empty($tplFileName)) && (is_readable($tplFileName))) {
 		require($tplFileName);
 	}else{
-		$lcp_output = '<ul class="'.$atts['class'].'">';//For default ul
+		// Default template
+		$lcp_output .= '<ul class="'.$atts['class'].'">';
+		
 		foreach ($catposts as $single):
 			$lcp_output .= lcp_display_post($single, $atts);
 		endforeach;
+		
 		$lcp_output .= "</ul>";
 	}
 	return $lcp_output;
@@ -112,14 +124,6 @@ function lcp_category($lcp_category_id, $lcp_category_name, $atts){
 		$category_id = $atts['id'];
 	}
 
-	//Link to the category:
-	$cat_link_string = '';
-	if ($atts['catlink'] == 'yes'){
-		$cat_link = get_category_link($category_id);
-		$cat_data = get_category($category_id);
-		$cat_title = $cat_data->name;
-		$cat_link_string = '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
-	}
 	//Build the query for get_posts()
 	$lcp_query = $lcp_category.'&numberposts=' . $atts['numberposts'] .
 				'&orderby=' . $atts['orderby'] .
@@ -135,23 +139,29 @@ function lcp_category($lcp_category_id, $lcp_category_name, $atts){
 
 function lcp_display_post($single, $atts){
 	$lcp_output .= '<li><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
+	
 	if ($atts['comments'] == yes){
 		$lcp_output .= ' (';
 		$lcp_output .=  lcp_comments($single);
 		$lcp_output .=  ')';
 	}
+	
 	if ($atts['date']=='yes'){
 		$lcp_output .= lcp_showdate($single, $atts['dateformat']);
 	}
+	
 	if ($atts['author']=='yes'){
 		$lcp_output .= " - ".lcp_showauthor($single) . '<br/>';
 	}
+	
 	if ($atts['content']=='yes' && $single->post_content){
 		$lcp_output.= lcp_content($single); // line tweaked to output filtered content
 	}
+	
 	if ($atts['excerpt']!='no' && !($atts['content']=='yes' && $single->post_content) ){
 		$lcp_output .= lcp_excerpt($single);
 	}
+	
 	if ($atts['thumbnail']=='yes'){
 		$lcp_output .= lcp_thumbnail($single);
 	}
