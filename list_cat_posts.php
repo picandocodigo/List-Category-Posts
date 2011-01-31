@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.15.1
+Version: 0.16
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -58,7 +58,8 @@ function catlist_func($atts, $content = null) {
 			'post_parent' => '0',
 			'class' => 'lcp_catlist',
 			'customfield_name' => '',
-			'customfield_value' =>''
+			'customfield_value' =>'',
+			'customfield_display' =>''
 		), $atts);
 	return list_category_posts($atts);
 }
@@ -71,7 +72,7 @@ add_shortcode('catlist', 'catlist_func');
  * @param array $atts
  */
 function list_category_posts($atts){
-	$lcp_category_id = $atts['id'];
+	$lcp_category_id = $atts['id'];	
 	$lcp_category_name = $atts['name'];
 	
 	//Get the category posts:
@@ -113,17 +114,15 @@ function list_category_posts($atts){
 }
 
 /**
- * Get the categories
+ * Get the categories & posts
  * @param string $lcp_category_id
  * @param string $lcp_category_name
  */
 function lcp_category($lcp_category_id, $lcp_category_name, $atts){
 	if($lcp_category_name != 'default' && $lcp_category_id == '0'){
 		$lcp_category = 'category_name=' . $atts['name'];
-		$category_id = get_cat_ID($atts['name']);
 	}else{
-		$lcp_category = 'cat=' . $atts['id'];
-		$category_id = $atts['id'];
+		$lcp_category = 'cat=' . $lcp_category_id;
 	}
 
 	//Build the query for get_posts()
@@ -174,6 +173,10 @@ function lcp_display_post($single, $atts){
 	if ($atts['thumbnail']=='yes'){
 		$lcp_display_output .= lcp_thumbnail($single);
 	}
+	
+	if($atts['customfield_display'] != ''){
+		$lcp_display_output .= lcp_display_customfields();
+	}
 	$lcp_display_output.="</li>";
 	return $lcp_display_output;
 }
@@ -222,9 +225,22 @@ function lcp_thumbnail($single){
 	return $lcp_thumbnail;
 }
 
+function lcp_display_customfields($custom_key = array(), $post_id){
+	foreach ($custom_key as $c) {
+		/**
+		 * TODO - Display custom fields
+		 */
+		get_post_custom_values($c, $post_id);
+	}
+}
+
 /** TODO - These are the todo's for a 1.0 release:
  *  -Pagination
  *  -Simplify template system
  *  -i18n
+ */
+
+/**
+ *  TODO: Fix the thing about many categories (not working now...) 
  */
 ?>
