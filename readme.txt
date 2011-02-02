@@ -119,6 +119,9 @@ Template system has changed. Custom templates should be stored in wordpress them
 
 == Changelog ==
 
+= 0.16 =
+* Changed STYLESHEETPATH to TEMPLATEPATH to point to the parent theme.
+
 = 0.15.1 =
 * Fixed a bug with undeclared variable. (Check http://picod.net/walcp, thanks Das!)
 

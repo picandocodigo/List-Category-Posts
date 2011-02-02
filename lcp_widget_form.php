@@ -44,13 +44,13 @@ $showexcerpt = strip_tags($instance['excerpt']);
 //var_dump($instance);
 ?>
 
-<p><label for="<?php echo $this->get_field_id('title'); ?>">Title: <br/>
+<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e("Title")?><br/>
 	<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" 
 	name="<?php echo $this->get_field_name('title'); ?>" type="text" 
 	value="<?php echo attribute_escape($title); ?>" />
 </label></p>
 
-<p><label for="<?php echo $this->get_field_id('categoryid'); ?>">Category: <br/>
+  <p><label for="<?php echo $this->get_field_id('categoryid'); ?>"><?php _e("Category")?><br/>
 <select id="<?php echo $this->get_field_id('categoryid'); ?>" name="<?php echo $this->get_field_name('categoryid'); ?>">
 	<?php 
 		$categories=  get_categories();
