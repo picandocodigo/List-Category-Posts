@@ -91,7 +91,7 @@ function list_category_posts($atts){
 	$tplFileName = null;
 	$possibleTemplates = array(
 		// File locations lower in list override others
-		STYLESHEETPATH.'/list-category-posts/'.$atts['template'].'.php',
+		TEMPLATEPATH.'/list-category-posts/'.$atts['template'].'.php',
 	);
 	foreach ($possibleTemplates as $key => $file) {
 		if (is_readable($file)) {
@@ -147,7 +147,6 @@ function lcp_category($lcp_category_id, $lcp_category_name, $atts){
 
 function lcp_display_post($single, $atts){
 	$lcp_display_output = '<li><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
-	
 	if ($atts['comments'] == yes){
 		$lcp_display_output .= ' (';
 		$lcp_display_output .=  lcp_comments($single);
@@ -166,7 +165,7 @@ function lcp_display_post($single, $atts){
 		$lcp_display_output.= lcp_content($single); // line tweaked to output filtered content
 	}
 	
-	if ($atts['excerpt']!='no' && !($atts['content']=='yes' && $single->post_content) ){
+	if ($atts['excerpt']=='yes' && !($atts['content']=='yes' && $single->post_content) ){
 		$lcp_display_output .= lcp_excerpt($single);
 	}
 	
@@ -175,7 +174,7 @@ function lcp_display_post($single, $atts){
 	}
 	
 	if($atts['customfield_display'] != ''){
-		$lcp_display_output .= lcp_display_customfields();
+	  $lcp_display_output .= lcp_display_customfields($atts['customfield_display'], $single->ID);
 	}
 	$lcp_display_output.="</li>";
 	return $lcp_display_output;
@@ -225,13 +224,17 @@ function lcp_thumbnail($single){
 	return $lcp_thumbnail;
 }
 
-function lcp_display_customfields($custom_key = array(), $post_id){
-	foreach ($custom_key as $c) {
-		/**
-		 * TODO - Display custom fields
-		 */
-		get_post_custom_values($c, $post_id);
-	}
+function lcp_display_customfields($custom_key, $post_id){
+  $lcp_customs = '';
+  $customs_array .= get_post_custom_values($custom_key, $post_id);
+  var_dump($customs_array);
+  foreach ($customs_array as $c){
+    var_dump($c);
+    foreach ($c as $d){ 
+      var_dump($d);
+    }
+  }
+  return $lcp_customs;
 }
 
 /** TODO - These are the todo's for a 1.0 release:
