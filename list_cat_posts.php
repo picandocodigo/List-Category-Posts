@@ -161,6 +161,14 @@ function lcp_display_post($single, $atts){
 		$lcp_display_output .= " - ".lcp_showauthor($single) . '<br/>';
 	}
 	
+	if($atts['customfield_display'] != ''){
+	  $lcp_display_output .= lcp_display_customfields($atts['customfield_display'], $single->ID);
+	}
+	
+	if ($atts['thumbnail']=='yes'){
+		$lcp_display_output .= lcp_thumbnail($single);
+	}
+	
 	if ($atts['content']=='yes' && $single->post_content){
 		$lcp_display_output.= lcp_content($single); // line tweaked to output filtered content
 	}
@@ -169,13 +177,6 @@ function lcp_display_post($single, $atts){
 		$lcp_display_output .= lcp_excerpt($single);
 	}
 	
-	if ($atts['thumbnail']=='yes'){
-		$lcp_display_output .= lcp_thumbnail($single);
-	}
-	
-	if($atts['customfield_display'] != ''){
-	  $lcp_display_output .= lcp_display_customfields($atts['customfield_display'], $single->ID);
-	}
 	$lcp_display_output.="</li>";
 	return $lcp_display_output;
 }
@@ -194,7 +195,14 @@ function lcp_showdate($single, $dateformat){
 }
 
 function lcp_content($single){
-	$lcp_content = apply_filters('the_content', $single->post_content); // added to parse shortcodes
+	$lcp_content = $single->post_content;
+	//Added to stop a post with catlist to display an infinite loop of catlist shortcode parsing
+	if (preg_match("/\[catlist.*\]/", $lcp_content, $regmatch)){
+		foreach ($regmatch as $match){
+			$lcp_content = str_replace($match, '(...)',$lcp_content);
+		}
+	}
+	$lcp_content = apply_filters('the_content', $lcp_content); // added to parse shortcodes
 	$lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
 	return '<p>' . $lcp_content . '</p>';
 }
@@ -215,7 +223,11 @@ function lcp_excerpt($single){
 	return '<p>' . $lcp_excerpt . '</p>';
 }
 
-
+/**
+ * Get the post Thumbnail
+ * @see http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
+ * @param unknown_type $single
+ */
 function lcp_thumbnail($single){
 	$lcp_thumbnail = '';
 	if ( has_post_thumbnail($single->ID) ) {
@@ -224,17 +236,30 @@ function lcp_thumbnail($single){
 	return $lcp_thumbnail;
 }
 
+/**
+ * Display custom fields.
+ * @see http://codex.wordpress.org/Function_Reference/get_post_custom
+ * @param string $custom_key
+ * @param int $post_id
+ */
 function lcp_display_customfields($custom_key, $post_id){
-  $lcp_customs = '';
-  $customs_array .= get_post_custom_values($custom_key, $post_id);
-  var_dump($customs_array);
-  foreach ($customs_array as $c){
-    var_dump($c);
-    foreach ($c as $d){ 
-      var_dump($d);
-    }
-  }
-  return $lcp_customs;
+	$lcp_customs = '';
+	//Doesn't work for many when having spaces:
+	$custom_key = trim($custom_key);
+	//Create array for many fields:
+	$custom_array = explode(",", $custom_key);
+	//Get post custom fields:
+	$custom_fields = get_post_custom($post_id);
+	//Loop on custom fields and if there's a value, add it:
+	foreach ($custom_array as $something){
+		$my_custom_field = $custom_fields[$something];
+		if (sizeof($my_custom_field) > 0 ):
+			foreach ( $my_custom_field as $key => $value ){
+				$lcp_customs .= $something. " : " . $value . "<br/>";
+			}
+		endif;
+	}
+	return $lcp_customs;
 }
 
 /** TODO - These are the todo's for a 1.0 release:
@@ -243,7 +268,5 @@ function lcp_display_customfields($custom_key, $post_id){
  *  -i18n
  */
 
-/**
- *  TODO: Fix the thing about many categories (not working now...) 
- */
+
 ?>

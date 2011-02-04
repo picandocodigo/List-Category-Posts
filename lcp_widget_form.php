@@ -44,13 +44,15 @@ $showexcerpt = strip_tags($instance['excerpt']);
 //var_dump($instance);
 ?>
 
-<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e("Title")?><br/>
+<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e("Title")?></label>
+<br/>
 	<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" 
 	name="<?php echo $this->get_field_name('title'); ?>" type="text" 
 	value="<?php echo attribute_escape($title); ?>" />
-</label></p>
+</p>
 
-  <p><label for="<?php echo $this->get_field_id('categoryid'); ?>"><?php _e("Category")?><br/>
+<p><label for="<?php echo $this->get_field_id('categoryid'); ?>"><?php _e("Category")?></label>
+<br/>
 <select id="<?php echo $this->get_field_id('categoryid'); ?>" name="<?php echo $this->get_field_name('categoryid'); ?>">
 	<?php 
 		$categories=  get_categories();
@@ -67,11 +69,12 @@ $showexcerpt = strip_tags($instance['excerpt']);
 	?>
 </select></p>
 
-<p><label for="<?php echo $this->get_field_id('limit'); ?>">Number of posts: <br/>
+<p><label for="<?php echo $this->get_field_id('limit'); ?>"><?php _e("Number of posts")?></label>
+<br/>
 	<input size="2" id="<?php echo $this->get_field_id('limit'); ?>" 
 	name="<?php echo $this->get_field_name('limit'); ?>" type="text" 
 	value="<?php echo attribute_escape($limit); ?>" />
-</label></p>
+</p>
 
 <p><label for="<?php echo $this->get_field_id('offset'); ?>">Offset: <br/>
 	<input size="2" id="<?php echo $this->get_field_id('offset'); ?>" 
@@ -79,21 +82,23 @@ $showexcerpt = strip_tags($instance['excerpt']);
 	value="<?php echo attribute_escape($offset); ?>" />
 </label></p>
 
-<p><label for="<?php echo $this->get_field_id('order'); ?>">Order: <br/>
+<p><label for="<?php echo $this->get_field_id('order'); ?>"><?php __("Order")?></label> 
+<br/>
 <select  id="<?php echo $this->get_field_id('orderby'); ?>" 
 	name="<?php echo $this->get_field_name('orderby'); ?>" type="text" />
 	<option value='date'>Date</option>
 	<option value='title'>Post title</option>
 	<option value='author'>Author</option>
 	<option value='rand'>Random</option>
-</select></p>
+</select>
+</p>
 
-<p><label for="<?php echo $this->get_field_id('order'); ?>">Order: <br/>
+<p><label for="<?php echo $this->get_field_id('order'); ?>">Order: </select>g<br/>
 <select id="<?php echo $this->get_field_id('order'); ?>" 
 	name="<?php echo $this->get_field_name('order'); ?>" type="text" />
 	<option value='desc'>Descending</option>
 	<option value='asc'>Ascending</option>
-</select></p>
+</p>
 
 <p><label for="<?php echo $this->get_field_id('exclude'); ?>">Exclude categories (id's): <br/>
 	<input id="<?php echo $this->get_field_id('exclude'); ?>"
