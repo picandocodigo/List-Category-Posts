@@ -26,11 +26,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 //Show category?
-if ($cat_link_string != ''){
-	$lcp_output = '<p><strong>' . $cat_link_string . '</strong></p>';
-}else{
-	$lcp_output = '';
-}
+$lcp_output = ($cat_link_string != '') ? '<p><strong>' . $cat_link_string . '</strong></p>' : '';
+
 $lcp_output .= '<ul class="lcp_catlist">';//For default ul
 //Posts loop:
 foreach($catposts as $single):
@@ -52,6 +49,7 @@ foreach($catposts as $single):
 	if($atts['thumbnail']=='yes'){
 		$lcp_output .= '<div class="lcp_thumbnail">'. lcp_thumbnails($single) . '</div>';
 	}
+
 	//Show content?
 	if($atts['content']=='yes' && $single->post_content){
 		$lcpcontent = apply_filters('the_content', $single->post_content); // added to parse shortcodes
