@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.16
+Version: 0.16.1
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -170,7 +170,7 @@ function lcp_display_post($single, $atts){
 	}
 	
 	if ($atts['content']=='yes' && $single->post_content){
-		$lcp_display_output.= lcp_content($single); // line tweaked to output filtered content
+		$lcp_display_output.= lcp_content($single);
 	}
 	
 	if ($atts['excerpt']=='yes' && !($atts['content']=='yes' && $single->post_content) ){
@@ -196,12 +196,13 @@ function lcp_showdate($single, $dateformat){
 
 function lcp_content($single){
 	$lcp_content = $single->post_content;
+	//Need to put some more thought on this!
 	//Added to stop a post with catlist to display an infinite loop of catlist shortcode parsing
-	if (preg_match("/\[catlist.*\]/", $lcp_content, $regmatch)){
+	/*if (preg_match("/\[catlist.*\]/", $lcp_content, $regmatch)){
 		foreach ($regmatch as $match){
 			$lcp_content = str_replace($match, '(...)',$lcp_content);
 		}
-	}
+	}*/
 	$lcp_content = apply_filters('the_content', $lcp_content); // added to parse shortcodes
 	$lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
 	return '<p>' . $lcp_content . '</p>';
@@ -255,7 +256,7 @@ function lcp_display_customfields($custom_key, $post_id){
 		$my_custom_field = $custom_fields[$something];
 		if (sizeof($my_custom_field) > 0 ):
 			foreach ( $my_custom_field as $key => $value ){
-				$lcp_customs .= $something. " : " . $value . "<br/>";
+				$lcp_customs .= "<div class=\"lcp-customfield\">" . $something. " : " . $value . "</div>";
 			}
 		endif;
 	}
