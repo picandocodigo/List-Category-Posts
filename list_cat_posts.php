@@ -25,8 +25,11 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-
 include('list_cat_posts_widget.php');
+require_once 'include/CatList.php';
+
+/* Add the shortcode to WordPress */
+add_shortcode('catlist', 'catlist_func');
 
 /**
  * 
@@ -61,11 +64,13 @@ function catlist_func($atts, $content = null) {
 			'customfield_value' =>'',
 			'customfield_display' =>''
 		), $atts);
-	return list_category_posts($atts);
-}
 
-/* Add the shortcode to WordPress */
-add_shortcode('catlist', 'catlist_func');
+        //return list_category_posts($atts);
+
+        $cat_list = new CatList($atts);
+
+        return $cat_list->toString();
+}
 
 /**
  * Main function, this is where the flow goes and calls auxiliary functions 
