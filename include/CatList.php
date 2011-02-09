@@ -5,7 +5,7 @@ class CatList{
 	private $lcp_category_id = 0;
 	private $lcp_category_name = '';
 	private $lcp_output = '';
-	
+	private $lcp_catlink = '';
 	/**
 	 * 
 	 * Constructor gets the shortcode attributes as parameter
@@ -20,23 +20,20 @@ class CatList{
 		//Get the category posts:
 		$this->lcp_categories_posts = $this->lcp_get_categories();
 
-                //Build the output
-                $this->list_category_posts();
+                $this->lcp_catlink();
+
+                $this->load_template();
 	}
 
 	/**
-	 * Main function, this is where the flow goes and calls auxiliary functions 
+	 * Load category name and link to the category:
 	 */
-	private function list_category_posts(){
-		$this->load_template();
-		
-		//Link to the category:
-		if ($this->params['catlink'] == 'yes'){
+	private function lcp_catlink(){
+		if ($this->params['catlink']=='yes'){
 			$cat_link = get_category_link($this->lcp_category_id);
 			$cat_title = get_cat_name($this->lcp_category_id);
-			$this->lcp_output .= '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
+			$this->lcp_catlink .= '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
 		}
-		
 	}
 	
 	private function load_template(){
@@ -57,6 +54,7 @@ class CatList{
                 if ((!empty($tplFileName)) && (is_readable($tplFileName))) {
 			require($tplFileName);
 		}else{
+                        $this->lcp_output .= $this->lcp_catlink;
 			// Default template
 			$this->lcp_output .= '<ul class="'.$this->params['class'].'">';
 			
@@ -171,23 +169,23 @@ class CatList{
 		}*/
 		$lcp_content = apply_filters('the_content', $lcp_content); // added to parse shortcodes
 		$lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
-		return '<p>' . $lcp_content . '</p>';
+		return $lcp_content;
 	}
 	
 	
 	public function lcp_excerpt($single){
 		if($single->post_excerpt){
-			return '<p>' . $single->post_excerpt . '</p>';
+			return $single->post_excerpt;
 		}
 		$lcp_excerpt = strip_tags($single->post_content);
-		if ( post_password_required($post) ) {
+		if ( post_password_required($single) ) {
 			$lcp_excerpt = __('There is no excerpt because this is a protected post.');
 			return $lcp_excerpt;
 		}
 		if (strlen($lcp_excerpt) > 255) {
 			$lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
 		}
-		return '<p>' . $lcp_excerpt . '</p>';
+		return $lcp_excerpt;
 	}
 	
 	/**
