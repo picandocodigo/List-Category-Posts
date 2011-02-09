@@ -71,6 +71,3 @@ function catlist_func($atts, $content = null) {
 
         return $cat_list->toString();
 }
-
-
-?>
