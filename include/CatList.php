@@ -19,6 +19,9 @@ class CatList{
 		
 		//Get the category posts:
 		$this->lcp_categories_posts = $this->lcp_get_categories();
+
+                //Build the output
+                $this->list_category_posts();
 	}
 
 	/**
@@ -29,37 +32,39 @@ class CatList{
 		
 		//Link to the category:
 		if ($this->params['catlink'] == 'yes'){
-			$cat_link = get_category_link($lcp_category_id);
-			$cat_title = get_cat_name($lcp_category_id);
-			$lcp_output .= '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
+			$cat_link = get_category_link($this->lcp_category_id);
+			$cat_title = get_cat_name($this->lcp_category_id);
+			$this->lcp_output .= '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
 		}
 		
-		return $lcp_output;
 	}
 	
 	private function load_template(){
 		$tplFileName = null;
+                
 		$possibleTemplates = array(
 			// File locations lower in list override others
 			TEMPLATEPATH.'/list-category-posts/'.$this->params['template'].'.php',
 			STYLESHEETPATH.'/list-category-posts/'.$this->params['template'].'.php'
 		);
-		foreach ($possibleTemplates as $key => $file) {
+
+                foreach ($possibleTemplates as $key => $file) {
 			if (is_readable($file)) {
 				$tplFileName = $file;
 			}
 		}
-		if ((!empty($tplFileName)) && (is_readable($tplFileName))) {
+
+                if ((!empty($tplFileName)) && (is_readable($tplFileName))) {
 			require($tplFileName);
 		}else{
 			// Default template
 			$this->lcp_output .= '<ul class="'.$this->params['class'].'">';
 			
-			foreach ($catposts as $single):
-				$lcp_output .= lcp_display_post($single, $this->params);
+			foreach ($this->lcp_categories_posts as $single):
+				$this->lcp_output .= $this->lcp_display_post($single, $this->params);
 			endforeach;
 			
-			$lcp_output .= "</ul>";
+			$this->lcp_output .= "</ul>";
 		}
 	}
 	
@@ -72,7 +77,7 @@ class CatList{
 		if($this->lcp_category_name != 'default' && $this->lcp_category_id == '0'){
 			$lcp_category = 'category_name=' . $this->param['name'];
 		}else{
-			$lcp_category = 'cat=' . $lcp_category_id;
+			$lcp_category = 'cat=' . $this->lcp_category_id;
 		}
 	
 		//Build the query for get_posts()
@@ -97,34 +102,34 @@ class CatList{
 	
 	private function lcp_display_post($single){
 		$lcp_display_output = '<li><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
-		if ($this->params['comments'] == yes){
+		if ($this->params['comments'] == 'yes'){
 			$lcp_display_output .= ' (';
-			$lcp_display_output .=  lcp_comments($single);
+			$lcp_display_output .=  $this->lcp_comments($single);
 			$lcp_display_output .=  ')';
 		}
 		
 		if ($this->params['date']=='yes'){
-			$lcp_display_output .= lcp_showdate($single);
+			$lcp_display_output .= $this->lcp_showdate($single);
 		}
 		
 		if ($this->params['author']=='yes'){
-			$lcp_display_output .= " - ".lcp_showauthor($single) . '<br/>';
+			$lcp_display_output .= " - ".$this->lcp_showauthor($single) . '<br/>';
 		}
 		
 		if($this->params['customfield_display'] != ''){
-		  $lcp_display_output .= lcp_display_customfields($this->params['customfield_display'], $single->ID);
+		  $lcp_display_output .= $this->lcp_display_customfields($this->params['customfield_display'], $single->ID);
 		}
 		
 		if ($this->params['thumbnail']=='yes'){
-			$lcp_display_output .= lcp_thumbnail($single);
+			$lcp_display_output .= $this->lcp_thumbnail($single);
 		}
 		
 		if ($this->params['content']=='yes' && $single->post_content){
-			$lcp_display_output.= lcp_content($single);
+			$lcp_display_output.= $this->lcp_content($single);
 		}
 		
 		if ($this->params['excerpt']=='yes' && !($this->params['content']=='yes' && $single->post_content) ){
-			$lcp_display_output .= lcp_excerpt($single);
+			$lcp_display_output .= $this->lcp_excerpt($single);
 		}
 		
 		$lcp_display_output.="</li>";
