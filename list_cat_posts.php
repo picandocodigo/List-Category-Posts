@@ -26,48 +26,51 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 include 'include/ListCategoryPostsWidget.php';
-require_once 'include/CatList.php';
+require_once 'include/CatListDisplayer.php';
 
-/* Add the shortcode to WordPress */
-add_shortcode('catlist', 'catlist_func');
+class ListCategoryPosts{
+    /**
+     * Gets the shortcode parameters and instantiate plugin objects
+     * @param $atts
+     * @param $content
+     */
+    function catlist_func($atts, $content = null) {
+            $atts = shortcode_atts(array(
+                            'id' => '0',
+                            'name' => '',
+                            'orderby' => 'date',
+                            'order' => 'desc',
+                            'numberposts' => '5',
+                            'date' => 'no',
+                            'author' => 'no',
+                            'dateformat' => get_option('date_format'),
+                            'template' => 'default',
+                            'excerpt' => 'no',
+                            'exclude' => '0',
+                            'excludeposts' => '0',
+                            'offset' => '0',
+                            'tags' => '',
+                            'content' => 'no',
+                            'catlink' => 'no',
+                            'comments' => 'no',
+                            'thumbnail' => 'no',
+                            'post_type' => '',
+                            'post_parent' => '0',
+                            'class' => 'lcp_catlist',
+                            'customfield_name' => '',
+                            'customfield_value' =>'',
+                            'customfield_display' =>''
+                    ), $atts);
 
-/**
- * 
- * Main plugin function: Gets the shortcode parameters, set defaults, and call the plugin's function. 
- * @param $atts
- * @param $content
- */
-function catlist_func($atts, $content = null) {
-	$atts = shortcode_atts(array(
-			'id' => '0',
-			'name' => 'default',
-			'orderby' => 'date',
-			'order' => 'desc',
-			'numberposts' => '5',
-			'date' => 'no',
-			'author' => 'no',
-			'dateformat' => get_option('date_format'),
-			'template' => 'default',
-			'excerpt' => 'no',
-			'exclude' => '0',
-			'excludeposts' => '0',
-			'offset' => '0',
-			'tags' => '',
-			'content' => 'no',
-			'catlink' => 'no',
-			'comments' => 'no',
-			'thumbnail' => 'no',
-			'post_type' => '',
-			'post_parent' => '0',
-			'class' => 'lcp_catlist',
-			'customfield_name' => '',
-			'customfield_value' =>'',
-			'customfield_display' =>''
-		), $atts);
+            
+            $catlist_displayer = new CatListDisplayer($atts);
+            return $catlist_displayer->display();
 
-        //return list_category_posts($atts);
+    }
 
-        $cat_list = new CatList($atts);
-
-        return $cat_list->toString();
+    /**
+     * Templates backwards compatibility
+     */
 }
+
+add_shortcode( 'catlist', array('ListCategoryPosts', 'catlist_func') );

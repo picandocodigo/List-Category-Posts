@@ -1,5 +1,5 @@
 Templates for the List Category Plugin are searched for in your WordPress theme's folder. 
-You should create a folder named "list-category-posts" under [i]wp-content/themes/your-theme-folder[/i].
+You should create a folder named "list-category-posts" under 'wp-content/themes/your-theme-folder'.
 
 Template files are .php files. You can use the included template as an example to start. 
 You can find it in the plugin's template folder under the name default.php. To use a template, use this code:

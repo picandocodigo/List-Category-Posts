@@ -16,11 +16,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 //Sidebar Widget file
+require_once 'CatListDisplayer.php';
 
 class ListCategoryPostsWidget extends WP_Widget{
 
 	function ListCategoryPostsWidget() {
-		parent::WP_Widget(false, $name = 'ListCategoryPostsWidget');
+		parent::WP_Widget(false, $name = 'List Category Posts');
 	}
 
 	function widget($args, $instance) {
@@ -58,7 +59,8 @@ class ListCategoryPostsWidget extends WP_Widget{
 			//'content' => 'no',
                         'catlink' => $showcatlink
                     );
-                echo list_category_posts($atts);
+                $catlist_displayer = new CatListDisplayer($atts);
+                echo  $catlist_displayer->display();
                 echo $lcp_result;
 		echo $after_widget;
 	}
