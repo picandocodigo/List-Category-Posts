@@ -31,36 +31,36 @@ $lcp_output = ($cat_link_string != '') ? '<p><strong>' . $cat_link_string . '</s
 $lcp_output .= '<ul class="lcp_catlist">';//For default ul
 //Posts loop:
 foreach($catposts as $single):
-	$lcp_output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
-	//Show comments?
-	if($atts['comments'] == yes){
-		$lcp_output .= ' (' . $single->comment_count . ')';
-	}
-	//Style for date:
-	if($atts['date']=='yes'){
-		$lcp_output .= ' - ' . get_the_time($atts['dateformat'], $single);
-	}
-	//Show author?
-	if($atts['author']=='yes'){
-		$lcp_userdata = get_userdata($single->post_author);
-		$lcp_output .=" - ".$lcp_userdata->display_name;
-	}
-	//Show thumbnail?
-	if($atts['thumbnail']=='yes'){
-		$lcp_output .= '<div class="lcp_thumbnail">'. lcp_thumbnails($single) . '</div>';
-	}
+    $lcp_output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
+    //Show comments?
+    if($atts['comments'] == yes){
+        $lcp_output .= ' (' . $single->comment_count . ')';
+    }
+    //Style for date:
+    if($atts['date']=='yes'){
+        $lcp_output .= ' - ' . get_the_time($atts['dateformat'], $single);
+    }
+    //Show author?
+    if($atts['author']=='yes'){
+        $lcp_userdata = get_userdata($single->post_author);
+        $lcp_output .=" - ".$lcp_userdata->display_name;
+    }
+    //Show thumbnail?
+    if($atts['thumbnail']=='yes'){
+        $lcp_output .= '<div class="lcp_thumbnail">'. lcp_thumbnails($single) . '</div>';
+    }
 
-	//Show content?
-	if($atts['content']=='yes' && $single->post_content){
-		$lcpcontent = apply_filters('the_content', $single->post_content); // added to parse shortcodes
-		$lcpcontent = str_replace(']]>', ']]&gt', $lcpcontent); // added to parse shortcodes
-		$lcp_output .= '<p>' . $lcpcontent . '</p>'; // line tweaked to output filtered content
-	}
-	//Show excerpt?
-	if($atts['excerpt']=='yes' && !($atts['content']=='yes' && $single->post_content) ){
-		$lcp_output .= lcp_excerpt($single);
-	}
-	$lcp_output .='</li>';
+    //Show content?
+    if($atts['content']=='yes' && $single->post_content){
+        $lcpcontent = apply_filters('the_content', $single->post_content); // added to parse shortcodes
+        $lcpcontent = str_replace(']]>', ']]&gt', $lcpcontent); // added to parse shortcodes
+        $lcp_output .= '<p>' . $lcpcontent . '</p>'; // line tweaked to output filtered content
+    }
+    //Show excerpt?
+    if($atts['excerpt']=='yes' && !($atts['content']=='yes' && $single->post_content) ){
+        $lcp_output .= lcp_excerpt($single);
+    }
+    $lcp_output .='</li>';
 endforeach;
 $lcp_output .= '</ul>';
 ?> 
