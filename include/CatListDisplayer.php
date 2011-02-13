@@ -10,7 +10,7 @@ class CatListDisplayer {
     private $catlist;
     private $params = array();
     private $lcp_output;
-
+    
     public function __construct($atts) {
         $this->params = $atts;
         $this->catlist = new CatList($atts);
@@ -65,88 +65,69 @@ class CatListDisplayer {
         $this->lcp_output .= '</' . $tag . '>';
     }
 
+    /**
+     *  This function should be overriden for template system.
+     * @param post $single
+     * @param HTML tag to display $tag
+     * @return string
+     */
     private function lcp_build_post($single, $tag){
-        $lcp_display_output = '<'. $tag . '><a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
-        $lcp_display_output .=  $this->get_comments_count($single);
-        $lcp_display_output .= $this->get_date_to_show($single);       
-        $lcp_display_output .= $this->get_author_to_show($single);
-        $lcp_display_output .= $this->catlist->get_custom_fields($this->params['customfield_display'], $single->ID);
+        $lcp_display_output = '<'. $tag . '>' . $this->get_post_title($single);
+
+        $lcp_display_output .= $this->get_comments($single);
+
+        $lcp_display_output .= ' ' . $this->get_date($single);
+
+        $lcp_display_output .= '<br/>' . __('Author') . ': ' . $this->get_author($single) . '<br/>';
+
+        $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
+
         $lcp_display_output .= $this->get_thumbnail($single);
+
         $lcp_display_output .= $this->get_content($single);
+
         $lcp_display_output .= $this->get_excerpt($single);
+
         $lcp_display_output .= '</' . $tag . '>';
 
         return $lcp_display_output;
     }
 
-    private function get_comments_count($single){
-        if ($this->params['comments'] == 'yes'){
-                return ' (' . $single->comment_count . ')';
-        }
+    /**
+     * Auxiliary functions for templates
+     */
+    private function get_author($single){
+        return $this->catlist->get_author_to_show($single);
     }
 
-    private function get_author_to_show($single){
-        if ($this->params['author']=='yes'){
-            $lcp_userdata = get_userdata($single->post_author);
-            return $lcp_userdata->display_name;
-        }
-    }
-
-    private function get_date_to_show($single){
-        if ($this->params['date']=='yes'){
-            //by Verex, great idea!
-            return  get_the_time($this->params['dateformat'], $single);
-        }
+    private function get_comments($single){
+        return $this->catlist->get_comments_count($single);
     }
 
     private function get_content($single){
-        if ($this->params['content']=='yes' && $single->post_content){
-            $lcp_content = $single->post_content;
-            //Need to put some more thought on this!
-            //Added to stop a post with catlist to display an infinite loop of catlist shortcode parsing
-            /*if (preg_match("/\[catlist.*\]/", $lcp_content, $regmatch)){
-                    foreach ($regmatch as $match){
-                            $lcp_content = str_replace($match, '(...)',$lcp_content);
-                    }
-            }*/
-            $lcp_content = apply_filters('the_content', $lcp_content); // added to parse shortcodes
-            $lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
-            return $lcp_content;
-       }
+        return $this->catlist->get_content($single);
+    }
+
+    private function get_custom_fields($custom_key, $post_id){
+        return $this->catlist->get_custom_fields($custom_key, $post_id);
+    }
+
+    private function get_date($single){
+        return $this->catlist->get_date_to_show($single);
     }
 
     private function get_excerpt($single){
-        if ($this->params['excerpt']=='yes' && !($this->params['content']=='yes' && $single->post_content) ){
-            if($single->post_excerpt){
-                    return $single->post_excerpt;
-            }
-            $lcp_excerpt = strip_tags($single->post_content);
-            if ( post_password_required($single) ) {
-                    $lcp_excerpt = __('There is no excerpt because this is a protected post.');
-                    return $lcp_excerpt;
-            }
-            if (strlen($lcp_excerpt) > 255) {
-                    $lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
-            }
-            $lcp_excerpt = apply_filters('the_content', $lcp_excerpt); // added to parse shortcodes
-            $lcp_excerpt = str_replace(']]>', ']]&gt', $lcp_excerpt); // added to parse shortcodes
-            return $lcp_excerpt;
-        }
+        return $this->catlist->get_excerpt($single);
     }
 
-    /**
-     * Get the post Thumbnail
-     * @see http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
-     * @param unknown_type $single
-     */
     private function get_thumbnail($single){
-        if ($this->params['thumbnail']=='yes'){
-            $lcp_thumbnail = '';
-            if ( has_post_thumbnail($single->ID) ) {
-                    $lcp_thumbnail = get_the_post_thumbnail($single->ID);
-            }
-            return $lcp_thumbnail;
-        }
+        return $this->catlist->get_thumbnail($single);
     }
+
+    private function get_post_title($single){
+        return '<a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
+    }
+
+
 
 }

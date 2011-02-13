@@ -17,6 +17,8 @@ Compatible with WordPress 3.0 and default Twenty Ten theme (http://wordpress.org
 
 Usage: [catlist argument1=value1 argument2=value2].
 
+*Notice*: On version 0.17 the plugin was again rewritten as objects. This added a few features, please read the documentation on it.
+
 Tell us how you use this plugin!
 http://foro.picandocodigo.net/discussion/261/do-you-like-list-category-posts-read-me
 
@@ -68,7 +70,7 @@ If you use both arguments (wrong!), List Category Posts will show the posts from
 
 * **dateformat** - Format of the date output. Default is get_option('date_format'). Check http://codex.wordpress.org/Formatting_Date_and_Time for possible formats.
 
-* **template** - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default' that means template in code of plugin not in template file, that's an unordered list (ul html tag) with a CSS class. This class can be passed as a parameter or by default it's: 'lcp_catlist'
+* **template** - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default', which displays an unordered list (ul html tag) with a CSS class. This class can be passed as a parameter or by default it's: 'lcp_catlist'. You can also use the default 'div' value. This will output a div with the 'lcp_catlist' CSS class (or one you pass as parameter with the class argument). The inner items (posts) will be displayed between p tags.
 
 * **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it.
 
@@ -107,6 +109,9 @@ Your comments and feedback are welcome at: http://foro.picandocodigo.net/categor
 
 == Upgrade Notice ==
 
+= 0.17 =
+Upgrade your templates: Templates system was rewritten, so your current templates will probably not work. Check out the new default.php file on /templates to see the simpler new way to work with templates.
+
 = 0.13.2 =
 Thumbnail parameter 'thumbnails' changed to 'thumbnail.
 
@@ -117,9 +122,13 @@ Template system has changed. Now the posts loop must be defined inside the templ
 Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use the widget.
 
 = 0.9 = 
-Template system has changed. Custom templates should be stored in wordpress theme folder.
+Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.17 =
+* Major rewrite. The whole code was rewritten using objects. It's easier now to develop for List Category Posts.
+* Both STYLESHEETPATH and TEMPLATEPATH are checked for templates.
 
 = 0.16.1 =
 * Fixed shortcode nesting.

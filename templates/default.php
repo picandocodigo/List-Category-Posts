@@ -25,42 +25,58 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-//Show category?
-$lcp_output = ($cat_link_string != '') ? '<p><strong>' . $cat_link_string . '</strong></p>' : '';
+/**
+ * The format for templates changed since version 0.17.
+ * Since this code is included inside CatListDisplayer, $this refers to
+ * the instance of CatListDisplayer that called this file.
+ */
 
-$lcp_output .= '<ul class="lcp_catlist">';//For default ul
-//Posts loop:
-foreach($catposts as $single):
-    $lcp_output .= '<li><a href="' . get_permalink($single->ID) . '">' . $single->post_title . '</a>';
-    //Show comments?
-    if($atts['comments'] == yes){
-        $lcp_output .= ' (' . $single->comment_count . ')';
-    }
-    //Style for date:
-    if($atts['date']=='yes'){
-        $lcp_output .= ' - ' . get_the_time($atts['dateformat'], $single);
-    }
-    //Show author?
-    if($atts['author']=='yes'){
-        $lcp_userdata = get_userdata($single->post_author);
-        $lcp_output .=" - ".$lcp_userdata->display_name;
-    }
-    //Show thumbnail?
-    if($atts['thumbnail']=='yes'){
-        $lcp_output .= '<div class="lcp_thumbnail">'. lcp_thumbnails($single) . '</div>';
-    }
+/* This is the string which will gather all the information.
+ * We're starting it  */
+$lcp_display_output = '';
 
-    //Show content?
-    if($atts['content']=='yes' && $single->post_content){
-        $lcpcontent = apply_filters('the_content', $single->post_content); // added to parse shortcodes
-        $lcpcontent = str_replace(']]>', ']]&gt', $lcpcontent); // added to parse shortcodes
-        $lcp_output .= '<p>' . $lcpcontent . '</p>'; // line tweaked to output filtered content
-    }
-    //Show excerpt?
-    if($atts['excerpt']=='yes' && !($atts['content']=='yes' && $single->post_content) ){
-        $lcp_output .= lcp_excerpt($single);
-    }
-    $lcp_output .='</li>';
+//Add 'starting' tag. Here, I'm using an unordered list (ul) as an example:
+$lcp_output .= '<ul class="lcp_catlist">';
+
+/**
+ * Posts loop.
+ * The code here will be executed for every post in the category.
+ * As you can see, the different options are being called from functions on the
+ * $this variable which is a CatListDisplayer. The CatListDisplayer
+ */
+foreach ($this->catlist->get_categories_posts() as $single):
+    //Start a List Item for each post:
+    $lcp_display_output .= "<li>";
+
+    //Show the title and link to the post:
+    $lcp_display_output .= $this->get_post_title($single);
+
+    //Show comments:
+    $lcp_display_output .= $this->get_comments($single);
+
+    //Show date:
+    $lcp_display_output .= ' ' . $this->get_date($single);
+
+    //Show author
+    $lcp_display_output .= '<br/>' . __('Author') . ': ' . $this->get_author($single) . '<br/>';
+
+    //Custom fields:
+    $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
+
+    //Post Thumbnail
+    $lcp_display_output .= $this->get_thumbnail($single);
+
+    //Post content
+    $lcp_display_output .= $this->get_content($single);
+
+    //Post excerpt
+    $lcp_display_output .= $this->get_excerpt($single);
+
+    //Close li tag
+    $lcp_display_output .= '</li>';
 endforeach;
-$lcp_output .= '</ul>';
+
+$lcp_display_output .= '</ul>';
+$this->lcp_output = $lcp_display_output;
+
 ?> 
