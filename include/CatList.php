@@ -94,4 +94,75 @@ class CatList{
         }
     }
 
+    public function get_comments_count($single){
+        if ($this->params['comments'] == 'yes'){
+                return ' (' . $single->comment_count . ')';
+        }
+    }
+
+    public function get_author_to_show($single){
+        if ($this->params['author']=='yes'){
+            $lcp_userdata = get_userdata($single->post_author);
+            return $lcp_userdata->display_name;
+        }
+    }
+
+
+
+    public function get_date_to_show($single){
+        if ($this->params['date']=='yes'){
+            //by Verex, great idea!
+            return  get_the_time($this->params['dateformat'], $single);
+        }
+    }
+
+    public function get_content($single){
+        if ($this->params['content']=='yes' && $single->post_content){
+            $lcp_content = $single->post_content;
+            //Need to put some more thought on this!
+            //Added to stop a post with catlist to display an infinite loop of catlist shortcode parsing
+            /*if (preg_match("/\[catlist.*\]/", $lcp_content, $regmatch)){
+                    foreach ($regmatch as $match){
+                            $lcp_content = str_replace($match, '(...)',$lcp_content);
+                    }
+            }*/
+            $lcp_content = apply_filters('the_content', $lcp_content); // added to parse shortcodes
+            $lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
+            return $lcp_content;
+       }
+    }
+
+    public function get_excerpt($single){
+        if ($this->params['excerpt']=='yes' && !($this->params['content']=='yes' && $single->post_content) ){
+            if($single->post_excerpt){
+                    return $single->post_excerpt;
+            }
+            $lcp_excerpt = strip_tags($single->post_content);
+            if ( post_password_required($single) ) {
+                    $lcp_excerpt = __('There is no excerpt because this is a protected post.');
+                    return $lcp_excerpt;
+            }
+            if (strlen($lcp_excerpt) > 255) {
+                    $lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
+            }
+            return $lcp_excerpt;
+        }
+    }
+
+    /**
+     * Get the post Thumbnail
+     * @see http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
+     * @param unknown_type $single
+     */
+    public function get_thumbnail($single){
+        if ($this->params['thumbnail']=='yes'){
+            $lcp_thumbnail = '';
+            if ( has_post_thumbnail($single->ID) ) {
+                    $lcp_thumbnail = get_the_post_thumbnail($single->ID);
+            }
+            return $lcp_thumbnail;
+        }
+    }
+
+
 }
