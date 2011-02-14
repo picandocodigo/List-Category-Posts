@@ -58,7 +58,7 @@ foreach ($this->catlist->get_categories_posts() as $single):
     $lcp_display_output .= ' ' . $this->get_date($single);
 
     //Show author
-    $lcp_display_output .= '<br/>' . __('Author') . ': ' . $this->get_author($single) . '<br/>';
+    $lcp_display_output .= '<br/>' . $this->get_author($single) . '<br/>';
 
     //Custom fields:
     $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
