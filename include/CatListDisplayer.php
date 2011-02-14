@@ -78,7 +78,7 @@ class CatListDisplayer {
 
         $lcp_display_output .= ' ' . $this->get_date($single);
 
-        $lcp_display_output .= '<br/>' . $this->get_author($single) . '<br/>';
+        $lcp_display_output .= $this->get_author($single);
 
         $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
 
