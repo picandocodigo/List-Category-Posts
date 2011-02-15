@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.1
-Stable tag: 0.17.2
+Stable tag: 0.18
 
 == Description ==
 List Category Posts is a simple WordPress plugin which allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. 
@@ -107,7 +107,18 @@ Your comments and feedback are welcome at: http://foro.picandocodigo.net/categor
 * **New feature requests** - Contact me on fernando at picandocodigo dot net or check out the forum.
 * **Support** I've decided to use WordPress Answers (http://meta.wordpress.stackexchange.com/) as the place for support. It's a great place with a large community of WordPress users and developers. Just ask your question with the tag 'plugin-list-category-post'.
 
+* **FAQ**
+
+Plugin could not be activated because it triggered a fatal error.
+Parse error: syntax error, unexpected T_STRING, expecting T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in /.../wp-content/plugins/list-category-posts/include/CatListDisplayer.php on line 10
+
+Please check:
+http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
+
 == Upgrade Notice ==
+
+= 0.18 =
+Template system was upgraded with new options. Backwards compatible, but you can better customize the way the post contents are displayed. Check templates/default.php.
 
 = 0.17 =
 Upgrade your templates: Templates system was rewritten, so your current templates will probably not work. Check out the new default.php file on /templates to see the simpler new way to work with templates.
@@ -125,6 +136,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.18 =
+* Fixed category id bug. Reported and fixed by Eric Celeste / http://eric.clst.org, thanks!
+* Improved template system a liitle bit, now you can pass an HTML tag and a CSS class to sorround each field on your template.
+* Added category link which wasn't working after previous big update.
 
 = 0.17.1 =
 * Fixed displaying of "Author:" even when not being called.

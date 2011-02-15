@@ -9,7 +9,6 @@ class CatList{
     private $params = array();
     private $lcp_categories_posts = array();
     private $lcp_category_id = 0;
-    private $lcp_category_name = '';
 
     /**
      * Constructor gets the shortcode attributes as parameter
@@ -26,13 +25,12 @@ class CatList{
      */
     private function lcp_set_categories(){
         if($this->params['name'] != '' && $this->params['id'] == '0'){
-            $this->lcp_category_name = $this->params['name'];
-            $lcp_category = 'category_name=' . $this->lcp_category_name;
-            //$this->lcp_category_id = ;
+            $this->lcp_category_id = $this->get_category_id_by_name($this->params['name']);
         }else{
             $this->lcp_category_id = $this->params['id'];
-            $lcp_category = 'cat=' . $this->lcp_category_id;
         }
+
+        $lcp_category = 'cat=' . $this->lcp_category_id;
 	
         //Build the query for get_posts()
         $lcp_query = $lcp_category.'&numberposts=' . $this->params['numberposts'] .
@@ -53,17 +51,34 @@ class CatList{
         $this->lcp_categories_posts = get_posts($lcp_query);
     }
 
+    /**
+     * Get the category id from its name
+     * by Eric Celeste / http://eric.clst.org
+     */
+    private function get_category_id_by_name($cat_name){
+            $term = get_term_by('name', $cat_name, 'category');
+            return $term->term_id;
+    }
+
+    public function get_category_id(){
+        return $this->lcp_category_id;
+    }
+
     public function get_categories_posts(){
         return $this->lcp_categories_posts;
     }
-	
+
     /**
      * Load category name and link to the category:
      */
     public function get_category_link(){
-        $cat_link = get_category_link($this->lcp_category_id);
-        $cat_title = get_cat_name($this->lcp_category_id);
-        return '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
+        if($this->params['customfield_display'] != ''){
+            $cat_link = get_category_link($this->lcp_category_id);
+            $cat_title = get_cat_name($this->lcp_category_id);
+            return '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -91,12 +106,16 @@ class CatList{
                 endif;
             }
             return $lcp_customs;
+        } else {
+            return null;
         }
     }
 
     public function get_comments_count($single){
         if ($this->params['comments'] == 'yes'){
                 return ' (' . $single->comment_count . ')';
+        } else {
+            return null;
         }
     }
 
@@ -104,6 +123,8 @@ class CatList{
         if ($this->params['author']=='yes'){
             $lcp_userdata = get_userdata($single->post_author);
             return $lcp_userdata->display_name;
+        } else {
+            return null;
         }
     }
 
@@ -113,6 +134,8 @@ class CatList{
         if ($this->params['date']=='yes'){
             //by Verex, great idea!
             return  get_the_time($this->params['dateformat'], $single);
+        } else {
+            return null;
         }
     }
 
@@ -129,7 +152,9 @@ class CatList{
             $lcp_content = apply_filters('the_content', $lcp_content); // added to parse shortcodes
             $lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
             return $lcp_content;
-       }
+       } else {
+            return null;
+        }
     }
 
     public function get_excerpt($single){
@@ -146,6 +171,8 @@ class CatList{
                     $lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
             }
             return $lcp_excerpt;
+        } else {
+            return null;
         }
     }
 
@@ -161,6 +188,8 @@ class CatList{
                     $lcp_thumbnail = get_the_post_thumbnail($single->ID);
             }
             return $lcp_thumbnail;
+        } else {
+            return null;
         }
     }
 
