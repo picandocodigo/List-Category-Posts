@@ -56,8 +56,14 @@ class CatList{
      * by Eric Celeste / http://eric.clst.org
      */
     private function get_category_id_by_name($cat_name){
+        //We check if the name gets the category id, if not, we check the slug.
+        $term = get_term_by('name', $cat_name, 'category');
+
+        if (!$term):
             $term = get_term_by('name', $cat_name, 'category');
-            return $term->term_id;
+        endif;
+
+        return $term->term_id;
     }
 
     public function get_category_id(){
