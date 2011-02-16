@@ -1,7 +1,6 @@
 <?php
 /**
  * This is an auxiliary class to help display the info on your CatList.php instance.
- *
  * @author fernando@picandocodigo.nets
  */
 require_once 'CatList.php';
@@ -55,7 +54,7 @@ class CatListDisplayer {
     }
     
     private function build_output($tag){
-        $this->lcp_output .= $this->get_category_link($single, 'strong');
+        $this->lcp_output .= $this->get_category_link('strong');
         $this->lcp_output .= '<' . $tag . ' class="'.$this->params['class'].'">';
         $inner_tag = ($tag == 'ul') ? 'li' : 'p';
         //Posts loop
@@ -102,7 +101,7 @@ class CatListDisplayer {
         return $this->assign_style($info, $tag, $css_class);
     }
 
-    private function get_comments($single, $tag = null, $class = null){
+    private function get_comments($single, $tag = null, $css_class = null){
         $info = $this->catlist->get_comments_count($single);
         return $this->assign_style($info, $tag, $css_class);
     }
@@ -136,7 +135,7 @@ class CatListDisplayer {
         return '<a href="' . get_permalink($single->ID).'">' . $single->post_title . '</a>';
     }
 
-    private function get_category_link($single, $tag = null, $css_class = null){
+    private function get_category_link($tag = null, $css_class = null){
         $info = $this->catlist->get_category_link();
         return $this->assign_style($info, $tag, $css_class);
     }

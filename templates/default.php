@@ -35,7 +35,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 $lcp_display_output = '';
 
 // Show category link:
-$lcp_display_output .= $this->get_category_link($single, 'strong');
+$lcp_display_output .= $this->get_category_link('strong');
 
 //Add 'starting' tag. Here, I'm using an unordered list (ul) as an example:
 $lcp_output .= '<ul class="lcp_catlist">';

@@ -57,13 +57,12 @@ class CatList{
      */
     private function get_category_id_by_name($cat_name){
         //We check if the name gets the category id, if not, we check the slug.
-        $term = get_term_by('name', $cat_name, 'category');
-
+        $term = get_term_by('slug', $cat_name, 'category');
         if (!$term):
             $term = get_term_by('name', $cat_name, 'category');
         endif;
 
-        return $term->term_id;
+        return ($term) ? $term->term_id : 0;
     }
 
     public function get_category_id(){
@@ -78,7 +77,7 @@ class CatList{
      * Load category name and link to the category:
      */
     public function get_category_link(){
-        if($this->params['customfield_display'] != ''){
+        if($this->params['catlink'] == 'yes' && $this->lcp_category_id != 0){
             $cat_link = get_category_link($this->lcp_category_id);
             $cat_title = get_cat_name($this->lcp_category_id);
             return '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
