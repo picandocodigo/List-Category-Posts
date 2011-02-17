@@ -146,6 +146,9 @@ class CatList{
 
     public function get_content($single){
         if ($this->params['content']=='yes' && $single->post_content){
+            if ( post_password_required($single) ) {
+                    return __('This is a protected post.');
+            }
             $lcp_content = $single->post_content;
             //Need to put some more thought on this!
             //Added to stop a post with catlist to display an infinite loop of catlist shortcode parsing

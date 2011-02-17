@@ -38,7 +38,7 @@ $lcp_display_output = '';
 $lcp_display_output .= $this->get_category_link('strong');
 
 //Add 'starting' tag. Here, I'm using an unordered list (ul) as an example:
-$lcp_output .= '<ul class="lcp_catlist">';
+$lcp_display_output .= '<ul class="lcp_catlist">';
 
 /**
  * Posts loop.
@@ -83,7 +83,7 @@ foreach ($this->catlist->get_categories_posts() as $single):
      * Post content - Example of how to use tag and class parameters:
      * This will produce:<div class="lcp_excerpt">The content</div>
      */
-    $lcp_display_output .= $this->get_excerpt($single, 'div', 'lcp_expert');
+    $lcp_display_output .= $this->get_excerpt($single, 'div', 'lcp_excerpt');
 
     //Close li tag
     $lcp_display_output .= '</li>';
