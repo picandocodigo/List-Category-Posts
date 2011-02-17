@@ -145,6 +145,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.18.3 =
 * Small excerpt fix, some readme file fixing too.
+* Not showing the_content for password protected posts.
 
 = 0.18.2 =
 * Small fixes. Should work for name parameter in all cases now.
