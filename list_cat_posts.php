@@ -54,6 +54,7 @@ class ListCategoryPosts{
                             'catlink' => 'no',
                             'comments' => 'no',
                             'thumbnail' => 'no',
+                            'thumbnail_size' => 'thumbnail',
                             'post_type' => '',
                             'post_parent' => '0',
                             'class' => 'lcp_catlist',

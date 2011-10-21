@@ -59,7 +59,9 @@ class CatListDisplayer {
         $inner_tag = ($tag == 'ul') ? 'li' : 'p';
         //Posts loop
         foreach ($this->catlist->get_categories_posts() as $single):
-                $this->lcp_output .= $this->lcp_build_post($single, $inner_tag);
+                if ( !post_password_required($single) ){
+                  $this->lcp_output .= $this->lcp_build_post($single, $inner_tag);
+                }
         endforeach;
 
         $this->lcp_output .= '</' . $tag . '>';
