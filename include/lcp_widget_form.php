@@ -57,8 +57,8 @@ $showexcerpt = strip_tags($instance['excerpt']);
 	<?php 
 		$categories=  get_categories();
 		foreach ($categories as $cat) :
-			$option = '<option value="' . $cat->cat_ID;
-			if ($cat->cat_ID == attribute_escape($categoryid)) :
+			$option = '<option value="' . $cat->cat_ID . '" ';
+			if ($cat->cat_ID == $categoryid) :
 				$option .= ' selected = "selected" ';
 			endif;
 			$option .=  '">';
@@ -82,35 +82,35 @@ $showexcerpt = strip_tags($instance['excerpt']);
 	value="<?php echo attribute_escape($offset); ?>" />
 </label></p>
 
-<p><label for="<?php echo $this->get_field_id('order'); ?>"><?php __("Order")?></label> 
-<br/>
-<select  id="<?php echo $this->get_field_id('orderby'); ?>" 
-	name="<?php echo $this->get_field_name('orderby'); ?>" type="text" />
-	<option value='date'>Date</option>
-	<option value='title'>Post title</option>
-	<option value='author'>Author</option>
-	<option value='rand'>Random</option>
-</select>
+<p><label for="<?php echo $this->get_field_id('orderby'); ?>">Order by</label> <br/>
+	<select  id="<?php echo $this->get_field_id('orderby'); ?>" 
+		name="<?php echo $this->get_field_name('orderby'); ?>" type="text" >
+		<option value='date'>Date</option>
+		<option value='title'>Post title</option>
+		<option value='author'>Author</option>
+		<option value='rand'>Random</option>
+	</select>
 </p>
 
-<p><label for="<?php echo $this->get_field_id('order'); ?>">Order: </select>g<br/>
-<select id="<?php echo $this->get_field_id('order'); ?>" 
-	name="<?php echo $this->get_field_name('order'); ?>" type="text" />
-	<option value='desc'>Descending</option>
-	<option value='asc'>Ascending</option>
+<p><label for="<?php echo $this->get_field_id('order'); ?>">Order:</label><br/>
+	<select id="<?php echo $this->get_field_id('order'); ?>" 
+		name="<?php echo $this->get_field_name('order'); ?>" type="text">
+		<option value='desc'>Descending</option>
+		<option value='asc'>Ascending</option>
+	</select>
 </p>
 
-<p><label for="<?php echo $this->get_field_id('exclude'); ?>">Exclude categories (id's): <br/>
+<p><label for="<?php echo $this->get_field_id('exclude'); ?>">Exclude categories (id's): </label><br/>
 	<input id="<?php echo $this->get_field_id('exclude'); ?>"
 	name="<?php echo $this->get_field_name('exclude'); ?>" type="text"
 	value="<?php echo attribute_escape($exclude); ?>" />
-</label></p>
+</p>
 
-<p><label for="<?php echo $this->get_field_id('excludeposts'); ?>">Exclude posts (id's): <br/>
+<p><label for="<?php echo $this->get_field_id('excludeposts'); ?>">Exclude posts (id's): </label><br/>
 	<input id="<?php echo $this->get_field_id('excludeposts'); ?>"
 	name="<?php echo $this->get_field_name('excludeposts'); ?>" type="text"
 	value="<?php echo attribute_escape($excludeposts); ?>" />
-</label></p>
+</p>
 
 <p>
 		<label>Show: </label><br/>
