@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.9
+Version: 0.19
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -75,8 +75,15 @@ add_shortcode( 'catlist', array('ListCategoryPosts', 'catlist_func') );
 
 /**
  * TO-DO:
- *  - i18n
- *  - Pagination
- *  - Simpler template system
- *  - Exclude child categories
+ * From WordPress Answers:
+Add Older Posts at bottom of List Category Post page
+  http://wordpress.stackexchange.com/questions/26398/add-older-posts-at-bottom-of-list-category-post-page
+Include the latest post of a specific category on a matching page
+  http://wordpress.stackexchange.com/questions/26224/how-to-include-the-latest-post-of-a-specific-category-on-a-matching-page
+Link the thumbnail image
+  http://wordpress.stackexchange.com/questions/28431/im-trying-to-link-the-thumbnail-image
+- i18n
+- Pagination
+- Simpler template system
+- Exclude child categories
  */
