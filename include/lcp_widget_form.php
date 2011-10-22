@@ -27,6 +27,7 @@ $instance = wp_parse_args( (array) $instance, array(
                 'show_excerpt'=>'',
                 'exclude'=>'',
                 'excludeposts'=>'',
+		'thumbnail' =>'',
                 'offset'=>'',
                 'show_catlink'=>'' ) );
 $title = strip_tags($instance['title']);
@@ -41,7 +42,8 @@ $offset = strip_tags($instance['offset']);
 $showcatlink = strip_tags($instance['catlink']);
 $categoryid = strip_tags($instance['categoryid']);
 $showexcerpt = strip_tags($instance['excerpt']);
-//var_dump($instance);
+$thumbnail = strip_tags($instance['thumbnail']);
+$thumbnail_size = strip_tags($instance['thumbnail_size']);
 ?>
 
 <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e("Title")?></label>
@@ -112,23 +114,33 @@ $showexcerpt = strip_tags($instance['excerpt']);
 	value="<?php echo attribute_escape($excludeposts); ?>" />
 </p>
 
-<p>
+
 		<label>Show: </label><br/>
-		<p>
-                <input type="checkbox"
-                       <?php checked( (bool) $instance['show_date'], true ); ?>
-                        name="<?php echo $this->get_field_name( 'show_date' ); ?>" />Date
-		</p><p>
-                <input type="checkbox"
-                       <?php checked( (bool) $instance['show_author'], true ); ?>
-                        name="<?php echo $this->get_field_name( 'show_author' ); ?>" />Author
-                </p><p>
-                <input type="checkbox"
-                        <?php checked( (bool) $instance['show_catlink'], true ); ?>
-                        name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" />Link to category
-                </p><p>
-                        <input type="checkbox"
-                        <?php checked( (bool) $instance['show_excerpt'], true ); ?>
-                        name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" />Excerpt
-                </p>
-</p>
+        <p>
+            <input type="checkbox" <?php checked( (bool) $instance['thumbnail'], true ); ?>
+            name="<?php echo $this->get_field_name( 'thumbnail'); ?>" />Thumbnail - size: 
+            <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
+                name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
+                <option value='thumbnail'>thumbnail</option>
+                <option value='medium'>medium</option>
+                <option value='large'>large</option>
+                <option value='full'>full</option>
+            </select>
+        </p>
+        <p>
+            <input type="checkbox" <?php checked( (bool) $instance['show_date'], true ); ?>
+            name="<?php echo $this->get_field_name( 'show_date' ); ?>" />Date
+        </p>
+        <p>
+            <input type="checkbox" <?php checked( (bool) $instance['show_author'], true ); ?>
+            name="<?php echo $this->get_field_name( 'show_author' ); ?>" />Author
+        </p>
+        <p>
+            <input type="checkbox" <?php checked( (bool) $instance['show_catlink'], true ); ?>
+            name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" />Link to category
+        </p>
+        <p>
+            <input type="checkbox" <?php checked( (bool) $instance['show_excerpt'], true ); ?>
+            name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" />Excerpt
+        </p>
+

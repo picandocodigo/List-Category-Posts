@@ -205,7 +205,7 @@ class CatList{
         if ($this->params['thumbnail']=='yes'){
             $lcp_thumbnail = '';
             if ( has_post_thumbnail($single->ID) ) {
-                    $lcp_thumbnail = get_the_post_thumbnail($single->ID, $this->params['thumbnail_size']);
+            	 $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' . get_the_post_thumbnail($single->ID, $this->params['thumbnail_size']) . '</a>';
             }
             return $lcp_thumbnail;
         } else {

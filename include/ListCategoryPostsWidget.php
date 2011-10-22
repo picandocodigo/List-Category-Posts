@@ -28,38 +28,44 @@ class ListCategoryPostsWidget extends WP_Widget{
 	function widget($args, $instance) {
 		extract( $args );
                 $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
-				$limit = (is_numeric($instance['limit'])) ? $instance['limit'] : 5;
-				$orderby = ($instance['orderby']) ? $instance['orderby'] : 'date';
-				$order = ($instance['order']) ? $instance['order'] : 'desc';
-				$exclude = ($instance['exclude'] != '') ? $instance['exclude'] : 0;
-				$excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
-				$offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
+                $limit = (is_numeric($instance['limit'])) ? $instance['limit'] : 5;
+                $orderby = ($instance['orderby']) ? $instance['orderby'] : 'date';
+                $order = ($instance['order']) ? $instance['order'] : 'desc';
+                $exclude = ($instance['exclude'] != '') ? $instance['exclude'] : 0;
+                $excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
+                $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
                 $category_id = $instance['categoryid'];
                 $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
                 $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
                 $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
                 $showauthor = ($instance['show_author'] == 'on') ? 'yes' : 'no';
                 $showcatlink = ($instance['show_catlink'] == 'on') ? 'yes' : 'no';
+                $thumbnail = ($instance['thumbnail'] == 'on') ? 'yes' : 'no';
+                $thumbnail_size = ($instance['thumbnail_size']) ? $instance['thumbnail_size'] : 'thumbnail';
 
                 echo $before_widget;
                 echo $before_title . $title . $after_title;
+
                 $atts = array(
-                        'id' => $category_id,
-			'orderby' => $orderby,
-			'order' => $order,
-			'numberposts' => $limit,
-			'date' => $showdate,
-			'author' => $showauthor,
-			'dateformat' => $dateformat,
-			'template' => 'default',
-			'excerpt' => $showexcerpt,
-			'exclude' => $exclude,
-			'excludeposts' => $excludeposts,
-			'offset' => $offset,
-			//'tags' => '',
-			//'content' => 'no',
-                        'catlink' => $showcatlink
-                    );
+                'id' => $category_id,
+                'orderby' => $orderby,
+                'order' => $order,
+                'numberposts' => $limit,
+                'date' => $showdate,
+                'author' => $showauthor,
+                'dateformat' => $dateformat,
+                'template' => 'default',
+                'excerpt' => $showexcerpt,
+                'exclude' => $exclude,
+                'excludeposts' => $excludeposts,
+                'offset' => $offset,
+                //'tags' => '',
+                //'content' => 'no',
+                'catlink' => $showcatlink,
+                'thumbnail' => $thumbnail,
+                'thumbnail_size' => $thumbnail_size
+                );
+                
                 $catlist_displayer = new CatListDisplayer($atts);
                 echo  $catlist_displayer->display();
                 echo $lcp_result;
@@ -82,6 +88,9 @@ class ListCategoryPostsWidget extends WP_Widget{
                 $instance['show_excerpt'] = strip_tags($new_instance['show_excerpt']);
                 $instance['show_author'] = strip_tags($new_instance['show_author']);
                 $instance['show_catlink'] = strip_tags($new_instance['show_catlink']);
+                $instance['show_catlink'] = strip_tags($new_instance['show_catlink']);
+                $instance['thumbnail'] = strip_tags($new_instance['thumbnail']);
+                $instance['thumbnail_size'] = strip_tags($new_instance['thumbnail_size']);
 
                 return $instance;
 	}
