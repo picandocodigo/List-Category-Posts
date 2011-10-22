@@ -45,10 +45,15 @@ class CatList{
         if($this->params['post_parent']): $args['post_parent'] = $this->params['post_parent']; endif;
 
         // Custom fields 'customfield_name' & 'customfield_value' should both be defined
-        if($this->params['customfield_name'] != '' && $this->params['customfield_value'] != ''):
+        if($this->params['customfield_name']!='' && $this->params['customfield_value'] != ''):
           $args['meta_key'] = $this->params['customfield_name'];
           $args['meta_value'] = $this->params['customfield_value'];
         endif;
+
+        //Get private posts
+        if(is_user_logged_in()){
+            $args['post_status'] = array('publish','private');
+        }
 
         // Added custom taxonomy support
         if ($this->params['taxonomy'] != "" && $this->params['tags'] != "") {
@@ -62,7 +67,7 @@ class CatList{
         }
 
         $this->lcp_categories_posts = get_posts($args);
-  }
+    }
 
     /**
      * Get the category id from its name

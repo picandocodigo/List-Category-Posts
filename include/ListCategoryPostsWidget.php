@@ -28,14 +28,14 @@ class ListCategoryPostsWidget extends WP_Widget{
 	function widget($args, $instance) {
 		extract( $args );
                 $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
-		$limit = (is_numeric($instance['limit'])) ? $instance['limit'] : 5;
-		$orderby = ($instance['orderby']) ? $instance['orderby'] : 'date';
-		$order = ($instance['order']) ? $instance['order'] : 'desc';
-		$exclude = ($instance['exclude'] != '') ? $instance['exclude'] : 0;
-		$excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
-		$offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
-		$category_id = $instance['categoryid'];
-		$dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
+				$limit = (is_numeric($instance['limit'])) ? $instance['limit'] : 5;
+				$orderby = ($instance['orderby']) ? $instance['orderby'] : 'date';
+				$order = ($instance['order']) ? $instance['order'] : 'desc';
+				$exclude = ($instance['exclude'] != '') ? $instance['exclude'] : 0;
+				$excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
+				$offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
+                $category_id = $instance['categoryid'];
+                $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
                 $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
                 $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
                 $showauthor = ($instance['show_author'] == 'on') ? 'yes' : 'no';

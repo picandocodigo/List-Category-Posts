@@ -3,17 +3,19 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 2.8
-Tested up to: 3.2..1
-Stable tag: 0.18.3
+Tested up to: 3.2.1
+Stable tag: 0.19
 
 == Description ==
-List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. 
+List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
 
 The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
 
 The plugin includes a widget, which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
+
+Since version 0.18, **this plugins does not work on server with PHP 4**. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 will be the last version to support PHP 4, from 3.2 and forward, only PHP 5 will be supported. You can still [download an older version of the plugin ] (https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
 
 Works correctly with WordPress 3.1 and default Twenty Ten theme
 (http://wordpress.org/support/topic/399754)
@@ -147,9 +149,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.19 =
 This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate Hitchhiker's Guide to the Galaxy" from my Amazon Wishlit in appreciation for the plugin. I am really enjoying the read :D. If you 
-* Fixed private post logic, not displaying post if private.
+* Fixed private post logic, not displaying post if private. Thanks Bainternet from WordPress Answers: http://wordpress.stackexchange.com/questions/12514/list-category-posts-not-showing-posts-marked-private-to-logged-in-users/12520#12520
 * Added thumbnail_size parameter.
 * Added support for custom taxonomies and also moved to the array call of get_posts. Coded by wsherliker, thanks! http://picod.net/32
+* Fixed widget, now it remembers saved options.
 
 = 0.18.3 =
 * Small excerpt fix, some readme file fixing too.
