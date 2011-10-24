@@ -80,8 +80,8 @@ Add Older Posts at bottom of List Category Post page
   http://wordpress.stackexchange.com/questions/26398/add-older-posts-at-bottom-of-list-category-post-page
 Include the latest post of a specific category on a matching page
   http://wordpress.stackexchange.com/questions/26224/how-to-include-the-latest-post-of-a-specific-category-on-a-matching-page
-Link the thumbnail image
-  http://wordpress.stackexchange.com/questions/28431/im-trying-to-link-the-thumbnail-image
+Getting the “more” tag to work with plugin-list-category-post
+  http://wordpress.stackexchange.com/questions/30376/getting-the-more-tag-to-work-with-plugin-list-category-post
 - i18n
 - Pagination
 - Simpler template system

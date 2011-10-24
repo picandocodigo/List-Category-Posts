@@ -15,17 +15,15 @@ Great to use WordPress as a CMS, and create pages with several categories posts.
 
 The plugin includes a widget, which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
 
-Since version 0.18, **this plugins does not work on server with PHP 4**. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 will be the last version to support PHP 4, from 3.2 and forward, only PHP 5 will be supported. You can still [download an older version of the plugin ] (https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
+Since version 0.18, **this plugins does not work on server with PHP 4**. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 will be the last version to support PHP 4, from 3.2 and forward, only PHP 5 will be supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
 
 Works correctly with WordPress 3.1 and default Twenty Ten theme
 (http://wordpress.org/support/topic/399754)
 
 **Usage**: `[catlist argument1=value1 argument2=value2]`
 
-**Tell us how you use this plugin!**
-http://foro.picandocodigo.net/discussion/261/do-you-like-list-category-posts-read-me
-
 **Support the plugin**
+
 If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my [Amazon Wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist").
 
 
@@ -152,7 +150,8 @@ Template system has changed. Custom templates should be stored in WordPress them
 * Added thumbnail link to post (http://picod.net/33).
 
 = 0.19 =
-This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate Hitchhiker's Guide to the Galaxy" from my Amazon Wishlit in appreciation for the plugin. I am really enjoying the read :D. If you 
+This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate Hitchhiker's Guide to the Galaxy" from my Amazon Wishlit in appreciation for the plugin. I am really enjoying the read :D. If you, like S would like to show your appreciation, here's my wishlist: http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web 
+ 
 * Fixed private post logic, not displaying post if private. Thanks Bainternet from WordPress Answers: http://wordpress.stackexchange.com/questions/12514/list-category-posts-not-showing-posts-marked-private-to-logged-in-users/12520#12520
 * Added thumbnail_size parameter.
 * Added support for custom taxonomies and also moved to the array call of get_posts. Coded by wsherliker, thanks! http://picod.net/32
