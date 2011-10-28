@@ -66,13 +66,13 @@ $thumbnail_size = strip_tags($instance['thumbnail_size']);
 	value="<?php echo attribute_escape($limit); ?>" />
 </p>
 
-<p><label for="<?php echo $this->get_field_id('offset'); ?>">Offset: <br/>
+<p><label for="<?php echo $this->get_field_id('offset'); ?>"><?php _e("Offset")?>: <br/>
 	<input size="2" id="<?php echo $this->get_field_id('offset'); ?>" 
 	name="<?php echo $this->get_field_name('offset'); ?>" type="text" 
 	value="<?php echo attribute_escape($offset); ?>" />
 </label></p>
 
-<p><label for="<?php echo $this->get_field_id('orderby'); ?>">Order by</label> <br/>
+<p><label for="<?php echo $this->get_field_id('orderby'); ?>"><?php _e("Order by")?></label> <br/>
 	<select  id="<?php echo $this->get_field_id('orderby'); ?>" 
 		name="<?php echo $this->get_field_name('orderby'); ?>" type="text" >
 		<option value='date'>Date</option>
@@ -82,7 +82,7 @@ $thumbnail_size = strip_tags($instance['thumbnail_size']);
 	</select>
 </p>
 
-<p><label for="<?php echo $this->get_field_id('order'); ?>">Order:</label><br/>
+<p><label for="<?php echo $this->get_field_id('order'); ?>"><?php _e("Order")?></label><br/>
 	<select id="<?php echo $this->get_field_id('order'); ?>" 
 		name="<?php echo $this->get_field_name('order'); ?>" type="text">
 		<option value='desc'>Descending</option>
@@ -90,13 +90,13 @@ $thumbnail_size = strip_tags($instance['thumbnail_size']);
 	</select>
 </p>
 
-<p><label for="<?php echo $this->get_field_id('exclude'); ?>">Exclude categories (id's): </label><br/>
+<p><label for="<?php echo $this->get_field_id('exclude'); ?>"><?php _e("Exclude categories (id's)")?></label><br/>
 	<input id="<?php echo $this->get_field_id('exclude'); ?>"
 	name="<?php echo $this->get_field_name('exclude'); ?>" type="text"
 	value="<?php echo attribute_escape($exclude); ?>" />
 </p>
 
-<p><label for="<?php echo $this->get_field_id('excludeposts'); ?>">Exclude posts (id's): </label><br/>
+<p><label for="<?php echo $this->get_field_id('excludeposts'); ?>"><?php _e("Exclude posts (id's)")?></label><br/>
 	<input id="<?php echo $this->get_field_id('excludeposts'); ?>"
 	name="<?php echo $this->get_field_name('excludeposts'); ?>" type="text"
 	value="<?php echo attribute_escape($excludeposts); ?>" />
@@ -106,7 +106,7 @@ $thumbnail_size = strip_tags($instance['thumbnail_size']);
 		<label>Show: </label><br/>
         <p>
             <input type="checkbox" <?php checked( (bool) $instance['thumbnail'], true ); ?>
-            name="<?php echo $this->get_field_name( 'thumbnail'); ?>" />Thumbnail - size: 
+            name="<?php echo $this->get_field_name( 'thumbnail'); ?>" /><?php _e("Thumbnail - size")?> 
             <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
                 name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
                 <option value='thumbnail'>thumbnail</option>
@@ -117,18 +117,18 @@ $thumbnail_size = strip_tags($instance['thumbnail_size']);
         </p>
         <p>
             <input type="checkbox" <?php checked( (bool) $instance['show_date'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_date' ); ?>" />Date
+            name="<?php echo $this->get_field_name( 'show_date' ); ?>" /><?php _e("Date")?>
         </p>
         <p>
             <input type="checkbox" <?php checked( (bool) $instance['show_author'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_author' ); ?>" />Author
+            name="<?php echo $this->get_field_name( 'show_author' ); ?>" /><?php _e("Author")?>
         </p>
         <p>
             <input type="checkbox" <?php checked( (bool) $instance['show_catlink'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" />Link to category
+            name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" /><?php _e("Link to category")?>
         </p>
         <p>
             <input type="checkbox" <?php checked( (bool) $instance['show_excerpt'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" />Excerpt
+            name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" /><?php _e("Excerpt")?>
         </p>
 
