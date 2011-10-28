@@ -55,7 +55,9 @@ class CatListDisplayer {
     
     private function build_output($tag){
         $this->lcp_output .= $this->get_category_link('strong');
-        $this->lcp_output .= '<' . $tag . ' class="'.$this->params['class'].'">';
+        $this->lcp_output .= '<' . $tag;
+        if (isset($this->params['class'])): $this->lcp_output .= ' class="'.$this->params['class']; endif;
+        $this->lcp_output .= '">';
         $inner_tag = ($tag == 'ul') ? 'li' : 'p';
         //Posts loop
         foreach ($this->catlist->get_categories_posts() as $single):
@@ -81,9 +83,10 @@ class CatListDisplayer {
         $lcp_display_output .= ' ' . $this->get_date($single);
 
         $lcp_display_output .= $this->get_author($single);
-
-        $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
-
+      
+        if (isset($this->params['customfield_display'])){
+          $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
+        }
         $lcp_display_output .= $this->get_thumbnail($single);
 
         $lcp_display_output .= $this->get_content($single, 'p');
