@@ -58,7 +58,7 @@ class CatList{
         // Added custom taxonomy support
         if ($this->params['taxonomy'] != "" && $this->params['tags'] != "") {
           $args['tax_query'] = array(array(
-              'taxonomy' => 'topic-tag',
+              'taxonomy' => $this->params['taxonomy'],
               'field' => 'slug',
               'terms' => explode(",",$this->params['tags'])
           ));
