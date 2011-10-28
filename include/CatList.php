@@ -1,8 +1,8 @@
 <?php
 /**
  * The CatList object gets the info for the CatListDisplayer to show.
- * Each shortcode appearence is an instance of this class.
- * @author fernando@picandocodigo.nets
+ * Each time you use the shortcode, you get an instance of this class.
+ * @author fernando@picandocodigo.net
  */
 
 class CatList{
