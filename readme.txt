@@ -145,6 +145,9 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.19.3 =
+* Another taxonomy fix, thanks frisco! http://wordpress.org/support/topic/plugin-list-category-posts-problem-with-custom-taxonomies
+
 = 0.19.2 =
 * Small fix, missing parameter for taxonomy.
 
