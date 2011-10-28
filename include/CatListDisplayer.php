@@ -1,7 +1,7 @@
 <?php
 /**
  * This is an auxiliary class to help display the info on your CatList.php instance.
- * @author fernando@picandocodigo.nets
+ * @author fernando@picandocodigo.net
  */
 require_once 'CatList.php';
 
