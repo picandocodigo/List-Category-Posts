@@ -24,10 +24,14 @@ class CatList{
      * Get the categories & posts
      */
     private function lcp_set_categories(){
-        if(isset($this->params['name']) && $this->params['id'] == '0'){
+        if(isset($this->params['name']) && $this->params['name'] != ''){
             $this->lcp_category_id = $this->get_category_id_by_name($this->params['name']);
-        }else{
+        }elseif (isset($this->params['id']) && $this->params['id'] != '0'){
             $this->lcp_category_id = $this->params['id'];
+        } else {
+          global $post;
+          $categories = get_the_category($post->ID);
+          $this->lcp_category_id = $categories[0]->cat_ID;
         }
 
         $args = array('cat'=> $this->lcp_category_id);

@@ -79,8 +79,6 @@ add_shortcode( 'catlist', array('ListCategoryPosts', 'catlist_func') );
  * From WordPress Answers:
 Add Older Posts at bottom of List Category Post page
   http://wordpress.stackexchange.com/questions/26398/add-older-posts-at-bottom-of-list-category-post-page
-Include the latest post of a specific category on a matching page
-  http://wordpress.stackexchange.com/questions/26224/how-to-include-the-latest-post-of-a-specific-category-on-a-matching-page
 Getting the “more” tag to work with plugin-list-category-post
   http://wordpress.stackexchange.com/questions/30376/getting-the-more-tag-to-work-with-plugin-list-category-post
 - Fix the code for the WordPress Coding Standards: http://codex.wordpress.org/WordPress_Coding_Standards

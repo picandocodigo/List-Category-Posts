@@ -8,7 +8,7 @@ require_once 'CatListDisplayer.php';
 class ListCategoryPostsWidget extends WP_Widget{
 
 	function ListCategoryPostsWidget() {
-                $opts = array('description' => '');
+                $opts = array('description' => 'List posts from a specified category');
 		parent::WP_Widget(false, $name = 'List Category Posts', $opts);
 	}
 
@@ -53,7 +53,6 @@ class ListCategoryPostsWidget extends WP_Widget{
                 
                 $catlist_displayer = new CatListDisplayer($atts);
                 echo  $catlist_displayer->display();
-                echo $lcp_result;
 		echo $after_widget;
 	}
 
@@ -87,4 +86,8 @@ class ListCategoryPostsWidget extends WP_Widget{
 }
 
 add_action('widgets_init', create_function('', 'return register_widget("listCategoryPostsWidget");'));
+
+#Working on i18n, if you want to give a hand visit: http://wordpress.stackexchange.com/questions/32339/widget-translation-on-my-plugin
+#$translation_dir = '../languages';
+#load_plugin_textdomain( 'list-category-posts', null, $translation_dir );
 ?>
