@@ -57,7 +57,7 @@ class CatListDisplayer {
         $this->lcp_output .= $this->get_category_link('strong');
         $this->lcp_output .= '<' . $tag;
         if (isset($this->params['class'])): $this->lcp_output .= ' class="'.$this->params['class']; endif;
-        $this->lcp_output .= '">';
+        $this->lcp_output .= '>';
         $inner_tag = ($tag == 'ul') ? 'li' : 'p';
         //Posts loop
         foreach ($this->catlist->get_categories_posts() as $single):
