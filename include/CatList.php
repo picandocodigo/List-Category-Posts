@@ -24,6 +24,7 @@ class CatList{
      * Get the categories & posts
      */
     private function lcp_set_categories(){
+        $args = array();
         if ( isset($this->params['categorypage']) && $this->params['categorypage'] == 'yes' ){
           global $post;
           $categories = get_the_category($post->ID);
@@ -32,11 +33,11 @@ class CatList{
           $this->lcp_category_id = $this->get_category_id_by_name($this->params['name']);
         } elseif ( isset($this->params['id']) && $this->params['id'] != '0' ){
           $this->lcp_category_id = $this->params['id'];
-        } else {
-          $this->lcp_category_id = 0;
         }
-
-        $args = array('cat'=> $this->lcp_category_id);
+        
+        if ($this->lcp_category_id != 0){
+          $args['category'] = $this->lcp_category_id;
+        }
 	
         $args = array_merge($args, array(
         'numberposts' => $this->params['numberposts'],
@@ -62,13 +63,13 @@ class CatList{
         }
 
         // Added custom taxonomy support
-        if (isset($this->params['taxonomy']) && $this->params['tags'] != "") {
+        if (isset($this->params['taxonomy']) && $this->params['taxonomy'] != '' && $this->params['tags'] != "") {
           $args['tax_query'] = array(array(
               'taxonomy' => $this->params['taxonomy'],
               'field' => 'slug',
               'terms' => explode(",",$this->params['tags'])
           ));
-        } elseif (isset($this->params['tags'])) {
+        } else if (isset($this->params['tags'])) {
           $args['tag'] = $this->params['tags'];
         }
 
@@ -80,6 +81,7 @@ class CatList{
      * by Eric Celeste / http://eric.clst.org
      */
     private function get_category_id_by_name($cat_name){
+        #TODO: Support multiple names (this used to work, but not anymore)
         //We check if the name gets the category id, if not, we check the slug.
         $term = get_term_by('slug', $cat_name, 'category');
         if (!$term):
