@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.2.1
-Stable tag: 0.20.2
+Stable tag: 0.20.3
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
@@ -44,11 +44,16 @@ If you've found the plugin useful, consider making a [donation via PayPal](http:
 
 *Selecting the category*
 
-The plugin can figure out the category from which you want to list posts in three different ways: Using the *category id*, the *category slug* and *detecting the current post's category*. When using List Category Posts inside a post, if you don't pass the category id or slug, it will detect the category id of the current posts, and list posts from that category. The parameters for the slug and id are:
+The plugin can figure out the category from which you want to list posts in three different ways: Using the *category id*, the *category slug* and *detecting the current post's category*.
+When using List Category Posts inside a post, if you don't pass the category id or slug, it will post the latest posts from every category. 
+You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
+ The parameters for choosing the category id are:
 
 * **name** - To display posts from a category using the category's name. Ex: [catlist name=mycategory]
 
-* **id** - To display posts from a category using the category's id. Ex: [catlist id=24]. You can **include several categories**: Ex: [catlist id=17,24,32] or **exclude** a category with the minus (-)  
+* **id** - To display posts from a category using the category's id. Ex: [catlist id=24]. You can **include several categories**: Ex: [catlist id=17,24,32] or **exclude** a category with the minus (-)
+
+* **categorypage** - Set it to "yes" if you want to list the posts from the current post's category.
 
 *Other parameters*
 
@@ -107,7 +112,7 @@ The plugin can figure out the category from which you want to list posts in thre
 
 * **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work.
 
-* **customfield_display** - Display custom field(s). You can specify many fields to show, separating them with a coma. 
+* **customfield_display** - Display custom field(s). You can specify many fields to show, separating them with a coma.
 
 * **template** - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default', which displays an unordered list (ul html tag) with a CSS class. This class can be passed as a parameter or by default it's: 'lcp_catlist'. You can also use the default 'div' value. This will output a div with the 'lcp_catlist' CSS class (or one you pass as parameter with the class argument). The inner items (posts) will be displayed between p tags.
 
@@ -160,6 +165,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.20.3 =
+* Fixed category detection code, which created some messy bugs in some cases
+
+= 0.20.2 =
+* Minor bugfix release
 
 = 0.20.1 =
 * Fixed extra " added to ul tag, thanks ideric (http://wordpress.org/support/topic/plugin-list-category-posts-extra-added-to-ul-tag)
