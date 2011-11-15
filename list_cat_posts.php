@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.20.5
+Version: 0.21
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -55,6 +55,7 @@ class ListCategoryPosts{
                             'comments' => 'no',
                             'thumbnail' => 'no',
                             'thumbnail_size' => 'thumbnail',
+                            'thumbnail_class' => '',
                             'post_type' => '',
                             'post_parent' => '0',
                             'class' => 'lcp_catlist',

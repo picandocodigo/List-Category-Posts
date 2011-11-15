@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.2.1
-Stable tag: 0.20.5
+Stable tag: 0.21
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
@@ -99,6 +99,8 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **thumbnail_size** - Either a string keyword (thumbnail, medium, large or full) or a 2-item array representing width and height in pixels, e.g. array(32,32).
 
+* **thumbnail_class** - Set a CSS class to the thumbnail and style it.
+
 * **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types.
 
 * **post_parent** - Show only the children of the post with this ID. Default: None.
@@ -155,6 +157,9 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.21 =
+* Added 'thumbnail_class' parameter, so you can set a CSS class to the thumbnail and style it.
 
 = 0.20.5 =
 * Brought back the multiple categories functionality for the id parameter. Hopefully the last 0.20 bugfix release so I can start working on new stuff to implement.
