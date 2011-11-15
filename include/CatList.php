@@ -219,11 +219,17 @@ class CatList{
      * @param unknown_type $single
      * 
      */
-    public function get_thumbnail($single){
+    public function get_thumbnail($single, $lcp_thumb_class = null){
         if ($this->params['thumbnail']=='yes'){
             $lcp_thumbnail = '';
             if ( has_post_thumbnail($single->ID) ) {
-            	 $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' . get_the_post_thumbnail($single->ID, $this->params['thumbnail_size']) . '</a>';
+              if ( $lcp_thumb_class != null){
+                $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' . 
+                get_the_post_thumbnail($single->ID, $this->params['thumbnail_size'], array('class' => $lcp_thumb_class )) . '</a>';
+              }else {
+                $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' . 
+                get_the_post_thumbnail($single->ID, $this->params['thumbnail_size']) . '</a>';
+              }
             }
             return $lcp_thumbnail;
         } else {

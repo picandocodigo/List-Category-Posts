@@ -131,9 +131,14 @@ class CatListDisplayer {
         return $this->assign_style($info, $tag, $css_class);
     }
 
-    private function get_thumbnail($single, $tag = null, $css_class = null){
-        $info = $this->catlist->get_thumbnail($single);
-        return $this->assign_style($info, $tag, $css_class);
+    private function get_thumbnail($single, $tag = null){
+        if ( isset($this->params['thumbnail_class']) && $this->params['thumbnail_class'] != '' ){
+          $lcp_thumb_class = $this->params['thumbnail_class'];
+          $info = $this->catlist->get_thumbnail($single, $lcp_thumb_class);
+        } else {
+          $info = $this->catlist->get_thumbnail($single);
+        }
+        return $this->assign_style($info, $tag);
     }
 
     private function get_post_title($single, $tag = null, $css_class = null){
@@ -164,7 +169,4 @@ class CatListDisplayer {
             return '<' . $tag . ' class="' . $css_class . '">' . $info . '</' . $tag . '>';
         }
     }
-
-
-
 }
