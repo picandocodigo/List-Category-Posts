@@ -31,16 +31,18 @@ class CatList{
         'numberposts' => $this->params['numberposts'],
         'orderby' => $this->params['orderby'],
         'order' => $this->params['order'],
-        'exclude' => $this->params['excludeposts'],
         'offset' => $this->params['offset']
         ));
-
+        
+        //Exclude
+        if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'): $args['exclude'] = $this->params['excludeposts']; endif;
+        
         // Post type and post parent:
-        if(isset($this->params['post_type'])): $args['post_type'] = $this->params['post_type']; endif;
-        if(isset($this->params['post_parent'])): $args['post_parent'] = $this->params['post_parent']; endif;
+        if(isset($this->params['post_type']) && $this->params['post_type'] != '0'): $args['post_type'] = $this->params['post_type']; endif;
+        if(isset($this->params['post_parent']) && $this->params['post_parent'] != '0'): $args['post_parent'] = $this->params['post_parent']; endif;
 
         // Custom fields 'customfield_name' & 'customfield_value' should both be defined
-        if(isset($this->params['customfield_name']) && $this->params['customfield_value'] != ''):
+        if( !empty($this->params['customfield_value']) ):
           $args['meta_key'] = $this->params['customfield_name'];
           $args['meta_value'] = $this->params['customfield_value'];
         endif;
@@ -51,15 +53,17 @@ class CatList{
         }
 
         // Added custom taxonomy support
-        if (isset($this->params['taxonomy']) && $this->params['taxonomy'] != '' && $this->params['tags'] != "") {
+        if ( !empty($this->params['taxonomy']) && !empty($this->params['tags']) ) {
           $args['tax_query'] = array(array(
               'taxonomy' => $this->params['taxonomy'],
               'field' => 'slug',
               'terms' => explode(",",$this->params['tags'])
           ));
-        } else if (isset($this->params['tags'])) {
+        } else if ( !empty($this->params['tags']) ) {
           $args['tag'] = $this->params['tags'];
         }
+        
+        var_dump($args);
         $this->lcp_categories_posts = get_posts($args);
     }
 
@@ -69,7 +73,7 @@ class CatList{
         global $post;
         $categories = get_the_category($post->ID);
         $this->lcp_category_id = $categories[0]->cat_ID;
-      } elseif ( isset($this->params['name']) && $this->params['name'] != '' ){
+      } elseif ( !empty($this->params['name']) ){
         if (preg_match('/,/', $this->params['name'])){
           $categories = '';
           $cat_array = explode(",", $this->params['name']);
