@@ -63,7 +63,6 @@ class CatList{
           $args['tag'] = $this->params['tags'];
         }
         
-        var_dump($args);
         $this->lcp_categories_posts = get_posts($args);
     }
 
