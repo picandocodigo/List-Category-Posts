@@ -158,6 +158,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.21.1 =
+* Small fixes: 
+  * Used "empty()" function for some Strings instead of evaluating isset() and != ''.
+  * Include parameters on the get_posts args only when they are set (post_parent among others).
+
 = 0.21 =
 * Added 'thumbnail_class' parameter, so you can set a CSS class to the thumbnail and style it.
 
