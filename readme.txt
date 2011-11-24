@@ -23,6 +23,8 @@ Please, read the information on [Other Notes](http://wordpress.org/extend/plugin
 
 `[catlist argument1=value1 argument2=value2]`
 
+
+
 **Support the plugin**
 
 If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my [Amazon Wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist"). **New Code is always welcome** :D
