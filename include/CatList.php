@@ -69,9 +69,7 @@ class CatList{
 
     private function get_lcp_category(){
       if ( isset($this->params['categorypage']) && $this->params['categorypage'] == 'yes' ){
-        global $post;
-        $categories = get_the_category($post->ID);
-        $this->lcp_category_id = $categories[0]->cat_ID;
+        $this->lcp_category_id = lcp_get_current_category();
       } elseif ( !empty($this->params['name']) ){
         if (preg_match('/,/', $this->params['name'])){
           $categories = '';
@@ -87,6 +85,12 @@ class CatList{
       } elseif ( isset($this->params['id']) && $this->params['id'] != '0' ){
         $this->lcp_category_id = $this->params['id'];
       }
+    }
+    
+    public function lcp_get_current_category(){
+        global $post;
+        $categories = get_the_category($post->ID);
+        return $categories[0]->cat_ID;
     }
     
     /**
