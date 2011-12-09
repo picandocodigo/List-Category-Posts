@@ -54,7 +54,6 @@ class CatListDisplayer {
     }
     
     private function build_output($tag){
-        $this->lcp_output .= $this->get_category_link('strong');
         $this->lcp_output .= '<' . $tag;
         if (isset($this->params['class'])): $this->lcp_output .= ' class="' . $this->params['class'] . '"'; endif;
         $this->lcp_output .= '>';
@@ -65,8 +64,14 @@ class CatListDisplayer {
                   $this->lcp_output .= $this->lcp_build_post($single, $inner_tag);
                 }
         endforeach;
-
         $this->lcp_output .= '</' . $tag . '>';
+        
+        if (!empty($this->params['morelink'])):
+            $this->lcp_output .= '<a href="' . get_category_link($this->catlist->get_category_id()) . '">' 
+            . $this->params['morelink'] . '</a>';
+        endif;
+
+        
     }
 
     /**
@@ -76,7 +81,13 @@ class CatListDisplayer {
      * @return string
      */
     private function lcp_build_post($single, $tag){
-        $lcp_display_output = '<'. $tag . '>' . $this->get_post_title($single);
+        global $post;
+        $class ='';
+        if ( $post->ID == $single->ID ):
+            $class = " class = current ";
+        endif;
+        $lcp_display_output = '<'. $tag . $class . '>';
+        $lcp_display_output .= $this->get_post_title($single);
 
         $lcp_display_output .= $this->get_comments($single);
 

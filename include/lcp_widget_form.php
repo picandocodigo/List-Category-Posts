@@ -17,7 +17,8 @@ $instance = wp_parse_args( (array) $instance, array(
                 'excludeposts'=>'',
                 'thumbnail' =>'',
                 'offset'=>'',
-                'show_catlink'=>'' ) );
+                'show_catlink'=>'',
+                'morelink' =>'' ) );
 $title = strip_tags($instance['title']);
 $limit = strip_tags($instance['limit']);
 $orderby = strip_tags($instance['orderby']);
@@ -32,6 +33,7 @@ $categoryid = strip_tags($instance['categoryid']);
 $showexcerpt = strip_tags($instance['show_excerpt']);
 $thumbnail = strip_tags($instance['thumbnail']);
 $thumbnail_size = strip_tags($instance['thumbnail_size']);
+$morelink = strip_tags($instance['morelink']);
 ?>
 
 <p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e("Title", 'list-category-posts')?></label>
@@ -103,31 +105,38 @@ $thumbnail_size = strip_tags($instance['thumbnail_size']);
 </p>
 
 
-                <label><?php _e("Show", 'list-category-posts')?>: </label><br/>
-        <p>
-            <input type="checkbox" <?php checked( (bool) $instance['thumbnail'], true ); ?>
-            name="<?php echo $this->get_field_name( 'thumbnail'); ?>" /><?php _e("Thumbnail - size", 'list-category-posts')?> 
-            <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
-                name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
-                <option value='thumbnail'>thumbnail</option>
-                <option value='medium'>medium</option>
-                <option value='large'>large</option>
-                <option value='full'>full</option>
-            </select>
-        </p>
-        <p>
-            <input type="checkbox" <?php checked( (bool) $instance['show_date'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_date' ); ?>" /><?php _e("Date", 'list-category-posts')?>
-        </p>
-        <p>
-            <input type="checkbox" <?php checked( (bool) $instance['show_author'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_author' ); ?>" /><?php _e("Author", 'list-category-posts')?>
-        </p>
-        <p>
-            <input type="checkbox" <?php checked( (bool) $instance['show_catlink'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" /><?php _e("Link to category", 'list-category-posts')?>
-        </p>
-        <p>
-            <input type="checkbox" <?php checked( (bool) $instance['show_excerpt'], true ); ?>
-            name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" /><?php _e("Excerpt", 'list-category-posts')?>
-        </p>
+<label><?php _e("Show", 'list-category-posts')?>: </label><br/>
+<p>
+    <input type="checkbox" <?php checked( (bool) $instance['thumbnail'], true ); ?>
+    name="<?php echo $this->get_field_name( 'thumbnail'); ?>" /> <?php _e("Thumbnail - size", 'list-category-posts')?> 
+    <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
+        name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
+        <option value='thumbnail'>thumbnail</option>
+        <option value='medium'>medium</option>
+        <option value='large'>large</option>
+        <option value='full'>full</option>
+    </select>
+</p>
+<p>
+    <input type="checkbox" <?php checked( (bool) $instance['show_date'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_date' ); ?>" /> <?php _e("Date", 'list-category-posts')?>
+</p>
+<p>
+    <input type="checkbox" <?php checked( (bool) $instance['show_author'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_author' ); ?>" /> <?php _e("Author", 'list-category-posts')?>
+</p>
+<p>
+    <input type="checkbox" <?php checked( (bool) $instance['show_catlink'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" /> <?php _e("Link to category", 'list-category-posts')?>
+</p>
+<p>
+    <input type="checkbox" <?php checked( (bool) $instance['show_excerpt'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" /> <?php _e("Excerpt", 'list-category-posts')?>
+</p>
+<p>
+    <label for="<?php echo $this->get_field_id('morelink'); ?>"><?php _e("More link", 'list-category-posts')?>: <br/>
+    <input class="widefat" id="<?php echo $this->get_field_id('morelink'); ?>" 
+        name="<?php echo $this->get_field_name('morelink'); ?>" type="text" 
+        value="<?php echo esc_attr($morelink); ?>" />
+    </p>
+
