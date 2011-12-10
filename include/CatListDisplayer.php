@@ -54,6 +54,7 @@ class CatListDisplayer {
     }
     
     private function build_output($tag){
+        $this->lcp_output .= $this->get_category_link('strong');
         $this->lcp_output .= '<' . $tag;
         if (isset($this->params['class'])): $this->lcp_output .= ' class="' . $this->params['class'] . '"'; endif;
         $this->lcp_output .= '>';
