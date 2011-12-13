@@ -69,7 +69,7 @@ class CatList{
 
     private function get_lcp_category(){
       if ( isset($this->params['categorypage']) && $this->params['categorypage'] == 'yes' ){
-        $this->lcp_category_id = lcp_get_current_category();
+        $this->lcp_category_id = $this->lcp_get_current_category();
       } elseif ( !empty($this->params['name']) ){
         if (preg_match('/,/', $this->params['name'])){
           $categories = '';
