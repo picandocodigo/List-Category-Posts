@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.3
-Stable tag: 0.22.2
+Stable tag: 0.22.3
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
@@ -102,7 +102,7 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **thumbnail** - Show post thumbnail (http://markjaquith.wordpress.com/2009/12/23/new-in-wordpress-2-9-post-thumbnail-images/). Default is 'no'. Ex: [catlist thumbnail=yes].
 
-* **thumbnail_size** - Either a string keyword (thumbnail, medium, large or full) or a 2-item array representing width and height in pixels, e.g. array(32,32).
+* **thumbnail_size** - Either a string keyword (thumbnail, medium, large or full) or 2 values representing width and height in pixels. Ex: [catlist thumbnail_size=32,32] or [catlist thumbnail_size=thumbnail]
 
 * **thumbnail_class** - Set a CSS class to the thumbnail and style it.
 
@@ -165,6 +165,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.22.3=
+ * Fixed thumbnail size parameter, added usage example on README.
+ * Added space after author and date http://wordpress.org/support/topic/plugin-list-category-posts-space-required-after
+ 
 = 0.22.2 =
  * Fixed bug with  the categorypage=yes param.
  * Tested with WordPress 3.3.

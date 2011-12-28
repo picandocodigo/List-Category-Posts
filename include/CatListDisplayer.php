@@ -90,15 +90,16 @@ class CatListDisplayer {
         $lcp_display_output = '<'. $tag . $class . '>';
         $lcp_display_output .= $this->get_post_title($single);
 
-        $lcp_display_output .= $this->get_comments($single);
+        $lcp_display_output .= $this->get_comments($single) . ' ';
 
-        $lcp_display_output .= ' ' . $this->get_date($single);
+        $lcp_display_output .= $this->get_date($single) . ' ';
 
-        $lcp_display_output .= $this->get_author($single);
+        $lcp_display_output .= $this->get_author($single) . ' ';
       
         if (isset($this->params['customfield_display'])){
           $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
         }
+        
         $lcp_display_output .= $this->get_thumbnail($single);
 
         $lcp_display_output .= $this->get_content($single, 'p');

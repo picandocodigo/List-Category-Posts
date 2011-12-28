@@ -230,13 +230,24 @@ class CatList{
         if ($this->params['thumbnail']=='yes'){
             $lcp_thumbnail = '';
             if ( has_post_thumbnail($single->ID) ) {
-              if ( $lcp_thumb_class != null){
-                $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' . 
-                get_the_post_thumbnail($single->ID, $this->params['thumbnail_size'], array('class' => $lcp_thumb_class )) . '</a>';
-              }else {
-                $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' . 
-                get_the_post_thumbnail($single->ID, $this->params['thumbnail_size']) . '</a>';
-              }
+              
+              if ( in_array( $this->params['thumbnail_size'], array('thumbnail', 'medium', 'large', 'full') ) ) :
+                $lcp_thumb_size = $this->params['thumbnail_size'];
+              elseif ($this->params['thumbnail_size']):
+                $lcp_thumb_size = explode(",", $this->params['thumbnail_size']);
+              else :
+                $lcp_thumb_size = 'thumbnail';
+              endif;//thumbnail size
+              
+              $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">'; 
+              
+              $lcp_thumbnail .= get_the_post_thumbnail(
+                                  $single->ID, 
+                                  $lcp_thumb_size, 
+                                  ($lcp_thumb_class != null) ? array('class' => $lcp_thumb_class ) : null
+                                );
+              $lcp_thumbnail .= '</a>';
+              
             }
             return $lcp_thumbnail;
         } else {
