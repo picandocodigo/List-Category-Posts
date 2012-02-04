@@ -208,12 +208,11 @@ class CatList{
     public function get_excerpt($single){
         if ($this->params['excerpt']=='yes' && !($this->params['content']=='yes' && $single->post_content) ){
             if($single->post_excerpt){
-                    return $single->post_excerpt;
+              return $single->post_excerpt;
             }
             $lcp_excerpt = strip_tags($single->post_content);
-            if (strlen($lcp_excerpt) > 255) {
-                    $lcp_excerpt = substr($lcp_excerpt, 0, 252) . '...';
-            }
+            $exc_lim = intval($this->params['excerpt_size']);
+            $lcp_excerpt = substr($lcp_excerpt, 0, $exc_lim) . '...';
             return $lcp_excerpt;
         } else {
             return null;

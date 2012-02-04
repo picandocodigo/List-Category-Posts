@@ -3,13 +3,15 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 2.8
-Tested up to: 3.3
-Stable tag: 0.22.3
+Tested up to: 3.3.1
+Stable tag: 0.23
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
 
 The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page.
+
+**New feature**: The different elements to display con now be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
 
@@ -90,6 +92,8 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it.
 
+* **excerpt_size** - Set the number of characters to display from the excerpt. Default is 255. Eg: `excerpt_size = 300`
+
 * **excludeposts** - IDs of posts to exclude from the list. Ex: [catlist excludeposts=12,52,37]
 
 * **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
@@ -120,6 +124,25 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **morelink** - Include a "more" link to access the category archive for the category. The link is inserted after listing the posts. It receives a string of characters as a parameter which will be used as the text of the link. Example: [catlist id=38 morelink="Read more"]
 
+== HTML & CSS Customization ==
+
+You can customize what HTML tags different elements will be sorrounded with and a CSS class for this element. The customizable elements are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
+
+The parameters are:
+`autor_tag, author_class, catlink_tag, catlink_class, comments_tag, comments_class, date_tag, date_class, 
+excerpt_tag, excerpt_class, morelink_class, thumbnail_class, title_tag, title_class`
+
+So for example, let's say you want to wrap the displayed comments count with the p tag and a "lcp_comments" class, you would do:
+`[catlist id=7 comments=yes comments_tag=p comments_class=lcp_comments]`
+This would produce the following code:
+`<p class="lcp_comments"> (3)</p>`
+
+Or you just want to style the displayed date, you could wrap it with a span tag:
+`[catlist name=blog date=yes date_tag=span date_class=lcp_date]`
+This would produce the following code:
+`<span class="lcp_date">March 21, 2011</span>`
+
+
 == Template System ==
 
 Templates for the List Category Plugin are searched for in your WordPress theme's folder. You should create a folder named list-category-posts under 'wp-content/themes/your-theme-folder'. Template files are .php files.
@@ -134,7 +157,7 @@ You can have as many different templates as you want, and use them in different 
 * **Instructions** on how to use the plugin: http://wordpress.org/extend/plugins/list-category-posts/other_notes/
 * **Template system** how to customize the way the posts are shown: http://wordpress.org/extend/plugins/list-category-posts/other_notes/. I am aware the Template System is not really friendly right now, I'll work on this whenever I get the time to work on the plugin for a while.
 * **New feature requests** - Contact me on fernando at picandocodigo dot net.
-* **Support** I've decided to use WordPress Answers (http://meta.wordpress.stackexchange.com/) as the place for support. It's a great place with a large community of WordPress users and developers. Just ask your question with the tag 'plugin-list-category-post'.
+* **Support** I've decided to use [WordPress Answers](http://wordpress.stackexchange.com/) as the place for support. It's a great place with a large community of WordPress users and developers. Just [ask your question](http://wordpress.stackexchange.com/questions/ask?tags=plugin-list-category-posts) using the 'plugin-list-category-post' tag.
 
 * **FAQ**
 
@@ -165,64 +188,89 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
-= 0.22.3=
+= 0.23 =
+
+This update is dedicated to Michelle K McGinnis who bought me "Diamond Age" by Neal Stephenson from my [Amazon Wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web). Thanks! :D
+
+ * Added excerpt size. You can set how many characters you want the excerpt to display with 'excerpt_size'.
+ * Fixed HTML tag and CSS class for each element (Check [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage).
+ * Removed shortcodes from excerpt.
+
+= 0.22.3 =
+
  * Fixed thumbnail size parameter, added usage example on README.
  * Added space after author and date http://wordpress.org/support/topic/plugin-list-category-posts-space-required-after
  
 = 0.22.2 =
+
  * Fixed bug with  the categorypage=yes param.
  * Tested with WordPress 3.3.
 
 = 0.22.1 =
+
  * Fixed accidentally deleted line which made the catlink=yes param not work.
 
 = 0.22 =
+
  * Added CSS "current" class hook for current post in the list: .current class attached to either the li or a tag of the currently viewed page in the said list. http://wordpress.stackexchange.com/q/35552/298
  * Added *morelink* parameter, check Other notes for usage.
 
 = 0.21.2 =
+
  * Removed var_dump... (Sorry about that)
 
 = 0.21.1 =
+
 * Small fixes: 
   * Used "empty()" function for some Strings instead of evaluating isset() and != ''.
   * Include parameters on the get_posts args only when they are set (post_parent among others).
 
 = 0.21 =
+
 * Added 'thumbnail_class' parameter, so you can set a CSS class to the thumbnail and style it.
 
 = 0.20.5 =
+
 * Brought back the multiple categories functionality for the id parameter. Hopefully the last 0.20 bugfix release so I can start working on new stuff to implement.
 * Now the name parameter accepts multiple categories too. Just use: `[catlist name=category1,category2]`
 
 = 0.20.4 =
+
 * Yet another bugfix, regarding nothing being displayed when using tags.
 
 = 0.20.3 =
+
 * Fixed category detection code, which created some messy bugs in some cases
 
 = 0.20.2 =
+
 * Minor bugfix release
 
 = 0.20.1 =
+
 * Fixed extra " added to ul tag, thanks ideric (http://wordpress.org/support/topic/plugin-list-category-posts-extra-added-to-ul-tag)
 
 = 0.20 =
+
 * Added the possibility to list posts from the current post's category
 * Some fixes to documentation
 
 = 0.19.3 =
+
 * Another taxonomy fix, thanks frisco! http://wordpress.org/support/topic/plugin-list-category-posts-problem-with-custom-taxonomies
 
 = 0.19.2 =
+
 * Small fix, missing parameter for taxonomy.
 
 = 0.19.1 =
+
 * Added thumbnail to Widget.
 * Added thumbnail link to post (http://picod.net/33).
 
 = 0.19 =
-This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate Hitchhiker's Guide to the Galaxy" from my Amazon Wishlit in appreciation for the plugin. I am really enjoying the read :D. If you, like S would like to show your appreciation, here's my wishlist: http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web 
+
+This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate Hitchhiker's Guide to the Galaxy" from my Amazon Wishlit in appreciation for the plugin. I am really enjoying the read :D. If you, like S would like to show your appreciation, here's my [wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web):
  
 * Fixed private post logic, not displaying post if private. Thanks Bainternet from WordPress Answers: http://wordpress.stackexchange.com/questions/12514/list-category-posts-not-showing-posts-marked-private-to-logged-in-users/12520#12520
 * Added thumbnail_size parameter.
@@ -230,102 +278,129 @@ This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate
 * Fixed widget, now it remembers saved options.
 
 = 0.18.3 =
+
 * Small excerpt fix, some readme file fixing too.
 * Not showing the_content for password protected posts.
 
 = 0.18.2 =
+
 * Small fixes. Should work for name parameter in all cases now.
 
 = 0.18.1 =
+
 * Added slug and name to the fetching of category id from previous update.
 
 = 0.18 =
+
 * Fixed category id bug. Reported and fixed by Eric Celeste - http://eric.clst.org, thanks!
 * Improved template system a liitle bit, now you can pass an HTML tag and a CSS class to sorround each field on your template.
 * Added category link which wasn't working after previous big update.
 
 = 0.17.1 =
+
 * Fixed displaying of "Author:" even when not being called.
 
 = 0.17 =
+
 * Major rewrite. The whole code was rewritten using objects. It's easier now to develop for List Category Posts.
 * Both STYLESHEETPATH and TEMPLATEPATH are checked for templates.
 
 = 0.16.1 =
+
 * Fixed shortcode nesting.
 
 = 0.16 =
+
 * Changed STYLESHEETPATH to TEMPLATEPATH to point to the parent theme.
 * Added support to display custom fields. (http://picod.net/wp03)
 * Tested with WordPress 3.1 - http://wordpress.org/support/topic/399754
 
 
 = 0.15.1 =
+
 * Fixed a bug with undeclared variable. (Check http://picod.net/walcp, thanks Das!)
 
 = 0.15 =
+
 * Added custom fields support. Define both custom field (customfield_name) and value (customfield_value) to use it.
 
 = 0.14.1 =
+
 * Fixed "Show the title of the category with a link to the category" code (catlink param), it broke on some previous update, but now it's working again. Thanks Soccerwidow on the WP Forums for pointing this out. 
 
 = 0.14 =
+
 * Added "post_type" and "post_parent" from the underlining "get_posts()" API to be usable within the short-code. By Martin Crawford, thanks!
 * Added the "class" parameter to style the default ul. You can pass a class name, or the plugin will use "lcp_catlist" bby default. Thanks Chocolaterebel (http://wordpress.org/support/topic/plugin-list-category-posts-sharing-my-own-template-in-lcp).
 * Fixed "tags" parameter on the documentation, it used to say "tag", and the plugin looks for "tags".
 
 = 0.13.2 =
+
 * Fixed thumbnail code, added it to default.php template as example. 
 
 = 0.13.1 =
+
 * Fixed broken dateformat. 
 
 = 0.13 =
+
 * Show post thumbnails, should be tested, feedback on styling is welcome. Thanks to Sebastian from http://www.avantix.com.ar/
 
 = 0.12 =
+
 * Added comments count.
 * Updated readme file
 
 = 0.11.2 =
+
 * Another minimal bug fixed with the excerpt...
 
 = 0.11.1 =
+
 * Fixed small bug which made the excerpt show up everytime... (Sorry :S)
 
 = 0.11 =
+
 * Automatic excerpt added in case the user didn't specifically write an excerpt.
 * Widget has been finally fixed. The attributes finally save themselves, and the widget works as expected :D
 
 
 = 0.10.1 =
-* Small fix - added ul tags to default template.
+* Small fix - 
+added ul tags to default template.
 * Compatible WordPress 3.0 with Twenty Ten theme (thanks again Doug Joseph :) )
 
 = 0.10 =
+
 * Code for the_content was fixed so that the content to output filtered content (thanks DougJoseph http://wordpress.org/support/topic/399754)
 
 = 0.9 =
+
 * admin parameter now shows "display name" instead of "user nice name".
 * Template system has changed: In older version, custom templates got deleted if an automatic upgrade was done. Now templates are stored in the theme folder. (Thanks Paul Clark)
 * Added tag support
 
 = 0.8.1 =
+
 * Fixed bug for 'content'.
 * There's new stuff on the widget options. I'm still working on it, so some bugs may appear.
 
 = 0.8 =
+
 * Widget implements WP 2.8 Widget API, so at least 2.8 is required. Now you can use as many widgets as necessary, with new params.
 * Updated readme file.
 
 = 0.7.2 =
+
 * Fixed link to category.
 * Improved template system.
 
 = 0.7.1 =
+
 * Fixed uber stupid bug with offset... Sorry about that!
 
 = 0.7 =
+
 * Exclude posts. Contribution by acub.
 * Offset parameter on shortcode to start listing posts with an offset. Contribution by Levi Vasquez
 * Content of the post can now be displayed. Contribution by Lang Zerner.
@@ -333,11 +408,13 @@ This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate
 * Fixed small bug when using category name.
 
 = 0.6 =
+
 * Minor fix for unclosed ul if not using templates.
 * Added option to list posts from many categories at once.
 * Added option to exclude categories.
 
 = 0.5 =
+
 * Readme.txt validation.
 * Added 'excerpt' parameter. You can now show the excerpt for each post.
 * Added 'dateformat' parameter. Format of the date output. Default is get_option('date_format') - by Verex

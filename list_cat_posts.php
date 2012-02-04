@@ -3,7 +3,7 @@
 Plugin Name: List category posts
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.22.3
+Version: 0.23
 Author: Fernando Briano
 Author URI: http://picandocodigo.net/
 */
@@ -42,20 +42,33 @@ class ListCategoryPosts{
                             'order' => 'desc',
                             'numberposts' => '5',
                             'date' => 'no',
-                            'author' => 'no',
+                            'date_tag' => '',
+                            'date_class' =>'',
                             'dateformat' => get_option('date_format'),
+                            'author' => 'no',
+                            'author_tag' =>'',
+                            'author_class' => '',
                             'template' => 'default',
                             'excerpt' => 'no',
+                            'excerpt_size' => '255',
+                            'excerpt_tag' =>'',
+                            'excerpt_class' =>'',
                             'exclude' => '0',
                             'excludeposts' => '0',
                             'offset' => '0',
                             'tags' => '',
                             'content' => 'no',
                             'catlink' => 'no',
+                            'catlink_tag' =>'',
+                            'catlink_class' => '',
                             'comments' => 'no',
+                            'comments_tag' => '',
+                            'comments_class' => '',
                             'thumbnail' => 'no',
                             'thumbnail_size' => 'thumbnail',
                             'thumbnail_class' => '',
+                            'title_tag' => '',
+                            'title_class' => '',
                             'post_type' => '',
                             'post_parent' => '0',
                             'class' => 'lcp_catlist',
@@ -64,7 +77,8 @@ class ListCategoryPosts{
                             'customfield_display' =>'',
                             'taxonomy' => '',
                             'categorypage' => '',
-                            'morelink' => ''
+                            'morelink' => '',
+                            'morelink_class' => ''
                     ), $atts);
 
             $catlist_displayer = new CatListDisplayer($atts);
