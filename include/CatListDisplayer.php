@@ -107,7 +107,7 @@ class CatListDisplayer {
         
         $lcp_display_output .= $this->get_thumbnail($single);
 
-        $lcp_display_output .= $this->get_content($single, 'p');
+        $lcp_display_output .= $this->get_content($single, $this->params['content_tag'], $this->params['content_class']);
 
         $lcp_display_output .= $this->get_excerpt($single, $this->params['excerpt_tag'], $this->params['excerpt_class']);;
 
