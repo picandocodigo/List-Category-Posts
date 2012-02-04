@@ -190,7 +190,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.23 =
 
-This update is dedicated to Michelle K McGinnis who bought me "Diamond Age" by Neal Stephenson from my [Amazon Wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web). Thanks! :D
+This update is dedicated to [Michelle K McGinnis](http://friendlywebconsulting.com/) who bought me "Diamond Age" by Neal Stephenson from my [Amazon Wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web). Thanks! :D
 
  * Added excerpt size. You can set how many characters you want the excerpt to display with 'excerpt_size'.
  * Fixed HTML tag and CSS class for each element (Check [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage).
