@@ -129,9 +129,8 @@ You can use the *categorypage* parameter to make it detect the category id of th
 You can customize what HTML tags different elements will be sorrounded with and a CSS class for this element. The customizable elements are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
 
 The parameters are:
-`autor_tag, author_class, catlink_tag, catlink_class, comments_tag, comments_class, 
-content_tag, content_class, date_tag, date_class, excerpt_tag, excerpt_class, 
-morelink_class, thumbnail_class, title_tag, title_class`
+`autor_tag, author_class, catlink_tag, catlink_class, comments_tag, comments_class, date_tag, date_class, 
+excerpt_tag, excerpt_class, morelink_class, thumbnail_class, title_tag, title_class`
 
 So for example, let's say you want to wrap the displayed comments count with the p tag and a "lcp_comments" class, you would do:
 `[catlist id=7 comments=yes comments_tag=p comments_class=lcp_comments]`
@@ -188,10 +187,6 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
-
-= 0.23.1 =
-
- * Added class and tag for "content".
 
 = 0.23 =
 
