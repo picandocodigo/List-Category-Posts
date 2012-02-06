@@ -119,17 +119,17 @@ class CatListDisplayer {
     /**
      * Auxiliary functions for templates
      */
-    private function get_author($single, $tag, $css_class){
+    private function get_author($single, $tag = null, $css_class = null){
         $info = $this->catlist->get_author_to_show($single);
         return $this->assign_style($info, $tag, $css_class);
     }
 
-    private function get_comments($single, $tag, $css_class){
+    private function get_comments($single, $tag = null, $css_class = null){
         $info = $this->catlist->get_comments_count($single);
         return $this->assign_style($info, $tag, $css_class);
     }
 
-    private function get_content($single, $tag, $css_class){
+    private function get_content($single, $tag = null, $css_class = null){
         $info = $this->catlist->get_content($single);
         return $this->assign_style($info, $tag, $css_class);
     }
