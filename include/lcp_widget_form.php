@@ -3,8 +3,7 @@
  * List Category Posts sidebar widget form for Appearance > Widgets.
  * @author fernando@picandocodigo.net
  */
-
-$instance = wp_parse_args( (array) $instance, array(
+$default = array (
                 'title' => '',
                 'categoryid' => '',
                 'limit' => '',
@@ -18,7 +17,10 @@ $instance = wp_parse_args( (array) $instance, array(
                 'thumbnail' =>'',
                 'offset'=>'',
                 'show_catlink'=>'',
-                'morelink' =>'' ) );
+                'morelink' =>'' 
+                );
+$instance = wp_parse_args( (array) $instance, $default);
+
 $title = strip_tags($instance['title']);
 $limit = strip_tags($instance['limit']);
 $orderby = strip_tags($instance['orderby']);
@@ -118,19 +120,19 @@ $morelink = strip_tags($instance['morelink']);
     </select>
 </p>
 <p>
-    <input type="checkbox" <?php checked( (bool) $instance['show_date'], true ); ?>
+    <input class="checkbox"  type="checkbox" <?php checked($instance['show_date'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_date' ); ?>" /> <?php _e("Date", 'list-category-posts')?>
 </p>
 <p>
-    <input type="checkbox" <?php checked( (bool) $instance['show_author'], true ); ?>
+    <input class="checkbox" input type="checkbox" <?php checked($instance['show_author'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_author' ); ?>" /> <?php _e("Author", 'list-category-posts')?>
 </p>
 <p>
-    <input type="checkbox" <?php checked( (bool) $instance['show_catlink'], true ); ?>
+    <input class="checkbox" input type="checkbox" <?php checked($instance['show_catlink'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" /> <?php _e("Link to category", 'list-category-posts')?>
 </p>
 <p>
-    <input type="checkbox" <?php checked( (bool) $instance['show_excerpt'], true ); ?>
+    <input class="checkbox" input type="checkbox" <?php checked($instance['show_excerpt'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" /> <?php _e("Excerpt", 'list-category-posts')?>
 </p>
 <p>
