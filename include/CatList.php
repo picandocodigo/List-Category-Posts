@@ -123,7 +123,8 @@ class CatList{
         if($this->params['catlink'] == 'yes' && $this->lcp_category_id != 0){
             $cat_link = get_category_link($this->lcp_category_id);
             $cat_title = get_cat_name($this->lcp_category_id);
-            return '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
+            return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
+                   ($this->params['catlink_string'] !== '' ? $this->params['catlink_string'] : $cat_title) . '</a>';
         } else {
             return null;
         }
