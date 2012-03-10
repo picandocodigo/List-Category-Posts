@@ -55,6 +55,7 @@ class ListCategoryPosts{
                             'excerpt_class' =>'',
                             'exclude' => '0',
                             'excludeposts' => '0',
+                                'exclude_singular' => '0', // New
                             'offset' => '0',
                             'tags' => '',
                             'content' => 'no',
@@ -83,15 +84,40 @@ class ListCategoryPosts{
                             'morelink' => '',
                             'morelink_class' => ''
                     ), $atts);
-
+            
+            // New
+            if ( !empty($attrs['exclude_singular']) && !empty($this->singular_id) ) {
+                $attrs['excludeposts'] = ($attrs['excludeposts'] != '0')
+                    ? $attrs['excludeposts'] . ',' . $this->singular_id
+                    : $this->singular_id;
+            }
+            unset($attrs['exclude_singular']);
+            
             $catlist_displayer = new CatListDisplayer($atts);
             return $catlist_displayer->display();
 
     }
+    
+    // New
+    function action_pre_get_posts($query) {
+        if ( $query->is_main_query() && $query->is_singular() ) {
+            $this->singular_id = $query->get_queried_object_id();
+        }
+    }
 
 }
 
-add_shortcode( 'catlist', array('ListCategoryPosts', 'catlist_func') );
+$list_category_posts = new ListCategoryPosts();
+
+add_action( 'pre_get_posts', array($list_category_posts, 'action_pre_get_posts') );
+add_shortcode( 'catlist', array($list_category_posts, 'catlist_func') );
+
+/**
+  Fork/Edit by kelleyvanevert:
+  Answering http://wordpress.stackexchange.com/questions/44895/exclude-current-page-from-list-of-pages/44984,
+   we found there is no way to exlcude the CURRENTLY DISPLAYED single post/page.
+  The solution I propose should solve the problem, I think; but I HAVEN'T tested yet.
+ */
 
 /**
  * TO-DO:
