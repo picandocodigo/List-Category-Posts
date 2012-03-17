@@ -94,7 +94,7 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **excerpt_size** - Set the number of characters to display from the excerpt. Default is 255. Eg: `excerpt_size = 300`
 
-* **excludeposts** - IDs of posts to exclude from the list. Ex: [catlist excludeposts=12,52,37]
+* **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: [catlist excludeposts=this,12,52,37]
 
 * **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
 

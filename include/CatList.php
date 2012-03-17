@@ -35,7 +35,12 @@ class CatList{
         ));
         
         //Exclude
-        if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'): $args['exclude'] = $this->params['excludeposts']; endif;
+        if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'):
+        	$args['exclude'] = $this->params['excludeposts']; 
+			if (strpos($args['exclude'],'this')!==false) {
+				$args['exclude']=$args['exclude']. ",".$this->lcp_get_current_post_id();
+			}
+        endif;
         
         // Post type and post parent:
         if(isset($this->params['post_type']) && $this->params['post_type'] != '0'): $args['post_type'] = $this->params['post_type']; endif;
@@ -92,7 +97,11 @@ class CatList{
         $categories = get_the_category($post->ID);
         return $categories[0]->cat_ID;
     }
-    
+	
+	private function lcp_get_current_post_id(){
+	    global $post;
+		return $post->ID;    
+	 }
     /**
      * Get the category id from its name
      * by Eric Celeste / http://eric.clst.org
@@ -123,8 +132,7 @@ class CatList{
         if($this->params['catlink'] == 'yes' && $this->lcp_category_id != 0){
             $cat_link = get_category_link($this->lcp_category_id);
             $cat_title = get_cat_name($this->lcp_category_id);
-            return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-                   ($this->params['catlink_string'] !== '' ? $this->params['catlink_string'] : $cat_title) . '</a>';
+            return '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
         } else {
             return null;
         }
