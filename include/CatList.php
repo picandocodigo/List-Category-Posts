@@ -62,11 +62,6 @@ class CatList{
 		}
 
 	
-		private function lcp_get_current_post_id(){
-	    global $post;
-			return $post->ID;    
-		}
-
 		// Added custom taxonomy support
 		if ( !empty($this->params['taxonomy']) && !empty($this->params['tags']) ) {
 			$args['tax_query'] = array(array(
@@ -81,6 +76,11 @@ class CatList{
 		$this->lcp_categories_posts = get_posts($args);
 	}
 
+
+	private function lcp_get_current_post_id(){
+		global $post;
+		return $post->ID;    
+	}
 
 
 	private function get_lcp_category(){
