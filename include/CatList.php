@@ -35,9 +35,12 @@ class CatList{
 		));
 
 		//Exclude
-		if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'):
-			$args['exclude'] = $this->params['excludeposts'];
-		endif;
+		if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'){
+			$args['exclude'] = $this->params['excludeposts']; 
+			if (strpos($args['exclude'],'this')!==false) {
+				$args['exclude']=$args['exclude']. ",".$this->lcp_get_current_post_id();
+			}
+		}
 
 		// Post type and post parent:
 		if(isset($this->params['post_type']) && $this->params['post_type'] != '0'):
@@ -58,6 +61,12 @@ class CatList{
 			$args['post_status'] = array('publish','private');
 		}
 
+	
+		private function lcp_get_current_post_id(){
+	    global $post;
+			return $post->ID;    
+		}
+
 		// Added custom taxonomy support
 		if ( !empty($this->params['taxonomy']) && !empty($this->params['tags']) ) {
 			$args['tax_query'] = array(array(
@@ -71,6 +80,7 @@ class CatList{
 
 		$this->lcp_categories_posts = get_posts($args);
 	}
+
 
 
 	private function get_lcp_category(){
@@ -104,7 +114,7 @@ class CatList{
 	 * by Eric Celeste / http://eric.clst.org
 	 */
 	private function get_category_id_by_name($cat_name){
-    #TODO: Support multiple names (this used to work, but not anymore)
+		//TODO: Support multiple names (this used to work, but not anymore)
 		//We check if the name gets the category id, if not, we check the slug.
 		$term = get_term_by('slug', $cat_name, 'category');
 		if (!$term):
