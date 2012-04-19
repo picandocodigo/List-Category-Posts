@@ -94,13 +94,13 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **excerpt_size** - Set the number of characters to display from the excerpt. Default is 255. Eg: `excerpt_size = 300`
 
-* **excludeposts** - IDs of posts to exclude from the list. Ex: [catlist excludeposts=12,52,37]
+* **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: [catlist excludeposts=this,12,52,37]
 
 * **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
 
 * **content** - Show the full content of the post. Default is 'no'. Ex: [catlist content=yes]
 
-* **catlink** - Show the title of the category with a link to the category. Use the catlink_string option to change the link text. Default is 'no'. Ex: [catlist catlink=yes]. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
+* **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: [catlist catlink=yes]. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
 
 * **comments** - Show comments count for each post. Default is 'no'. Ex: [catlist comments=yes].
 
