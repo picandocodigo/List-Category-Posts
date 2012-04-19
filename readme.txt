@@ -25,15 +25,13 @@ Please, read the information on [Other Notes](http://wordpress.org/extend/plugin
 
 `[catlist argument1=value1 argument2=value2]`
 
-
-
 **Support the plugin**
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my [Amazon Wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist"). 
+If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :). 
 
 **Development**
 
-I've moved the development to [GitHub](https://github.com/picandocodigo/List-Category-Posts), Subversion and the WordPress.org structure have become old. Fork it, code, make a pull request, suggest improvements, etc. over there. Maybe someday all of the WordPress plugins will be hosted on Github :)
+I've moved the development to [GitHub](https://github.com/picandocodigo/List-Category-Posts). Fork it, code, make a pull request, suggest improvements, etc. over there. I dream of the day all of the WordPress plugins will be hosted on Github :)
 
 
 ==Installation==
@@ -192,8 +190,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.24 =
 
- * Attempting to condition whitespaces to WordPress Coding Standard (emacs php-mode sucks for this...)
  * Fixes "excerpt doesn't strip shortcodes" - https://github.com/picandocodigo/List-Category-Posts/issues/5
+ * Exclude currently displayed post - [1](http://wordpress.stackexchange.com/questions/44895/exclude-current-page-from-list-of-pages/), [2](https://github.com/picandocodigo/List-Category-Posts/pull/8)
+ * Add title to category title [1](http://wordpress.stackexchange.com/questions/44467/list-category-plugin-changing-the-links), will be improved.
+ * Attempting to condition whitespaces to WordPress Coding Standard (emacs php-mode sucks for this...)
  * No more git-svn crap, now I'm developing this over at (GitHub)[https://github.com/picandocodigo/List-Category-Posts] and copying it into the WordPress SVN Repo.
 
 = 0.23.2 =

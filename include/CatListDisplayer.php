@@ -1,6 +1,7 @@
 <?php
 /**
- * This is an auxiliary class to help display the info on your CatList.php instance.
+ * This is an auxiliary class to help display the info
+ * on your CatList.php instance.
  * @author fernando@picandocodigo.net
  */
 require_once 'CatList.php';
@@ -98,16 +99,25 @@ class CatListDisplayer {
 			$class = " class = current ";
 		endif;
 		$lcp_display_output = '<'. $tag . $class . '>';
-		$lcp_display_output .= $this->get_post_title($single, $this->params['title_tag'], $this->params['title_class']);
+		$lcp_display_output .=
+			$this->get_post_title($single, $this->params['title_tag'],
+														$this->params['title_class']);
+		$lcp_display_output .=
+			$this->get_comments($single, $this->params['comments_tag'],
+													$this->params['comments_class']) . ' ';
 
-		$lcp_display_output .= $this->get_comments($single, $this->params['comments_tag'], $this->params['comments_class']) . ' ';
+		$lcp_display_output .=
+			$this->get_date($single, $this->params['date_tag'],
+											$this->params['date_class']) . ' ';
 
-		$lcp_display_output .= $this->get_date($single, $this->params['date_tag'], $this->params['date_class']) . ' ';
-
-		$lcp_display_output .= $this->get_author($single, $this->params['author_tag'], $this->params['author_class']) . ' ';
+		$lcp_display_output .=
+			$this->get_author($single, $this->params['author_tag'],
+												$this->params['author_class']) . ' ';
 
 		if (isset($this->params['customfield_display'])){
-			$lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
+			$lcp_display_output .=
+				$this->get_custom_fields($this->params['customfield_display'],
+																 $single->ID);
 		}
 
 		$lcp_display_output .= $this->get_thumbnail($single);
@@ -156,7 +166,8 @@ class CatListDisplayer {
 		}
 
 		private function get_thumbnail($single, $tag = null){
-				if ( isset($this->params['thumbnail_class']) && $this->params['thumbnail_class'] != '' ){
+				if ( isset($this->params['thumbnail_class']) &&
+						$this->params['thumbnail_class'] != '' ){
 					$lcp_thumb_class = $this->params['thumbnail_class'];
 					$info = $this->catlist->get_thumbnail($single, $lcp_thumb_class);
 				} else {
@@ -166,7 +177,9 @@ class CatListDisplayer {
 		}
 
 		private function get_post_title($single, $tag = null, $css_class = null){
-				$info = '<a href="' . get_permalink($single->ID).'" >' . $single->post_title . '</a>';
+				$info = '<a href="' . get_permalink($single->ID) .
+					'" title="'. $single->post_title . '">' .
+					$single->post_title . '</a>';
 				return $this->assign_style($info, $tag, $css_class);
 		}
 
