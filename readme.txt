@@ -36,7 +36,7 @@ I've moved the development to [GitHub](https://github.com/picandocodigo/List-Cat
 
 ==Installation==
 
-* Upload listcat directory into you wp-content/plugins/ directory.
+* Upload listcat directory into your wp-content/plugins/ directory.
 * Login to your WordPress Admin menu, go to Plugins, and activate it.
 * You can find the List Category Posts widget in the Appearence > Widgets section on your WordPress Dashboard.
 * If you want to customize the way the plugin displays the information, check the section on Templates on this documentation.
