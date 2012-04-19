@@ -36,9 +36,9 @@ class CatList{
 
 		//Exclude
 		if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'){
-			$args['exclude'] = $this->params['excludeposts']; 
-			if (strpos($args['exclude'],'this')!==false) {
-				$args['exclude']=$args['exclude']. ",".$this->lcp_get_current_post_id();
+			$args['exclude'] = $this->params['excludeposts'];
+			if (strpos($args['exclude'], 'this') !== FALSE) {
+				$args['exclude'] = $args['exclude'] . ",". $this->lcp_get_current_post_id();
 			}
 		}
 
@@ -61,7 +61,6 @@ class CatList{
 			$args['post_status'] = array('publish','private');
 		}
 
-	
 		// Added custom taxonomy support
 		if ( !empty($this->params['taxonomy']) && !empty($this->params['tags']) ) {
 			$args['tax_query'] = array(array(
@@ -79,7 +78,7 @@ class CatList{
 
 	private function lcp_get_current_post_id(){
 		global $post;
-		return $post->ID;    
+		return $post->ID;
 	}
 
 
