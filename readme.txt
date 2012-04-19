@@ -188,6 +188,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.24 =
+
+ * Attempting to condition whitespaces to WordPress Coding Standard(emacs php-mode sucks for this...)
+ * Fixes "excerpt doesn't strip shortcodes" - https://github.com/picandocodigo/List-Category-Posts/issues/5
+
 = 0.23.2 =
 
  * Bugfix release
