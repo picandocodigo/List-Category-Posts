@@ -35,7 +35,9 @@ class CatList{
         ));
         
         //Exclude
-        if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'): $args['exclude'] = $this->params['excludeposts']; endif;
+        if(isset($this->params['excludeposts']) && $this->params['excludeposts'] != '0'): 
+					$args['exclude'] = $this->params['excludeposts']; 
+				endif;
         
         // Post type and post parent:
         if(isset($this->params['post_type']) && $this->params['post_type'] != '0'): $args['post_type'] = $this->params['post_type']; endif;
@@ -123,7 +125,8 @@ class CatList{
         if($this->params['catlink'] == 'yes' && $this->lcp_category_id != 0){
             $cat_link = get_category_link($this->lcp_category_id);
             $cat_title = get_cat_name($this->lcp_category_id);
-            return '<a href="' . $cat_link . '" title="' . $cat_title . '">' . $cat_title . '</a>';
+            return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
+                   ($this->params['catlink_string'] !== '' ? $this->params['catlink_string'] : $cat_title) . '</a>';
         } else {
             return null;
         }
@@ -212,7 +215,7 @@ class CatList{
             }
             $lcp_excerpt = strip_tags($single->post_content);
             $exc_lim = intval($this->params['excerpt_size']);
-            $lcp_excerpt = substr($lcp_excerpt, 0, $exc_lim) . '...';
+            $lcp_excerpt = mb_substr($lcp_excerpt, 0, $exc_lim) . '...';
             return $lcp_excerpt;
         } else {
             return null;
