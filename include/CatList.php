@@ -207,8 +207,9 @@ class CatList{
 							$lcp_content = str_replace($match, '(...)',$lcp_content);
 							}
 							}*/
-			$lcp_content = apply_filters('the_content', $lcp_content); // added to parse shortcodes
-			$lcp_content = str_replace(']]>', ']]&gt', $lcp_content); // added to parse shortcodes
+			// added to parse shortcodes
+			$lcp_content = apply_filters('the_content', $lcp_content);
+			$lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
 			return $lcp_content;
 		} else {
 			return null;
@@ -225,12 +226,12 @@ class CatList{
 			 * http://codex.wordpress.org/Function_Reference/strip_shortcodes
 			*/
 			if($single->post_excerpt){
-				return strip_shortcodes($single->post_excerpt);
+				return $single->post_excerpt;
 			}
-			$lcp_excerpt = strip_tags($single->post_content);
+			$lcp_excerpt = strip_shortcodes(strip_tags($single->post_content));
 			$exc_lim = intval($this->params['excerpt_size']);
 			$lcp_excerpt = mb_substr($lcp_excerpt, 0, $exc_lim) . '...';
-			return strip_shortcodes($lcp_excerpt);
+			return $lcp_excerpt;
 		} else {
 			return null;
 		}
