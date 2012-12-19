@@ -182,7 +182,7 @@ class CatListDisplayer {
   private function get_post_title($single, $tag = null, $css_class = null){
     $info = '<a href="' . get_permalink($single->ID) .
       '" title="'. $single->post_title . '">' .
-      $single->post_title . '</a>';
+      apply_filters('the_title', $single->post_title, $single->ID) . '</a>';
     return $this->assign_style($info, $tag, $css_class);
   }
 
