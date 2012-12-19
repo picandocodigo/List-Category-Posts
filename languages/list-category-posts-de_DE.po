@@ -1,0 +1,101 @@
+# Translation of List category posts in German
+# This file is distributed under the same license as the List category posts package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2012-12-19 14:49:20+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: translate.foe-services.de/ReGlot/0.1\n"
+"Project-Id-Version: List category posts\n"
+"Language-Team: Translate.foe-services.de <translate@foe-services.de>\n"
+"Language: German\n"
+
+#: include/lcp_widget_form.php:40
+msgid "Title"
+msgstr "Titel"
+
+#: include/lcp_widget_form.php:47
+msgid "Category"
+msgstr "Kategorie"
+
+#: include/lcp_widget_form.php:65
+msgid "Number of posts"
+msgstr "Anzahl der Beiträge"
+
+#: include/lcp_widget_form.php:72
+msgid "Offset"
+msgstr "Offset"
+
+#: include/lcp_widget_form.php:78
+msgid "Order by"
+msgstr "Sortieren nach"
+
+#: include/lcp_widget_form.php:81 include/lcp_widget_form.php:123
+msgid "Date"
+msgstr "Datum"
+
+#: include/lcp_widget_form.php:82
+msgid "Post title"
+msgstr "Artikeltitel"
+
+#: include/lcp_widget_form.php:83 include/lcp_widget_form.php:127
+msgid "Author"
+msgstr "Autor"
+
+#: include/lcp_widget_form.php:84
+msgid "Random"
+msgstr "Zufällig"
+
+#: include/lcp_widget_form.php:88
+msgid "Order"
+msgstr "Sortierung"
+
+#: include/lcp_widget_form.php:91
+msgid "Descending"
+msgstr "Absteigend"
+
+#: include/lcp_widget_form.php:92
+msgid "Ascending"
+msgstr "Aufsteigend"
+
+#: include/lcp_widget_form.php:96
+msgid "Exclude categories (id's)"
+msgstr "Kategorien ausschließen (id's)"
+
+#: include/lcp_widget_form.php:102
+msgid "Exclude posts (id's)"
+msgstr "Artikel ausschließen (id's)"
+
+#: include/lcp_widget_form.php:109
+msgid "Show"
+msgstr "Anzeigen"
+
+#: include/lcp_widget_form.php:112
+msgid "Thumbnail - size"
+msgstr "Größe der Miniaturbilder"
+
+#: include/lcp_widget_form.php:131
+msgid "Link to category"
+msgstr "Link zur Kategorie"
+
+#: include/lcp_widget_form.php:135
+msgid "Excerpt"
+msgstr "Auszug"
+
+#: include/lcp_widget_form.php:138
+msgid "More link"
+msgstr "Mehr Link"
+
+#: include/ListCategoryPostsWidget.php:5
+msgid "List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2]."
+msgstr "List Category Posts ermöglicht es Artikel einer Kategorie in einem Artikel oder auf einer Seite mit dem Shortcode [catlist] anzuzeigen. Der Shortcode akzeptiert Kategorie-Name oder -ID, Sortierung und Anzahl der Artikel. [catlist] kann so oft wie gewünscht eingesetzt werden. Nutzung: [catlist argument1=wert1 argument2=wert2]"
+
+#: include/ListCategoryPostsWidget.php:11
+msgid "List posts from a specified category"
+msgstr "Liste Artikel einer festgelegten Kategorie auf"
+
+#: include/ListCategoryPostsWidget.php:12
+msgid "List Category Posts"
+msgstr "List Category Posts"

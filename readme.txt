@@ -184,6 +184,9 @@ http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upg
 
 == Upgrade Notice ==
 
+= 0.25 =
+* translation support
+
 = 0.18 =
 Template system was upgraded with new options. Backwards compatible, but you can better customize the way the post contents are displayed. Check templates/default.php.
 
