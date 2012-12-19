@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.3.1
-Stable tag: 0.24
+Stable tag: 0.25
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
