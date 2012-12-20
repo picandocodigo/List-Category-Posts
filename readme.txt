@@ -3,7 +3,7 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 2.8
-Tested up to: 3.3.1
+Tested up to: 3.5
 Stable tag: 0.25
 
 == Description ==
@@ -11,7 +11,7 @@ List Category Posts allows you to list posts from a category into a post/page us
 
 The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page.
 
-**New feature**: The different elements to display con now be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
+**Customization**: The different elements to display con be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
 
@@ -43,6 +43,8 @@ I've moved the development to [GitHub](https://github.com/picandocodigo/List-Cat
 
 ==Other notes==
 
+= INSTRUCTIONS: How to use the plugin =
+
 **Selecting the category**
 
 The plugin can figure out the category from which you want to list posts in three different ways: Using the *category id*, the *category name or slug* and *detecting the current post's category*.
@@ -58,9 +60,9 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 **Other parameters**
 
-* **tags** - Tag support, you can display posts from a certain tag. 
+* **tags** - Tag support, you can display posts from a certain tag.
 
-* **orderby** - To customize the order. Valid values are: 
+* **orderby** - To customize the order. Valid values are:
   * **author** - Sort by the numeric author IDs.
   * **category** - Sort by the numeric category IDs.
   * **content** - Sort by content.
@@ -110,6 +112,18 @@ You can use the *categorypage* parameter to make it detect the category id of th
 * **thumbnail_class** - Set a CSS class to the thumbnail and style it.
 
 * **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types.
+
+* **post_status** - use post status, default value is 'publish'. Valid values:
+  * 'publish' - a published post or page.
+  * 'pending' - post is pending review.
+  * 'draft' - a post in draft status.
+  * 'auto-draft' - a newly created post, with no content.
+  * 'future' - a post to publish in the future.
+  * 'private' - not visible to users who are not logged in.
+  * 'inherit' - a revision. see get_children.
+  * 'trash' - post is in trashbin (available with Version 2.9).
+  * 'any' - retrieves any status except those from post types with 'exclude_from_search' set to true. 
+
 
 * **post_parent** - Show only the children of the post with this ID. Default: None.
 
@@ -166,6 +180,8 @@ You can have as many different templates as you want, and use them in different 
 Please check:
 http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
 
+**Please do not ask for support when you are having issues with your CSS**. I can't solve every user's CSS problems. Feel free to ask on the forums or WP Answers. But please, **[read the instructions first](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)**.
+
 == Upgrade Notice ==
 
 = 0.18 =
@@ -187,6 +203,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.25 =
+
+ * Better excerpt
+ * Applies title filter, should work with qTranslate
+ * Adds post status parameter
+ * Adds meta links to plugin page - most importantly: INSTRUCTIONS (please read them).
 
 = 0.24 =
 

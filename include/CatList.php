@@ -45,10 +45,15 @@ class CatList{
       endif;
     }
 
-    // Post type and post parent:
-    if(isset($this->params['post_type']) && $this->params['post_type'] != '0'):
+    // Post type, status, parent params:
+    if(isset($this->params['post_type']) && $this->params['post_type'] != ''):
       $args['post_type'] = $this->params['post_type'];
     endif;
+
+    if(isset($this->params['post_status']) && $this->params['post_status'] != ''):
+      $args['post_status'] = $this->params['post_status'];
+    endif;
+
 
     if(isset($this->params['post_parent']) &&
        $this->params['post_parent'] != '0'):

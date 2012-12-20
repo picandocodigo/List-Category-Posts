@@ -10,7 +10,7 @@ class CatListDisplayer {
   private $catlist;
   private $params = array();
   private $lcp_output;
-  
+
   public function __construct($atts) {
     $this->params = $atts;
     $this->catlist = new CatList($atts);
@@ -36,12 +36,11 @@ class CatListDisplayer {
       if ( is_readable($file) ) :
         $tplFileName = $file;
       endif;
-    endforeach
+    endforeach;
 
     if ( !empty($tplFileName) && is_readable($tplFileName) ) :
       require($tplFileName);
     else:
-
       switch($this->params['template']):
       case "default":
         $this->build_output('ul');
@@ -53,7 +52,7 @@ class CatListDisplayer {
         $this->build_output('ul');
         break;
       endswitch;
-    }
+    endif;
   }
 
   private function build_output($tag){
