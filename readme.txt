@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.5
-Stable tag: 0.25
+Stable tag: 0.25.1
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
@@ -25,6 +25,8 @@ Please, read the information on [Other Notes](http://wordpress.org/extend/plugin
 
 `[catlist argument1=value1 argument2=value2]`
 
+Please read [the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) on how to use it.
+
 **Support the plugin**
 
 If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :). 
@@ -43,10 +45,10 @@ I've moved the development to [GitHub](https://github.com/picandocodigo/List-Cat
 
 ==Other notes==
 
-= INSTRUCTIONS: How to use the plugin =
+=== INSTRUCTIONS: How to use the plugin ===
+
 
 **Selecting the category**
-
 The plugin can figure out the category from which you want to list posts in three different ways: Using the *category id*, the *category name or slug* and *detecting the current post's category*.
 When using List Category Posts inside a post, if you don't pass the category id, name or slug, it will post the latest posts from every category. 
 You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
@@ -91,9 +93,9 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **dateformat** - Format of the date output. Default is get_option('date_format'). Check http://codex.wordpress.org/Formatting_Date_and_Time for possible formats.
 
-* **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it.
+* **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it. If you don't have an excerpt in your post, the plugin will fetch this text from the content, striping its html tags and shortcodes. The limit is set by the *excerpt_size* parameter (55 words by default).
 
-* **excerpt_size** - Set the number of characters to display from the excerpt. Default is 255. Eg: `excerpt_size = 300`
+* **excerpt_size** - Set the number of *words* to display from the excerpt. Default is 55. Eg: `excerpt_size = 30`
 
 * **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: [catlist excludeposts=this,12,52,37]
 
@@ -114,15 +116,15 @@ You can use the *categorypage* parameter to make it detect the category id of th
 * **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types.
 
 * **post_status** - use post status, default value is 'publish'. Valid values:
-  * 'publish' - a published post or page.
-  * 'pending' - post is pending review.
-  * 'draft' - a post in draft status.
-  * 'auto-draft' - a newly created post, with no content.
-  * 'future' - a post to publish in the future.
-  * 'private' - not visible to users who are not logged in.
-  * 'inherit' - a revision. see get_children.
-  * 'trash' - post is in trashbin (available with Version 2.9).
-  * 'any' - retrieves any status except those from post types with 'exclude_from_search' set to true. 
+  * **publish** - a published post or page.
+  * **pending** - post is pending review.
+  * **draft** - a post in draft status.
+  * **auto-draft** - a newly created post, with no content.
+  * **future** - a post to publish in the future.
+  * **private** - not visible to users who are not logged in.
+  * **inherit** - a revision. see get_children.
+  * **trash** - post is in trashbin (available with Version 2.9).
+  * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true. 
 
 
 * **post_parent** - Show only the children of the post with this ID. Default: None.
@@ -206,6 +208,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.25.1 =
+
+ * Changed excerpt limit, it uses word count, and is working for WordPress' excerpt and auto generated ones.
 
 = 0.25 =
 

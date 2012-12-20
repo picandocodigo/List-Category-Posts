@@ -256,12 +256,13 @@ class CatList{
         $single->post_content) ):
 
       if($single->post_excerpt):
-        return $single->post_excerpt;
+        $lcp_excerpt = $single->post_excerpt;
       else:
         $lcp_excerpt = strip_shortcodes(strip_tags($single->post_content));
-        $excerpt_length = intval($this->params['excerpt_size']);
-        return wp_trim_words($lcp_excerpt, $excerpt_length);
       endif;
+
+      $excerpt_length = intval($this->params['excerpt_size']);
+      return wp_trim_words($lcp_excerpt, $excerpt_length);
     else:
       return null;
     endif;

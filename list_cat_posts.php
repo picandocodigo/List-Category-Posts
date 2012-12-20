@@ -1,17 +1,17 @@
 <?php
-/*
-Plugin Name: List category posts
-Plugin URI: https://wordpress.org/extend/plugins/list-category-posts/
-Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-Version: 0.25.1
-Author: Fernando Briano
-Author URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
+  /*
+    Plugin Name: List category posts
+    Plugin URI: https://github.com/picandocodigo/List-Category-Posts
+    Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
+    Version: 0.26
+    Author: Fernando Briano
+    Author URI: http://picandocodigo.net/
 
-Text Domain:   list-category-posts
-Domain Path:   /languages/
-*/
+    Text Domain:   list-category-posts
+    Domain Path:   /languages/
+  */
 
-/* Copyright 2008-2012  Fernando Briano  (email : fernando@picandocodigo.net)
+  /* Copyright 2008-2012  Fernando Briano  (email : fernando@picandocodigo.net)
 
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -55,7 +55,7 @@ class ListCategoryPosts{
                              'author_class' => '',
                              'template' => 'default',
                              'excerpt' => 'no',
-                             'excerpt_size' => '255',
+                             'excerpt_size' => '55',
                              'excerpt_tag' =>'',
                              'excerpt_class' =>'',
                              'exclude' => '0',
