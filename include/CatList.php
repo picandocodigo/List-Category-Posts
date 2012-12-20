@@ -249,20 +249,14 @@ class CatList{
     if ($this->params['excerpt']=='yes' &&
         !($this->params['content']=='yes' &&
         $single->post_content) ):
-      /*
-       * Strip shortcodes - #5
-       * http://codex.wordpress.org/Function_Reference/strip_shortcodes
-       */
+
       if($single->post_excerpt):
-        $lcp_excerpt = $single->post_excerpt;
+        return $single->post_excerpt;
       else:
         $lcp_excerpt = strip_shortcodes(strip_tags($single->post_content));
+        $excerpt_length = intval($this->params['excerpt_size']);
+        return wp_trim_words($lcp_excerpt, $excerpt_length);
       endif;
-
-      $exc_lim = intval($this->params['excerpt_size']);
-      $lcp_excerpt = mb_substr($lcp_excerpt, 0, $exc_lim) . '...';
-
-      return $lcp_excerpt;
     else:
       return null;
     endif;
