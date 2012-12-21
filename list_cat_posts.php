@@ -1,14 +1,17 @@
 <?php
-  /*
-    Plugin Name: List category posts
-    Plugin URI: https://github.com/picandocodigo/List-Category-Posts
-    Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-    Version: 0.25
-    Author: Fernando Briano
-    Author URI: http://picandocodigo.net/
-  */
+/*
+Plugin Name: List category posts
+Plugin URI: https://wordpress.org/extend/plugins/list-category-posts/
+Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
+Version: 0.25.1
+Author: Fernando Briano
+Author URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 
-  /* Copyright 2008-2011  Fernando Briano  (email : fernando@picandocodigo.net)
+Text Domain:   list-category-posts
+Domain Path:   /languages/
+*/
+
+/* Copyright 2008-2012  Fernando Briano  (email : fernando@picandocodigo.net)
 
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -24,6 +27,8 @@
      along with this program; if not, write to the Free Software
      Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
   */
+
+load_plugin_textdomain( 'list-category-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 include 'include/ListCategoryPostsWidget.php';
 require_once 'include/CatListDisplayer.php';
@@ -117,7 +122,6 @@ Add Older Posts at bottom of List Category Post page
 Getting the “more” tag to work with plugin-list-category-post
   http://wordpress.stackexchange.com/questions/30376/getting-the-more-tag-to-work-with-plugin-list-category-post
 - Fix the code for the WordPress Coding Standards: http://codex.wordpress.org/WordPress_Coding_Standards
-- i18n
 - Pagination
 - Simpler template system
 - Exclude child categories
