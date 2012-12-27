@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 2.8
 Tested up to: 3.5
-Stable tag: 0.26
+Stable tag: 0.27
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode.
@@ -86,6 +86,10 @@ You can use the *categorypage* parameter to make it detect the category id of th
   * **DESC** - Descending (highest to lowest). Ex: [catlist name=mycategory orderby=title order=asc]
 
 * **numberposts** - Number of posts to return. Set to 0 to use the max number of posts per page. Set to -1 to remove the limit. Default: 5. Ex: [catlist name=mycategory numberposts=10]
+
+* **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 month=12]` will list posts from December 2012.
+
+* **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
 
 * **date** - Display post's date next to the title. Default is 'no', use date=yes to activate it.
 
@@ -187,7 +191,7 @@ http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upg
 == Upgrade Notice ==
 
 = 0.25 =
-* translation support
+* Translation support.
 
 = 0.18 =
 Template system was upgraded with new options. Backwards compatible, but you can better customize the way the post contents are displayed. Check templates/default.php.
@@ -208,6 +212,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.27 =
+
+ * Fixes to widget.
+ * Adds year and month parameters to list posts from a certain year and/or month.
+ * Adds search parameter to display posts that match a search term.
 
 = 0.26 =
 

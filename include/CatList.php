@@ -54,11 +54,26 @@ class CatList{
       $args['post_status'] = $this->params['post_status'];
     endif;
 
-
     if(isset($this->params['post_parent']) &&
-       $this->params['post_parent'] != '0'):
+      $this->params['post_parent'] != '0'):
       $args['post_parent'] = $this->params['post_parent'];
     endif;
+
+    if(isset($this->params['year']) &&
+      $this->params['year'] != ''):
+      $args['year'] = $this->params['year'];
+    endif;
+
+    if(isset($this->params['monthnum']) &&
+      $this->params['monthnum'] != ''):
+      $args['monthnum'] = $this->params['monthnum'];
+    endif;
+
+    if(isset($this->params['search']) &&
+      $this->params['search'] != ''):
+      $args['s'] = $this->params['search'];
+    endif;
+
 
     /*
      * Custom fields 'customfield_name' & 'customfield_value'
