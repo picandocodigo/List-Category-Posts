@@ -1,0 +1,124 @@
+# Copyright (C) 2012 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: include/ListCategoryPostsWidget.php:5
+msgid ""
+"List Category Posts allows you to list posts from a category into a post/"
+"page using the [catlist] shortcode. This shortcode accepts a category name "
+"or id, the order in which you want the posts to display, and the number of "
+"posts to display. You can use [catlist] as many times as needed with "
+"different arguments. Usage: [catlist argument1=value1 argument2=value2]."
+msgstr ""
+"Prispevky zoznam Kategorie umoznuje na zoznam prispevky od kategoriu do "
+"prispevku / stranke pomocou tlacidiel [] catlist shortcode. To shortcode "
+"akceptuje nazov kategorie alebo ID, poradie, v ktorom chcete prispevky na "
+"zobrazenie, a poctu pracovnych miest . zobrazit Mozete pouzit [catlist] "
+"tolkokrat, kolkokrat je to potrebne s roznymi argumentmi Pouzitie: .. "
+"[catlist argument1 = hodnota1 argument2 = hodnota2] "
+
+#: include/ListCategoryPostsWidget.php:11
+msgid "List posts from a specified category"
+msgstr "Zoznam prispevky z urcitej kategorie"
+
+#: include/ListCategoryPostsWidget.php:12
+msgid "List Category Posts"
+msgstr "Prispevky zoznam Kategoria"
+
+#: include/lcp_widget_form.php:40
+msgid "Title"
+msgstr "Nazov"
+
+#: include/lcp_widget_form.php:47
+msgid "Category"
+msgstr "Kategoria"
+
+#: include/lcp_widget_form.php:65
+msgid "Number of posts"
+msgstr "Pocet prispevkov"
+
+#: include/lcp_widget_form.php:72
+msgid "Offset"
+msgstr "Offset"
+
+#: include/lcp_widget_form.php:78
+msgid "Order by"
+msgstr "Zoradit podla"
+
+#: include/lcp_widget_form.php:81 include/lcp_widget_form.php:123
+msgid "Date"
+msgstr "Datum"
+
+#: include/lcp_widget_form.php:82
+msgid "Post title"
+msgstr "Nazov prispevku"
+
+#: include/lcp_widget_form.php:83 include/lcp_widget_form.php:127
+msgid "Author"
+msgstr "Autor"
+
+#: include/lcp_widget_form.php:84
+msgid "Random"
+msgstr "Random"
+
+#: include/lcp_widget_form.php:88
+msgid "Order"
+msgstr "Objednavka"
+
+#: include/lcp_widget_form.php:91
+msgid "Descending"
+msgstr "Zostupne"
+
+#: include/lcp_widget_form.php:92
+msgid "Ascending"
+msgstr "Vzostupne"
+
+#: include/lcp_widget_form.php:96
+msgid "Exclude categories (id's)"
+msgstr "Vylucit kategorie (id je)"
+
+#: include/lcp_widget_form.php:102
+msgid "Exclude posts (id's)"
+msgstr "Vylucit prispevkov (id je)"
+
+#: include/lcp_widget_form.php:109
+msgid "Show"
+msgstr "Zobrazit"
+
+#: include/lcp_widget_form.php:112
+msgid "Thumbnail - size"
+msgstr "Nahlad - velkost"
+
+#: include/lcp_widget_form.php:131
+msgid "Link to category"
+msgstr "Odkaz na kategoriu"
+
+#: include/lcp_widget_form.php:135
+msgid "Excerpt"
+msgstr "Vypis"
+
+#: include/lcp_widget_form.php:138
+msgid "More link"
+msgstr "Dalsi odkaz"
+
+#: list_cat_posts.php:102
+msgid "How to use"
+msgstr "Ako pouzivat"
+
+#: list_cat_posts.php:103
+msgid "Donate"
+msgstr "Donate"
+
+#: list_cat_posts.php:104
+msgid "Fork on Github"
+msgstr "Vidlica na GitHub"
