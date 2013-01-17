@@ -277,7 +277,12 @@ class CatList{
       endif;
 
       $excerpt_length = intval($this->params['excerpt_size']);
-      return wp_trim_words($lcp_excerpt, $excerpt_length);
+      if (function_exists('wp_trim_words')):
+        return wp_trim_words($lcp_excerpt, $excerpt_length);
+      else:
+        $exc_lim = intval($excerpt_length);
+        return mb_substr($lcp_excerpt, 0, $exc_lim) . '...';
+      endif;
     else:
       return null;
     endif;
