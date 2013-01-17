@@ -2,7 +2,7 @@
 Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
-Requires at least: 2.8
+Requires at least: 3.3
 Tested up to: 3.5
 Stable tag: 0.27
 
@@ -212,6 +212,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.27.1 =
+
+ * Sets minimum version to WordPress 3.3, since wp_trim_words was introduced in that version.
+ * Adds Slovak translation by Branco from [WebHostingGeeks.com](http://webhostinggeeks.com/blog/)
 
 = 0.27 =
 
