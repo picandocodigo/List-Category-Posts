@@ -88,7 +88,7 @@ class CatListDisplayer {
   }
 
   /**
-   *  This function should be overriden for template system.
+   * This function should be overriden for template system.
    * @param post $single
    * @param HTML tag to display $tag
    * @return string
@@ -100,22 +100,60 @@ class CatListDisplayer {
       $class = " class = current ";
     endif;
     $lcp_display_output = '<'. $tag . $class . '>';
-    $lcp_display_output .=
-      $this->get_post_title($single, $this->params['title_tag'],
-                            $this->params['title_class']);
-    $lcp_display_output .=
-      $this->get_comments($single, $this->params['comments_tag'],
-                          $this->params['comments_class']) . ' ';
 
-    $lcp_display_output .=
-      $this->get_date($single, $this->params['date_tag'],
-                      $this->params['date_class']) . ' ';
+    if (!empty($this->params['title_tag'])):
+      if (!empty($this->params['title_class'])):
+        $lcp_display_output .= $this->get_post_title($single,
+                                         $this->params['title_tag'],
+                                         $this->params['title_class']);
+      else:
+        $lcp_display_output .= $this->get_post_title($single, $this->params['title_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_post_title($single) . ' ';
+    endif;
 
-    $lcp_display_output .=
-      $this->get_author($single, $this->params['author_tag'],
-                        $this->params['author_class']) . ' ';
+    // Coments count
+    if (!empty($this->params['comments_tag'])):
+      if (!empty($this->params['comments_class'])):
+        $lcp_display_output .= $this->get_comments($single,
+                                       $this->params['comments_tag'],
+                                       $this->params['comments_class']);
+      else:
+        $lcp_display_output .= $this->get_comments($single, $this->params['comments_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_comments($single);
+    endif;
 
-    if (isset($this->params['customfield_display'])) :
+    // Date
+    if (!empty($this->params['date_tag'])):
+      if (!empty($this->params['date_class'])):
+        $lcp_display_output .= $this->get_date($single,
+                                   $this->params['date_tag'],
+                                   $this->params['date_class']);
+      else:
+        $lcp_display_output .= $this->get_date($single, $this->params['date_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_date($single);
+    endif;
+
+    // Author
+    if (!empty($this->params['author_tag'])):
+      if (!empty($this->params['author_class'])):
+        $lcp_display_output .= $this->get_author($single,
+                                     $this->params['author_tag'],
+                                     $this->params['author_class']);
+      else:
+        $lcp_display_output .= $this->get_author($single, $this->params['author_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_author($single);
+    endif;
+
+
+    if (!empty($this->params['customfield_display'])) :
       $lcp_display_output .=
         $this->get_custom_fields($this->params['customfield_display'],
                                  $single->ID);
@@ -123,9 +161,29 @@ class CatListDisplayer {
 
     $lcp_display_output .= $this->get_thumbnail($single);
 
-    $lcp_display_output .= $this->get_content($single, $this->params['content_tag'], $this->params['content_class']);
+    if (!empty($this->params['content_tag'])):
+      if (!empty($this->params['content_class'])):
+        $lcp_display_output .= $this->get_content($single,
+                                     $this->params['content_tag'],
+                                     $this->params['content_class']);
+      else:
+        $lcp_display_output .= $this->get_content($single, $this->params['content_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_content($single);
+    endif;
 
-    $lcp_display_output .= $this->get_excerpt($single, $this->params['excerpt_tag'], $this->params['excerpt_class']);;
+    if (!empty($this->params['excerpt_tag'])):
+      if (!empty($this->params['excerpt_class'])):
+        $lcp_display_output .= $this->get_excerpt($single,
+                                     $this->params['excerpt_tag'],
+                                     $this->params['excerpt_class']);
+      else:
+        $lcp_display_output .= $this->get_excerpt($single, $this->params['excerpt_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_excerpt($single);
+    endif;
 
     $lcp_display_output .= '</' . $tag . '>';
 
@@ -167,8 +225,7 @@ class CatListDisplayer {
   }
 
   private function get_thumbnail($single, $tag = null){
-    if ( isset($this->params['thumbnail_class']) &&
-         $this->params['thumbnail_class'] != '' ) :
+    if ( !empty($this->params['thumbnail_class']) ) :
       $lcp_thumb_class = $this->params['thumbnail_class'];
       $info = $this->catlist->get_thumbnail($single, $lcp_thumb_class);
     else:
