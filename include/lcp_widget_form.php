@@ -12,6 +12,7 @@
                     'show_date'=>'',
                     'show_author'=>'',
                     'show_excerpt'=>'',
+                    'excerpt_size' =>'',
                     'exclude'=>'',
                     'excludeposts'=>'',
                     'thumbnail' =>'',
@@ -20,6 +21,7 @@
                     'morelink' =>''
                     );
   $instance = wp_parse_args( (array) $instance, $default);
+
   $title = strip_tags($instance['title']);
   $limit = strip_tags($instance['limit']);
   $orderby = strip_tags($instance['orderby']);
@@ -32,9 +34,11 @@
   $showcatlink = strip_tags($instance['show_catlink']);
   $categoryid = strip_tags($instance['categoryid']);
   $showexcerpt = strip_tags($instance['show_excerpt']);
+  $excerptsize = strip_tags($instance['excerpt_size']);
   $thumbnail = strip_tags($instance['thumbnail']);
   $thumbnail_size = strip_tags($instance['thumbnail_size']);
   $morelink = strip_tags($instance['morelink']);
+
 ?>
 
 <p>
@@ -162,28 +166,44 @@
 </p>
 
 <p>
-                                                                                <input class="checkbox"  type="checkbox" <?php checked( (bool) $instance['show_date'], true ); ?>
-    name="<?php echo $this->get_field_name( 'show_date' ); ?>" /> <?php _e("Date", 'list-category-posts')?>
+  <input class="checkbox"  type="checkbox"
+    <?php checked( (bool) $instance['show_date'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_date' ); ?>" />
+  <?php _e("Date", 'list-category-posts')?>
 </p>
 <p>
-                                                                                <input class="checkbox" input type="checkbox" <?php checked( (bool) $instance['show_author'], true ); ?>
-    name="<?php echo $this->get_field_name( 'show_author' ); ?>" /> <?php _e("Author", 'list-category-posts')?>
+  <input class="checkbox" input type="checkbox"
+    <?php checked( (bool) $instance['show_author'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_author' ); ?>" />
+  <?php _e("Author", 'list-category-posts')?>
 </p>
 <p>
-                                                                                <input class="checkbox" input type="checkbox" <?php checked( (bool) $instance['show_catlink'], true ); ?>
-    name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" /> <?php _e("Link to category", 'list-category-posts')?>
+  <input class="checkbox" input type="checkbox"
+    <?php checked( (bool) $instance['show_catlink'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" />
+  <?php _e("Link to category", 'list-category-posts')?>
 </p>
 <p>
-                                                                                <input class="checkbox" input type="checkbox" <?php checked( (bool) $instance['show_excerpt'], true ); ?>
-    name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" /> <?php _e("Excerpt", 'list-category-posts')?>
+  <input class="checkbox" input type="checkbox"
+    <?php checked( (bool) $instance['show_excerpt'], true ); ?>
+      name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" />
+  <?php _e("Excerpt", 'list-category-posts')?>
+</p>
+<p>
+  <label for="<?php echo $this->get_field_id('excerpt_size'); ?>">
+    <?php _e("Excerpt size", 'list-category-posts')?>:
+  </label>
+  <br/>
+  <input class="widefat" id="<?php echo $this->get_field_id('excerpt_size'); ?>"
+    name="<?php echo $this->get_field_name('excerpt_size'); ?>" type="text"
+    value="<?php echo esc_attr($excerptsize); ?>" />
 </p>
 <p>
   <label for="<?php echo $this->get_field_id('morelink'); ?>">
-    <?php _e("More link", 'list-category-posts')?>: 
+    <?php _e("More link", 'list-category-posts')?>:
   </label>
   <br/>
-  <input class="widefat" id="<?php echo $this->get_field_id('morelink'); ?>" 
-    name="<?php echo $this->get_field_name('morelink'); ?>" type="text" 
+  <input class="widefat" id="<?php echo $this->get_field_id('morelink'); ?>"
+    name="<?php echo $this->get_field_name('morelink'); ?>" type="text"
     value="<?php echo esc_attr($morelink); ?>" />
 </p>
-

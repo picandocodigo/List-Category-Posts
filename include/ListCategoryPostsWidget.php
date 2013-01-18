@@ -25,6 +25,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
     $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
     $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
+    $excerptsize = (empty($instance['excerpt_size']) ? 55 : $instance['excerpt_size']);
     $showauthor = ($instance['show_author'] == 'on') ? 'yes' : 'no';
     $showcatlink = ($instance['show_catlink'] == 'on') ? 'yes' : 'no';
     $thumbnail = ($instance['thumbnail'] == 'on') ? 'yes' : 'no';
@@ -44,6 +45,7 @@ class ListCategoryPostsWidget extends WP_Widget{
       'dateformat' => $dateformat,
       'template' => 'default',
       'excerpt' => $showexcerpt,
+      'excerpt_size' => $excerptsize,
       'exclude' => $exclude,
       'excludeposts' => $excludeposts,
       'offset' => $offset,
@@ -72,6 +74,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['dateformat'] = strip_tags($new_instance['dateformat']);
     $instance['show_date'] = strip_tags($new_instance['show_date']);
     $instance['show_excerpt'] = strip_tags($new_instance['show_excerpt']);
+    $instance['excerpt_size'] = strip_tags($new_instance['excerpt_size']);
     $instance['show_author'] = strip_tags($new_instance['show_author']);
     $instance['show_catlink'] = strip_tags($new_instance['show_catlink']);
     $instance['show_catlink'] = strip_tags($new_instance['show_catlink']);
