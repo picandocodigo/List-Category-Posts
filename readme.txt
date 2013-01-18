@@ -217,9 +217,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.27.1 =
 
- * Sets minimum version to WordPress 3.3, since wp_trim_words was introduced in that version. Adds workaround for people using WordPress < 3.3
- * Adds Slovak translation by Branco from [WebHostingGeeks.com](http://webhostinggeeks.com/blog/)
- * Removes Debug PHP warnings
+ * Sets minimum version to WordPress 3.3, since wp_trim_words was introduced in that version. Adds workaround for people using WordPress < 3.3.
+ * Adds Slovak translation by Branco from [WebHostingGeeks.com](http://webhostinggeeks.com/blog/).
+ * Removes Debug PHP warnings.
+ * Checkboxes on Widget save state, i18n for widget.
+ * Adds excerpt size to widget.
 
 = 0.27 =
 
