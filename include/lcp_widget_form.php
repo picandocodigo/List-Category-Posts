@@ -94,10 +94,10 @@
   </label> <br/>
     <select  id="<?php echo $this->get_field_id('orderby'); ?>"
       name="<?php echo $this->get_field_name('orderby'); ?>" type="text" >
-    <?php $lcp_orders = array("date" => "Date",
-                              "title" => "Post title",
-                              "author" => "Author",
-                              "rand" => "Random");
+      <?php $lcp_orders = array("date" => __("Date", "list-category-posts"),
+                                "title" => __("Post title", "list-category-posts"),
+                                "author" => __("Author", "list-category-posts"),
+                                "rand" => __("Random", "list-category-posts"));
       foreach ($lcp_orders as $key=>$value):
         $option = '<option value="' . $key . '" ';
         if ($orderby == $key):
@@ -162,19 +162,19 @@
 </p>
 
 <p>
-    <input class="checkbox"  type="checkbox" <?php checked($instance['show_date'], true ); ?>
+                                                                                <input class="checkbox"  type="checkbox" <?php checked( (bool) $instance['show_date'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_date' ); ?>" /> <?php _e("Date", 'list-category-posts')?>
 </p>
 <p>
-    <input class="checkbox" input type="checkbox" <?php checked($instance['show_author'], true ); ?>
+                                                                                <input class="checkbox" input type="checkbox" <?php checked( (bool) $instance['show_author'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_author' ); ?>" /> <?php _e("Author", 'list-category-posts')?>
 </p>
 <p>
-    <input class="checkbox" input type="checkbox" <?php checked($instance['show_catlink'], true ); ?>
+                                                                                <input class="checkbox" input type="checkbox" <?php checked( (bool) $instance['show_catlink'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" /> <?php _e("Link to category", 'list-category-posts')?>
 </p>
 <p>
-    <input class="checkbox" input type="checkbox" <?php checked($instance['show_excerpt'], true ); ?>
+                                                                                <input class="checkbox" input type="checkbox" <?php checked( (bool) $instance['show_excerpt'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_excerpt' ); ?>" /> <?php _e("Excerpt", 'list-category-posts')?>
 </p>
 <p>
