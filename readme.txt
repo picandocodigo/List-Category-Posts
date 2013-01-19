@@ -201,6 +201,10 @@ And in your theme's CSS:
   display: none;
 }`
 
+**How to insert the shortcode on the theme and not a post or page**
+
+`<?php echo do_shortcode("[catlist id=3]"); ?>`
+
 **Please do not ask for support when you are having issues with your CSS**. I can't solve every user's CSS problems. Feel free to ask on the forums or WP Answers. But please, **[read the instructions first](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)**.
 
 == Upgrade Notice ==
