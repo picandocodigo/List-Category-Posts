@@ -95,7 +95,7 @@ You can use the *categorypage* parameter to make it detect the category id of th
 
 * **author** - Display the post's author next to the title. Default is 'no', use author=yes to activate it.
 
-* **dateformat** - Format of the date output. Default is get_option('date_format'). Check http://codex.wordpress.org/Formatting_Date_and_Time for possible formats.
+* **dateformat** - Format of the date output. The default format is the one you've set on your WordPress settings. Example: `[catlist id=42 dateformat="l F dS, Y"]` would display the date as "Monday January 21st, 2013". Check http://codex.wordpress.org/Formatting_Date_and_Time for more options to display date.
 
 * **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it. If you don't have an excerpt in your post, the plugin will fetch this text from the content, striping its html tags and shortcodes. The limit is set by the *excerpt_size* parameter (55 words by default).
 
