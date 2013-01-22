@@ -185,8 +185,17 @@ class CatListDisplayer {
       $lcp_display_output .= $this->get_excerpt($single);
     endif;
 
-    $lcp_display_output .= '</' . $tag . '>';
+    if (!empty($this->params['posts_morelink'])) :
+      $href = 'href="'.get_permalink($single->ID) . '"';
+      $class = "";
+      if (!empty($this->params['posts_morelink_class'])) :
+        $class = 'class="' . $this->params['posts_morelink_class'] . '" ';
+      endif;
+      $readmore = $this->params['posts_morelink'];
+      $lcp_display_output .= ' <a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
+    endif;
 
+    $lcp_display_output .= '</' . $tag . '>';
     return $lcp_display_output;
   }
 
