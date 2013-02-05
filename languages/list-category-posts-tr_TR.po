@@ -1,0 +1,128 @@
+# Copyright (C) 2012 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: list-category-posts\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp\n"
+"POT-Creation-Date: 2012-12-19 13:23:13+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-01-27 20:15+0200\n"
+"Last-Translator: HakanEr <hakanerwptr@gmail.com>\n"
+"Language-Team: hakaner <hakanerwptr@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: turkish\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: include/ListCategoryPostsWidget.php:5
+msgid ""
+"List Category Posts allows you to list posts from a category into a post/"
+"page using the [catlist] shortcode. This shortcode accepts a category name "
+"or id, the order in which you want the posts to display, and the number of "
+"posts to display. You can use [catlist] as many times as needed with "
+"different arguments. Usage: [catlist argument1=value1 argument2=value2]."
+msgstr ""
+"List Category Posts, [catlist] kısa kodunu kullanarak bir yazı/sayfa içinde "
+"bir kategorideki yazıları listeleyebilmenizi sağlar. Bu kısa kod, bir "
+"kategori adı veya id kimliği, yazıları görüntülemek istediğiniz sıra ve "
+"gösterilecek yazı sayısını kabul eder. Farklı değişkenler ile gerektiğinde "
+"birçok kez [catlist] kullanabilirsiniz. Kullanımı: [catlist değişken1=değer1 "
+"değişken2=değer2]."
+
+#: include/ListCategoryPostsWidget.php:11
+msgid "List posts from a specified category"
+msgstr "Belirli bir kategorideki yazıları listele"
+
+#: include/ListCategoryPostsWidget.php:12
+msgid "List Category Posts"
+msgstr "List Category Posts"
+
+#: include/lcp_widget_form.php:40
+msgid "Title"
+msgstr "Başlık"
+
+#: include/lcp_widget_form.php:47
+msgid "Category"
+msgstr "Kategori"
+
+#: include/lcp_widget_form.php:65
+msgid "Number of posts"
+msgstr "Yazı sayısı"
+
+#: include/lcp_widget_form.php:72
+msgid "Offset"
+msgstr "Kaydırma"
+
+#: include/lcp_widget_form.php:78
+msgid "Order by"
+msgstr "Sırala"
+
+#: include/lcp_widget_form.php:81 include/lcp_widget_form.php:123
+msgid "Date"
+msgstr "Tarih"
+
+#: include/lcp_widget_form.php:82
+msgid "Post title"
+msgstr "Yazı başlığı"
+
+#: include/lcp_widget_form.php:83 include/lcp_widget_form.php:127
+msgid "Author"
+msgstr "Yazar"
+
+#: include/lcp_widget_form.php:84
+msgid "Random"
+msgstr "Rasgele"
+
+#: include/lcp_widget_form.php:88
+msgid "Order"
+msgstr "Sıralama"
+
+#: include/lcp_widget_form.php:91
+msgid "Descending"
+msgstr "Azalan"
+
+#: include/lcp_widget_form.php:92
+msgid "Ascending"
+msgstr "Artan"
+
+#: include/lcp_widget_form.php:96
+msgid "Exclude categories (id's)"
+msgstr "Kategorileri (id'ler) hariç tut"
+
+#: include/lcp_widget_form.php:102
+msgid "Exclude posts (id's)"
+msgstr "Yazıları (id'ler) hariç tut"
+
+#: include/lcp_widget_form.php:109
+msgid "Show"
+msgstr "Göster"
+
+#: include/lcp_widget_form.php:112
+msgid "Thumbnail - size"
+msgstr "Küçük resim - boyut"
+
+#: include/lcp_widget_form.php:131
+msgid "Link to category"
+msgstr "Kategoriye bağlantı"
+
+#: include/lcp_widget_form.php:135
+msgid "Excerpt"
+msgstr "Alıntı"
+
+#: include/lcp_widget_form.php:138
+msgid "More link"
+msgstr "Devamı bağlantısı"
+
+#: list_cat_posts.php:102
+msgid "How to use"
+msgstr "Nasıl kullanılır"
+
+#: list_cat_posts.php:103
+msgid "Donate"
+msgstr "Bağış yap"
+
+#: list_cat_posts.php:104
+msgid "Fork on Github"
+msgstr "Github üzerinde incele"
