@@ -44,22 +44,24 @@ I've moved the development to [GitHub](https://github.com/picandocodigo/List-Cat
 
 ==Other notes==
 
-==INSTRUCTIONS How to use the plugin==
+==INSTRUCTIONS on how to use the plugin==
 
 
-**Selecting the category**
-The plugin can figure out the category from which you want to list posts in three different ways: Using the *category id*, the *category name or slug* and *detecting the current post's category*.
-When using List Category Posts inside a post, if you don't pass the category id, name or slug, it will post the latest posts from every category. 
-You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
- The parameters for choosing the category id are:
+==Selecting the category==
+The plugin can figure out the category from which you want to list posts in several ways. You should use only one of these:
 
-* **name** - To display posts from a category using the category's name or slug. Ex: [catlist name=mycategory]
+* Using the *category id*.
+  * **id** - To display posts from a category using the category's id. Ex: `[catlist id=24]`. You can **include several categories**: `[catlist id=17,24,32]` or **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`
+* The *category name or slug*.
+  * **name** - To display posts from a category using the category's name or slug. Ex: `[catlist name=mycategory]`
+* *Detecting the current post's category*. You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
+  * **categorypage** - Set it to "yes" if you want to list the posts from the current post's category. `[catlist categorypage="yes"]`
 
-* **id** - To display posts from a category using the category's id. Ex: [catlist id=24]. You can **include several categories**: Ex: [catlist id=17,24,32] or **exclude** a category with the minus (-)
+When using List Category Posts whithout a category id, name or slug, it will post the latest posts from every category.
 
-* **categorypage** - Set it to "yes" if you want to list the posts from the current post's category.
 
-**Other parameters**
+
+==Other parameters==
 
 * **tags** - Tag support, you can display posts from a certain tag.
 
