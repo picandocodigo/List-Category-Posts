@@ -48,16 +48,22 @@ I've moved the development to [GitHub](https://github.com/picandocodigo/List-Cat
 
 
 ==Selecting the category==
-The plugin can figure out the category from which you want to list posts in several ways. You should use only one of these:
+The plugin can figure out the category from which you want to list posts in several ways. **You should use only one of these methods** since these are all mutually exclusive, weird results are expected when using more than one:
 
 * Using the *category id*.
-  * **id** - To display posts from a category using the category's id. Ex: `[catlist id=24]`. You can **include several categories**: `[catlist id=17,24,32]` or **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`
+  * **id** - To display posts from a category using the category's id. Ex: `[catlist id=24]`.
 * The *category name or slug*.
   * **name** - To display posts from a category using the category's name or slug. Ex: `[catlist name=mycategory]`
 * *Detecting the current post's category*. You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
   * **categorypage** - Set it to "yes" if you want to list the posts from the current post's category. `[catlist categorypage="yes"]`
 
 When using List Category Posts whithout a category id, name or slug, it will post the latest posts from every category.
+
+==Using several categories==
+
+* **include** posts from several categories with **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
+* **include** posts from several categories with **OR** relationship, posts that belong to either one of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
+* **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`.
 
 
 
@@ -232,13 +238,15 @@ Template system has changed. Now the posts loop must be defined inside the templ
 = 0.8 =
 Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use the widget.
 
-= 0.9 = 
+= 0.9 =
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
 
 = 0.29 =
  * Adds turkish translation, thanks [Hakan Er](http://hakanertr.wordpress.com/) for writing this translation! :)
+ * Adds "AND" relationship to several categories. Thanks to [hvianna](http://wordpress.org/support/profile/hvianna) from the WordPress forums who [implemented this feature](http://wordpress.org/support/topic/list-only-posts-that-belong-to-two-or-more-categories-solution) :D
+ * More improvements on readme.
 
 = 0.28 =
  * Improvements on readme, faqs.
@@ -301,7 +309,7 @@ This update is dedicated to [Michelle K McGinnis](http://friendlywebconsulting.c
 
  * Fixed thumbnail size parameter, added usage example on README.
  * Added space after author and date http://wordpress.org/support/topic/plugin-list-category-posts-space-required-after
- 
+
 = 0.22.2 =
 
  * Fixed bug with  the categorypage=yes param.

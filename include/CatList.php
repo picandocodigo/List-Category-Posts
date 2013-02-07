@@ -26,7 +26,11 @@ class CatList{
    * Order the parameters and query the DB for posts
    */
   private function set_lcp_parameters(){
-    $args = array('cat'=> $this->lcp_category_id);
+    if (is_array($this->lcp_category_id)):
+      $args = array('category__and' => $this->lcp_category_id);
+    else:
+      $args = array('cat'=> $this->lcp_category_id);
+    endif;
 
     $args = array_merge($args, array(
       'numberposts' => $this->params['numberposts'],
@@ -117,7 +121,16 @@ class CatList{
       $this->lcp_category_id = $this->lcp_get_current_category();
 
     elseif ( !empty($this->params['name']) ):
-      if (preg_match('/,/', $this->params['name'])):
+      if (preg_match('/\+/', $this->params['name'])):
+        $categories = array();
+        $cat_array = explode("+", $this->params['name']);
+        foreach ($cat_array as $category) :
+          $id = $this->get_category_id_by_name($category);
+          $categories[] = $id;
+        endforeach;
+        $this->lcp_category_id = $categories;
+
+      elseif (preg_match('/,/', $this->params['name'])):
         $categories = '';
         $cat_array = explode(",", $this->params['name']);
 
@@ -132,7 +145,11 @@ class CatList{
         $this->lcp_category_id = $this->get_category_id_by_name($this->params['name']);
       endif;
     elseif ( isset($this->params['id']) && $this->params['id'] != '0' ):
-      $this->lcp_category_id = $this->params['id'];
+      if (preg_match('/\+/', $this->params['id'])):
+        $this->lcp_category_id = explode("+", $this->params['id']);
+      else:
+        $this->lcp_category_id = $this->params['id'];
+      endif;
     endif;
   }
 
