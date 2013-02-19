@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 0.29
+Stable tag: 0.30
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. When you're editing a page or post, directly insert the shortcode in your text and the posts will be listed there. The **basic** usage would be something like this:
@@ -70,6 +70,8 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 ==Other parameters==
 
 * **tags** - Tag support, you can display posts from a certain tag.
+
+* **exclude_tags** - Exclude posts from one or more tags: `[catlist tag="videogames" exclude_tags="sega,sony"]`
 
 * **orderby** - To customize the order. Valid values are:
   * **author** - Sort by the numeric author IDs.

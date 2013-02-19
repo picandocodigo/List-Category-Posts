@@ -16,7 +16,6 @@ class CatList{
    */
   public function __construct($atts) {
     $this->params = $atts;
-
     //Get the category posts:
     $this->get_lcp_category();
     $this->set_lcp_parameters();
@@ -90,6 +89,15 @@ class CatList{
       $args['post_status'] = array('publish','private');
     endif;
 
+    if ( $this->lcp_not_empty('exclude_tags') ):
+      $excluded_tags = explode(",", $this->params['exclude_tags']);
+      $tag_ids = array();
+      foreach ( $excluded_tags as $excluded):
+        $tag_ids[] = get_term_by('slug', $excluded, 'post_tag')->term_id;
+      endforeach;
+      $args['tag__not_in'] = $tag_ids;
+    endif;
+
     // Added custom taxonomy support
     if ( $this->lcp_not_empty('taxonomy') && $this->lcp_not_empty('tags') ):
       $args['tax_query'] = array(array(
@@ -98,17 +106,17 @@ class CatList{
                                'terms' => explode(",",$this->params['tags'])
                                  ));
     elseif ( !empty($this->params['tags']) ):
-    $args['tag'] = $this->params['tags'];
+      $args['tag'] = $this->params['tags'];
     endif;
 
     $this->lcp_categories_posts = get_posts($args);
   }
 
   private function lcp_not_empty($param){
-    if ( isset($this->params[$param]) &&
-         !empty($this->params[$param]) &&
-         ($this->params[$param] != 0) &&
-         ($this->params[$param] != '') ) :
+    if ( ( isset($this->params[$param]) ) &&
+         ( !empty($this->params[$param]) ) &&
+         ( $this->params[$param] != '0' ) &&
+         ( $this->params[$param] != '') ) :
       return true;
     else:
       return false;
