@@ -22,6 +22,8 @@ class CatList{
     $this->set_lcp_parameters();
   }
 
+
+
   /**
    * Order the parameters and query the DB for posts
    */
@@ -40,41 +42,36 @@ class CatList{
     ));
 
     //Exclude
-    if(isset($this->params['excludeposts']) &&
-       $this->params['excludeposts'] != '0'){
+    if( $this->lcp_not_empty('excludeposts') ):
       $args['exclude'] = $this->params['excludeposts'];
       if (strpos($args['exclude'], 'this') !== FALSE) :
         $args['exclude'] = $args['exclude'] .
           ",". $this->lcp_get_current_post_id();
       endif;
-    }
+    endif;
 
     // Post type, status, parent params:
-    if(isset($this->params['post_type']) && $this->params['post_type'] != ''):
+    if($this->lcp_not_empty('post_type')):
       $args['post_type'] = $this->params['post_type'];
     endif;
 
-    if(isset($this->params['post_status']) && $this->params['post_status'] != ''):
+    if($this->lcp_not_empty('post_status')):
       $args['post_status'] = $this->params['post_status'];
     endif;
 
-    if(isset($this->params['post_parent']) &&
-      $this->params['post_parent'] != '0'):
+    if($this->lcp_not_empty('post_parent')):
       $args['post_parent'] = $this->params['post_parent'];
     endif;
 
-    if(isset($this->params['year']) &&
-      $this->params['year'] != ''):
+    if($this->lcp_not_empty('year')):
       $args['year'] = $this->params['year'];
     endif;
 
-    if(isset($this->params['monthnum']) &&
-      $this->params['monthnum'] != ''):
+    if($this->lcp_not_empty('monthnum')):
       $args['monthnum'] = $this->params['monthnum'];
     endif;
 
-    if(isset($this->params['search']) &&
-      $this->params['search'] != ''):
+    if($this->lcp_not_empty('search')):
       $args['s'] = $this->params['search'];
     endif;
 
@@ -83,7 +80,7 @@ class CatList{
      * Custom fields 'customfield_name' & 'customfield_value'
      * should both be defined
      */
-    if( !empty($this->params['customfield_value']) ):
+    if( $this->lcp_not_empty('customfield_value') ):
       $args['meta_key'] = $this->params['customfield_name'];
       $args['meta_value'] = $this->params['customfield_value'];
     endif;
@@ -94,17 +91,28 @@ class CatList{
     endif;
 
     // Added custom taxonomy support
-    if ( !empty($this->params['taxonomy']) && !empty($this->params['tags']) ):
+    if ( $this->lcp_not_empty('taxonomy') && $this->lcp_not_empty('tags') ):
       $args['tax_query'] = array(array(
-                            'taxonomy' => $this->params['taxonomy'],
-                            'field' => 'slug',
-                            'terms' => explode(",",$this->params['tags'])
-                                       ));
+                               'taxonomy' => $this->params['taxonomy'],
+                               'field' => 'slug',
+                               'terms' => explode(",",$this->params['tags'])
+                                 ));
     elseif ( !empty($this->params['tags']) ):
-      $args['tag'] = $this->params['tags'];
+    $args['tag'] = $this->params['tags'];
     endif;
 
     $this->lcp_categories_posts = get_posts($args);
+  }
+
+  private function lcp_not_empty($param){
+    if ( isset($this->params[$param]) &&
+         !empty($this->params[$param]) &&
+         ($this->params[$param] != 0) &&
+         ($this->params[$param] != '') ) :
+      return true;
+    else:
+      return false;
+    endif;
   }
 
 
@@ -115,12 +123,11 @@ class CatList{
 
 
   private function get_lcp_category(){
-    if ( isset($this->params['categorypage']) &&
+    if ( $this->lcp_not_empty('categorypage') &&
          $this->params['categorypage'] == 'yes' ):
 
       $this->lcp_category_id = $this->lcp_get_current_category();
-
-    elseif ( !empty($this->params['name']) ):
+    elseif ( $this->lcp_not_empty('name') ):
       if (preg_match('/\+/', $this->params['name'])):
         $categories = array();
         $cat_array = explode("+", $this->params['name']);
