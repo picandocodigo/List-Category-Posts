@@ -56,6 +56,7 @@ class ListCategoryPosts{
                              'template' => 'default',
                              'excerpt' => 'no',
                              'excerpt_size' => '55',
+                             'excerpt_strip' => '',
                              'excerpt_tag' =>'',
                              'excerpt_class' =>'',
                              'exclude' => '0',

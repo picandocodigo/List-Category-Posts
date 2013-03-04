@@ -303,21 +303,34 @@ class CatList{
         $single->post_content) ):
 
       if($single->post_excerpt):
-        $lcp_excerpt = $single->post_excerpt;
-      else:
-        $lcp_excerpt = strip_shortcodes(strip_tags($single->post_content));
+        return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
       endif;
 
-      $excerpt_length = intval($this->params['excerpt_size']);
-      if (function_exists('wp_trim_words')):
-        return wp_trim_words($lcp_excerpt, $excerpt_length);
-      else:
-        $exc_lim = intval($excerpt_length);
-        return mb_substr($lcp_excerpt, 0, $exc_lim) . '...';
-      endif;
+      return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
     else:
       return null;
     endif;
+  }
+
+  private function lcp_trim_excerpt($text = ''){
+    $excerpt_length = intval($this->params['excerpt_size']);
+
+    $text = strip_shortcodes($text);
+    $text = apply_filters('the_content', $text);
+    $text = str_replace(']]>',']]&gt;', $text);
+
+    if( $this->lcp_not_empty('excerpt_strip') &&
+        $this->params['excerpt_strip'] == 'yes'):
+      $text = strip_tags($text);
+    endif;
+
+    $words = explode(' ', $text, $excerpt_length + 1);
+    if(count($words) > $excerpt_length) :
+      array_pop($words);
+      array_push($words, '...');
+      $text = implode(' ', $words);
+    endif;
+    return $text;
   }
 
   /**

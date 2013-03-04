@@ -106,11 +106,11 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **dateformat** - Format of the date output. The default format is the one you've set on your WordPress settings. Example: `[catlist id=42 dateformat="l F dS, Y"]` would display the date as "Monday January 21st, 2013". Check http://codex.wordpress.org/Formatting_Date_and_Time for more options to display date.
 
-* **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it. If you don't have an excerpt in your post, the plugin will fetch this text from the content, striping its html tags and shortcodes. The limit is set by the *excerpt_size* parameter (55 words by default).
+* **excerpt** - Display the post's excerpt. Default is 'no', use excerpt=yes to activate it. If you don't have an excerpt in your post, the plugin will fetch this text from the content, striping its images and shortcodes. The limit is set by the *excerpt_size* parameter (55 words by default). It respects your theme's allowed HTML tags and doesn't strip them from the excerpt. If you want to strip tags, use `excerpt_strip=yes`.
 
-* **excerpt_size**
-  * If you are using WordPress >= 3.3: Set the number of *words* to display from the excerpt. Default is 55. Eg: `excerpt_size = 30`
-  * If for some reason you can't update your WordPress and are still using WordPress < 3.3, this will use a fallback function instead of `wp_trim_words` where you'll have to set the number of *characters* insted of words with this parameter.
+* **excerpt_size** - Set the number of *words* to display from the excerpt. Default is 55. Eg: `excerpt_size = 30`
+
+* **excerpt_strip** - Set it to `yes` to strip the excerpt's HTML tags.
 
 * **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: [catlist excludeposts=this,12,52,37]
 
@@ -244,6 +244,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.30 =
+ * Adds ability to exclude tags.
+ * Changes excerpt. Since lot of users have asked for it, I once again modified the way the excerpt is shown. It now respects your theme's allowed HTML tags and doesn't strip them from the excerpt. If you want to strip tags, use `excerpt_strip=yes`.
 
 = 0.29 =
  * Adds turkish translation, thanks [Hakan Er](http://hakanertr.wordpress.com/) for writing this translation! :)
