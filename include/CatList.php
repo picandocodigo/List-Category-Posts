@@ -302,7 +302,7 @@ class CatList{
         !($this->params['content']=='yes' &&
         $single->post_content) ):
 
-      if($single->post_excerpt):
+      if($single->post_excerpt && $this->params['excerpt_overwrite'] != 'yes'):
         return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
       endif;
 
