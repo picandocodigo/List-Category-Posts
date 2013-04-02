@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 0.30.1
+Stable tag: 0.30.2
 
 == Description ==
 List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. When you're editing a page or post, directly insert the shortcode in your text and the posts will be listed there. The **basic** usage would be something like this:
@@ -28,7 +28,7 @@ Please, read the information on [Other Notes](http://wordpress.org/extend/plugin
 
 **Support the plugin**
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :). 
+If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :).
 
 **Development**
 
@@ -139,7 +139,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
   * **private** - not visible to users who are not logged in.
   * **inherit** - a revision. see get_children.
   * **trash** - post is in trashbin (available with Version 2.9).
-  * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true. 
+  * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true.
 
 
 * **post_parent** - Show only the children of the post with this ID. Default: None.
@@ -161,7 +161,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 You can customize what HTML tags different elements will be sorrounded with and a CSS class for this element. The customizable elements are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
 
 The parameters are:
-`autor_tag, author_class, catlink_tag, catlink_class, comments_tag, comments_class, date_tag, date_class, 
+`autor_tag, author_class, catlink_tag, catlink_class, comments_tag, comments_class, date_tag, date_class,
 excerpt_tag, excerpt_class, morelink_class, thumbnail_class, title_tag, title_class, posts_morelink_class`
 
 So for example, let's say you want to wrap the displayed comments count with the p tag and a "lcp_comments" class, you would do:
@@ -245,7 +245,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
-= 0.31 =
+= 0.30.2 =
+ * Improves 'current category' detection.
+ * Adds categorypage parameter to widget
+
+= 0.30.1 =
  * **excerpt** - Fixed default excerpt behaviour from previous release. By default it **will** strip html tags as it always did. If you want it not to strip tags, you'll have to use `excerpt_strip=no`. Added a new parameter to have a consistent excerpt. If you want to overwrite WordPress' excerpt when using the plugin and generate one the way the plugin does when there's no excerpt, use `excerpt_overwrite=yes`.
 
 = 0.30 =
@@ -339,7 +343,7 @@ This update is dedicated to [Michelle K McGinnis](http://friendlywebconsulting.c
 
 = 0.21.1 =
 
-* Small fixes: 
+* Small fixes:
   * Used "empty()" function for some Strings instead of evaluating isset() and != ''.
   * Include parameters on the get_posts args only when they are set (post_parent among others).
 
@@ -389,7 +393,7 @@ This update is dedicated to [Michelle K McGinnis](http://friendlywebconsulting.c
 = 0.19 =
 
 This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate Hitchhiker's Guide to the Galaxy" from my Amazon Wishlit in appreciation for the plugin. I am really enjoying the read :D. If you, like S would like to show your appreciation, here's my [wishlist](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web):
- 
+
 * Fixed private post logic, not displaying post if private. Thanks Bainternet from WordPress Answers: http://wordpress.stackexchange.com/questions/12514/list-category-posts-not-showing-posts-marked-private-to-logged-in-users/12520#12520
 * Added thumbnail_size parameter.
 * Added support for custom taxonomies and also moved to the array call of get_posts. Coded by wsherliker, thanks! http://picod.net/32
@@ -444,7 +448,7 @@ This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate
 
 = 0.14.1 =
 
-* Fixed "Show the title of the category with a link to the category" code (catlink param), it broke on some previous update, but now it's working again. Thanks Soccerwidow on the WP Forums for pointing this out. 
+* Fixed "Show the title of the category with a link to the category" code (catlink param), it broke on some previous update, but now it's working again. Thanks Soccerwidow on the WP Forums for pointing this out.
 
 = 0.14 =
 
@@ -454,11 +458,11 @@ This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate
 
 = 0.13.2 =
 
-* Fixed thumbnail code, added it to default.php template as example. 
+* Fixed thumbnail code, added it to default.php template as example.
 
 = 0.13.1 =
 
-* Fixed broken dateformat. 
+* Fixed broken dateformat.
 
 = 0.13 =
 
@@ -484,7 +488,7 @@ This update is dedicated to S. Keller from Switzerland who gave me "The Ultimate
 
 
 = 0.10.1 =
-* Small fix - 
+* Small fix -
 added ul tags to default template.
 * Compatible WordPress 3.0 with Twenty Ten theme (thanks again Doug Joseph :) )
 

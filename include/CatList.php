@@ -132,8 +132,8 @@ class CatList{
 
   private function get_lcp_category(){
     if ( $this->lcp_not_empty('categorypage') &&
-         $this->params['categorypage'] == 'yes' ):
-
+         $this->params['categorypage'] == 'yes' ||
+         $this->params['id'] == -1):
       $this->lcp_category_id = $this->lcp_get_current_category();
     elseif ( $this->lcp_not_empty('name') ):
       if (preg_match('/\+/', $this->params['name'])):
@@ -170,8 +170,8 @@ class CatList{
 
   public function lcp_get_current_category(){
     global $post;
-    $categories = get_the_category($post->ID);
-    return $categories[0]->cat_ID;
+    $category = get_category( get_query_var( 'cat' ) );
+    return $category->cat_ID;
   }
 
   /**

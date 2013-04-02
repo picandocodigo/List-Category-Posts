@@ -59,6 +59,13 @@
   <select id="<?php echo $this->get_field_id('categoryid'); ?>" name="<?php echo $this->get_field_name('categoryid'); ?>">
     <?php
       $categories=  get_categories();
+      $option = '<option value="-1"';
+      if ($categoryid == -1) :
+        $option .= ' selected = "selected" ';
+      endif;
+      $option .= '">' . "Current category" . '</option>';
+      echo $option;
+
       foreach ($categories as $cat) :
         $option = '<option value="' . $cat->cat_ID . '" ';
         if ($cat->cat_ID == $categoryid) :
@@ -155,7 +162,7 @@
 <p>
   <label><?php _e("Show", 'list-category-posts')?>: </label><br/>
   <input type="checkbox" <?php checked( (bool) $instance['thumbnail'], true ); ?>
-    name="<?php echo $this->get_field_name( 'thumbnail'); ?>" /> <?php _e("Thumbnail - size", 'list-category-posts')?> 
+    name="<?php echo $this->get_field_name( 'thumbnail'); ?>" /> <?php _e("Thumbnail - size", 'list-category-posts')?>
     <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
       name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
       <option value='thumbnail'>thumbnail</option>
