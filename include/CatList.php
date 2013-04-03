@@ -169,8 +169,12 @@ class CatList{
   }
 
   public function lcp_get_current_category(){
-    global $post;
-    $category = get_category( get_query_var( 'cat' ) );
+    $category = get_category( get_query_var( 'category' ) );
+    if(isset($category->errors) && $category->errors["invalid_term"][0] == "Empty Term"):
+      global $post;
+      $categories = get_the_category($post->ID);
+      return $categories[0]->cat_ID;
+    endif;
     return $category->cat_ID;
   }
 
