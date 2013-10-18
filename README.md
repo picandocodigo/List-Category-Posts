@@ -5,9 +5,9 @@ Master: [![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts
 
 | *						| WordPress					| Version			| *		| Development				|					|
 | :----					| ----:						| :----				| :---: | :----						| :----				|
-| [Homepage][1.1]		| Requires at least:		| __2.9__			| *		| [GitHub-Repository][1.3]	| [Translate][1.6]	|
-| [WordPress.org][1.2]	| Tested up to:				| __3.6__			| *		| [Issue-Tracker][1.4]		|					|
-| *						| Current stable release:	| __[0.30.3][1.5]__	| *		| Current dev version:		| [0.40-dev][1.7]	|
+| [Homepage][1.1]		| Requires at least:		| __3.3__			| *		| [GitHub-Repository][1.3]	| [Translate][1.6]	|
+| [WordPress.org][1.2]	| Tested up to:				| __3.6.1__			| *		| [Issue-Tracker][1.4]		|					|
+| *						| Current stable release:	| __[0.30.3][1.5]__	| *		| Current dev version:		| [0.31][1.7]	|
 
 [1.1]: http://wordpress.org/plugins/list-category-posts/
 [1.2]: http://wordpress.org/plugins/list-category-posts/
@@ -18,11 +18,15 @@ Master: [![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts
 [1.7]: https://github.com/picandocodigo/List-Category-Posts/archive/master.zip
 
 ### Description
-List Category Posts is a WordPress plugin that allows you to list posts from a category into a post/page using the [catlist] shortcode. Please visit the plugin's page on WordPress.org to find out more.
+List Category Posts is a **[WordPress](http://wordpress.org) plugin** that allows you to list posts from a category into a post/page using the [catlist] shortcode. Please visit the [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/) to find out more.
+
 The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page.
+
 Great to use WordPress as a CMS, and create pages with several categories posts.
-Widget: It includes a widget which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
-Please, read the information on Other Notes and Changelog to be aware of new functionality, and improvements to the plugin.
+
+**Widget**: It includes a widget which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
+
+Please, read the information on [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) and [Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/) to be aware of new functionality, and improvements to the plugin.
 
 ### Usage
 
@@ -38,7 +42,7 @@ If you've found the plugin useful, consider making a [donation via PayPal](http:
 | Fernando Briano		| [picandocodigo][2.1.1]| [picandocodigo][2.1.2]| http://picandocodigo.net/	| Active				|
 
 [2.1.1]: https://github.com/picandocodigo
-[2.1.2]: http://profiles.wordpress.org/picandocodigo/
+[2.1.2]: http://profiles.wordpress.org/fernandobt
 
 
 ## License
@@ -62,10 +66,3 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
-
-
-## Changelog
-* __0.40__ _[future plans/roadmap][4.1]_
-    * TBD
-
-[4.1]: https://github.com/maxchirkov/html-mode-locker/issues
