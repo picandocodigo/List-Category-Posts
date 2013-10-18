@@ -256,6 +256,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.31 =
  * Pull request from @cfoellmann, adds testing environment and Travis CI integration. Awesomeness.
+ * When searching for a thumbnail, if there's no thumbnail on the post but there's a YouTube video, display the YouTube video thumbnail. (wordpress.org/support/topic/youtube-thumbnail)
 
 = 0.30.3 =
  * Bugfix release, fixes current category for post/page
