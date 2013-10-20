@@ -16,6 +16,7 @@ class CatList{
    */
   public function __construct($atts) {
     $this->params = $atts;
+
     //Get the category posts:
     $this->get_lcp_category();
     $this->set_lcp_parameters();
@@ -210,9 +211,15 @@ class CatList{
       $cat_title = get_cat_name($this->lcp_category_id);
 
       return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-        ($this->params['catlink_string'] !== '' ? $this->params['catlink_string'] : $cat_title) . '</a>';
+        ($this->params['catlink_string'] !== '' ? $this->params['catlink_string'] : $cat_title) . $this->get_category_count() .  '</a>';
     else:
       return null;
+    endif;
+  }
+
+  public function get_category_count(){
+    if($this->params['category_count'] == 'yes'):
+      return ' (' . get_category($this->lcp_category_id)->category_count . ')';
     endif;
   }
 
@@ -378,10 +385,13 @@ class CatList{
         $imageurl = "http://i.ytimg.com/vi/{$matches[3]}/1.jpg";
       endif;
 
-      $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">';
-      $lcp_thumbnail .= '<img src="' . $imageurl . '" alt="' . $single->title . '" />';
+      $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' .
+        '<img src="' . $imageurl .
+        ( ($lcp_thumb_class != null) ? 'class="' . $lcp_thumb_class .'"' : null ) .
+        '" alt="' . $single->title . '" />';
       $lcp_thumbnail .= '</a>';
     endif;
     endif;
     return $lcp_thumbnail;
-  }}
+  }
+}

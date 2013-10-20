@@ -113,7 +113,7 @@ class CatListDisplayer {
       $lcp_display_output .= $this->get_post_title($single) . ' ';
     endif;
 
-    // Coments count
+    // Comments count
     if (!empty($this->params['comments_tag'])):
       if (!empty($this->params['comments_class'])):
         $lcp_display_output .= $this->get_comments($single,
@@ -254,6 +254,10 @@ class CatListDisplayer {
   private function get_category_link($tag = null, $css_class = null){
     $info = $this->catlist->get_category_link();
     return $this->assign_style($info, $tag, $css_class);
+  }
+
+  private function get_category_count(){
+    return $this->catlist->get_category_count();
   }
 
   /**
