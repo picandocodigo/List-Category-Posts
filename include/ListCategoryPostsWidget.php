@@ -32,9 +32,6 @@ class ListCategoryPostsWidget extends WP_Widget{
     $thumbnail_size = ($instance['thumbnail_size']) ? $instance['thumbnail_size'] : 'thumbnail';
     $morelink = empty($instance['morelink']) ? ' ' : $instance['morelink'];
 
-
-
-
     $atts = array(
       'id' => $category_id,
       'orderby' => $orderby,
@@ -57,24 +54,12 @@ class ListCategoryPostsWidget extends WP_Widget{
 
     echo $before_widget;
 
-    if($morelink!='')//check if the user has setup the morelink;
-    
-    {
-        	//if the user has setup the morelink,display it right beside the title;
-          $current_category_link=get_category_link($category_id);
-		      echo $before_title.$title .'<a href="'.$current_category_link.'" id="more">'.$morelink.'</a>'.$after_title;
-    
+    if($title == 'catlink'){
+      //if the user has setup 'catlink' as the title, replace it with the category link:
+      $lcp_category = get_category($category_id);
+      $title = '<a href="' . get_category_link($lcp_category->cat_ID) . '">' . $lcp_category->name . '</a>';
     }
-
-    else
-    
-    {
-      
-         //if the user hasn't set the morelink,just display the title alone.
-         echo $before_title.$title.$after_title;
-    
-    }
-
+    echo $before_title . $title . $after_title;
 
     $catlist_displayer = new CatListDisplayer($atts);
     echo  $catlist_displayer->display();

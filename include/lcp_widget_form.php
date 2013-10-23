@@ -189,7 +189,7 @@
   <input class="checkbox" input type="checkbox"
     <?php checked( (bool) $instance['show_catlink'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_catlink' ); ?>" />
-  <?php _e("Link to category", 'list-category-posts')?>
+  <?php _e("Link to category (use 'catlink' on the title field if you want the title of this widget to be a link to the category)", 'list-category-posts')?>
 </p>
 <p>
   <input class="checkbox" input type="checkbox"
