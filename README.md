@@ -7,7 +7,7 @@ Master: [![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts
 | :----					| ----:						| :----				| :---: | :----						| :----				|
 | [Homepage][1.1]		| Requires at least:		| __3.3__			| *		| [GitHub-Repository][1.3]	| [Translate][1.6]	|
 | [WordPress.org][1.2]	| Tested up to:				| __3.6.1__			| *		| [Issue-Tracker][1.4]		|					|
-| *						| Current stable release:	| __[0.32][1.5]__	| *		| Current dev version:		| [0.33][1.7]	|
+| *						| Current stable release:	| __[0.33][1.5]__	| *		| Current dev version:		| [0.34][1.7]	|
 
 [1.1]: http://wordpress.org/plugins/list-category-posts/
 [1.2]: http://wordpress.org/plugins/list-category-posts/
