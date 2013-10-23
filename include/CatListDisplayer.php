@@ -56,7 +56,19 @@ class CatListDisplayer {
   }
 
   private function build_output($tag){
-    $this->lcp_output .= $this->get_category_link('strong');
+    // More link
+    if (!empty($this->params['catlink_tag'])):
+      if (!empty($this->params['catlink_class'])):
+        $this->lcp_output .= $this->get_category_link(
+                                   $this->params['catlink_tag'],
+                                   $this->params['catlink_class']);
+      else:
+        $this->lcp_output .= $this->get_category_link($this->params['catlink_tag']);
+      endif;
+    else:
+      $this->lcp_output .= $this->get_category_link("strong");
+    endif;
+
     $this->lcp_output .= '<' . $tag;
 
     //Give a class to wrapper tag

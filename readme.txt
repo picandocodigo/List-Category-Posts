@@ -261,6 +261,7 @@ Template system has changed. Custom templates should be stored in WordPress them
  * Adds feature to make widget title a link to the category. Use 'catlink' as the value for the widget's title to make it a link to the category (based on https://github.com/picandocodigo/List-Category-Posts/pull/51/).
  * Fixes morelink styiling with CSS class and tag.
  * Adds morelink to templates (based on https://github.com/picandocodigo/List-Category-Posts/pull/48/)
+ * Fixes tag and CSS class for "catlink" too: http://wordpress.org/support/topic/cat_link-tag-does-not-seem-to-be-working
 
 = 0.32 =
  * Add category count parameter to show the number of posts in a category next to its title. Only works when using the **catlink** option: `[catlist name=nintendo catlink=yes category_count=yes]` - http://wordpress.org/support/topic/count-feature
