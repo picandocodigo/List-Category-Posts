@@ -256,9 +256,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.33 =
+ * Fixes bug with thumbnail size on Widget.
+
 = 0.32 =
  * Add category count parameter to show the number of posts in a category next to its title. Only works when using the **catlink** option: `[catlist name=nintendo catlink=yes category_count=yes]` - http://wordpress.org/support/topic/count-feature
-
 
 = 0.31 =
  * Pull request from @cfoellmann, adds testing environment and Travis CI integration. Awesomeness.

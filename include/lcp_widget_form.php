@@ -16,6 +16,7 @@
                     'exclude'=>'',
                     'excludeposts'=>'',
                     'thumbnail' =>'',
+                    'thumbnail_size' =>'',
                     'offset'=>'',
                     'show_catlink'=>'',
                     'morelink' =>''
