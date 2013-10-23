@@ -255,6 +255,11 @@ class CatListDisplayer {
     $info = $this->catlist->get_category_link();
     return $this->assign_style($info, $tag, $css_class);
   }
+  
+  private function get_morelink($tag = null, $css_class = null){
+    $info = $this->catlist->get_morelink();
+    return $this->assign_style($info, $tag, $css_class);
+  }
 
   private function get_category_count(){
     return $this->catlist->get_category_count();
