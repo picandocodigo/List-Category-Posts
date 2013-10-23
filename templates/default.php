@@ -90,4 +90,8 @@ foreach ($this->catlist->get_categories_posts() as $single):
 endforeach;
 
 $lcp_display_output .= '</ul>';
+
+// If there's a "more link", show it:
+$lcp_display_output .= $this->catlist->get_morelink();
+
 $this->lcp_output = $lcp_display_output;

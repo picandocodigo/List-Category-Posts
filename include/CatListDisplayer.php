@@ -76,15 +76,19 @@ class CatListDisplayer {
     //Close wrapper tag
     $this->lcp_output .= '</' . $tag . '>';
 
-    if (!empty($this->params['morelink'])) :
-      $href = 'href="' . get_category_link($this->catlist->get_category_id()) . '"';
-      $class = "";
-      if (!empty($this->params['morelink_class'])) :
-        $class = 'class="' . $this->params['morelink_class'] . '" ';
+    // More link
+    if (!empty($this->params['morelink_tag'])):
+      if (!empty($this->params['morelink_class'])):
+        $this->lcp_output .= $this->get_morelink(
+                                   $this->params['morelink_tag'],
+                                   $this->params['morelink_class']);
+      else:
+        $this->lcp_output .= $this->get_morelink($this->params['morelink_tag']);
       endif;
-      $readmore = $this->params['morelink'];
-      $this->lcp_output .= '<a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
+    else:
+      $this->lcp_output .= $this->get_morelink();
     endif;
+
   }
 
   /**

@@ -92,6 +92,7 @@ class ListCategoryPosts{
                              'category_count' => '',
                              'morelink' => '',
                              'morelink_class' => '',
+                             'morelink_tag' => '',
                              'posts_morelink' => '',
                              'posts_morelink_class' => '',
                              'year' => '',

@@ -217,20 +217,19 @@ class CatList{
     endif;
   }
   
-    /**
+  /**
    * Load morelink name and link to the category:
    */
   public function get_morelink(){
-    if($this->params['morelink'] !== '' && $this->lcp_category_id != 0):
-      $cat_link = get_category_link($this->lcp_category_id);
-      $cat_title = get_cat_name($this->lcp_category_id);
-
-      return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-        ($this->params['morelink'] !== '' ? $this->params['morelink'] : 'More posts') . '</a>';
+    if (!empty($this->params['morelink'])) :
+      $href = 'href="' . get_category_link($this->lcp_category_id) . '"';
+      $readmore = ($this->params['morelink'] !== '' ? $this->params['morelink'] : 'More posts');
+      return '<a ' . $href . ' >' . $readmore . '</a>';
     else:
       return null;
     endif;
   }
+
 
 
   public function get_category_count(){
