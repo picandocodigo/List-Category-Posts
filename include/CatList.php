@@ -211,14 +211,14 @@ class CatList{
       $cat_title = get_cat_name($this->lcp_category_id);
 
       return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-        ($this->params['catlink_string'] !== '' ? $this->params['catlink_string'] : $cat_title) . $this->get_category_count() .  '</a>';
+        ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title) . $this->get_category_count() .  '</a>';
     else:
       return null;
     endif;
   }
 
   public function get_category_count(){
-    if($this->params['category_count'] == 'yes'):
+    if($this->lcp_not_empty('category_count') && $this->params['category_count'] == 'yes'):
       return ' (' . get_category($this->lcp_category_id)->category_count . ')';
     endif;
   }
