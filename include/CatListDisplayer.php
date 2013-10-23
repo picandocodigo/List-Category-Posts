@@ -76,16 +76,7 @@ class CatListDisplayer {
     //Close wrapper tag
     $this->lcp_output .= '</' . $tag . '>';
 
-    if (!empty($this->params['morelink'])) :
-      $href = 'href="' . get_category_link($this->catlist->get_category_id()) . '"';
-      $class = "";
-      if (!empty($this->params['morelink_class'])) :
-        $class = 'class="' . $this->params['morelink_class'] . '" ';
-      endif;
-      $readmore = $this->params['morelink'];
-      $this->lcp_output .= '<a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
-    endif;
-  }
+
 
   /**
    * This function should be overriden for template system.
