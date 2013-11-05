@@ -6,14 +6,14 @@ Master: [![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts
 | *						| WordPress					| Version			| *		| Development				|					|
 | :----					| ----:						| :----				| :---: | :----						| :----				|
 | [Homepage][1.1]		| Requires at least:		| __3.3__			| *		| [GitHub-Repository][1.3]	| [Translate][1.6]	|
-| [WordPress.org][1.2]	| Tested up to:				| __3.6.1__			| *		| [Issue-Tracker][1.4]		|					|
-| *						| Current stable release:	| __[0.33][1.5]__	| *		| Current dev version:		| [0.34][1.7]	|
+| [WordPress.org][1.2]	| Tested up to:				| __3.7.1__			| *		| [Issue-Tracker][1.4]		|					|
+| *						| Current stable release:	| __[0.34][1.5]__	| *		| Current dev version:		| [0.35][1.7]	|
 
 [1.1]: http://wordpress.org/plugins/list-category-posts/
 [1.2]: http://wordpress.org/plugins/list-category-posts/
 [1.3]: https://github.com/picandocodigo/List-Category-Posts
 [1.4]: http://wordpress.org/support/plugin/list-category-posts
-[1.5]: http://downloads.wordpress.org/plugin/list-category-posts.0.31.zip
+[1.5]: http://downloads.wordpress.org/plugin/list-category-posts.0.34.zip
 [1.6]: http://wp-translate.org/projects/List-Category-Posts
 [1.7]: https://github.com/picandocodigo/List-Category-Posts/archive/master.zip
 
