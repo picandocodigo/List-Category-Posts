@@ -143,14 +143,10 @@ class CatListDisplayer {
     endif;
 
     // Date
-    if (!empty($this->params['date_tag'])):
-      if (!empty($this->params['date_class'])):
-        $lcp_display_output .= $this->get_date($single,
-                                   $this->params['date_tag'],
-                                   $this->params['date_class']);
-      else:
-        $lcp_display_output .= $this->get_date($single, $this->params['date_tag']);
-      endif;
+    if (!empty($this->params['date_tag']) || !empty($this->params['date_class'])):
+      $lcp_display_output .= $this->get_date($single,
+                                             $this->params['date_tag'],
+                                             $this->params['date_class']);
     else:
       $lcp_display_output .= $this->get_date($single);
     endif;
@@ -291,8 +287,10 @@ class CatListDisplayer {
    * @return string
    */
   private function assign_style($info, $tag = null, $css_class = null){
-    if (!empty($info)):
-      if (empty($tag)):
+     if (!empty($info)):
+      if (empty($tag) && !empty($css_class)):
+        $tag = "span";
+      elseif (empty($tag)):
         return $info;
       elseif (!empty($tag) && empty($css_class)) :
         return '<' . $tag . '>' . $info . '</' . $tag . '>';

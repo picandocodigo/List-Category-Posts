@@ -169,7 +169,9 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 == HTML & CSS Customization ==
 
-You can customize what HTML tags different elements will be sorrounded with and a CSS class for this element. The customizable elements are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
+You can customize what HTML tags different elements will be sorrounded with and a CSS class for this element, or just a CSS class which will wrap the element with a `span` tag.
+
+The customizable elements (so far) are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
 
 The parameters are:
 `autor_tag, author_class, catlink_tag, catlink_class, comments_tag, comments_class, date_tag, date_class,
@@ -184,6 +186,11 @@ Or you just want to style the displayed date, you could wrap it with a span tag:
 `[catlist name=blog date=yes date_tag=span date_class=lcp_date]`
 This would produce the following code:
 `<span class="lcp_date">March 21, 2011</span>`
+
+Elements without a specified tag, but a specified class, will be wrapped with a span tag and its class. For example this:
+`[catlist id=7  date=yes date_class="lcp_date"]`
+Will produce the following:
+`<span class="lcp_date">October 23, 2013</span>`
 
 
 == Template System ==
@@ -205,10 +212,14 @@ You can have as many different templates as you want, and use them in different 
 
 * **FAQ**
 
-Since version 0.18, **this plugins does not work on servers with PHP 4**. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 was the last version to support PHP 4, from 3.2 and forward, only PHP 5 is supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
+**Does not work on servers with PHP < 5**
+
+This is true since version 0.18. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 was the last version to support PHP 4, from 3.2 and forward, only PHP 5 is supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
 
 **Plugin could not be activated because it triggered a fatal error.**
+
 *Parse error: syntax error, unexpected T_STRING, expecting T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in /.../wp-content/plugins/list-category-posts/include/CatListDisplayer.php on line 10*
+
 Please check:
 http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
 
@@ -233,6 +244,10 @@ And in your theme's CSS:
 
 == Upgrade Notice ==
 
+= 0.34 =
+ * Now the plugin accepts either class or tag or both for styling elements (such as date, author, etc. to display). When just using a tag, it will sorround the element with that tag. When using just a class, it will sorround the element between span tags and the given CSS class. Check [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) under **HTML & CSS Customization** for more info.
+ * Fixed bug on `post_status`, it used to show all published posts and if user was logged in, all private ones too. Now you can specify 'private' to just display private posts, and draft, publish, draft, etc (See **post_status** param on the [instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for more info).
+
 = 0.25 =
 * Translation support.
 
@@ -255,6 +270,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.34 =
+
+ * Now accepts either class or tag or both for styling elements (such as date, author, etc. to display). When just using a tag, it will sorround the element with that tag. When using just a class, it will wrap the element between span tags and the given CSS class. Check [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) under **HTML & CSS Customization** for more info.
+ * Fixed bug on `post_status`, it used to show all published posts and if user was logged in, all private ones too. Now you can specify 'private' to just display private posts, and draft, publish, draft, etc (See **post_status** param on the [instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for more info).
 
 = 0.33 =
  * Fixes bug with thumbnail size on Widget.
