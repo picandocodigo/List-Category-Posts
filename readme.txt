@@ -80,7 +80,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **tags** - Tag support, you can display posts from a certain tag.
 
-* **exclude_tags** - Exclude posts from one or more tags: `[catlist tag="videogames" exclude_tags="sega,sony"]`
+* **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
 
 * **orderby** - To customize the order. Valid values are:
   * **author** - Sort by the numeric author IDs.
