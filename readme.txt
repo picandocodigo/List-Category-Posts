@@ -97,13 +97,15 @@ When using List Category Posts whithout a category id, name or slug, it will pos
   * **rand** - Randomly sort results.
   * **status** - Sort by status.
   * **title** - Sort by title.
-  * **type** - Sort by type. Ex: [catlist name=mycategory orderby=date]
+  * **type** - Sort by type. Ex: `[catlist name=mycategory orderby=date]`
+
+* **customfield_orderby** - You can order the posts by a custom field. For example: `[catlist numberposts=-1 customfield_orderby=Mood order=desc]` will list all the posts with a "Mood" custom field. Remember the default order is descending, more on order:
 
 * **order** - How to sort **orderby**. Valid values are:
   * **ASC** - Ascending (lowest to highest).
-  * **DESC** - Descending (highest to lowest). Ex: [catlist name=mycategory orderby=title order=asc]
+  * **DESC** - Descending (highest to lowest). Ex: `[catlist name=mycategory orderby=title order=asc]`
 
-* **numberposts** - Number of posts to return. Set to 0 to use the max number of posts per page. Set to -1 to remove the limit. Default: 5. Ex: [catlist name=mycategory numberposts=10]
+* **numberposts** - Number of posts to return. Set to 0 to use the max number of posts per page. Set to -1 to remove the limit. Default: 5. Ex: `[catlist name=mycategory numberposts=10]`
 
 * **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 month=12]` will list posts from December 2012.
 
@@ -121,23 +123,23 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **excerpt_strip** - Set it to `yes` to strip the excerpt's HTML tags.
 
-* **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: [catlist excludeposts=this,12,52,37]
+* **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: `[catlist excludeposts=this,12,52,37]`
 
 * **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
 
-* **content** - Show the full content of the post. Default is 'no'. Ex: [catlist content=yes]
+* **content** - Show the full content of the post. Default is 'no'. Ex: `[catlist content=yes]`
 
-* **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: [catlist catlink=yes]. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
+* **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: `[catlist catlink=yes]`. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
 
 * **category_count** -  Shows the posts count in that category, only works when using the **catlink** option: `[catlist name=nintendo catlink=yes category_count=yes]`
 
-* **comments** - Show comments count for each post. Default is 'no'. Ex: [catlist comments=yes].
+* **comments** - Show comments count for each post. Default is 'no'. Ex: `[catlist comments=yes]`.
 
-* **thumbnail** - Show post thumbnail (http://markjaquith.wordpress.com/2009/12/23/new-in-wordpress-2-9-post-thumbnail-images/). Default is 'no'. Ex: [catlist thumbnail=yes].
+* **thumbnail** - Show post thumbnail (http://markjaquith.wordpress.com/2009/12/23/new-in-wordpress-2-9-post-thumbnail-images/). Default is 'no'. Ex: `[catlist thumbnail=yes]`.
 
-* **thumbnail_size** - Either a string keyword (thumbnail, medium, large or full) or 2 values representing width and height in pixels. Ex: [catlist thumbnail_size=32,32] or [catlist thumbnail_size=thumbnail]
+* **thumbnail_size** - Either a string keyword (thumbnail, medium, large or full) or 2 values representing width and height in pixels. Ex: `[catlist thumbnail_size=32,32]` or `[catlist thumbnail_size=thumbnail]`
 
-* **thumbnail_class** - Set a CSS class to the thumbnail and style it.
+* **thumbnail_class** - Set a CSS class for the thumbnail.
 
 * **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types.
 
@@ -163,9 +165,9 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **template** - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default', which displays an unordered list (ul html tag) with a CSS class. This class can be passed as a parameter or by default it's: 'lcp_catlist'. You can also use the default 'div' value. This will output a div with the 'lcp_catlist' CSS class (or one you pass as parameter with the class argument). The inner items (posts) will be displayed between p tags.
 
-* **morelink** - Include a "more" link to access the category archive for the category. The link is inserted after listing the posts. It receives a string of characters as a parameter which will be used as the text of the link. Example: [catlist id=38 morelink="Read more"]
+* **morelink** - Include a "more" link to access the category archive for the category. The link is inserted after listing the posts. It receives a string of characters as a parameter which will be used as the text of the link. Example: `[catlist id=38 morelink="Read more"]`
 
-* **posts_morelink** - Include a "read more" link after each post. It receives a string of characters as a parameter which will be used as the text of the link. Example: [catlist id=38 posts_morelink="Read more about this post"]
+* **posts_morelink** - Include a "read more" link after each post. It receives a string of characters as a parameter which will be used as the text of the link. Example: `[catlist id=38 posts_morelink="Read more about this post"]`
 
 == HTML & CSS Customization ==
 
@@ -198,7 +200,7 @@ Will produce the following:
 Templates for the List Category Plugin are searched for in your WordPress theme's folder. You should create a folder named list-category-posts under 'wp-content/themes/your-theme-folder'. Template files are .php files.
 
 You can use the included template as an example to start. It's in the plugin's template folder under the name default.php. To use a template, use this code:
-[catlist id=1 template=templatename]
+`[catlist id=1 template=templatename]`
 If the template file were templatename.php.
 
 You can have as many different templates as you want, and use them in different pages and posts. The template code is pretty well documented, so if you're a bit familiar with HTML and PHP, you'll have no problems creating your own template. I'm planning on reworking the template system in order to have a really user friendly way to create templates.
@@ -273,14 +275,12 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.35 =
  * Updated Turkish translation, thanks again [Hakan Er](http://hakanertr.wordpress.com/)!
-
+ * Adds feature to order by custom field using the `customfield_orderby` parameter.
 
 = 0.34.1 =
-
  * Bugfix (removed var_dump)
 
 = 0.34 =
-
  * Now accepts either class or tag or both for styling elements (such as date, author, etc. to display). When just using a tag, it will sorround the element with that tag. When using just a class, it will wrap the element between span tags and the given CSS class. Check [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) under **HTML & CSS Customization** for more info.
  * Fixed bug on `post_status`, it used to show all published posts and if user was logged in, all private ones too. Now you can specify 'private' to just display private posts, and draft, publish, draft, etc (See **post_status** param on the [instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for more info).
 
