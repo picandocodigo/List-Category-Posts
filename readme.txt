@@ -72,8 +72,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **include** posts from several categories with **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
 * **include** posts from several categories with **OR** relationship, posts that belong to either one of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
-* **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`.
-
+* **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, the order must be categories you want to include first, and exclude after. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
 
 
 ==Other parameters==
@@ -278,6 +277,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.36 =
 
  * Adds option for "target=_blank" for post links.
+ * Adds option to exclude category when using the *and* relationship: `[catlist id=1+2-3]` will include posts from categories 1 and 2 but not 3.
 
 = 0.35 =
  * Updated Turkish translation, thanks again [Hakan Er](http://hakanertr.wordpress.com/)!

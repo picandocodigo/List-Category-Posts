@@ -9,6 +9,7 @@ class CatList{
   private $params = array();
   private $lcp_category_id = 0;
   private $category_param;
+  private $exclude;
 
   /**
    * Constructor gets the shortcode attributes as parameter
@@ -116,6 +117,10 @@ class CatList{
       $args['tag'] = $this->params['tags'];
     endif;
 
+    if ( !empty($this->exclude)):
+      $args['category__not_in'] = array($this->exclude);
+    endif;
+
     if ( $this->lcp_not_empty('customfield_orderby') ):
       $args['orderby'] = 'meta_value';
       $args['meta_key'] = $this->params['customfield_orderby'];
@@ -151,10 +156,12 @@ class CatList{
       if (preg_match('/\+/', $this->params['name'])):
         $categories = array();
         $cat_array = explode("+", $this->params['name']);
+
         foreach ($cat_array as $category) :
           $id = $this->get_category_id_by_name($category);
           $categories[] = $id;
         endforeach;
+
         $this->lcp_category_id = $categories;
 
       elseif (preg_match('/,/', $this->params['name'])):
@@ -173,6 +180,9 @@ class CatList{
       endif;
     elseif ( isset($this->params['id']) && $this->params['id'] != '0' ):
       if (preg_match('/\+/', $this->params['id'])):
+        if ( preg_match('/(-[0-9]+)+/', $this->params['id'], $matches) ):
+          $this->exclude = implode(',', explode("-", ltrim($matches[0], '-') ));
+        endif;
         $this->lcp_category_id = explode("+", $this->params['id']);
       else:
         $this->lcp_category_id = $this->params['id'];
