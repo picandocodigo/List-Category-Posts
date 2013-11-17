@@ -111,10 +111,12 @@ class CatListDisplayer {
    */
   private function lcp_build_post($single, $tag){
     global $post;
+
     $class ='';
     if ( $post->ID == $single->ID ):
       $class = " class = current ";
     endif;
+
     $lcp_display_output = '<'. $tag . $class . '>';
 
     if (!empty($this->params['title_tag'])):
@@ -258,8 +260,12 @@ class CatListDisplayer {
 
   private function get_post_title($single, $tag = null, $css_class = null){
     $info = '<a href="' . get_permalink($single->ID) .
-      '" title="'. $single->post_title . '">' .
-      apply_filters('the_title', $single->post_title, $single->ID) . '</a>';
+      '" title="' . $single->post_title. '"';
+    if (!empty($this->params['link_target'])):
+      $info .= ' target="' . $this->params['link_target'] . '" ';
+    endif;
+    $info .= '>' . apply_filters('the_title', $single->post_title, $single->ID) . '</a>';
+
     return $this->assign_style($info, $tag, $css_class);
   }
 
