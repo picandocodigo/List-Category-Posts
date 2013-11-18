@@ -23,8 +23,6 @@ class CatList{
     $this->set_lcp_parameters();
   }
 
-
-
   /**
    * Order the parameters and query the DB for posts
    */
@@ -228,11 +226,20 @@ class CatList{
    */
   public function get_category_link(){
     if($this->params['catlink'] == 'yes' && $this->lcp_category_id != 0):
-      $cat_link = get_category_link($this->lcp_category_id);
-      $cat_title = get_cat_name($this->lcp_category_id);
+      $ids = is_array($this->lcp_category_id) ?
+        $this->lcp_category_id :
+        explode(",", $this->lcp_category_id);
 
-      return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-        ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title) . $this->get_category_count() .  '</a>';
+      $link = array();
+      foreach($ids as $lcp_id){
+        $cat_link = get_category_link($lcp_id);
+        $cat_title = get_cat_name($lcp_id);
+        array_push($link, '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
+                   ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title) .
+                   $this->get_category_count() .  '</a>');
+      }
+
+      return implode(", ", $link);
     else:
       return null;
     endif;
