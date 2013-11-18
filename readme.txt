@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.7.1
-Stable tag: 0.36
+Stable tag: 0.37
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -73,6 +73,20 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 * **include** posts from several categories with **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
 * **include** posts from several categories with **OR** relationship, posts that belong to either one of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
 * **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, the order must be categories you want to include first, and exclude after. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
+
+==Pagination==
+
+To use pagination, you need to set the following parameters:
+* **pagination** set it to yes.
+* **instance** a number or name to identify the instance where you are using pagination. Since you can use the shortcode several times in the same page or post, you need to identify the instance so that you paginate only that instance.
+
+Posts per page are set with the **numberposts** parameter.
+
+Example:
+
+`[catlist id=3 numberposts=2 pagination=yes instance=1]`
+
+`[catlist id=5 numberposts=4 pagination=yes instance=2]`
 
 
 ==Other parameters==
@@ -273,6 +287,9 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.37 =
+ * Adds pagination. Check **Pagination** on [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) to learn how to use it.
 
 = 0.36 =
 

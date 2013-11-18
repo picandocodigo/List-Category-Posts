@@ -10,6 +10,9 @@ class CatList{
   private $lcp_category_id = 0;
   private $category_param;
   private $exclude;
+  private $page = 1;
+  private $posts_count = 0;
+  private $instance = 0;
 
   /**
    * Constructor gets the shortcode attributes as parameter
@@ -18,6 +21,9 @@ class CatList{
   public function __construct($atts) {
     $this->params = $atts;
 
+    if ($this->lcp_not_empty('instance')){
+      $this->instance = $atts['instance'];
+    }
     //Get the category posts:
     $this->get_lcp_category();
     $this->set_lcp_parameters();
@@ -126,7 +132,21 @@ class CatList{
       $args['meta_key'] = $this->params['customfield_orderby'];
     endif;
 
-    $this->lcp_categories_posts = get_posts($args);
+    if ( $this->lcp_not_empty('pagination')):
+      if( preg_match('/lcp_page' . preg_quote($this->instance) . '=([0-9]+)/i', $_SERVER['QUERY_STRING'], $match) ):
+        $this->page = $match[1];
+        $offset = ($this->page - 1) * $this->params['numberposts'];
+        $args = array_merge($args, array('offset' => $offset));
+      endif;
+    endif;
+
+    // for WP_Query compatibility
+    // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
+    $args['posts_per_page'] = $args['numberposts'];
+
+    $query = new WP_Query;
+    $this->lcp_categories_posts = $query->query($args);
+    $this->posts_count = $query->found_posts;
   }
 
   private function lcp_not_empty($param){
@@ -315,6 +335,22 @@ class CatList{
   }
 
 
+  /** Pagination **/
+  public function get_page(){
+    return $this->page;
+  }
+
+  public function get_posts_count(){
+    return $this->posts_count;
+  }
+
+  public function get_number_posts(){
+    return $this->params['numberposts'];
+  }
+
+  public function get_instance(){
+    return $this->instance;
+  }
 
   public function get_date_to_show($single){
     if ($this->params['date']=='yes'):

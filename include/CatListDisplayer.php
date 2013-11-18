@@ -101,6 +101,36 @@ class CatListDisplayer {
       $this->lcp_output .= $this->get_morelink();
     endif;
 
+    if (!empty($this->params['pagination']) && $this->params['pagination'] == "yes"):
+      $current_page = $this->catlist->get_page();
+      $pages_count = ceil (
+                           $this->catlist->get_posts_count() / $this->catlist->get_number_posts()
+                           );
+
+      for($i = 1; $i <= $pages_count; $i++){
+        if ($i == $current_page){
+          $link = $current_page;
+        } else {
+          $link = $this->lcp_page_link($i, true);
+        }
+        $this->lcp_output .=  "$link - ";
+      }
+    endif;
+  }
+
+  private function lcp_page_link($page){
+    $amp = ( strpos($_SERVER["REQUEST_URI"], "?") ) ? "&" : "";
+    $pattern = "/[&|?]?lcp_page" . preg_quote($this->catlist->get_instance()) . "=([0-9]+)/";
+    $query = preg_replace($pattern, '', $_SERVER['QUERY_STRING']);
+
+    $url = strtok($_SERVER["REQUEST_URI"],'?');
+
+
+
+    $page_link = "http://$_SERVER[HTTP_HOST]$url?$query" .
+      $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page;
+
+    return "<a href='$page_link' title='$page'>$page</a>";
   }
 
   /**
