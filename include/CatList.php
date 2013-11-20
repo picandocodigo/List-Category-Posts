@@ -399,7 +399,12 @@ class CatList{
     if ($this->params['thumbnail']=='yes'):
       $lcp_thumbnail = '';
       if ( has_post_thumbnail($single->ID) ):
-        if ( in_array( $this->params['thumbnail_size'],array('thumbnail', 'medium', 'large', 'full') )):
+        $avalaible_image_sizes = get_intermediate_image_sizes();
+        if ( in_array(
+                      $this->params['thumbnail_size'],
+                      $avalaible_image_sizes
+                       )
+             ):
           $lcp_thumb_size = $this->params['thumbnail_size'];
         elseif ($this->params['thumbnail_size']):
           $lcp_thumb_size = explode(",", $this->params['thumbnail_size']);
