@@ -71,7 +71,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 ==Using several categories==
 
 * **include** posts from several categories with **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
-* **include** posts from several categories with **OR** relationship, posts that belong to either one of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
+* **include** posts from several categories with **OR** relationship, posts that belong to any of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
 * **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, the order must be categories you want to include first, and exclude after. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
 
 ==Pagination==
@@ -290,6 +290,14 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.37 =
  * Adds pagination. Check **Pagination** on [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) to learn how to use it.
+
+= 0.36.2 =
+
+ * Fixed category_count for several categories.
+
+= 0.36.1 =
+
+ * Fixed catlink to display titles for all the categories when using more than one category.
 
 = 0.36 =
 

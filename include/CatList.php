@@ -29,8 +29,6 @@ class CatList{
     $this->set_lcp_parameters();
   }
 
-
-
   /**
    * Order the parameters and query the DB for posts
    */
@@ -248,11 +246,20 @@ class CatList{
    */
   public function get_category_link(){
     if($this->params['catlink'] == 'yes' && $this->lcp_category_id != 0):
-      $cat_link = get_category_link($this->lcp_category_id);
-      $cat_title = get_cat_name($this->lcp_category_id);
+      $ids = is_array($this->lcp_category_id) ?
+        $this->lcp_category_id :
+        explode(",", $this->lcp_category_id);
 
-      return '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-        ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title) . $this->get_category_count() .  '</a>';
+      $link = array();
+      foreach($ids as $lcp_id){
+        $cat_link = get_category_link($lcp_id);
+        $cat_title = get_cat_name($lcp_id);
+        array_push($link, '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
+                   ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title) .
+                   $this->get_category_count($lcp_id) .  '</a>');
+      }
+
+      return implode(", ", $link);
     else:
       return null;
     endif;
@@ -273,9 +280,9 @@ class CatList{
 
 
 
-  public function get_category_count(){
+  public function get_category_count($id){
     if($this->lcp_not_empty('category_count') && $this->params['category_count'] == 'yes'):
-      return ' (' . get_category($this->lcp_category_id)->category_count . ')';
+      return ' (' . get_category($id)->category_count . ')';
     endif;
   }
 
@@ -428,7 +435,12 @@ class CatList{
     if ($this->params['thumbnail']=='yes'):
       $lcp_thumbnail = '';
       if ( has_post_thumbnail($single->ID) ):
-        if ( in_array( $this->params['thumbnail_size'],array('thumbnail', 'medium', 'large', 'full') )):
+        $avalaible_image_sizes = get_intermediate_image_sizes();
+        if ( in_array(
+                      $this->params['thumbnail_size'],
+                      $avalaible_image_sizes
+                       )
+             ):
           $lcp_thumb_size = $this->params['thumbnail_size'];
         elseif ($this->params['thumbnail_size']):
           $lcp_thumb_size = explode(",", $this->params['thumbnail_size']);
