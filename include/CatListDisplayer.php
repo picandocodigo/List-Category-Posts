@@ -75,8 +75,16 @@ class CatListDisplayer {
     if (isset($this->params['class'])):
       $this->lcp_output .= ' class="' . $this->params['class'] . '"';
     endif;
+
+    //Give id to wrapper tag
+    if (isset($this->params['instance'])){
+      $this->lcp_output .= ' id=lcp_instance_' . $this->params['instance'];
+    }
+
     $this->lcp_output .= '>';
     $inner_tag = ($tag == 'ul') ? 'li' : 'p';
+
+
 
     //Posts loop
     foreach ($this->catlist->get_categories_posts() as $single) :
@@ -125,10 +133,9 @@ class CatListDisplayer {
 
     $url = strtok($_SERVER["REQUEST_URI"],'?');
 
-
-
     $page_link = "http://$_SERVER[HTTP_HOST]$url?$query" .
-      $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page;
+      $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
+      "#lcp_instance_" . $this->catlist->get_instance();
 
     return "<a href='$page_link' title='$page'>$page</a>";
   }
