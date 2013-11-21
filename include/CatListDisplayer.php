@@ -121,7 +121,7 @@ class CatListDisplayer {
         } else {
           $link = $this->lcp_page_link($i, true);
         }
-        $this->lcp_output .=  "$link - ";
+        $this->lcp_output .=  "$link " . ( ($i != $pages_count) ? "- " : "");
       }
     endif;
   }
