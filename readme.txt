@@ -278,8 +278,9 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
-= 0.36.2 =
+= 0.37 =
 
+ * Supports `more` tag.  If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag.
  * Fixes YouTube thumbnails: Includes "embed" urls for youtube video
    thumbnails, makes correct img tag when using CSS class.
 
