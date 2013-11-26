@@ -103,7 +103,9 @@ class ListCategoryPosts{
                              'pagination' => 'no',
                              'instance' => '0'
                            ), $atts);
-
+    if( $atts['pagination'] == 'yes'){
+      lcp_pagination_css();
+    }
     $catlist_displayer = new CatListDisplayer($atts);
     return $catlist_displayer->display();
   }
@@ -128,6 +130,18 @@ function lpc_meta($links, $file) {
 }
 
 add_filter( 'plugin_row_meta', 'lpc_meta', 10, 2 );
+
+function lcp_pagination_css(){
+  if ( @file_exists( get_stylesheet_directory() . '/lcp_paginator.css' ) ):
+    $css_file = get_stylesheet_directory_uri() . '/lcp_paginator.css';
+  elseif ( @file_exists( get_template_directory() . '/lcp_paginator.css' ) ):
+    $css_file = get_template_directory_uri() . '/lcp_paginator.css';
+  else:
+    $css_file = WP_PLUGIN_URL . '/' . basename( __DIR__ ) . '/lcp_paginator.css';
+  endif;
+
+  wp_enqueue_style( 'lcp_paginator', $css_file, false, '2.70' );
+}
 
 /**
  * TO-DO:

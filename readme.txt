@@ -88,6 +88,13 @@ Example:
 
 `[catlist id=5 numberposts=4 pagination=yes instance=2]`
 
+==Changing the pagination CSS==
+
+If you want to customize the way the pagination is displayed, you can
+copy the `lcp_paginator.css` file from the plugin's directory to your
+theme's directory and customize it. Do not customize the file on the
+plugin's directory since this file will be overwritten every time you
+update the plugin.
 
 ==Other parameters==
 

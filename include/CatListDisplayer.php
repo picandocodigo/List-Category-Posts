@@ -110,34 +110,38 @@ class CatListDisplayer {
     endif;
 
     if (!empty($this->params['pagination']) && $this->params['pagination'] == "yes"):
-      $current_page = $this->catlist->get_page();
+      $lcp_paginator = '';
       $pages_count = ceil (
                            $this->catlist->get_posts_count() / $this->catlist->get_number_posts()
                            );
 
       for($i = 1; $i <= $pages_count; $i++){
-        if ($i == $current_page){
-          $link = $current_page;
-        } else {
-          $link = $this->lcp_page_link($i, true);
-        }
-        $this->lcp_output .=  "$link " . ( ($i != $pages_count) ? "- " : "");
+        $lcp_paginator .=  $this->lcp_page_link($i, true);
       }
+      $this->lcp_output .= "<ul class='lcp_paginator'>" . $lcp_paginator . "</ul>";
+
     endif;
   }
 
   private function lcp_page_link($page){
-    $amp = ( strpos($_SERVER["REQUEST_URI"], "?") ) ? "&" : "";
-    $pattern = "/[&|?]?lcp_page" . preg_quote($this->catlist->get_instance()) . "=([0-9]+)/";
-    $query = preg_replace($pattern, '', $_SERVER['QUERY_STRING']);
+    $current_page = $this->catlist->get_page();
+    $link = '';
 
-    $url = strtok($_SERVER["REQUEST_URI"],'?');
+    if ($page == $current_page){
+      $link = "<li>$current_page</li>";
+    } else {
+      $amp = ( strpos($_SERVER["REQUEST_URI"], "?") ) ? "&" : "";
+      $pattern = "/[&|?]?lcp_page" . preg_quote($this->catlist->get_instance()) . "=([0-9]+)/";
+      $query = preg_replace($pattern, '', $_SERVER['QUERY_STRING']);
 
-    $page_link = "http://$_SERVER[HTTP_HOST]$url?$query" .
-      $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
-      "#lcp_instance_" . $this->catlist->get_instance();
+      $url = strtok($_SERVER["REQUEST_URI"],'?');
 
-    return "<a href='$page_link' title='$page'>$page</a>";
+      $page_link = "http://$_SERVER[HTTP_HOST]$url?$query" .
+        $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
+        "#lcp_instance_" . $this->catlist->get_instance();
+      $link .=  "<li><a href='$page_link' title='$page'>$page</a></li>";
+    }
+    return $link;
   }
 
   /**

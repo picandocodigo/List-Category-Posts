@@ -131,7 +131,8 @@ class CatList{
     endif;
 
     if ( $this->lcp_not_empty('pagination')):
-      if( preg_match('/lcp_page' . preg_quote($this->instance) . '=([0-9]+)/i', $_SERVER['QUERY_STRING'], $match) ):
+      if( preg_match('/lcp_page' . preg_quote($this->instance) .
+                     '=([0-9]+)/i', $_SERVER['QUERY_STRING'], $match) ):
         $this->page = $match[1];
         $offset = ($this->page - 1) * $this->params['numberposts'];
         $args = array_merge($args, array('offset' => $offset));
