@@ -244,7 +244,7 @@ class CatList{
       return null;
     endif;
   }
-  
+
   /**
    * Load morelink name and link to the category:
    */
@@ -338,13 +338,16 @@ class CatList{
         $single->post_content):
 
       $lcp_content = $single->post_content;
-      /* Need to put some more thought on this!
-       * Added to stop a post with catlist to display an infinite loop of
-       * catlist shortcode parsing
-       * added to parse shortcodes
-       */
       $lcp_content = apply_filters('the_content', $lcp_content);
       $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
+
+      if ( preg_match('/<!--more(.*?)?-->/', $lcp_content, $matches) ):
+        $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
+        $lcp_content = explode($matches[0], $lcp_content, 2)[0] .
+          ' <a href="' . get_permalink($single->ID) . ' title="' . "$lcp_more" . '">' .
+          $lcp_more . '</a>';
+      endif;
+
       return $lcp_content;
     else:
       return null;
