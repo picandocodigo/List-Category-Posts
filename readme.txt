@@ -77,16 +77,18 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 ==Pagination==
 
 To use pagination, you need to set the following parameters:
+
 * **pagination** set it to yes.
+
 * **instance** a number or name to identify the instance where you are using pagination. Since you can use the shortcode several times in the same page or post, you need to identify the instance so that you paginate only that instance.
 
 Posts per page are set with the **numberposts** parameter.
 
 Example:
 
-`[catlist id=3 numberposts=2 pagination=yes instance=1]`
+`[catlist id=3 numberposts=5 pagination=yes instance=1]`
 
-`[catlist id=5 numberposts=4 pagination=yes instance=2]`
+`[catlist id=5 numberposts=15 pagination=yes instance=2]`
 
 ==Changing the pagination CSS==
 
