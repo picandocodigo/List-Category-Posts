@@ -265,7 +265,7 @@ class CatList{
       return null;
     endif;
   }
-  
+
   /**
    * Load morelink name and link to the category:
    */
@@ -375,13 +375,17 @@ class CatList{
         $single->post_content):
 
       $lcp_content = $single->post_content;
-      /* Need to put some more thought on this!
-       * Added to stop a post with catlist to display an infinite loop of
-       * catlist shortcode parsing
-       * added to parse shortcodes
-       */
       $lcp_content = apply_filters('the_content', $lcp_content);
       $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
+
+      if ( preg_match('/<!--more(.*?)?-->/', $lcp_content, $matches) ):
+        $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
+        $lcp_post_content = explode($matches[0], $lcp_content, 2);
+        $lcp_content = $lcp_post_content[0] .
+          ' <a href="' . get_permalink($single->ID) . ' title="' . "$lcp_more" . '">' .
+          $lcp_more . '</a>';
+      endif;
+
       return $lcp_content;
     else:
       return null;
@@ -463,6 +467,8 @@ class CatList{
               preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/watch(\?v\=|\/v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/", $single->post_content, $matches)
               ||
               preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/(v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/", $single->post_content, $matches)
+              ||
+              preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/(embed)\/([a-zA-Z0-9\-\_]{11})[^<\s]*/", $single->post_content, $matches)
               ):
         $youtubeurl = $matches[0];
 
@@ -470,11 +476,15 @@ class CatList{
           $imageurl = "http://i.ytimg.com/vi/{$matches[3]}/1.jpg";
         endif;
 
-        $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'">' .
-          '<img src="' . $imageurl .
-          ( ($lcp_thumb_class != null) ? 'class="' . $lcp_thumb_class .'"' : null ) .
-          '" alt="' . $single->title . '" />';
-        $lcp_thumbnail .= '</a>';
+        $lcp_ytimage = '<img src="' . $imageurl . '" alt="' . $single->post_title . '" />';
+
+        if ($lcp_thumb_class != null):
+          $thmbn_class = ' class="' . $lcp_thumb_class . '" />';
+        $lcp_ytimage = preg_replace("/\>/", $thmbn_class, $lcp_ytimage);
+        endif;
+
+        $lcp_thumbnail .= '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
+
       endif;
     endif;
     return $lcp_thumbnail;

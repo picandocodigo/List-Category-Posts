@@ -147,7 +147,7 @@ update the plugin.
 
 * **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
 
-* **content** - Show the full content of the post. Default is 'no'. Ex: `[catlist content=yes]`
+* **content** - Show the full content of the post. If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag. Default is 'no'. Ex: `[catlist content=yes]`
 
 * **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: `[catlist catlink=yes]`. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
 
@@ -268,6 +268,10 @@ And in your theme's CSS:
 
 == Upgrade Notice ==
 
+= 0.37 =
+
+When using `content=yes`, if the post has a more tag, the plugin will only show the content previous to the more tag and not all the content as it used before (it now supports the more tag the same way as WordPress).
+
 = 0.34 =
  * Now the plugin accepts either class or tag or both for styling elements (such as date, author, etc. to display). When just using a tag, it will sorround the element with that tag. When using just a class, it will sorround the element between span tags and the given CSS class. Check [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) under **HTML & CSS Customization** for more info.
  * Fixed bug on `post_status`, it used to show all published posts and if user was logged in, all private ones too. Now you can specify 'private' to just display private posts, and draft, publish, draft, etc (See **post_status** param on the [instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for more info).
@@ -295,8 +299,14 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
-= 0.37 =
+= 0.38 =
+
  * Adds pagination. Check **Pagination** on [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) to learn how to use it.
+
+= 0.37 =
+ * Supports `more` tag.  If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag.
+ * Fixes YouTube thumbnails: Includes "embed" urls for youtube video
+   thumbnails, makes correct img tag when using CSS class.
 
 = 0.36.2 =
 
