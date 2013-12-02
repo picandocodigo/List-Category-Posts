@@ -101,7 +101,8 @@ class ListCategoryPosts{
                              'search' => '',
                              'link_target' => '',
                              'pagination' => 'no',
-                             'instance' => '0'
+                             'instance' => '0',
+                             'youtube_thumbnail' => ''
                            ), $atts);
     if( $atts['pagination'] == 'yes'){
       lcp_pagination_css();
