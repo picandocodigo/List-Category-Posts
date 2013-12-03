@@ -1,18 +1,33 @@
 # List Category Posts
-List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
+List Category Posts is a **[WordPress](http://wordpress.org) plugin**
+that allows you to list posts from a category into a post/page using
+the [catlist] shortcode. This shortcode accepts a category name or id,
+the order in which you want the posts to display, and the number of
+posts to display. You can use [catlist] as many times as needed with
+different arguments.
+
+Usage:
+`[catlist argument1=value1 argument2=value2]`
+
+Please visit the
+[plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/)
+to find out more.
 
 Master: [![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts.png?branch=master)](https://travis-ci.org/picandocodigo/List-Category-Posts)
 
-### Description
-List Category Posts is a **[WordPress](http://wordpress.org) plugin** that allows you to list posts from a category into a post/page using the [catlist] shortcode. Please visit the [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/) to find out more.
+# Development
 
-The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page.
+A Vagrantfile is included to set up a box for WordPress development.
+You need [Vagrant](http://www.vagrantup.com/) installed on your
+computer.
 
-Great to use WordPress as a CMS, and create pages with several categories posts.
+Fork the repo, clone it locally and do `vagrant up`. You'll have a
+WordPress instance running on http://127.0.0.1:8080/wordpress/.
+Install WordPress from that URL and activate the plugin on
+http://127.0.0.1:8080/wordpress/wp-admin/plugins.php.
 
-**Widget**: It includes a widget which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
-
-Please, read the information on [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) and [Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/) to be aware of new functionality, and improvements to the plugin.
+The plugin code is linked directly on the box, so any change you make
+on the code is reflected automatically on the Vagrant box's WordPress.
 
 ### Usage
 
