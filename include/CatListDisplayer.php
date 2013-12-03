@@ -77,7 +77,7 @@ class CatListDisplayer {
     endif;
 
     //Give id to wrapper tag
-    if (isset($this->params['instance'])){
+    if (isset($this->params['instance']) && $this->params['instance'] != '0'){
       $this->lcp_output .= ' id=lcp_instance_' . $this->params['instance'];
     }
 
