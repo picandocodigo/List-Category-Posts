@@ -249,6 +249,24 @@ This is true since version 0.18. If you're still using PHP 4 on your webhost, yo
 Please check:
 http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
 
+**How do I display the Thumbnail next to the title?**
+
+To see the thumbnail next to the title, you can add a class to it like
+this:
+`[catlist id=1 thumbnail=yes thumbnail_class=lcp_thumbnail]`
+Then in your theme's stylesheet add this code:
+`lcp_thumbnail{
+  float: left;
+}
+
+lcp_catlist li{
+  clear: both;
+}`
+
+If you want the thumbnail to the right, just change the `float: left`
+attribute to `float: right`.
+
+
 **How to not display the title**
 
 You have to add a CSS class to the title with the `title_class` parameter. Then edit the title_class class in your theme's CSS file. Something like this:
