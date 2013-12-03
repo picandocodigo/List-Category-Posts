@@ -253,13 +253,16 @@ http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upg
 
 To see the thumbnail next to the title, you can add a class to it like
 this:
+
 `[catlist id=1 thumbnail=yes thumbnail_class=lcp_thumbnail]`
+
 Then in your theme's stylesheet add this code:
-`lcp_thumbnail{
+
+`.lcp_thumbnail{
   float: left;
 }
 
-lcp_catlist li{
+.lcp_catlist li{
   clear: both;
 }`
 

@@ -37,15 +37,6 @@ on the code is reflected automatically on the Vagrant box's WordPress.
 
 If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :). 
 
-## Developers
-| Name					| GitHub				| WordPress.org			| Web                       | Status				|
-| :----					| :----					| :----					| :----                     | ----:					|
-| Fernando Briano		| [picandocodigo][2.1.1]| [picandocodigo][2.1.2]| http://picandocodigo.net/	| Active				|
-
-[2.1.1]: https://github.com/picandocodigo
-[2.1.2]: http://profiles.wordpress.org/fernandobt
-
-
 ## License
 __[GPLv3](http://www.gnu.org/licenses/gpl-3.0.html)__
 
