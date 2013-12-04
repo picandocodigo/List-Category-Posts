@@ -80,9 +80,15 @@ To use pagination, you need to set the following parameters:
 
 * **pagination** set it to yes.
 
-* **instance** a number or name to identify the instance where you are using pagination. Since you can use the shortcode several times in the same page or post, you need to identify the instance so that you paginate only that instance.
+* **numberposts** - Posts per page are set with the `numberposts` parameter.
 
-Posts per page are set with the **numberposts** parameter.
+* **instance** (only necessary when using the shortcode with
+    pagination more than once in the same page/post) - a number or
+    name to identify the instance where you are using pagination.
+    Since you can use the shortcode several times in the same page or
+    post, you need to identify the instance so that you paginate only
+    that instance.
+
 
 Example:
 
@@ -324,7 +330,12 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.38 =
 
- * Adds pagination. Check **Pagination** on [Other notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) to learn how to use it.
+ * Adds pagination. Check **Pagination** on [Other
+   notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)
+   to learn how to use it.
+ * Adds "How to display thumbnails next to title" to the FAQ.
+ * Adds a Vagrant box for developers to be able to start coding with
+   no effort :)
 
 = 0.37 =
  * Supports `more` tag.  If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag.
