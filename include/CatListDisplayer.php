@@ -114,16 +114,28 @@ class CatListDisplayer {
       $pages_count = ceil (
                            $this->catlist->get_posts_count() / $this->catlist->get_number_posts()
                            );
-
       for($i = 1; $i <= $pages_count; $i++){
         $lcp_paginator .=  $this->lcp_page_link($i, true);
       }
-      $this->lcp_output .= "<ul class='lcp_paginator'>" . $lcp_paginator . "</ul>";
+
+      $this->lcp_output .= "<ul class='lcp_paginator'>";
+
+      // Add "Previous" link
+      if ($this->catlist->get_page() > 1){
+        $this->lcp_output .= $this->lcp_page_link( intval($this->catlist->get_page()) - 1, "<<" );
+      }
+
+      $this->lcp_output .= $lcp_paginator;
+      // Add "Next" link
+      if ($this->catlist->get_page() < $pages_count){
+        $this->lcp_output .= $this->lcp_page_link( intval($this->catlist->get_page()) + 1, ">>");
+      }
+      $this->lcp_output .= "</ul>";
 
     endif;
   }
 
-  private function lcp_page_link($page){
+  private function lcp_page_link($page, $char = nil){
     $current_page = $this->catlist->get_page();
     $link = '';
 
@@ -139,7 +151,9 @@ class CatListDisplayer {
       $page_link = "http://$_SERVER[HTTP_HOST]$url?$query" .
         $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
         "#lcp_instance_" . $this->catlist->get_instance();
-      $link .=  "<li><a href='$page_link' title='$page'>$page</a></li>";
+      $link .=  "<li><a href='$page_link' title='$page'>";
+      ($char != nil) ? ($link .= $char) : ($link .= $page);
+      $link .= "</a></li>";
     }
     return $link;
   }
