@@ -37,6 +37,6 @@ tar -xzvf latest.tar.gz
 rm latest.tar.gz
 chown www-data:www-data wordpress -R
 cd wordpress/wp-content/plugins/
-ln -s /vagrant list-category-posts
+ln -s /vagrant
 
 
