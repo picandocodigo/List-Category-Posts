@@ -26,7 +26,7 @@ WordPress instance running on http://127.0.0.1:8080/wordpress/.
 
 Install WordPress from that URL with this information:
 
- * Database Name: `wordpress`
+* Database Name: `wordpress`
  * User Name: `wordpressuser`
  * Password: `wordpresspass`
 
