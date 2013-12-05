@@ -321,6 +321,10 @@ class CatListDisplayer {
     endif;
     $info .= '>' . apply_filters('the_title', $single->post_title, $single->ID) . '</a>';
 
+    if( !empty($this->params['post_suffix']) ):
+      $info .= " " . $this->params['post_suffix'];
+    endif;
+
     return $this->assign_style($info, $tag, $css_class);
   }
 
