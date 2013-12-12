@@ -174,17 +174,7 @@ class CatListDisplayer {
 
     $lcp_display_output = '<'. $tag . $class . '>';
 
-    if (!empty($this->params['title_tag'])):
-      if (!empty($this->params['title_class'])):
-        $lcp_display_output .= $this->get_post_title($single,
-                                         $this->params['title_tag'],
-                                         $this->params['title_class']);
-      else:
-        $lcp_display_output .= $this->get_post_title($single, $this->params['title_tag']);
-      endif;
-    else:
-      $lcp_display_output .= $this->get_post_title($single) . ' ';
-    endif;
+    $lcp_display_output .= $this->get_post_title($single);
 
     // Comments count
     if (!empty($this->params['comments_tag'])):
@@ -313,26 +303,44 @@ class CatListDisplayer {
     return $this->assign_style($info, $tag);
   }
 
-  private function get_post_title($single, $tag = null, $css_class = null){
+  private function get_post_title($single){
     $info = '<a href="' . get_permalink($single->ID) .
       '" title="' . wptexturize($single->post_title) . '"';
+
     if (!empty($this->params['link_target'])):
       $info .= ' target="' . $this->params['link_target'] . '" ';
     endif;
+
+    if ( !empty($this->params['title_class'] ) &&
+         empty($this->params['title_tag']) ):
+      $info .= ' class=' . $this->params['title_class'];
+    endif;
+
+
     $info .= '>' . apply_filters('the_title', $single->post_title, $single->ID) . '</a>';
 
     if( !empty($this->params['post_suffix']) ):
       $info .= " " . $this->params['post_suffix'];
     endif;
 
-    return $this->assign_style($info, $tag, $css_class);
+    if (!empty($this->params['title_tag'])){
+      $pre = "<" . $this->params['title_tag'];
+      if (!empty($this->params['title_class'])){
+        $pre .= " class=" . $this->params['title_class'];
+      }
+      $pre .= ">";
+      $post = "</" . $this->params['title_tag'] . ">";
+      $info = $pre . $info . $post;
+    }
+
+    return $info;
   }
 
   private function get_category_link($tag = null, $css_class = null){
     $info = $this->catlist->get_category_link();
     return $this->assign_style($info, $tag, $css_class);
   }
-  
+
   private function get_morelink($tag = null, $css_class = null){
     $info = $this->catlist->get_morelink();
     return $this->assign_style($info, $tag, $css_class);
