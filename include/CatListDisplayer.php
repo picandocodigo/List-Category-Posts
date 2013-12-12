@@ -315,7 +315,7 @@ class CatListDisplayer {
 
   private function get_post_title($single, $tag = null, $css_class = null){
     $info = '<a href="' . get_permalink($single->ID) .
-      '" title="' . $single->post_title. '"';
+      '" title="' . wptexturize($single->post_title) . '"';
     if (!empty($this->params['link_target'])):
       $info .= ' target="' . $this->params['link_target'] . '" ';
     endif;
