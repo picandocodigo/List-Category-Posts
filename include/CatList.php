@@ -378,9 +378,13 @@ class CatList{
       $lcp_content = apply_filters('the_content', $lcp_content);
       $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
 
-      if ( preg_match('/<!--more(.*?)?-->/', $lcp_content, $matches) ):
-        $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
-        $lcp_post_content = explode($matches[0], $lcp_content, 2);
+      if ( preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches) ):
+        if( empty($this->params['posts_morelink']) ):
+          $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
+        else:
+          $lcp_more = '';
+        endif;
+        $lcp_post_content = explode($matches[1], $lcp_content);
         $lcp_content = $lcp_post_content[0] .
           ' <a href="' . get_permalink($single->ID) . ' title="' . "$lcp_more" . '">' .
           $lcp_more . '</a>';
