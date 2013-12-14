@@ -363,7 +363,7 @@ class CatList{
   public function get_date_to_show($single){
     if ($this->params['date']=='yes'):
       //by Verex, great idea!
-      return  get_the_time($this->params['dateformat'], $single);
+      return get_the_time($this->params['dateformat'], $single);
     else:
       return null;
     endif;
