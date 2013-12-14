@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
-sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password rootpass'
-sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password rootpass'
+if [ ! -x /usr/bin/mysql ];
+then
+    sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password rootpass'
+    sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password rootpass'
 
-apt-get update
+    apt-get update
 
-apt-get install -y apache2 php5 libapache2-mod-php5 mysql-server-5.5 php5-mysql
+    apt-get install -y apache2 php5 libapache2-mod-php5 mysql-server-5.5 php5-mysql
+fi
 
 if [ ! -f /var/log/databasesetup ];
 then
@@ -22,21 +25,23 @@ then
     fi
 fi
 
-if [ ! -h /var/www ];
+if [ ! -d /var/www ];
 then 
     a2enmod rewrite
     sed -i '/AllowOverride None/c AllowOverride All' /etc/apache2/sites-available/default
     service apache2 restart
 fi
 
-cd /var/www
-
-rm index.html
-wget http://wordpress.org/latest.tar.gz
-tar -xzvf latest.tar.gz
-rm latest.tar.gz
-chown www-data:www-data wordpress -R
-cd wordpress/wp-content/plugins/
-ln -s /vagrant
+if [ ! -d /var/www/wordpress ];
+then
+    cd /var/www
+    rm index.html
+    wget http://wordpress.org/latest.tar.gz
+    tar -xzvf latest.tar.gz
+    rm latest.tar.gz
+    chown www-data:www-data wordpress -R
+    cd wordpress/wp-content/plugins/
+    ln -s /vagrant
+fi
 
 
