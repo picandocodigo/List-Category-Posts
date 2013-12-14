@@ -109,6 +109,11 @@ class CatListDisplayer {
       $this->lcp_output .= $this->get_morelink();
     endif;
 
+    $this->lcp_output .= $this->get_pagination();
+  }
+
+  public function get_pagination(){
+    $pag_output = '';
     if (!empty($this->params['pagination']) && $this->params['pagination'] == "yes"):
       $lcp_paginator = '';
       $pages_count = ceil (
@@ -118,21 +123,22 @@ class CatListDisplayer {
         $lcp_paginator .=  $this->lcp_page_link($i, true);
       }
 
-      $this->lcp_output .= "<ul class='lcp_paginator'>";
+      $pag_output .= "<ul class='lcp_paginator'>";
 
       // Add "Previous" link
       if ($this->catlist->get_page() > 1){
-        $this->lcp_output .= $this->lcp_page_link( intval($this->catlist->get_page()) - 1, "<<" );
+        $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) - 1, "<<" );
       }
 
-      $this->lcp_output .= $lcp_paginator;
+      $pag_output .= $lcp_paginator;
+
       // Add "Next" link
       if ($this->catlist->get_page() < $pages_count){
-        $this->lcp_output .= $this->lcp_page_link( intval($this->catlist->get_page()) + 1, ">>");
+        $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) + 1, ">>");
       }
-      $this->lcp_output .= "</ul>";
-
+      $pag_output .= "</ul>";
     endif;
+    return $pag_output;
   }
 
   private function lcp_page_link($page, $char = nil){

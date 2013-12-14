@@ -51,47 +51,50 @@ $lcp_display_output .= '<ul class="lcp_catlist">';
  * You can now pass an html tag as a parameter. This tag will sorround the info
  * you want to display. You can also assign a specific CSS class to each field.
  */
-foreach ($this->catlist->get_categories_posts() as $single):
-    //Start a List Item for each post:
-    $lcp_display_output .= "<li>";
+foreach ($this->catlist->get_categories_posts() as $single){
+  //Start a List Item for each post:
+  $lcp_display_output .= "<li>";
 
-    //Show the title and link to the post:
-    $lcp_display_output .= $this->get_post_title($single);
+  //Show the title and link to the post:
+  $lcp_display_output .= $this->get_post_title($single);
 
-    //Show comments:
-    $lcp_display_output .= $this->get_comments($single);
+  //Show comments:
+  $lcp_display_output .= $this->get_comments($single);
 
-    //Show date:
-    $lcp_display_output .= ' ' . $this->get_date($single);
+  //Show date:
+  $lcp_display_output .= ' ' . $this->get_date($single);
 
-    //Show author
-    $lcp_display_output .= $this->get_author($single);
+  //Show author
+  $lcp_display_output .= $this->get_author($single);
 
-    //Custom fields:
-    $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
+  //Custom fields:
+  $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
 
-    //Post Thumbnail
-    $lcp_display_output .= $this->get_thumbnail($single);
+  //Post Thumbnail
+  $lcp_display_output .= $this->get_thumbnail($single);
 
-    /**
-     * Post content - Example of how to use tag and class parameters:
-     * This will produce:<p class="lcp_content">The content</p>
-     */
-    $lcp_display_output .= $this->get_content($single, 'p', 'lcp_content');
+  /**
+   * Post content - Example of how to use tag and class parameters:
+   * This will produce:<p class="lcp_content">The content</p>
+   */
+  $lcp_display_output .= $this->get_content($single, 'p', 'lcp_content');
 
-    /**
-     * Post content - Example of how to use tag and class parameters:
-     * This will produce:<div class="lcp_excerpt">The content</div>
-     */
-    $lcp_display_output .= $this->get_excerpt($single, 'div', 'lcp_excerpt');
+  /**
+   * Post content - Example of how to use tag and class parameters:
+   * This will produce:<div class="lcp_excerpt">The content</div>
+   */
+  $lcp_display_output .= $this->get_excerpt($single, 'div', 'lcp_excerpt');
 
-    //Close li tag
-    $lcp_display_output .= '</li>';
-endforeach;
+  //Close li tag
+  $lcp_display_output .= '</li>';
+}
 
 $lcp_display_output .= '</ul>';
 
 // If there's a "more link", show it:
 $lcp_display_output .= $this->catlist->get_morelink();
+
+//Pagination
+$lcp_display_output .= $this->get_pagination();
 
 $this->lcp_output = $lcp_display_output;
