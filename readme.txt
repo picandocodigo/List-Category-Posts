@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 0.40.1
+Stable tag: 0.41
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -201,7 +201,13 @@ update the plugin.
 
 * **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work.
 
-* **customfield_display** - Display custom field(s). You can specify many fields to show, separating them with a coma.
+* **customfield_display** - Display custom field(s). You can specify
+    many fields to show, separating them with a coma. If you want to
+    display just the value and not the name of the custom field, use
+    `customfield_display_name` and set it to no:
+
+* **customfield_display_name** - To use with `customfield_display`.
+    Use it to just print the value of the Custom field and not the name.
 
 * **template** - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default', which displays an unordered list (ul html tag) with a CSS class. This class can be passed as a parameter or by default it's: 'lcp_catlist'. You can also use the default 'div' value. This will output a div with the 'lcp_catlist' CSS class (or one you pass as parameter with the class argument). The inner items (posts) will be displayed between p tags.
 
@@ -351,6 +357,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.41 =
+ * Adds `customfield_display_name` param.
+ * Adds pagination to custom template.
+ * Fixes date display.
+ * Adds conditions to Vagrantfile to boot faster and not repeat work.
 
 = 0.40.1 =
 
