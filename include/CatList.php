@@ -48,11 +48,16 @@ class CatList{
 
     //Exclude
     if( $this->lcp_not_empty('excludeposts') ):
-      $args['exclude'] = $this->params['excludeposts'];
+      $exclude = array(
+                       'post__not_in' => explode(",", $this->params['excludeposts'])
+                       );
       if (strpos($args['exclude'], 'this') !== FALSE) :
-        $args['exclude'] = $args['exclude'] .
-          ",". $this->lcp_get_current_post_id();
+        $exclude = array_merge(
+                               $exclude,
+                               array('post__not_in' => $this->lcp_get_current_post_id())
+                               );
       endif;
+      $args = array_merge($args, $exclude);
     endif;
 
     // Post type, status, parent params:

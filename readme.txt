@@ -207,7 +207,12 @@ update the plugin.
     `customfield_display_name` and set it to no:
 
 * **customfield_display_name** - To use with `customfield_display`.
-    Use it to just print the value of the Custom field and not the name.
+    Use it to just print the value of the Custom field and not the
+    name. Example:
+`[catlist numberposts=-1 customfield_display="Mood"
+    customfield_display_name="no"]`
+Will print the value of the Custom Field "Mood" but not the text
+    "Mood: [value]".
 
 * **template** - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default', which displays an unordered list (ul html tag) with a CSS class. This class can be passed as a parameter or by default it's: 'lcp_catlist'. You can also use the default 'div' value. This will output a div with the 'lcp_catlist' CSS class (or one you pass as parameter with the class argument). The inner items (posts) will be displayed between p tags.
 
@@ -363,6 +368,7 @@ Template system has changed. Custom templates should be stored in WordPress them
  * Adds pagination to custom template.
  * Fixes date display.
  * Adds conditions to Vagrantfile to boot faster and not repeat work.
+ * Fixes exclude posts, broken when migrating from get_posts to WP_Query.
 
 = 0.40.1 =
 
