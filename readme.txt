@@ -15,8 +15,19 @@ List Category Posts allows you to list posts from a category into a post/page us
 
 `[catlist name="news"]`
 
-The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! The [catlist] shortcode can be used as many times as needed with different arguments on each post/page. You can add a lot more parameters according to what and how you want to show your post's list:
+The shortcode accepts a category name or id, the order in which you
+want the posts to display, and the number of posts to display. You can
+also display the post author, date, excerpt, custom field values, even
+the content!
+
+The [catlist] shortcode can be used as many times as needed with
+different arguments on each post/page. You can add a lot more
+parameters according to what and how you want to show your post's
+list:
 `[catlist id=1 numberposts=10]`
+
+There's an options page which only has one option to set for the
+plugin at the moment. But new options will be implemented on demand.
 
 **Please read [the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)** to learn what parameters are available and how to use them.
 
@@ -368,11 +379,13 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 = 0.41 =
+ * Adds options page, to set the default numberposts value globally.
  * Adds `customfield_display_name` param.
  * Adds pagination to custom template.
  * Fixes date display.
  * Adds conditions to Vagrantfile to boot faster and not repeat work.
- * Fixes exclude posts, broken when migrating from get_posts to WP_Query.
+ * Fixes exclude posts, broken when migrating from get_posts to
+ WP_Query.
 
 = 0.40.1 =
 
