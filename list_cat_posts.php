@@ -31,6 +31,7 @@
 load_plugin_textdomain( 'list-category-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 include 'include/ListCategoryPostsWidget.php';
+include 'include/options.php';
 require_once 'include/CatListDisplayer.php';
 
 class ListCategoryPosts{
@@ -45,7 +46,7 @@ class ListCategoryPosts{
                              'name' => '',
                              'orderby' => 'date',
                              'order' => 'desc',
-                             'numberposts' => '5',
+                             'numberposts' => '',
                              'date' => 'no',
                              'date_tag' => '',
                              'date_class' =>'',
@@ -105,6 +106,9 @@ class ListCategoryPosts{
                              'pagination' => 'no',
                              'instance' => '0'
                            ), $atts);
+    if( $atts['numberposts'] == ''){
+      $atts['numberposts'] = get_option('numberposts');
+    }
     if( $atts['pagination'] == 'yes'){
       lcp_pagination_css();
     }
