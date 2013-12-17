@@ -314,18 +314,23 @@ class CatList{
       //Loop on custom fields and if there's a value, add it:
       foreach ($custom_array as $something) :
         $my_custom_field = $custom_fields[$something];
+
         if (sizeof($my_custom_field) > 0 ):
+
           foreach ( $my_custom_field as $key => $value ) :
             $lcp_customs .= "<div class=\"lcp-customfield\">";
-              if ($this->params['customfield_display_name'] == "no")
-                $lcp_customs .= $something . " : ";
-              $lcp_customs .= $value . "</div>";
+
+            if ($this->params['customfield_display_name'] != "no")
+              $lcp_customs .= $something . " : ";
+
+            $lcp_customs .= $value . "</div>";
           endforeach;
+
         endif;
+
       endforeach;
 
       return $lcp_customs;
-
     else:
       return null;
     endif;
