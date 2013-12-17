@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.8
-Stable tag: 0.41
+Stable tag: 0.41.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -343,8 +343,6 @@ And in your theme's CSS:
 
 `<?php echo do_shortcode("[catlist id=3]"); ?>`
 
-**Please do not ask for support when you are having issues with your CSS**. I can't solve every user's CSS problems. Feel free to ask on the forums or WP Answers. But please, **[read the instructions first](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)**.
-
 == Upgrade Notice ==
 
 = 0.37 =
@@ -378,7 +376,12 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
-= 0.41 =
+= 0.41.1 =
+ * Fixes customfield display name.
+ * Fixes size in getting thumbnails, now checks for all available
+ sizes and defaults ("thumbnail", "full", etc.)
+
+= 0.41.0 =
  * Adds options page, to set the default numberposts value globally.
  * Adds `customfield_display_name` param.
  * Adds pagination to custom template.

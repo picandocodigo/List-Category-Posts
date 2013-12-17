@@ -317,7 +317,7 @@ class CatList{
         if (sizeof($my_custom_field) > 0 ):
           foreach ( $my_custom_field as $key => $value ) :
             $lcp_customs .= "<div class=\"lcp-customfield\">";
-              if ($this->params['customfield_display_name'] != "no")
+              if ($this->params['customfield_display_name'] == "no")
                 $lcp_customs .= $something . " : ";
               $lcp_customs .= $value . "</div>";
           endforeach;
@@ -451,11 +451,17 @@ class CatList{
     if ($this->params['thumbnail']=='yes'):
       $lcp_thumbnail = '';
       if ( has_post_thumbnail($single->ID) ):
-        $avalaible_image_sizes = get_intermediate_image_sizes();
+
+        $available_image_sizes = array_unique(
+                                            array_merge(
+                                                        get_intermediate_image_sizes(),
+                                                        array("thumbnail", "medium", "large", "full")
+                                                        )
+                                            );
         if ( in_array(
                       $this->params['thumbnail_size'],
-                      $avalaible_image_sizes
-                       )
+                      $available_image_sizes
+                      )
              ):
           $lcp_thumb_size = $this->params['thumbnail_size'];
         elseif ($this->params['thumbnail_size']):
