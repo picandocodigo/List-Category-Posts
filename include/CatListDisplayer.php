@@ -142,7 +142,7 @@ class CatListDisplayer {
     return $pag_output;
   }
 
-  private function lcp_page_link($page, $char = nil){
+  private function lcp_page_link($page, $char = null){
     $current_page = $this->catlist->get_page();
     $link = '';
 
@@ -159,7 +159,7 @@ class CatListDisplayer {
         $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
         "#lcp_instance_" . $this->catlist->get_instance();
       $link .=  "<li><a href='$page_link' title='$page'>";
-      ($char != nil) ? ($link .= $char) : ($link .= $page);
+      ($char != null) ? ($link .= $char) : ($link .= $page);
       $link .= "</a></li>";
     }
     return $link;
