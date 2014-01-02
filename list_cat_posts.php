@@ -92,6 +92,8 @@ class ListCategoryPosts{
                              'customfield_display' =>'',
                              'customfield_display_name' =>'',
                              'customfield_orderby' =>'',
+                             'customfield_tag' => '',
+                             'customfield_class' => '',
                              'taxonomy' => '',
                              'categorypage' => '',
                              'category_count' => '',
