@@ -85,6 +85,7 @@ class ListCategoryPosts{
                              'post_status' => '',
                              'post_parent' => '0',
                              'post_suffix' => '',
+                             'show_protected' => 'no',
                              'class' => 'lcp_catlist',
                              'customfield_name' => '',
                              'customfield_value' =>'',

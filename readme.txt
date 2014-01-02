@@ -197,6 +197,8 @@ update the plugin.
   * **trash** - post is in trashbin (available with Version 2.9).
   * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true.
 
+* **show_protected** - Show posts protected by password. By default
+    they are not displayed. Use: `[catlist show_protected=yes]`
 
 * **post_parent** - Show only the children of the post with this ID.
     Default: None.

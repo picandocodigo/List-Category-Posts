@@ -88,7 +88,8 @@ class CatListDisplayer {
 
     //Posts loop
     foreach ($this->catlist->get_categories_posts() as $single) :
-      if ( !post_password_required($single) ) :
+      if ( !post_password_required($single) ||
+           ( post_password_required($single) && $this->params['show_protected'] == 'yes' ) ):
         $this->lcp_output .= $this->lcp_build_post($single, $inner_tag);
       endif;
     endforeach;
