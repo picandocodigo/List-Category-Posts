@@ -51,10 +51,13 @@ class CatList{
       $exclude = array(
                        'post__not_in' => explode(",", $this->params['excludeposts'])
                        );
-      if (strpos($args['exclude'], 'this') !== FALSE) :
+      if (strpos($this->params['excludeposts'], 'this') > -1) :
         $exclude = array_merge(
                                $exclude,
-                               array('post__not_in' => $this->lcp_get_current_post_id())
+                               array('post__not_in' => array(
+                                                             $this->lcp_get_current_post_id()
+                                                             )
+                                     )
                                );
       endif;
       $args = array_merge($args, $exclude);
