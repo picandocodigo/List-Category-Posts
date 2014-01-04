@@ -89,7 +89,9 @@ class CatListDisplayer {
     //Posts loop
     foreach ($this->catlist->get_categories_posts() as $single) :
       if ( !post_password_required($single) ||
-           ( post_password_required($single) && $this->params['show_protected'] == 'yes' ) ):
+           ( post_password_required($single) && (
+                                                 isset($this->params['show_protected']) &&
+                                                 $this->params['show_protected'] == 'yes' ) )):
         $this->lcp_output .= $this->lcp_build_post($single, $inner_tag);
       endif;
     endforeach;
@@ -121,7 +123,7 @@ class CatListDisplayer {
                            $this->catlist->get_posts_count() / $this->catlist->get_number_posts()
                            );
       for($i = 1; $i <= $pages_count; $i++){
-        $lcp_paginator .=  $this->lcp_page_link($i, true);
+        $lcp_paginator .=  $this->lcp_page_link($i);
       }
 
       $pag_output .= "<ul class='lcp_paginator'>";
@@ -159,7 +161,9 @@ class CatListDisplayer {
         $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
         "#lcp_instance_" . $this->catlist->get_instance();
       $link .=  "<li><a href='$page_link' title='$page'>";
+
       ($char != null) ? ($link .= $char) : ($link .= $page);
+
       $link .= "</a></li>";
     }
     return $link;

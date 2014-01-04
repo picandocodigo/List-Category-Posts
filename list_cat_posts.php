@@ -3,7 +3,7 @@
     Plugin Name: List category posts
     Plugin URI: https://github.com/picandocodigo/List-Category-Posts
     Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-    Version: 0.42.1
+    Version: 0.42.2
     Author: Fernando Briano
     Author URI: http://picandocodigo.net/
 
@@ -11,7 +11,7 @@
     Domain Path:   /languages/
   */
 
-  /* Copyright 2008-2013  Fernando Briano  (email : fernando@picandocodigo.net)
+  /* Copyright 2008-2014  Fernando Briano  (email : fernando@picandocodigo.net)
 
      This program is free software; you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
