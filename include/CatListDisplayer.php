@@ -122,26 +122,27 @@ class CatListDisplayer {
       $pages_count = ceil (
                            $this->catlist->get_posts_count() / $this->catlist->get_number_posts()
                            );
+      if ($pages_count > 1){
+        for($i = 1; $i <= $pages_count; $i++){
+          $lcp_paginator .=  $this->lcp_page_link($i);
+        }
 
-      for($i = 1; $i <= $pages_count; $i++){
-        $lcp_paginator .=  $this->lcp_page_link($i);
+        $pag_output .= "<ul class='lcp_paginator'>";
+
+        // Add "Previous" link
+        if ($this->catlist->get_page() > 1){
+          $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) - 1, $this->params['pagination_prev'] );
+        }
+
+        $pag_output .= $lcp_paginator;
+
+        // Add "Next" link
+        if ($this->catlist->get_page() < $pages_count){
+          $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) + 1, $this->params['pagination_next']);
+        }
+
+        $pag_output .= "</ul>";
       }
-
-      $pag_output .= "<ul class='lcp_paginator'>";
-
-      // Add "Previous" link
-      if ($this->catlist->get_page() > 1){
-        $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) - 1, $this->params['pagination_prev'] );
-      }
-
-      $pag_output .= $lcp_paginator;
-
-      // Add "Next" link
-      if ($this->catlist->get_page() < $pages_count){
-        $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) + 1, $this->params['pagination_next']);
-      }
-
-      $pag_output .= "</ul>";
     endif;
     return $pag_output;
   }
