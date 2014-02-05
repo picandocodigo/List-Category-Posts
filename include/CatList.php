@@ -151,6 +151,7 @@ class CatList{
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
 
+    remove_all_filters('posts_orderby');
     $query = new WP_Query;
     $this->lcp_categories_posts = $query->query($args);
     $this->posts_count = $query->found_posts;
