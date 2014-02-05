@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 0.43
+Stable tag: 0.43.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -158,7 +158,9 @@ update the plugin.
     You can set the default number of posts globally on the options
     page on your Dashboard in Settings / List Category Posts.
 
-* **no_posts_text** - Text to display when no posts are found.
+* **no_posts_text** - Text to display when no posts are found. If you
+    don't specify it, nothing will get displayed where the posts
+    should be.
 
 * **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 monthnum=12]` will list posts from December 2012.
 
@@ -394,6 +396,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.43.1 =
+ * Show "no posts text" only if it's been set and there are no posts,
+ otherwise behave like before.
 
 = 0.43 =
  * Removes filters to order by (should fix issues with order)
