@@ -109,6 +109,7 @@ class ListCategoryPosts{
                              'pagination' => 'no',
                              'pagination_next' => '>>',
                              'pagination_prev' => '<<',
+                             'no_posts_text' => "No posts found",
                              'instance' => '0'
                            ), $atts);
     if( $atts['numberposts'] == ''){
