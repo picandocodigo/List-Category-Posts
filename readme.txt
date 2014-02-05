@@ -400,9 +400,10 @@ Template system has changed. Custom templates should be stored in WordPress them
  * Adds `pagination_prev` and `pagination_next` params to customize
  the "Previous" and "Next" buttons on pagination navigation.
  * Only show pages in pagination when they are > 1
- * Adds `no_posts_text` param to display a custom message when no posts are found
-
-
+ * Adds `no_posts_text` param to display a custom message when no
+ posts are found
+ * Fixes "morelink" class parameter (now can be used without
+ specifying an HTML tag and the class is applied to the a tag).
 
 = 0.42.3 =
   * Adds missing title attribute from thumbnail links.
@@ -422,7 +423,6 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.41.2 =
  * Small bugfix with customfield_display_name (wasn't working now it
  is)
-
 
 = 0.41.1 =
  * Fixes customfield display name.
@@ -448,7 +448,7 @@ Template system has changed. Custom templates should be stored in WordPress them
  * Removes unnecessary stuff on wp_enqueue_styles
  * Fixes validation when using quotes in title
  * Fixes on <!--more--> tag
- * Fixes on title HTML tag and CSS class. (*See HTML & CSSb
+ * Fixes on title HTML tag and CSS class. (*See HTML & CSS
  Customization* on [Other Notes](http://wordpress.org/plugins/list-category-posts/other_notes/) to check the expected behaviour)
 
 = 0.39 =

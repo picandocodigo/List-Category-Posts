@@ -104,17 +104,8 @@ class CatListDisplayer {
     $this->lcp_output .= '</' . $tag . '>';
 
     // More link
-    if (!empty($this->params['morelink_tag'])):
-      if (!empty($this->params['morelink_class'])):
-        $this->lcp_output .= $this->get_morelink(
-                                   $this->params['morelink_tag'],
-                                   $this->params['morelink_class']);
-      else:
-        $this->lcp_output .= $this->get_morelink($this->params['morelink_tag']);
-      endif;
-    else:
-      $this->lcp_output .= $this->get_morelink();
-    endif;
+    $this->lcp_output .= $this->get_morelink();
+
 
     $this->lcp_output .= $this->get_pagination();
   }
@@ -380,9 +371,23 @@ class CatListDisplayer {
     return $this->assign_style($info, $tag, $css_class);
   }
 
-  private function get_morelink($tag = null, $css_class = null){
+  private function get_morelink(){
     $info = $this->catlist->get_morelink();
-    return $this->assign_style($info, $tag, $css_class);
+    if ( !empty($this->params['morelink_tag'])){
+      if( !empty($this->params['morelink_class']) ){
+        return "<" . $this->params['morelink_tag'] . " class='" .
+          $this->params['morelink_class'] . "'>" . $info .
+          "</" . $this->params["morelink_tag"] . ">";
+      } else {
+        return "<" . $this->params['morelink_tag'] . ">" .
+          $info . "</" . $this->params["morelink_tag"] . ">";
+      }
+    } else{
+      if ( !empty($this->params['morelink_class']) ){
+        return str_replace("<a", "<a class='" . $this->params['morelink_class'] . "' ", $info);
+      }
+    }
+    return $info;
   }
 
   private function get_category_count(){
