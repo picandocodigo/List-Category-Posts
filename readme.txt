@@ -3,8 +3,8 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 3.8
-Stable tag: 0.42.3
+Tested up to: 3.8.1
+Stable tag: 0.43
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -107,6 +107,14 @@ Example:
 
 `[catlist id=5 numberposts=15 pagination=yes instance=2]`
 
+You can customize what to show for the "next" and "previous" buttons
+in the pagination navigation. Use the following params:
+
+ * **pagination_prev** - Replace the "<<" characters in the "previous"
+ button in the pagination navigation with a custom text.
+ * **pagination_next** - Replace the ">>" characters in the "next"
+ button in the pagination navigation with a custom text.
+
 ==Changing the pagination CSS==
 
 If you want to customize the way the pagination is displayed, you can
@@ -149,6 +157,8 @@ update the plugin.
     Ex: `[catlist name=mycategory numberposts=10]`
     You can set the default number of posts globally on the options
     page on your Dashboard in Settings / List Category Posts.
+
+* **no_posts_text** - Text to display when no posts are found.
 
 * **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 monthnum=12]` will list posts from December 2012.
 
@@ -384,6 +394,15 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.43 =
+ * Removes filters to order by (should fix issues with order)
+ * Adds `pagination_prev` and `pagination_next` params to customize
+ the "Previous" and "Next" buttons on pagination navigation.
+ * Only show pages in pagination when they are > 1
+ * Adds `no_posts_text` param to display a custom message when no posts are found
+
+
 
 = 0.42.3 =
   * Adds missing title attribute from thumbnail links.
