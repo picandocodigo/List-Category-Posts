@@ -238,8 +238,10 @@ class CatList{
   public function lcp_get_current_tags(){
     $tags = get_the_tags();
     $tag_ids = array();
-    foreach ($tags as $tag_id => $tag) {
-      array_push($tag_ids, $tag_id);
+    if( !empty($tags) ){
+      foreach ($tags as $tag_id => $tag) {
+        array_push($tag_ids, $tag_id);
+      }
     }
     return $tag_ids;
   }
