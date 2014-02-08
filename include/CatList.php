@@ -121,6 +121,10 @@ class CatList{
       $args['tag__not_in'] = $tag_ids;
     endif;
 
+    if ( $this->lcp_not_empty('currenttags') && $this->params['currenttags'] == "yes" ):
+      $args['tag__in'] = $this->lcp_get_current_tags();
+    endif;
+
     // Added custom taxonomy support
     if ( $this->lcp_not_empty('taxonomy') && $this->lcp_not_empty('tags') ):
       $args['tax_query'] = array(array(
@@ -229,6 +233,15 @@ class CatList{
       return $categories[0]->cat_ID;
     endif;
     return $category->cat_ID;
+  }
+
+  public function lcp_get_current_tags(){
+    $tags = get_the_tags();
+    $tag_ids = array();
+    foreach ($tags as $tag_id => $tag) {
+      array_push($tag_ids, $tag_id);
+    }
+    return $tag_ids;
   }
 
   /**

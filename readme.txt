@@ -130,6 +130,8 @@ update the plugin.
 
 * **tags** - Tag support, you can display posts from a certain tag.
 
+* **currenttags* - Display posts from the current post's tags.
+
 * **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
 
 * **orderby** - To customize the order. Valid values are:
@@ -402,6 +404,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.44 =
  * Adds the feature to get an author's posts
+ * Adds show posts from current post's tags.
 
 = 0.43.1 =
  * Show "no posts text" only if it's been set and there are no posts,

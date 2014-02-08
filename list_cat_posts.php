@@ -67,6 +67,7 @@ class ListCategoryPosts{
                              'offset' => '0',
                              'tags' => '',
                              'exclude_tags' => '',
+                             'currenttags' => '',
                              'content' => 'no',
                              'content_tag' => '',
                              'content_class' => '',
