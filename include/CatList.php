@@ -90,6 +90,9 @@ class CatList{
       $args['s'] = $this->params['search'];
     endif;
 
+    if($this->lcp_not_empty('author_posts')):
+      $args['author_name'] = $this->params['author_posts'];
+    endif;
 
     /*
      * Custom fields 'customfield_name' & 'customfield_value'

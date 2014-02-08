@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 0.43.1
+Stable tag: 0.44
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -124,6 +124,9 @@ plugin's directory since this file will be overwritten every time you
 update the plugin.
 
 ==Other parameters==
+
+* **author_posts** - Get posts by author. Use 'user_nicename' (NOT
+    name). Example: `[catlist author_posts="fernando"]`
 
 * **tags** - Tag support, you can display posts from a certain tag.
 
@@ -396,6 +399,9 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.44 =
+ * Adds the feature to get an author's posts
 
 = 0.43.1 =
  * Show "no posts text" only if it's been set and there are no posts,
