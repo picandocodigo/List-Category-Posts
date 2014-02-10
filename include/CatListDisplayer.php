@@ -85,7 +85,7 @@ class CatListDisplayer {
     }
 
     $this->lcp_output .= '>';
-    $inner_tag = ($tag == ('ul' || 'ol') ) ? 'li' : 'p';
+    $inner_tag = ( ($tag == 'ul') || ($tag == 'ol') ) ? 'li' : 'p';
 
     //Posts loop
     foreach ($this->catlist->get_categories_posts() as $single) :
