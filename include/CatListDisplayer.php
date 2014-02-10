@@ -48,6 +48,9 @@ class CatListDisplayer {
       case "div":
         $this->build_output('div');
         break;
+      case "ol":
+        $this->build_output('ol');
+        break;
       default:
         $this->build_output('ul');
         break;
@@ -82,7 +85,7 @@ class CatListDisplayer {
     }
 
     $this->lcp_output .= '>';
-    $inner_tag = ($tag == 'ul') ? 'li' : 'p';
+    $inner_tag = ($tag == ('ul' || 'ol') ) ? 'li' : 'p';
 
     //Posts loop
     foreach ($this->catlist->get_categories_posts() as $single) :

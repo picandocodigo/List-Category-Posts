@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 0.44.1
+Stable tag: 0.45
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,16 +74,16 @@ The plugin can figure out the category from which you want to list posts in seve
   * **id** - To display posts from a category using the category's id. Ex: `[catlist id=24]`.
 * The *category name or slug*.
   * **name** - To display posts from a category using the category's name or slug. Ex: `[catlist name=mycategory]`
-* *Detecting the current post's category*. You can use the *categorypage* parameter to make it detect the category id of the current posts, and list posts from that category.
+* *Detecting the current post's category*. You can use the *categorypage* parameter to make it detect the category id of the current post, and list posts from that category.
   * **categorypage** - Set it to "yes" if you want to list the posts from the current post's category. `[catlist categorypage="yes"]`
 
-When using List Category Posts whithout a category id, name or slug, it will post the latest posts from every category.
+When using List Category Posts whithout a category id, name or slug, it will post the latest posts from **every category**.
 
-==Using several categories==
+==Using more than one category==
 
-* **include** posts from several categories with **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
-* **include** posts from several categories with **OR** relationship, posts that belong to any of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
-* **exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, the order must be categories you want to include first, and exclude after. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
+* Posts from several categories with an **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
+* Posts from several categories with an **OR** relationship, posts that belong to any of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
+* **Exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, you should write the categories you want to include first, and then the ones you want to exclude. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
 
 ==Pagination==
 
@@ -128,9 +128,10 @@ update the plugin.
 * **author_posts** - Get posts by author. Use 'user_nicename' (NOT
     name). Example: `[catlist author_posts="fernando"]`
 
-* **tags** - Tag support, you can display posts from a certain tag.
+* **tags** - Tag support, display posts from a certain tag.
 
-* **currenttags** - Display posts from the current post's tags.
+* **currenttags** - Display posts from the current post's tags (won't
+    work on pages since they have no tags).
 
 * **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
 
@@ -171,9 +172,15 @@ update the plugin.
 
 * **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
 
-* **date** - Display post's date next to the title. Default is 'no', use date=yes to activate it.
+* **date** - Display post's date next to the title. Default is 'no',
+    use date=yes to activate it. You can set a css class and an html
+    tag to wrap the date in with `date_class` and `date_tag` (see HTML
+    & CSS Customization further below).
 
-* **author** - Display the post's author next to the title. Default is 'no', use author=yes to activate it.
+* **author** - Display the post's author next to the title. Default is
+    'no', use author=yes to activate it. You can set a css class and an html
+    tag to wrap the author name in with `author_class` and `author_tag` (see HTML
+    & CSS Customization further below).
 
 * **dateformat** - Format of the date output. The default format is the one you've set on your WordPress settings. Example: `[catlist id=42 dateformat="l F dS, Y"]` would display the date as "Monday January 21st, 2013". Check http://codex.wordpress.org/Formatting_Date_and_Time for more options to display date.
 
@@ -249,11 +256,31 @@ update the plugin.
     Use it to just print the value of the Custom field and not the
     name. Example:
 `[catlist numberposts=-1 customfield_display="Mood"
-    customfield_display_name="no"]`
+   customfield_display_name="no"]`
 Will print the value of the Custom Field "Mood" but not the text
     "Mood: [value]".
 
-* **template** - File name of template from templates directory without extension. Example: For 'template.php' value is only 'template'. Default is 'default', which displays an unordered list (ul html tag) with a CSS class. This class can be passed as a parameter or by default it's: 'lcp_catlist'. You can also use the default 'div' value. This will output a div with the 'lcp_catlist' CSS class (or one you pass as parameter with the class argument). The inner items (posts) will be displayed between p tags.
+* **template** - By default, posts will be listed in an unordered list
+    (ul tag) with the class 'lcp_catlist':
+
+    `<ul class="lcp_catlist"><li><a href="post1">Post 1</li>...`
+
+    You can use a different class by using the *class* parameter.
+
+    You can create your own template file (Check **Template System**
+    further down this document) and pass it as a parameter here. The
+    parameter is the template name without the extension. For example
+    for `mytemplate.php`, the value would be `mytemplate`.
+
+    You can also pass these two parameters which yield different
+    results:
+      * `div` - This will output a div with the `lcp_catlist` class
+    (or one you pass as a parameter with the `class` argument). The
+    posts will be displayed between p tags.
+
+      * `ol` - This will output an ordered list with the `lcp_catlist`
+      css class (or the one you pass as a parameter with the `class`
+      argument) and each post will be a list item inside the ordered list.
 
 * **morelink** - Include a "more" link to access the category archive for the category. The link is inserted after listing the posts. It receives a string of characters as a parameter which will be used as the text of the link. Example: `[catlist id=38 morelink="Read more"]`
 
@@ -401,6 +428,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.45 =
+ * Adds ol default template to `template` parameter.
+ * Improves documentation.
 
 = 0.44.1 =
  * Removes warning when using current tag in pages
