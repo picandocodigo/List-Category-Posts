@@ -346,7 +346,7 @@ class CatListDisplayer {
 
     if ( !empty($this->params['title_class'] ) &&
          empty($this->params['title_tag']) ):
-      $info .= ' class=' . $this->params['title_class'];
+      $info .= ' class="' . $this->params['title_class'] . '"';
     endif;
 
 
