@@ -427,11 +427,12 @@ class CatList{
   }
 
   public function get_excerpt($single){
-    if ($this->params['excerpt']=='yes' &&
-        !($this->params['content']=='yes' &&
+    if ( !empty($this->params['excerpt']) && $this->params['excerpt']=='yes' &&
+         !empty($this->params['content']) && !($this->params['content']=='yes' &&
         $single->post_content) ):
 
-      if($single->post_excerpt && $this->params['excerpt_overwrite'] != 'yes'):
+      if($single->post_excerpt && !empty($this->params['excerpt_overwrite']) &&
+         $this->params['excerpt_overwrite'] != 'yes'):
         return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
       endif;
 
