@@ -83,6 +83,7 @@ class ListCategoryPosts{
                              'thumbnail_class' => '',
                              'title_tag' => '',
                              'title_class' => '',
+                             'title_limit' => '0',
                              'post_type' => '',
                              'post_status' => '',
                              'post_parent' => '0',

@@ -337,8 +337,16 @@ class CatListDisplayer {
   }
 
   private function get_post_title($single){
-    $info = '<a href="' . get_permalink($single->ID) .
-      '" title="' . wptexturize($single->post_title) . '"';
+    $info = '<a href="' . get_permalink($single->ID);
+
+    $lcp_post_title = apply_filters('the_title', $single->post_title, $single->ID);
+
+    if ( !empty($this->params['title_limit']) && $this->params['title_limit'] != "0" ):
+      r($this->params['title_limit']);
+      $lcp_post_title = substr($lcp_post_title, 0, intval($this->params['title_limit']));
+    endif;
+
+    $info.=  '" title="' . wptexturize($single->post_title) . '"';
 
     if (!empty($this->params['link_target'])):
       $info .= ' target="' . $this->params['link_target'] . '" ';
@@ -350,7 +358,7 @@ class CatListDisplayer {
     endif;
 
 
-    $info .= '>' . apply_filters('the_title', $single->post_title, $single->ID) . '</a>';
+    $info .= '>' . $lcp_post_title . '</a>';
 
     if( !empty($this->params['post_suffix']) ):
       $info .= " " . $this->params['post_suffix'];
