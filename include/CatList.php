@@ -121,8 +121,12 @@ class CatList{
       $args['tag__not_in'] = $tag_ids;
     endif;
 
+    // Current tags
     if ( $this->lcp_not_empty('currenttags') && $this->params['currenttags'] == "yes" ):
-      $args['tag__in'] = $this->lcp_get_current_tags();
+      $tags = $this->lcp_get_current_tags();
+      if ( !empty($tags) ):
+        $args['tag__in'] = $tags;
+      endif;
     endif;
 
     // Added custom taxonomy support
@@ -163,6 +167,13 @@ class CatList{
     $this->lcp_categories_posts = $query->query($args);
     $this->posts_count = $query->found_posts;
   }
+
+  /* Should I return posts or show that the tag/category or whatever
+    posts combination that I called has no posts? By default I've
+    always returned the latest posts because that's what the query
+    does when the params are "wrong". But could make for a better user
+    experience if I returned an empty list in certain cases.
+    private function lcp_should_return_posts() */
 
   private function lcp_not_empty($param){
     if ( ( isset($this->params[$param]) ) &&
