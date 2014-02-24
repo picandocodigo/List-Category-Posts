@@ -447,6 +447,7 @@ class CatList{
 
     $text = strip_shortcodes($text);
     $text = apply_filters('the_content', $text);
+    $text = apply_filters('the_excerpt', $text);
     $text = str_replace(']]>',']]&gt;', $text);
 
     if( $this->lcp_not_empty('excerpt_strip') &&

@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 0.45
+Stable tag: 0.46
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -189,6 +189,10 @@ update the plugin.
 * **excerpt_size** - Set the number of *words* to display from the excerpt. Default is 55. Eg: `excerpt_size=30`
 
 * **excerpt_strip** - Set it to `yes` to strip the excerpt's HTML tags.
+
+* **title_limit** - Set the limit of characters for the title. Ex:
+    `[catlist id=2 title_limit=50]` will show only the first 50
+    characters of the title and add "…" at the end.
 
 * **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: `[catlist excludeposts=this,12,52,37]`
 
@@ -428,6 +432,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.46 =
+ * Adds "the_excerpt" filter to excerpt to improve compatibility with
+ the [Jetpack](http://wordpress.org/plugins/jetpack/) plugin.
+ * Add character limit to title
+ * Removes debug warnings
+ * Output valid HTML, attribute quotations - thanks Nikolaus Demmel!
 
 = 0.45 =
  * Adds ol default template to `template` parameter.
