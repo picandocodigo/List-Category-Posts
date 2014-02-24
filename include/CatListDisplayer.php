@@ -367,9 +367,9 @@ class CatListDisplayer {
     if (!empty($this->params['title_tag'])){
       $pre = "<" . $this->params['title_tag'];
       if (!empty($this->params['title_class'])){
-        $pre .= ' class="' . $this->params['title_class'];
+        $pre .= ' class="' . $this->params['title_class'] . '"';
       }
-      $pre .= '">';
+      $pre .= '>';
       $post = "</" . $this->params['title_tag'] . ">";
       $info = $pre . $info . $post;
     }
