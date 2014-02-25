@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 0.46
+Stable tag: 0.46.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -432,6 +432,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.46.1 =
+ * Fixes quotes bug on title tag.
+ * Only show ellipsis when title.size > title_limit when using the
+ title_limit param.
 
 = 0.46 =
  * Adds "the_excerpt" filter to excerpt to improve compatibility with
