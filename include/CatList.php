@@ -438,26 +438,32 @@ class CatList{
   }
 
   public function get_excerpt($single){
-    if ( !empty($this->params['excerpt']) && $this->params['excerpt']=='yes' &&
-         !empty($this->params['content']) && !($this->params['content']=='yes' &&
-        $single->post_content) ):
+    if ( !empty($this->params['excerpt']) && $this->params['excerpt']=='yes'){
+      switch($single->post_excerpt){
 
-      if($single->post_excerpt && !empty($this->params['excerpt_overwrite']) &&
-         $this->params['excerpt_overwrite'] != 'yes'):
-        return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
-      endif;
+      case(null):
+        $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
+      default:
+        if(!empty($this->params['excerpt_overwrite']) &&
+           $this->params['excerpt_overwrite'] == 'yes'){
+          //Content
+          $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
+        } else {
+          $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
+        }
+      }
 
-      return $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
-    else:
-      return null;
-    endif;
+      if( strlen($single->post_content) < 1 ){
+        $lcp_excerpt = $single->post_title;
+      }
+      return $lcp_excerpt;
+    }
   }
 
   private function lcp_trim_excerpt($text = ''){
     $excerpt_length = intval($this->params['excerpt_size']);
 
     $text = strip_shortcodes($text);
-    $text = apply_filters('the_content', $text);
     $text = apply_filters('the_excerpt', $text);
     $text = str_replace(']]>',']]&gt;', $text);
 
