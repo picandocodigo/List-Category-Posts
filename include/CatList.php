@@ -446,10 +446,9 @@ class CatList{
       default:
         if(!empty($this->params['excerpt_overwrite']) &&
            $this->params['excerpt_overwrite'] == 'yes'){
-          //Content
           $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
         } else {
-          $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
+          $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
         }
       }
 
