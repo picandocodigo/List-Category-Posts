@@ -439,20 +439,22 @@ class CatList{
 
   public function get_excerpt($single){
     if ( !empty($this->params['excerpt']) && $this->params['excerpt']=='yes'){
-      switch($single->post_excerpt){
 
-      case(null):
+      if($single->post_excerpt == ("")){
+        //No excerpt, generate one:
         $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
-      default:
+      }else{
         if(!empty($this->params['excerpt_overwrite']) &&
            $this->params['excerpt_overwrite'] == 'yes'){
+          // Excerpt but we want to overwrite it:";
           $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
         } else {
+          // Bring post excerpt;
           $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
         }
       }
 
-      if( strlen($single->post_content) < 1 ){
+      if( strlen($lcp_excerpt) < 1 ){
         $lcp_excerpt = $single->post_title;
       }
       return $lcp_excerpt;
