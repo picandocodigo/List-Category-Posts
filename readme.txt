@@ -350,55 +350,8 @@ You can have as many different templates as you want, and use them in different 
 
 
 * **FAQ**
+You can find the Frequently Asked Questions [here](https://github.com/picandocodigo/List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions).
 
-**Does not work on servers with PHP < 5**
-
-This is true since version 0.18. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 was the last version to support PHP 4, from 3.2 and forward, only PHP 5 is supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
-
-**Plugin could not be activated because it triggered a fatal error.**
-
-*Parse error: syntax error, unexpected T_STRING, expecting T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in /.../wp-content/plugins/list-category-posts/include/CatListDisplayer.php on line 10*
-
-Please check:
-http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
-
-**How do I display the Thumbnail next to the title?**
-
-To see the thumbnail next to the title, you can add a class to it like
-this:
-
-`[catlist id=1 thumbnail=yes thumbnail_class=lcp_thumbnail]`
-
-Then in your theme's stylesheet add this code:
-
-`.lcp_thumbnail{
-  float: left;
-}
-
-.lcp_catlist li{
-  clear: both;
-}`
-
-If you want the thumbnail to the right, just change the `float: left`
-attribute to `float: right`.
-
-
-**How to not display the title**
-
-You have to add a CSS class to the title with the `title_class` parameter. Then edit the title_class class in your theme's CSS file. Something like this:
-
-In the post:
-`[catlist id=3 title_class=lcp_title numberposts=1]`
-
-And in your theme's CSS:
-
-`.lcp_title{
-  display: none;
-}`
-
-**How to insert the shortcode on the theme and not a post or page**
-
-`<?php echo do_shortcode("[catlist id=3]"); ?>`
 
 == Upgrade Notice ==
 

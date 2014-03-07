@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: List Category Posts - Template
+Plugin Name: List Category Posts - Template "Default"
 Plugin URI: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/
 Description: Template file for List Category Post Plugin for Wordpress which is used by plugin by argument template=value.php
 Version: 0.9
