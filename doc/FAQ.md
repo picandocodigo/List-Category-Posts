@@ -6,6 +6,7 @@
  * [Plugin could not be activated because it triggered a fatal error](#fatal-error)
  * [How do I display the Thumbnail next to the title?](#thumbnail)
  * [How to not display the title](#no-title)
+ * [How can I use the shortcode in a Widget?](#widget)
 
 ##<a name="php5"></a>Does not work on servers with PHP < 5
 
@@ -101,3 +102,12 @@ The offset should equal the number of posts (`numberposts`) times the number of 
   </tr>
 </table>
 ```
+##<a name="widget"></a>How can I use the shortcode in a Widget?
+
+Add this code to your theme's functions.php file:
+```php
+add_filter('widget_text', 'do_shortcode');
+```
+
+Then just add a new text widget to your blog and use the shortcode there
+as the widget's content.
