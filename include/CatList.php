@@ -394,7 +394,7 @@ class CatList{
   }
 
   public function get_number_posts(){
-    return $this->params['numberposts'];
+    return ($this->params['numberposts']) ? $this->params['numberposts'] : 1; // Don't cause exception
   }
 
   public function get_instance(){
