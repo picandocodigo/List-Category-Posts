@@ -493,7 +493,9 @@ class CatList{
 
     if ($this->params['thumbnail']=='yes'):
       $lcp_thumbnail = '';
-      if ( has_post_thumbnail($single->ID) ):
+      if ( has_post_thumbnail($single->ID) 
+	          &&
+	         is_numeric(get_post_thumbnail_id($single->ID)) ):
 
         $available_image_sizes = array_unique(
                                             array_merge(
@@ -538,6 +540,19 @@ class CatList{
 
         $lcp_ytimage = '<img src="' . $imageurl . '" alt="' . $single->post_title . '" />';
 
+        if ($lcp_thumb_class != null):
+          $thmbn_class = ' class="' . $lcp_thumb_class . '" />';
+        $lcp_ytimage = preg_replace("/\>/", $thmbn_class, $lcp_ytimage);
+        endif;
+
+        $lcp_thumbnail .= '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
+      elseif (
+		strlen(get_post_thumbnail_id($single->ID)) == 11
+		 &&
+		!is_numeric(get_post_thumbnail_id($single->ID)) 
+	      ) :
+        $imageurl = "http://i.ytimg.com/vi/".get_post_thumbnail_id($single->ID)."/1.jpg";
+        $lcp_ytimage = '<img src="' . $imageurl . '" alt="' . $single->post_title . '" />';
         if ($lcp_thumb_class != null):
           $thmbn_class = ' class="' . $lcp_thumb_class . '" />';
         $lcp_ytimage = preg_replace("/\>/", $thmbn_class, $lcp_ytimage);
