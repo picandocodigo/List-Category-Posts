@@ -13,7 +13,15 @@ Please visit the
 [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/)
 to find out more.
 
-Master: [![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts.png?branch=master)](https://travis-ci.org/picandocodigo/List-Category-Posts)
+Master:
+[![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts.png?branch=master)](https://travis-ci.org/picandocodigo/List-Category-Posts)
+
+# Want to help with the development?
+
+I'm looking for code contributors for the plugin. If you know PHP and
+would like to start contributing to the plugin, let me know! I can
+help you get started. Contact me
+[here](http://picandocodigo.net/about/contacto/).
 
 # Development
 
