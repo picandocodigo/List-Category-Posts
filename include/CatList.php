@@ -410,6 +410,14 @@ class CatList{
     endif;
   }
 
+    public function get_the_modified_date_to_show($single){
+    if ($this->params['date_modified']=='yes'):
+      return get_the_modified_time($this->params['dateformat'], $single);
+    else:
+      return null;
+    endif;
+  }
+
   public function get_content($single){
     if (isset($this->params['content']) &&
         $this->params['content'] =='yes' &&
