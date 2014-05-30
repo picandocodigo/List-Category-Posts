@@ -53,7 +53,7 @@ class ListCategoryPosts{
                              'dateformat' => get_option('date_format'),
                              'date_modified' => '',
                              'date_modified_tag' => '',
-                             'date_modified_class' => 'poop',
+                             'date_modified_class' => '',
                              'author' => 'no',
                              'author_tag' =>'',
                              'author_class' => '',
