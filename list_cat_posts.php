@@ -1,32 +1,31 @@
 <?php
-  /*
-    Plugin Name: List category posts
-    Plugin URI: https://github.com/picandocodigo/List-Category-Posts
-    Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
-    Version: 0.46.4
-    Author: Fernando Briano
-    Author URI: http://picandocodigo.net/
+/*
+  Plugin Name: List category posts
+  Plugin URI: https://github.com/picandocodigo/List-Category-Posts
+  Description: List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
+  Version: 0.46.4
+  Author: Fernando Briano
+  Author URI: http://picandocodigo.net/
 
-    Text Domain:   list-category-posts
-    Domain Path:   /languages/
-  */
+  Text Domain:   list-category-posts
+  Domain Path:   /languages/
 
-  /* Copyright 2008-2014  Fernando Briano  (email : fernando@picandocodigo.net)
+  Copyright 2008-2014  Fernando Briano  (email : fernando@picandocodigo.net)
 
-     This program is free software; you can redistribute it and/or modify
-     it under the terms of the GNU General Public License as published by
-     the Free Software Foundation; either version 3 of the License, or
-     any later version.
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 3 of the License, or
+  any later version.
 
-     This program is distributed in the hope that it will be useful,
-     but WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     GNU General Public License for more details.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-     You should have received a copy of the GNU General Public License
-     along with this program; if not, write to the Free Software
-     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-  */
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
 
 load_plugin_textdomain( 'list-category-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
@@ -71,6 +70,7 @@ class ListCategoryPosts{
                              'content' => 'no',
                              'content_tag' => '',
                              'content_class' => '',
+                             'display_id' => 'no',
                              'catlink' => 'no',
                              'catlink_string' => '',
                              'catlink_tag' =>'',
@@ -78,6 +78,7 @@ class ListCategoryPosts{
                              'comments' => 'no',
                              'comments_tag' => '',
                              'comments_class' => '',
+                             'starting_with' => '',
                              'thumbnail' => 'no',
                              'thumbnail_size' => 'thumbnail',
                              'thumbnail_class' => '',

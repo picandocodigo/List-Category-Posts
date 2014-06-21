@@ -223,27 +223,31 @@ class CatListDisplayer {
       $lcp_display_output .= $this->get_author($single);
     endif;
 
+    // Display ID
+    if (!empty($this->params['display_id']) && $this->params['display_id'] == 'yes'){
+        $lcp_display_output .= $single->ID;
+    }
 
     // Custom field display
     if (!empty($this->params['customfield_display'])) :
       if (!empty($this->params['customfield_tag'])):
         if (!empty($this->params['customfield_class'])):
           $lcp_display_output .= $this->get_custom_fields(
-                                                          $this->params['customfield_display'],
-                                                          $single->ID,
-                                                          $this->params['customfield_tag'],
-                                                          $this->params['customfield_class']);
+              $this->params['customfield_display'],
+              $single->ID,
+              $this->params['customfield_tag'],
+              $this->params['customfield_class']);
         else:
           $lcp_display_output .= $this->get_custom_fields(
-                                                          $this->params['customfield_display'],
-                                                          $single->ID,
-                                                          $this->params['customfield_tag']);
+              $this->params['customfield_display'],
+              $single->ID,
+              $this->params['customfield_tag']);
         endif;
       else:
         $lcp_display_output .= $this->get_custom_fields(
-                                                        $this->params['customfield_display'],
-                                                        $single->ID
-                                                        );
+            $this->params['customfield_display'],
+            $single->ID
+        );
       endif;
     endif;
 

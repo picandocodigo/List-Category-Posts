@@ -26,7 +26,7 @@ then
 fi
 
 if [ ! -d /var/www ];
-then 
+then
     a2enmod rewrite
     sed -i '/AllowOverride None/c AllowOverride All' /etc/apache2/sites-available/default
     service apache2 restart

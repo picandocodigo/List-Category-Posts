@@ -4,7 +4,6 @@
    * Each time you use the shortcode, you get an instance of this class.
    * @author fernando@picandocodigo.net
    */
-
 class CatList{
   private $params = array();
   private $lcp_category_id = 0;
@@ -19,6 +18,11 @@ class CatList{
    * @param array $atts
    */
   public function __construct($atts) {
+      load_plugin_textdomain(
+          'list-category-posts',
+          false,
+          dirname( plugin_basename( __FILE__ ) ) . '/languages/'
+      );
     $this->params = $atts;
 
     if ($this->lcp_not_empty('instance')){
@@ -158,6 +162,11 @@ class CatList{
       endif;
     endif;
 
+    // Posts that start with a given letter:
+    if ( $this->lcp_not_empty('starting_with') ){
+        add_filter('posts_where' , array( $this, 'starting_with') );
+    }
+
     // for WP_Query compatibility
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
@@ -166,6 +175,13 @@ class CatList{
     $query = new WP_Query;
     $this->lcp_categories_posts = $query->query($args);
     $this->posts_count = $query->found_posts;
+    remove_all_filters('posts_where');
+  }
+
+  public function starting_with($where){
+      $letter = $this->params['starting_with'];
+      $where .= ' AND wp_posts.post_title LIKE \'' . $letter . "%'";
+      return $where;
   }
 
   /* Should I return posts or show that the tag/category or whatever
@@ -176,14 +192,12 @@ class CatList{
     private function lcp_should_return_posts() */
 
   private function lcp_not_empty($param){
-    if ( ( isset($this->params[$param]) ) &&
-         ( !empty($this->params[$param]) ) &&
-         ( $this->params[$param] != '0' ) &&
-         ( $this->params[$param] != '') ) :
-      return true;
-    else:
-      return false;
-    endif;
+      return (
+          isset($this->params[$param]) &&
+          !empty($this->params[$param]) &&
+          $this->params[$param] !== '0' &&
+          $this->params[$param] !== ''
+      );
   }
 
 
