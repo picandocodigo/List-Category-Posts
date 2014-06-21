@@ -1,5 +1,7 @@
 # List Category Posts
 [![Code Climate](https://codeclimate.com/github/picandocodigo/List-Category-Posts.png)](https://codeclimate.com/github/picandocodigo/List-Category-Posts)
+[![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts.png?branch=master)](https://travis-ci.org/picandocodigo/List-Category-Posts)
+
 List Category Posts is a **[WordPress](http://wordpress.org) plugin**
 that allows you to list posts from a category into a post/page using
 the [catlist] shortcode. This shortcode accepts a category name or id,
@@ -13,9 +15,6 @@ Usage:
 Please visit the
 [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/)
 to find out more.
-
-Master:
-[![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts.png?branch=master)](https://travis-ci.org/picandocodigo/List-Category-Posts)
 
 # Want to help with the development?
 
