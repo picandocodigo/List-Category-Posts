@@ -29,7 +29,11 @@ list:
 There's an options page which only has one option to set for the
 plugin at the moment. But new options will be implemented on demand.
 
-**Please read [the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)** to learn what parameters are available and how to use them.
+**Please read [the
+  instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)**
+  to learn what parameters are available and how to use them.
+
+You can find **Frequently Asked Questions** [here](https://github.com/picandocodigo/List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions).
 
 **Customization**: The different elements to display con be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
 

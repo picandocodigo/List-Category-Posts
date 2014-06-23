@@ -37,7 +37,6 @@ class CatList{
    */
   private function set_lcp_parameters(){
     $args = $this->lcp_categories();
-
     $args = array_merge($args, array(
       'numberposts' => $this->params['numberposts'],
       'orderby' => $this->params['orderby'],
@@ -140,10 +139,10 @@ class CatList{
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
 
-    remove_all_filters('posts_orderby');
     $query = new WP_Query;
     $this->lcp_categories_posts = $query->query($args);
     $this->posts_count = $query->found_posts;
+    remove_all_filters('posts_orderby');
     remove_all_filters('posts_where');
   }
 
