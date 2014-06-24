@@ -19,7 +19,7 @@ function list_category_posts_options() {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
   $numberposts = get_option('numberposts');
- ?>
+?>
 <div class="wrap">
   <h2>List Category Posts</h2>
   <form method="post" action="options.php">
@@ -60,7 +60,7 @@ function list_category_posts_options() {
       support forum</a>. Make sure
       you <a href='http://wordpress.org/extend/plugins/list-category-posts/other_notes/'>read
       the instructions</a> to be aware of all the things you can do
-      with List Category Posts."); ?>
+      with List Category Posts and <a href='https://github.com/picandocodigo/List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions'>check out the FAQ</a>."); ?>
     </em>
   </p>
 

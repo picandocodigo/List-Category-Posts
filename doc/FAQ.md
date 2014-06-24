@@ -1,34 +1,38 @@
 # Frequently Asked Questions
 
- * [How to display lists in columns](#columns)
+ * [How can I remove the hyperlink of the title of the post?](#no_link)
+ * [How can I use the shortcode in a Widget?](#widget)
  * [How to insert the shortcode on the theme and not a post or page](#shortcode-theme)
- * [The plugin doesn't work on servers with PHP < 5](#php4)
- * [Plugin could not be activated because it triggered a fatal error](#fatal-error)
+ * [How to display lists in columns](#columns)
  * [How do I display the Thumbnail next to the title?](#thumbnail)
  * [How to not display the title](#no-title)
- * [How can I use the shortcode in a Widget?](#widget)
+ * [The plugin doesn't work on servers with PHP < 5](#php4)
+ * [Plugin could not be activated because it triggered a fatal error](#fatal-error)
 
-##<a name="php5"></a>Does not work on servers with PHP < 5
+##<a name="no_link"></a>How can I remove the hyperlink of the title of the post?
 
-This is true since version 0.18. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 was the last version to support PHP 4, from 3.2 and forward, only PHP 5 is supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
+I had never considered this at all, but user osckar shared his solution
+on [the Forum](http://wordpress.org/support/topic/removing-hyperlink):
 
-##<a name="fatal-error"></a>Plugin could not be activated because it triggered a fatal error
+Add this class to your css file:
 
-Something like this:
-
+```css
+.no_link {
+  cursor: default !important;
+  pointer-events: none;
+}
 ```
-Parse error: syntax error, unexpected T_STRING, expecting
-T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in
-/.../wp-content/plugins/list-category-posts/include/CatListDisplayer.php
-on line 10*
+
+And add the class to the shortcode: `title_class=no_link`.
+
+For those who may already have a `title_class` in their code you can
+simply add the following to your current `title_class` style and it will
+accomplish the same thing:
+
+```css
+cursor: default !important;
+pointer-events: none;
 ```
-
-It's probably due to the webhost using PHP 4. CatListDisplayer.php
-declares private attributes. PHP 4 doesn't have public, private or
-protected accessors. Try updating your server or using an [older version](http://wordpress.org/plugins/list-category-posts/download/).
-
-Please check:
-http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
 
 ##<a name="thumbnail"></a>How do I display the Thumbnail next to the title?
 
@@ -111,3 +115,25 @@ add_filter('widget_text', 'do_shortcode');
 
 Then just add a new text widget to your blog and use the shortcode there
 as the widget's content.
+
+##<a name="php5"></a>Does not work on servers with PHP < 5
+
+This is true since version 0.18. If you're still using PHP 4 on your webhost, you should consider upgrading to PHP 5. WordPress 3.1 was the last version to support PHP 4, from 3.2 and forward, only PHP 5 is supported. You can still [download an older version of the plugin](https://wordpress.org/extend/plugins/list-category-posts/download/ "download an older version of the plugin") if you're using PHP 4.
+
+##<a name="fatal-error"></a>Plugin could not be activated because it triggered a fatal error
+
+Something like this:
+
+```
+Parse error: syntax error, unexpected T_STRING, expecting
+T_OLD_FUNCTION or T_FUNCTION or T_VAR or '}' in
+/.../wp-content/plugins/list-category-posts/include/CatListDisplayer.php
+on line 10*
+```
+
+It's probably due to the webhost using PHP 4. CatListDisplayer.php
+declares private attributes. PHP 4 doesn't have public, private or
+protected accessors. Try updating your server or using an [older version](http://wordpress.org/plugins/list-category-posts/download/).
+
+Please check:
+http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
