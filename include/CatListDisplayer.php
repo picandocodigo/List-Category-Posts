@@ -117,9 +117,12 @@ class CatListDisplayer {
     $pag_output = '';
     if (!empty($this->params['pagination']) && $this->params['pagination'] == "yes"):
       $lcp_paginator = '';
+      $number_posts = $this->catlist->get_number_posts();
       $pages_count = ceil (
-                           $this->catlist->get_posts_count() / $this->catlist->get_number_posts()
-                           );
+        $this->catlist->get_posts_count() /
+        # Avoid dividing by 0 (pointed out by @rhj4)
+        max( array( 1, $number_posts ) )
+      );
       if ($pages_count > 1){
         for($i = 1; $i <= $pages_count; $i++){
           $lcp_paginator .=  $this->lcp_page_link($i);
