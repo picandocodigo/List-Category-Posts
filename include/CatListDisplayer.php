@@ -213,6 +213,15 @@ class CatListDisplayer {
       $lcp_display_output .= $this->get_date($single);
     endif;
 
+    // Date Modified
+    if (!empty($this->params['date_modified_tag']) || !empty($this->params['date_modified_class'])):
+      $lcp_display_output .= $this->get_modified_date($single,
+                                             $this->params['date_modified_tag'],
+                                             $this->params['date_modified_class']);
+    else:
+      $lcp_display_output .= $this->get_modified_date($single);
+    endif;
+
     // Author
     if (!empty($this->params['author_tag'])):
       if (!empty($this->params['author_class'])):
@@ -323,6 +332,11 @@ class CatListDisplayer {
 
   private function get_date($single, $tag = null, $css_class = null){
     $info = " " . $this->catlist->get_date_to_show($single);
+    return $this->assign_style($info, $tag, $css_class);
+  }
+
+  private function get_modified_date($single, $tag = null, $css_class = null){
+    $info = " " . $this->catlist->get_the_modified_date_to_show($single);
     return $this->assign_style($info, $tag, $css_class);
   }
 

@@ -24,6 +24,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $category_id = $instance['categoryid'];
     $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
     $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
+    $showmodifieddate = ($instance['show_modified_date'] == 'on') ? 'yes' : 'no';
     $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
     $excerptsize = (empty($instance['excerpt_size']) ? 55 : $instance['excerpt_size']);
     $showauthor = ($instance['show_author'] == 'on') ? 'yes' : 'no';
@@ -38,6 +39,7 @@ class ListCategoryPostsWidget extends WP_Widget{
       'order' => $order,
       'numberposts' => $limit,
       'date' => $showdate,
+      'date_modified' => $showmodifieddate,
       'author' => $showauthor,
       'dateformat' => $dateformat,
       'template' => 'default',
@@ -79,6 +81,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['categoryid'] = strip_tags($new_instance['categoryid']);
     $instance['dateformat'] = strip_tags($new_instance['dateformat']);
     $instance['show_date'] = strip_tags($new_instance['show_date']);
+    $instance['show_modified_date'] = strip_tags($new_instance['show_modified_date']);
     $instance['show_excerpt'] = strip_tags($new_instance['show_excerpt']);
     $instance['excerpt_size'] = strip_tags($new_instance['excerpt_size']);
     $instance['show_author'] = strip_tags($new_instance['show_author']);
