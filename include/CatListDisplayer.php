@@ -336,7 +336,7 @@ class CatListDisplayer {
   }
 
   private function get_modified_date($single, $tag = null, $css_class = null){
-    $info = " " . $this->catlist->get_the_modified_date_to_show($single);
+    $info = " " . $this->catlist->get_modified_date_to_show($single);
     return $this->assign_style($info, $tag, $css_class);
   }
 
