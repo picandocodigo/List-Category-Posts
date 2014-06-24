@@ -434,9 +434,17 @@ class CatList{
   }
 
   public function get_date_to_show($single){
-    if ($this->params['date']=='yes'):
+    if ($this->params['date'] == 'yes'):
       //by Verex, great idea!
       return get_the_time($this->params['dateformat'], $single);
+    else:
+      return null;
+    endif;
+  }
+
+  public function get_modified_date_to_show($single){
+    if ($this->params['date_modified'] == 'yes'):
+      return get_the_modified_time($this->params['dateformat'], $single);
     else:
       return null;
     endif;

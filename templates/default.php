@@ -64,6 +64,9 @@ foreach ($this->catlist->get_categories_posts() as $single){
   //Show date:
   $lcp_display_output .= ' ' . $this->get_date($single);
 
+  //Show date modified:
+  $lcp_display_output .= ' ' . $this->get_modified_date($single);
+
   //Show author
   $lcp_display_output .= $this->get_author($single);
 

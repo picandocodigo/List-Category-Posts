@@ -10,6 +10,7 @@
                     'orderby'=>'',
                     'order'=>'',
                     'show_date'=>'',
+                    'show_modified_date'=>'',
                     'show_author'=>'',
                     'show_excerpt'=>'',
                     'excerpt_size' =>'',
@@ -28,6 +29,7 @@
   $orderby = strip_tags($instance['orderby']);
   $order = strip_tags($instance['order']);
   $showdate = strip_tags($instance['show_date']);
+  $showmodifieddate = strip_tags($instance['show_modified_date']);
   $showauthor = strip_tags($instance['show_author']);
   $exclude = strip_tags($instance['exclude']);
   $excludeposts = strip_tags($instance['excludeposts']);
@@ -178,6 +180,12 @@
     <?php checked( (bool) $instance['show_date'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_date' ); ?>" />
   <?php _e("Date", 'list-category-posts')?>
+</p>
+<p>
+  <input class="checkbox"  type="checkbox"
+    <?php checked( (bool) $instance['show_modified_date'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_modified_date' ); ?>" />
+  <?php _e("Modified Date", 'list-category-posts')?>
 </p>
 <p>
   <input class="checkbox" input type="checkbox"
