@@ -1,0 +1,114 @@
+# Copyright (C) 2012
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp\n"
+"POT-Creation-Date: 2012-12-19 13:23:13+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-06-24 11:16+7\n"
+"Last-Translator: reachask Ragkamnerd <id513128@gmail.com>\n"
+"Language-Team: Thailand <LL@li.org>\n"
+"Language: th_TH\n"
+
+#: include/ListCategoryPostsWidget.php:5
+msgid "List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2]."
+msgstr "ระบบแสดงรายการบทความจากหมวดหมู่จะช่วยให้คุณสามารถแสดงรายการบทความจากหมวดหมู่สู่บทความ/หน้าโดยใช้รหัสย่อ [catlist] วึ่งสามารใช้ชื่อหรือรหัสหมวดหมู่ที่คุณต้องการในการแสดงบทความที่คุณต้องการแสดงผล และจำนวนบทความที่คุณต้องการแสดงผลด้วย คุณสามารถใช้ [catlist] ได้เท่าไหร่ก็ได้ตามที่คุณต้องการโดยใช้ค่าที่แตกต่างกันไป ในรูปแปป: [catlist argument1=value1 argument2=value2]"
+
+#: include/ListCategoryPostsWidget.php:11
+msgid "List posts from a specified category"
+msgstr "แสดงบทความจากหมวดหมู่ที่ระบุไว้"
+
+#: include/ListCategoryPostsWidget.php:12
+msgid "List Category Posts"
+msgstr "แสดงบทความของหมวดหมู่"
+
+#: include/lcp_widget_form.php:40
+msgid "Title"
+msgstr "หัวเรื่อง"
+
+#: include/lcp_widget_form.php:47
+msgid "Category"
+msgstr "หมวดหมู่"
+
+#: include/lcp_widget_form.php:65
+msgid "Number of posts"
+msgstr "จำนวนบทความ"
+
+#: include/lcp_widget_form.php:72
+msgid "Offset"
+msgstr "ระยะห่าง"
+
+#: include/lcp_widget_form.php:78
+msgid "Order by"
+msgstr "เรียงตาม"
+
+#: include/lcp_widget_form.php:81 include/lcp_widget_form.php:123
+msgid "Date"
+msgstr "วันที่"
+
+#: include/lcp_widget_form.php:82
+msgid "Post title"
+msgstr "หัวเรื่องบทความ"
+
+#: include/lcp_widget_form.php:83 include/lcp_widget_form.php:127
+msgid "Author"
+msgstr "ผุ้เขียน"
+
+#: include/lcp_widget_form.php:84
+msgid "Random"
+msgstr "สุ่ม"
+
+#: include/lcp_widget_form.php:88
+msgid "Order"
+msgstr "เรียง"
+
+#: include/lcp_widget_form.php:91
+msgid "Descending"
+msgstr "จากน้อยไปมาก"
+
+#: include/lcp_widget_form.php:92
+msgid "Ascending"
+msgstr "จากมากไปน้อย"
+
+#: include/lcp_widget_form.php:96
+msgid "Exclude categories (id's)"
+msgstr "ยกเว้นหมวดหมู่ (ระบุโดยใ้รหัสหมดวหมู่)"
+
+#: include/lcp_widget_form.php:102
+msgid "Exclude posts (id's)"
+msgstr "ยกเว้นบทความ (ระบุโดยใ้รหัสบทความ)"
+
+#: include/lcp_widget_form.php:109
+msgid "Show"
+msgstr "แสดง"
+
+#: include/lcp_widget_form.php:112
+msgid "Thumbnail - size"
+msgstr "รูปย่อ - ขนาด"
+
+#: include/lcp_widget_form.php:131
+msgid "Link to category"
+msgstr "เชื่อมโยงไปยังหมวดหมู่"
+
+#: include/lcp_widget_form.php:135
+msgid "Excerpt"
+msgstr "ยกเว้น"
+
+#: include/lcp_widget_form.php:138
+msgid "More link"
+msgstr "เชื่อมโยงเพิ่มเติม"
+
+#: list_cat_posts.php:102
+msgid "How to use"
+msgstr "วิธีใช้"
+
+#: list_cat_posts.php:103
+msgid "Donate"
+msgstr "สนับสนุนผู้จัดทำ"
+
+#: list_cat_posts.php:104
+msgid "Fork on Github"
+msgstr "แตกโครงการได้ที่ Github"
