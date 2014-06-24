@@ -270,7 +270,7 @@ class CatList{
 
   public function lcp_get_current_category(){
     $category = get_category( get_query_var( 'category' ) );
-    if(isset($category->errors) && $category->errors["invalid_term"][0] == "Empty Term"):
+    if(isset($category->errors) && $category->errors["invalid_term"][0] == __("Empty Term") ):
       global $post;
       $categories = get_the_category($post->ID);
       return $categories[0]->cat_ID;
@@ -316,18 +316,29 @@ class CatList{
    * Load category name and link to the category:
    */
   public function get_category_link(){
-    if($this->params['catlink'] == 'yes' && $this->lcp_category_id != 0):
-      $ids = is_array($this->lcp_category_id) ?
-        $this->lcp_category_id :
-        explode(",", $this->lcp_category_id);
+    if( ($this->params['catlink'] == 'yes' || $this->params['catname'] == 'yes') &&
+      $this->lcp_category_id != 0):
+
+      // Check for one id or several:
+      $ids = null;
+      if (is_array($this->lcp_category_id)){
+        $ids = $this->lcp_category_id;
+      } else{
+        $ids = explode(",", $this->lcp_category_id);
+      }
 
       $link = array();
       foreach($ids as $lcp_id){
         $cat_link = get_category_link($lcp_id);
         $cat_title = get_cat_name($lcp_id);
-        array_push($link, '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-                   ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title) .
-                   $this->get_category_count($lcp_id) .  '</a>');
+        $cat_string = ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title);
+
+        if ($this->params['catlink'] == 'yes'){
+          $cat_string .= '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
+            $cat_string .
+            $this->get_category_count($lcp_id) .  '</a>';
+        }
+        array_push($link, $cat_string);
       }
 
       return implode(", ", $link);

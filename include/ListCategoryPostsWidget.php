@@ -56,10 +56,18 @@ class ListCategoryPostsWidget extends WP_Widget{
 
     echo $before_widget;
 
-    if($title == 'catlink'){
-      //if the user has setup 'catlink' as the title, replace it with the category link:
+    if ($title == 'catlink') {
+      // If the user has setup 'catlink' as the title, replace it with
+      // the category link:
       $lcp_category = get_category($category_id);
-      $title = '<a href="' . get_category_link($lcp_category->cat_ID) . '">' . $lcp_category->name . '</a>';
+      $title = '<a href="' . get_category_link($lcp_category->cat_ID) . '">' .
+        $lcp_category->name . '</a>';
+    } elseif ($title == 'catname') {
+      global $post;
+      // If the user has setup 'catname' as the title, replace it with
+      // the category link:
+      $lcp_category = get_the_category($post->ID);
+      $title = $lcp_category[0]->name;
     }
     echo $before_title . $title . $after_title;
 

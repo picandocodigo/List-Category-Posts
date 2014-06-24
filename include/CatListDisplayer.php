@@ -59,18 +59,7 @@ class CatListDisplayer {
   }
 
   private function build_output($tag){
-    // More link
-    if (!empty($this->params['catlink_tag'])):
-      if (!empty($this->params['catlink_class'])):
-        $this->lcp_output .= $this->get_category_link(
-                                   $this->params['catlink_tag'],
-                                   $this->params['catlink_class']);
-      else:
-        $this->lcp_output .= $this->get_category_link($this->params['catlink_tag']);
-      endif;
-    else:
-      $this->lcp_output .= $this->get_category_link("strong");
-    endif;
+    $this->category_title();
 
     $this->lcp_output .= '<' . $tag;
 
@@ -301,6 +290,22 @@ class CatListDisplayer {
 
     $lcp_display_output .= '</' . $tag . '>';
     return $lcp_display_output;
+  }
+
+  private function category_title(){
+    // More link
+    if (!empty($this->params['catlink_tag'])):
+      if (!empty($this->params['catlink_class'])):
+        $this->lcp_output .= $this->get_category_link(
+          $this->params['catlink_tag'],
+          $this->params['catlink_class']
+        );
+      else:
+        $this->lcp_output .= $this->get_category_link($this->params['catlink_tag']);
+      endif;
+    else:
+      $this->lcp_output .= $this->get_category_link("strong");
+    endif;
   }
 
   /**
