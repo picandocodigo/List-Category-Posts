@@ -54,6 +54,7 @@ class ListCategoryPosts{
                              'date_modified_tag' => '',
                              'date_modified_class' => '',
                              'author' => 'no',
+                             'author_posts_link' => 'no',
                              'author_tag' =>'',
                              'author_class' => '',
                              'author_posts' => '',

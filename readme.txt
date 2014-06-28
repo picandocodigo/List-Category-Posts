@@ -195,6 +195,13 @@ update the plugin.
     tag to wrap the author name in with `author_class` and `author_tag` (see HTML
     & CSS Customization further below).
 
+    When displaying the post author, you can also display a link to the
+    author's page. The following parameter **only works if author=yes
+    is present in the shortcode**:
+
+    * **author_posts_link** - Gets the URL of the author page for the
+      author. The HTML and CSS customization are the ones applied to `author`.
+
 * **dateformat** - Format of the date output. The default format is the one you've set on your WordPress settings. Example: `[catlist id=42 dateformat="l F dS, Y"]` would display the date as "Monday January 21st, 2013". Check http://codex.wordpress.org/Formatting_Date_and_Time for more options to display date.
 
 * **excerpt** - Display the post's excerpt. Default is 'no', use `excerpt=yes` to activate it. If you don't have an excerpt in your post, the plugin will fetch this text from the content, striping its images, shortcodes and HTML tags. The limit is set by the *excerpt_size* parameter (55 words by default). If you want the automatically generated excerpt to respect your theme's allowed HTML tags, you should use `excerpt_strip=no`. If the post has an excerpt, the HTML tags are automatically stripped. If you want to overwrite the post's excerpt with an automatically generated one (may be usefull to allow HTML tags), use `excerpt_overwrite=yes`. I added this last parameter to have consistency across excerpts.
@@ -414,7 +421,8 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.49 =
 
-* Adds catname parameter to show just the category name (and not the link). Thanks user sirenAri from the [forum](http://wordpress.org/support/topic/a-couple-of-suggestions-and-one-teensy-error)
+* Adds `author_posts_link`, to show an author's page.
+* Adds catname parameter to show just the category name (and not the link). Thanks user sirenAri from the [forum](http://wordpress.org/support/topic/a-couple-of-suggestions-and-one-teensy-error).
 * Small bug fix for getting current category. Used to check against simple string, now checking against i18n'ed one.
 
 = 0.48 =
