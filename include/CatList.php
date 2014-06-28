@@ -419,9 +419,17 @@ class CatList{
   }
 
   public function get_author_to_show($single){
-    if ($this->params['author']=='yes'):
+    if ($this->params['author'] == 'yes'):
       $lcp_userdata = get_userdata($single->post_author);
-      return $lcp_userdata->display_name;
+      $author_name =  $lcp_userdata->display_name;
+      if($this->lcp_not_empty('author_posts_link') &&
+        $this->params['author_posts_link'] == 'yes'){
+        $link = get_author_posts_url($lcp_userdata->ID);
+        return "<a href=" . $link . " title='" . $author_name .
+          "'>" . $author_name . "</a>";
+      } else {
+        return $author_name;
+      }
     else:
       return null;
     endif;

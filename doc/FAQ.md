@@ -6,6 +6,7 @@
  * [How to display lists in columns](#columns)
  * [How do I display the Thumbnail next to the title?](#thumbnail)
  * [How to not display the title](#no-title)
+ * [How do I remove the bullets from the list?](#bullets)
  * [The plugin doesn't work on servers with PHP < 5](#php4)
  * [Plugin could not be activated because it triggered a fatal error](#fatal-error)
 
@@ -115,6 +116,18 @@ add_filter('widget_text', 'do_shortcode');
 
 Then just add a new text widget to your blog and use the shortcode there
 as the widget's content.
+
+##<a name="bullets"></a>How do I remove the bullets from the list?
+
+By default the posts will be displayed inside a ul tag with the
+`lcp_catlist` CSS class. So to make the bullets disappear, just add
+this CSS code to your theme's stylesheet:
+
+```css
+.lcp_catlist li{
+  list-style: none;
+}
+```
 
 ##<a name="php5"></a>Does not work on servers with PHP < 5
 
