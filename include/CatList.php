@@ -148,7 +148,8 @@ class CatList{
 
   public function starting_with($where){
       $letter = $this->params['starting_with'];
-      $where .= ' AND wp_posts.post_title LIKE \'' . $letter . "%'";
+      $where .= ' AND wp_posts.post_title ' .
+        'COLLATE UTF8_GENERAL_CI LIKE \'' . $letter . "%'";
       return $where;
   }
 
@@ -318,7 +319,6 @@ class CatList{
   public function get_category_link(){
     if( ($this->params['catlink'] == 'yes' || $this->params['catname'] == 'yes') &&
       $this->lcp_category_id != 0):
-
       // Check for one id or several:
       $ids = null;
       if (is_array($this->lcp_category_id)){
@@ -328,19 +328,26 @@ class CatList{
       }
 
       $link = array();
+      // Loop on several categories:
       foreach($ids as $lcp_id){
         $cat_link = get_category_link($lcp_id);
         $cat_title = get_cat_name($lcp_id);
-        $cat_string = ($this->lcp_not_empty('catlink_string') ? $this->params['catlink_string'] : $cat_title);
 
+        // Use the category title or 'catlink_string' set by user:
+        if ($this->lcp_not_empty('catlink_string')){
+          $cat_string = $this->params['catlink_string'];
+        } else {
+          $cat_string = $cat_title;
+        }
+
+        // Do we want the link or just the title?
         if ($this->params['catlink'] == 'yes'){
-          $cat_string .= '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
+          $cat_string = '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
             $cat_string .
             $this->get_category_count($lcp_id) .  '</a>';
         }
         array_push($link, $cat_string);
       }
-
       return implode(", ", $link);
     else:
       return null;
