@@ -422,6 +422,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.50 =
+
+ * Adds Thai translation by [itpcc](https://github.com/itpcc).
+
 = 0.49.1 =
 
  * Makes sure "starting_with" queries are case insesitive.
