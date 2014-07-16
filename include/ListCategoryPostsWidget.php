@@ -32,6 +32,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $thumbnail = ($instance['thumbnail'] == 'on') ? 'yes' : 'no';
     $thumbnail_size = ($instance['thumbnail_size']) ? $instance['thumbnail_size'] : 'thumbnail';
     $morelink = empty($instance['morelink']) ? ' ' : $instance['morelink'];
+    $template = empty($instance['template']) ? 'default' : $instance['template'];
 
     $atts = array(
       'id' => $category_id,
@@ -51,7 +52,8 @@ class ListCategoryPostsWidget extends WP_Widget{
       'catlink' => $showcatlink,
       'thumbnail' => $thumbnail,
       'thumbnail_size' => $thumbnail_size,
-      'morelink' => $morelink
+      'morelink' => $morelink,
+      'template' => $template
     );
 
     echo $before_widget;
@@ -98,6 +100,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['thumbnail'] = strip_tags($new_instance['thumbnail']);
     $instance['thumbnail_size'] = strip_tags($new_instance['thumbnail_size']);
     $instance['morelink'] = strip_tags($new_instance['morelink']);
+    $instance['template'] = strip_tags($new_instance['template']);
 
     return $instance;
   }

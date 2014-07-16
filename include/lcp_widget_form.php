@@ -20,7 +20,8 @@
                     'thumbnail_size' =>'',
                     'offset'=>'',
                     'show_catlink'=>'',
-                    'morelink' =>''
+                    'morelink' =>'',
+                    'template' => ''
                     );
   $instance = wp_parse_args( (array) $instance, $default);
 
@@ -41,6 +42,7 @@
   $thumbnail = strip_tags($instance['thumbnail']);
   $thumbnail_size = strip_tags($instance['thumbnail_size']);
   $morelink = strip_tags($instance['morelink']);
+  $template = strip_tags($instance['template']);
 
 ?>
 
@@ -222,4 +224,46 @@
   <input class="widefat" id="<?php echo $this->get_field_id('morelink'); ?>"
     name="<?php echo $this->get_field_name('morelink'); ?>" type="text"
     value="<?php echo esc_attr($morelink); ?>" />
+</p>
+
+<p>
+  <label for="<?php echo $this->get_field_id('template'); ?>">
+    <?php _e("Template", 'list-category-posts')?>:
+  </label>
+  <br/>
+  <select id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
+    <?php
+      $templates = array('default');
+
+      // The paths were we can find templates (with trailing slashes '/')
+      $templatePaths = array(
+        TEMPLATEPATH.'/list-category-posts/',
+        STYLESHEETPATH.'/list-category-posts/'
+      );
+
+      foreach ($templatePaths as $templatePath) :
+        foreach (scandir($templatePath) as $file) :
+          // Check that the files found are well formed
+          if ( ($file[0] != '.') && (substr($file, -4) == '.php') && is_file($templatePath.$file) && is_readable($templatePath.$file) ) :
+            $templateName = substr($file, 0, strlen($file)-4);
+            // Add the template only if necessary
+            if (!in_array($templateName, $templates)) :
+              $templates[] = $templateName;
+            endif;
+          endif;
+        endforeach;
+      endforeach;
+
+      foreach ($templates as $tmp) :
+        $option = '<option value="' . $tmp . '" ';
+        if ($tmp == $template) :
+          $option .= ' selected = "selected" ';
+        endif;
+        $option .=  '">';
+        $option .= $tmp;
+        $option .= '</option>';
+        echo $option;
+      endforeach;
+    ?>
+  </select>
 </p>
