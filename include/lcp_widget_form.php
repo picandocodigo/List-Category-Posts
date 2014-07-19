@@ -233,27 +233,8 @@
   <br/>
   <select id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
     <?php
-      $templates = array('default');
-
-      // The paths were we can find templates (with trailing slashes '/')
-      $templatePaths = array(
-        TEMPLATEPATH.'/list-category-posts/',
-        STYLESHEETPATH.'/list-category-posts/'
-      );
-
-      foreach ($templatePaths as $templatePath) :
-        foreach (scandir($templatePath) as $file) :
-          // Check that the files found are well formed
-          if ( ($file[0] != '.') && (substr($file, -4) == '.php') && is_file($templatePath.$file) && is_readable($templatePath.$file) ) :
-            $templateName = substr($file, 0, strlen($file)-4);
-            // Add the template only if necessary
-            if (!in_array($templateName, $templates)) :
-              $templates[] = $templateName;
-            endif;
-          endif;
-        endforeach;
-      endforeach;
-
+      $templates = CatListDisplayer::get_templates();
+      $templates[] = 'default';
       foreach ($templates as $tmp) :
         $option = '<option value="' . $tmp . '" ';
         if ($tmp == $template) :

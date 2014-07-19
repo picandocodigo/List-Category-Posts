@@ -10,15 +10,38 @@ class CatListDisplayer {
   private $catlist;
   private $params = array();
   private $lcp_output;
+  public static function getTemplatePaths(){
+    $template_path = TEMPLATEPATH . "/list-category-posts/";
+    $stylesheet_path = STYLESHEETPATH . "/list-category-posts/";
+    return array($template_path, $stylesheet_path);
+  }
 
   public function __construct($atts) {
     $this->params = $atts;
     $this->catlist = new CatList($atts);
-    $this->template();
+    $this->define_template();
   }
 
   public function display(){
     return $this->lcp_output;
+  }
+
+  private function define_template(){
+    // Check if we got a template param:
+    if (isset($this->params['template']) &&
+      !empty($this->params['template']) &&
+      $this->params['template'] != 'default'){
+      // The default values for ul, ol and div:
+      if (preg_match('/^ul$|^div$|^ol$/i', $this->params['template'], $matches)){
+        $this->build_output($matches[0]);
+      } else {
+        // Else try an actual template from the params
+        $this->template();
+      }
+    } else {
+      // Default:
+      $this->build_output('ul');
+    }
   }
 
   /**
@@ -26,36 +49,49 @@ class CatListDisplayer {
    */
   private function template(){
     $tplFileName = null;
-    $possibleTemplates = array(
-      // File locations lower in list override others
-      TEMPLATEPATH.'/list-category-posts/'.$this->params['template'].'.php',
-      STYLESHEETPATH.'/list-category-posts/'.$this->params['template'].'.php'
-    );
+    $template_param = $this->params['template'];
+    $templates = array();
 
-    foreach ($possibleTemplates as $key => $file) :
-      if ( is_readable($file) ) :
+    // Get templates paths and add the incoming parameter to search
+    // for the php file:
+    if($template_param){
+      $paths = self::getTemplatePaths();
+      foreach($paths as $path){
+        $templates[] = $path . $template_param . '.php';
+      }
+    }
+
+    // Check if we can read the template file:
+    foreach ($templates as $file) :
+      if ( is_file($file) && is_readable($file) ) :
         $tplFileName = $file;
       endif;
     endforeach;
 
-    if ( !empty($tplFileName) && is_readable($tplFileName) ) :
+    if($tplFileName){
       require($tplFileName);
-    else:
-      switch($this->params['template']):
-      case "default":
-        $this->build_output('ul');
-        break;
-      case "div":
-        $this->build_output('div');
-        break;
-      case "ol":
-        $this->build_output('ol');
-        break;
-      default:
-        $this->build_output('ul');
-        break;
-      endswitch;
-    endif;
+    } else {
+      $this->build_output('ul');
+    }
+  }
+
+  public static function get_templates($param = null){
+    $templates = array();
+    $paths = self::getTemplatePaths();
+    foreach ($paths as $templatePath) :
+      foreach (scandir($templatePath) as $file) :
+        // Check that the files found are well formed
+        if ( ($file[0] != '.') && (substr($file, -4) == '.php') &&
+          is_file($templatePath.$file) && is_readable($templatePath.$file) ) :
+          $templateName = substr($file, 0, strlen($file)-4);
+          // Add the template only if necessary
+          if (!in_array($templateName, $templates)) :
+            $templates[] = $templateName;
+          endif;
+        endif;
+      endforeach;
+    endforeach;
+    return $templates;
   }
 
   private function build_output($tag){
