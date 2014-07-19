@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.9.1
-Stable tag: 0.49.1
+Stable tag: 0.50
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -425,6 +425,8 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.50 =
 
  * Adds Thai translation by [itpcc](https://github.com/itpcc).
+ * The widget can now select an existing template. Thanks [Borjan Tchakaloff](https://github.com/bibz)!
+ * Templates code was refactored.
 
 = 0.49.1 =
 
