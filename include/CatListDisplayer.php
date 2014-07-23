@@ -29,8 +29,7 @@ class CatListDisplayer {
   private function define_template(){
     // Check if we got a template param:
     if (isset($this->params['template']) &&
-      !empty($this->params['template']) &&
-      $this->params['template'] != 'default'){
+      !empty($this->params['template'])){
       // The default values for ul, ol and div:
       if (preg_match('/^ul$|^div$|^ol$/i', $this->params['template'], $matches)){
         $this->build_output($matches[0]);
