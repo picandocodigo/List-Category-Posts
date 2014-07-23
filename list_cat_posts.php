@@ -58,7 +58,7 @@ class ListCategoryPosts{
                              'author_tag' =>'',
                              'author_class' => '',
                              'author_posts' => '',
-                             'template' => 'default',
+                             'template' => '',
                              'excerpt' => 'no',
                              'excerpt_size' => '55',
                              'excerpt_strip' => 'yes',
