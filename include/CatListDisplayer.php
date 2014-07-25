@@ -77,19 +77,21 @@ class CatListDisplayer {
   public static function get_templates($param = null){
     $templates = array();
     $paths = self::getTemplatePaths();
-    foreach ($paths as $templatePath) :
-      foreach (scandir($templatePath) as $file) :
-        // Check that the files found are well formed
-        if ( ($file[0] != '.') && (substr($file, -4) == '.php') &&
-          is_file($templatePath.$file) && is_readable($templatePath.$file) ) :
-          $templateName = substr($file, 0, strlen($file)-4);
-          // Add the template only if necessary
-          if (!in_array($templateName, $templates)) :
-            $templates[] = $templateName;
-          endif;
-        endif;
-      endforeach;
-    endforeach;
+    foreach ($paths as $templatePath){
+      if (is_dir($templatePath) && scandir($templatePath)){
+        foreach ($templatePath as $file){
+          // Check that the files found are well formed
+          if ( ($file[0] != '.') && (substr($file, -4) == '.php') &&
+          is_file($templatePath.$file) && is_readable($templatePath.$file) ){
+            $templateName = substr($file, 0, strlen($file)-4);
+            // Add the template only if necessary
+            if (!in_array($templateName, $templates)){
+              $templates[] = $templateName;
+            }
+          }
+        }
+      }
+    }
     return $templates;
   }
 

@@ -317,7 +317,9 @@ class CatList{
    * Load category name and link to the category:
    */
   public function get_category_link(){
-    if( ($this->params['catlink'] == 'yes' ||
+    if(($this->lcp_not_empty('catlink') &&
+      $this->params['catlink'] == 'yes' ||
+      $this->lcp_not_empty('catname') &&
       $this->params['catname'] == 'yes') &&
       $this->lcp_category_id != 0):
       // Check for one id or several:
