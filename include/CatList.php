@@ -583,7 +583,8 @@ class CatList{
           $lcp_thumb_size = 'thumbnail';
         endif;
 
-        $lcp_thumbnail = '<a href="' . get_permalink($single->ID).'" title="' . $single->post_title . '">';
+        $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
+          '" title="' . esc_attr($single->post_title) . '">';
 
         $lcp_thumbnail .= get_the_post_thumbnail(
           $single->ID,

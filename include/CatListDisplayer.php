@@ -316,7 +316,7 @@ class CatListDisplayer {
     endif;
 
     if (!empty($this->params['posts_morelink'])) :
-      $href = 'href="'.get_permalink($single->ID) . '"';
+      $href = 'href="' . get_permalink($single->ID) . '"';
       $class = "";
       if (!empty($this->params['posts_morelink_class'])) :
         $class = 'class="' . $this->params['posts_morelink_class'] . '" ';
@@ -488,6 +488,7 @@ class CatListDisplayer {
       elseif (!empty($tag) && empty($css_class)) :
         return '<' . $tag . '>' . $info . '</' . $tag . '>';
       endif;
+      $css_class = sanitize_html_class($css_class);
       return '<' . $tag . ' class="' . $css_class . '">' . $info . '</' . $tag . '>';
     endif;
   }
