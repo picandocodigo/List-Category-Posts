@@ -267,27 +267,7 @@ class CatListDisplayer {
     }
 
     // Custom field display
-    if (!empty($this->params['customfield_display'])) :
-      if (!empty($this->params['customfield_tag'])):
-        if (!empty($this->params['customfield_class'])):
-          $lcp_display_output .= $this->get_custom_fields(
-              $this->params['customfield_display'],
-              $single->ID,
-              $this->params['customfield_tag'],
-              $this->params['customfield_class']);
-        else:
-          $lcp_display_output .= $this->get_custom_fields(
-              $this->params['customfield_display'],
-              $single->ID,
-              $this->params['customfield_tag']);
-        endif;
-      else:
-        $lcp_display_output .= $this->get_custom_fields(
-            $this->params['customfield_display'],
-            $single->ID
-        );
-      endif;
-    endif;
+    $lcp_display_output .= $this->get_custom_fields($single);
 
     $lcp_display_output .= $this->get_thumbnail($single);
 
@@ -315,15 +295,7 @@ class CatListDisplayer {
       $lcp_display_output .= $this->get_excerpt($single);
     endif;
 
-    if (!empty($this->params['posts_morelink'])) :
-      $href = 'href="' . get_permalink($single->ID) . '"';
-      $class = "";
-      if (!empty($this->params['posts_morelink_class'])) :
-        $class = 'class="' . $this->params['posts_morelink_class'] . '" ';
-      endif;
-      $readmore = $this->params['posts_morelink'];
-      $lcp_display_output .= ' <a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
-    endif;
+    $lcp_display_output .= $this->get_posts_morelink($single);
 
     $lcp_display_output .= '</' . $tag . '>';
     return $lcp_display_output;
@@ -363,13 +335,15 @@ class CatListDisplayer {
     return $this->assign_style($info, $tag, $css_class);
   }
 
-  private function get_custom_fields($custom_key, $post_id, $tag = null, $css_class = null){
-    $info = $this->catlist->get_custom_fields($custom_key, $post_id);
-    if($tag == null)
-      $tag = 'div';
-    if($css_class == null)
-      $css_class = 'lcp_customfield';
-    return $this->assign_style($info, $tag, $css_class);
+  private function get_custom_fields($single){
+    if(!empty($this->params['customfield_display'])){
+      $info = $this->catlist->get_custom_fields($this->params['customfield_display'], $single->ID);
+      if(empty($this->params['customfield_tag']) || $this->params['customfield_tag'] == null)
+        $tag = 'div';
+      if(empty($this->params['customfield_class']) || $this->params['customfield_class'] == null)
+        $css_class = 'lcp_customfield';
+      return $this->assign_style($info, $tag, $css_class);
+    }
   }
 
   private function get_date($single, $tag = null, $css_class = null){
@@ -440,6 +414,18 @@ class CatListDisplayer {
     }
 
     return $info;
+  }
+
+  private function get_posts_morelink($single){
+    if(!empty($this->params['posts_morelink'])){
+      $href = 'href="' . get_permalink($single->ID) . '"';
+      $class = "";
+      if ( !empty($this->params['posts_morelink_class']) ):
+        $class = 'class="' . $this->params['posts_morelink_class'] . '" ';
+      endif;
+      $readmore = $this->params['posts_morelink'];
+      return ' <a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
+    }
   }
 
   private function get_category_link($tag = null, $css_class = null){

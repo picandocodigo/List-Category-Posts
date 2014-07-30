@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 3.9.1
-Stable tag: 0.50.3
+Stable tag: 0.50.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -422,10 +422,18 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.50.4 =
+
+ * Fixes posts_morelink and customfields for templates.
+ * Adds fixes by [htrex](https://github.com/htrex):
+   * Fix custom template regression
+   * Fix excluded categories not working in widget
+
 = 0.50.3 =
 
  * Addresses some warnings / scandir on Displayer and catname on widget
  * Fixes lcp_paginator.css path
+ * Some small sanitations
 
 = 0.50.2 =
 

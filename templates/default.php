@@ -71,7 +71,7 @@ foreach ($this->catlist->get_categories_posts() as $single){
   $lcp_display_output .= $this->get_author($single);
 
   //Custom fields:
-  $lcp_display_output .= $this->get_custom_fields($this->params['customfield_display'], $single->ID);
+  $lcp_display_output .= $this->get_custom_fields($single);
 
   //Post Thumbnail
   $lcp_display_output .= $this->get_thumbnail($single);
@@ -87,6 +87,10 @@ foreach ($this->catlist->get_categories_posts() as $single){
    * This will produce:<div class="lcp_excerpt">The content</div>
    */
   $lcp_display_output .= $this->get_excerpt($single, 'div', 'lcp_excerpt');
+
+
+  // Get Posts "More" link:
+  $lcp_display_output .= $this->get_posts_morelink($single);
 
   //Close li tag
   $lcp_display_output .= '</li>';
