@@ -79,7 +79,7 @@ class CatListDisplayer {
     $paths = self::getTemplatePaths();
     foreach ($paths as $templatePath){
       if (is_dir($templatePath) && scandir($templatePath)){
-        foreach ($templatePath as $file){
+        foreach (scandir($templatePath) as $file){
           // Check that the files found are well formed
           if ( ($file[0] != '.') && (substr($file, -4) == '.php') &&
           is_file($templatePath.$file) && is_readable($templatePath.$file) ){
