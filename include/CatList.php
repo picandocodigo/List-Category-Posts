@@ -112,8 +112,8 @@ class CatList{
       $args['tag'] = $this->params['tags'];
     endif;
 
-    if ( !empty($this->exclude)):
-      $args['category__not_in'] = array($this->exclude);
+    if ( !empty($this->params['exclude'])):
+      $args['category__not_in'] = array($this->params['exclude']);
     endif;
 
     if ( $this->lcp_not_empty('customfield_orderby') ):
