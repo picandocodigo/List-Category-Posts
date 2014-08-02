@@ -147,9 +147,18 @@ class CatList{
   }
 
   public function starting_with($where){
-      $letter = $this->params['starting_with'];
+      // Explode a string of letters separated with commas and 
+      // build the $where query with OR statements to retrieve 
+      // all posts that start with those letters
+ 
+      $letters = explode(',', $this->params['starting_with']);
       $where .= ' AND wp_posts.post_title ' .
-        'COLLATE UTF8_GENERAL_CI LIKE \'' . $letter . "%'";
+        'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[0] . "%'";
+      for ($i=1; $i <sizeof($letters); $i++) { 
+                $where .= 'OR wp_posts.post_title ' .
+        'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
+      }
+      
       return $where;
   }
 
