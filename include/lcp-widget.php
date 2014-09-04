@@ -3,7 +3,7 @@
  * List Category Posts sidebar widget.
  * @author fernando@picandocodigo.net
  */
-require_once 'CatListDisplayer.php';
+require_once 'lcp-catlistdisplayer.php';
 
 class ListCategoryPostsWidget extends WP_Widget{
 
@@ -107,7 +107,7 @@ class ListCategoryPostsWidget extends WP_Widget{
 
   /** @see WP_Widget::form */
   function form($instance) {
-    include('lcp_widget_form.php');
+    include('lcp-widget-form.php');
   }
 }
 

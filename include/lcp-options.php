@@ -22,7 +22,7 @@ function list_category_posts_options() {
 ?>
 <div class="wrap">
   <h2>List Category Posts</h2>
-  <form method="post" action="options.php">
+  <form method="post" action="lcp-options.php">
     <?php
       settings_fields('list_category_posts_group');
       do_settings_sections('list_category_posts_group');

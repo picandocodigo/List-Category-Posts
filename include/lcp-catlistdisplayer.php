@@ -1,10 +1,10 @@
 <?php
 /**
  * This is an auxiliary class to help display the info
- * on your CatList.php instance.
+ * on your CatList instance.
  * @author fernando@picandocodigo.net
  */
-require_once 'CatList.php';
+require_once 'lcp-catlist.php';
 
 class CatListDisplayer {
   private $catlist;
