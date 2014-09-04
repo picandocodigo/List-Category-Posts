@@ -423,7 +423,9 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 = 0.51 =
+ * Fixes translations, updates Spanish translation. Translators, please update your po and mo files and submit them via pull request on GitHub :)
  * Test compatibility with WordPress 4.0
+ * Adds icon for WordPress 4.0 new plugin interface.
  * Fixes posts_morelink and customfields for templates.
  * Adds fixes by [htrex](https://github.com/htrex):
    * Fix custom template regression

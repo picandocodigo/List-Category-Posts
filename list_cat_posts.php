@@ -2,7 +2,7 @@
 /*
   Plugin Name: List category posts
   Plugin URI: https://github.com/picandocodigo/List-Category-Posts
-  Description: List Category Posts allows you to list posts by category in a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
+  Description: List Category Posts allows you to list posts by category in a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, the number of posts to display and many more parameters. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2].
   Version: 0.51
   Author: Fernando Briano
   Author URI: http://fernandobriano.com
@@ -27,7 +27,6 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-load_plugin_textdomain( 'list-category-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
 include 'include/lcp-widget.php';
 include 'include/lcp-options.php';
@@ -150,6 +149,11 @@ function lpc_meta($links, $file) {
 }
 
 add_filter( 'plugin_row_meta', 'lpc_meta', 10, 2 );
+
+function load_i18n(){
+  load_plugin_textdomain( 'list-category-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'plugins_loaded', 'load_i18n' );
 
 function lcp_pagination_css(){
   if ( @file_exists( get_stylesheet_directory() . '/lcp_paginator.css' ) ):
