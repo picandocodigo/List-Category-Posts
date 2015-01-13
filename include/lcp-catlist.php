@@ -122,12 +122,15 @@ class CatList{
     endif;
 
     if ( $this->lcp_not_empty('pagination')):
-      if( preg_match('/lcp_page' . preg_quote($this->instance) .
-                     '=([0-9]+)/i', $_SERVER['QUERY_STRING'], $match) ):
-        $this->page = $match[1];
-        $offset = ($this->page - 1) * $this->params['numberposts'];
-        $args = array_merge($args, array('offset' => $offset));
-      endif;
+      if(isset($_SERVER['QUERY_STRING']) &&
+      !empty($_SERVER['QUERY_STRING']) ){
+        if( preg_match('/lcp_page' . preg_quote($this->instance) .
+          '=([0-9]+)/i', $_SERVER['QUERY_STRING'], $match) ):
+          $this->page = $match[1];
+          $offset = ($this->page - 1) * $this->params['numberposts'];
+          $args = array_merge($args, array('offset' => $offset));
+        endif;
+      }
     endif;
 
     // Posts that start with a given letter:
@@ -227,10 +230,12 @@ class CatList{
   }
 
   private function get_lcp_category(){
+    // In a category page:
     if ( $this->lcp_not_empty('categorypage') &&
          $this->params['categorypage'] == 'yes' ||
          $this->params['id'] == -1):
       $this->lcp_category_id = $this->lcp_get_current_category();
+    // Using the category name:
     elseif ( $this->lcp_not_empty('name') ):
       if (preg_match('/\+/', $this->params['name'])):
         $categories = array();
@@ -257,12 +262,13 @@ class CatList{
       else:
         $this->lcp_category_id = $this->get_category_id_by_name($this->params['name']);
       endif;
+    // Using the id:
     elseif ( isset($this->params['id']) && $this->params['id'] != '0' ):
       if (preg_match('/\+/', $this->params['id'])):
         if ( preg_match('/(-[0-9]+)+/', $this->params['id'], $matches) ):
           $this->exclude = implode(',', explode("-", ltrim($matches[0], '-') ));
         endif;
-        $this->lcp_category_id = explode("+", $this->params['id']);
+        $this->lcp_category_id = array_map('intval', explode( "+", $this->params['id'] ) );
       else:
         $this->lcp_category_id = $this->params['id'];
       endif;

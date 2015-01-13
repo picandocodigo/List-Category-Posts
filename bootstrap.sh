@@ -34,14 +34,12 @@ fi
 
 if [ ! -d /var/www/wordpress ];
 then
-    cd /var/www
-    rm index.html
+    cd /var/www && rm html/index.html
     wget http://wordpress.org/latest.tar.gz
     tar -xzvf latest.tar.gz
     rm latest.tar.gz
-    chown www-data:www-data wordpress -R
-    cd wordpress/wp-content/plugins/
-    ln -s /vagrant
+    mv /var/www/wordpress/* /var/www/html/
+    chown www-data:www-data /var/www/html/ -R
 fi
 
 

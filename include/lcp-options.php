@@ -18,11 +18,10 @@ function list_category_posts_options() {
 	if ( !current_user_can( 'manage_options' ) )  {
 		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 	}
-  $numberposts = get_option('numberposts');
 ?>
 <div class="wrap">
   <h2>List Category Posts</h2>
-  <form method="post" action="lcp-options.php">
+  <form method="post" action="options.php">
     <?php
       settings_fields('list_category_posts_group');
       do_settings_sections('list_category_posts_group');
@@ -37,7 +36,7 @@ function list_category_posts_options() {
             </label>
           </th>
           <td>
-            <input type="text" id="numberposts" name="numberposts" value="<?php echo $numberposts; ?>"/>
+            <input type="text" id="numberposts" name="numberposts"  value="<?php echo esc_attr( get_option('numberposts') ); ?>"/>
             <small>
               <ul>
                 <li>
