@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.1
-Stable tag: 0.52
+Stable tag: 0.53
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,10 @@ plugin's directory since this file will be overwritten every time you
 update the plugin.
 
 ==Other parameters==
+
+* **starting_with** - Get posts starting with a given letter. You can
+use several letters. Example: `[catlist starting_with="m,o,t"]` will
+list posts whose title start with either m, o or t.
 
 * **author_posts** - Get posts by author. Use 'user_nicename' (NOT
     name). Example: `[catlist author_posts="fernando"]`
@@ -421,6 +425,9 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.53 =
+ * Adds "starting_with" parameter by Diego Sorribas. Thank you!
 
 = 0.52 =
  * Small fix for pagination and query string.
