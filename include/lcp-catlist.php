@@ -151,9 +151,9 @@ class CatList{
 
    public function starting_with($where){
       $letters = explode(',', $this->params['starting_with']);
-      $where .= 'AND (wp_posts.ID !='.get_the_ID().' AND wp_posts.post_title ' .
+      $where .= 'AND (wp_posts.post_title ' .
         'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[0] . "%'";
-      for ($i=1; $i <sizeof($letters); $i++) { 
+      for ($i=1; $i <sizeof($letters); $i++) {
                 $where .= 'OR wp_posts.post_title ' .
         'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
       }
