@@ -186,8 +186,13 @@ class CatListDisplayer {
       $query = preg_replace($pattern, '', $_SERVER['QUERY_STRING']);
 
       $url = strtok($_SERVER["REQUEST_URI"],'?');
+      $protocol = "http";
+      if ( (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+        $_SERVER['SERVER_PORT'] == 443){
+        $protocol = "https";
+      }
 
-      $page_link = "http://$_SERVER[HTTP_HOST]$url?$query" .
+      $page_link = "$protocol://$_SERVER[HTTP_HOST]$url?$query" .
         $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
         "#lcp_instance_" . $this->catlist->get_instance();
       $link .=  "<li><a href='$page_link' title='$page'>";
