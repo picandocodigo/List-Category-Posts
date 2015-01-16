@@ -378,7 +378,7 @@ class CatListDisplayer {
     return $this->assign_style($info, $tag);
   }
 
-  private function get_post_title($single){
+  private function get_post_title($single, $tag = null, $css_class = null){
     $info = '<a href="' . get_permalink($single->ID);
 
     $lcp_post_title = apply_filters('the_title', $single->post_title, $single->ID);
@@ -401,7 +401,6 @@ class CatListDisplayer {
       $info .= ' class="' . $this->params['title_class'] . '"';
     endif;
 
-
     $info .= '>' . $lcp_post_title . '</a>';
 
     if( !empty($this->params['post_suffix']) ):
@@ -416,6 +415,10 @@ class CatListDisplayer {
       $pre .= '>';
       $post = "</" . $this->params['title_tag'] . ">";
       $info = $pre . $info . $post;
+    }
+
+    if( $tag !== null || $css_class !== null){
+      $info = $this->assign_style($info, $tag, $css_class);
     }
 
     return $info;
