@@ -241,7 +241,7 @@ Show the full content of the post. If there's a &lt;!--more--&gt; tag in the pos
 
 * **thumbnail_class** - Set a CSS class for the thumbnail.
 
-* **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types.
+* **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types. You can use several types, example: `[catlist post_type="page,post" numberposts=-1]`
 
 * **post_status** - use post status, default value is 'publish'. Valid values:
   * **publish** - a published post or page.
@@ -253,6 +253,7 @@ Show the full content of the post. If there's a &lt;!--more--&gt; tag in the pos
   * **inherit** - a revision. see get_children.
   * **trash** - post is in trashbin (available with Version 2.9).
   * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true.
+  You can use several post statuses. Example: `[catlist post_status="future, publish" excludeposts=this]`
 
 * **show_protected** - Show posts protected by password. By default
     they are not displayed. Use: `[catlist show_protected=yes]`

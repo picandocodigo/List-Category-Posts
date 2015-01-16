@@ -202,13 +202,11 @@ class CatList{
   private function lcp_types_and_statuses($args){
     // Post type, status, parent params:
     if($this->lcp_not_empty('post_type')):
-      $args['post_type'] = $this->params['post_type'];
+      $args['post_type'] = explode( ',', $this->params['post_type'] );
     endif;
 
     if($this->lcp_not_empty('post_status')):
-      $args['post_status'] = array(
-        $this->params['post_status']
-      );
+      $args['post_status'] = explode( ',', $this->params['post_status'] );
     endif;
 
     if($this->lcp_not_empty('post_parent')):
