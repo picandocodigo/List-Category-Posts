@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.1
-Stable tag: 0.53
+Stable tag: 0.54
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,10 +132,6 @@ update the plugin.
 
 ==Other parameters==
 
-* **starting_with** - Get posts starting with a given letter. You can
-use several letters. Example: `[catlist starting_with="m,o,t"]` will
-list posts whose title start with either m, o or t.
-
 * **author_posts** - Get posts by author. Use 'user_nicename' (NOT
     name). Example: `[catlist author_posts="fernando"]`
 
@@ -169,7 +165,9 @@ list posts whose title start with either m, o or t.
   * **ASC** - Ascending (lowest to highest).
   * **DESC** - Descending (highest to lowest). Ex: `[catlist name=mycategory orderby=title order=asc]`
 
-* **starting_with** - Get posts whose title starts with a certain letter. Example: `[catlist starting_with="l"]` will list all posts whose title starts with L.
+* **starting_with** - Get posts whose title starts with a certain
+    letter. Example: `[catlist starting_with="l"]` will list all posts
+    whose title starts with L. You can use several letters: `[catlist starting_with="m,o,t"]`.
 
 * **numberposts** - Number of posts to return. Set to 0 to use the max
     number of posts per page. Set to -1 to remove the limit.
@@ -427,8 +425,13 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.54 =
+ * Adds http/https check for pagination links.
+ * Fixes `post_status` and `post_type` parameters for using multiple post statuses and types.
+
 = 0.53 =
- * Adds "starting_with" parameter by Diego Sorribas. Thank you!
+ * Makes "starting_with" parameter accept several letters, by Diego
+ Sorribas. Thank you!
 
 = 0.52 =
  * Small fix for pagination and query string.
