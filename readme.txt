@@ -332,7 +332,17 @@ Then just add a new text widget to your blog and use the shortcode there as the 
 
 == HTML & CSS Customization ==
 
-You can customize what HTML tags different elements will be sorrounded with and a CSS class for this element, or just a CSS class which will wrap the element with a `span` tag.
+By default, the plugin lists the posts in an unordered list with the
+`lcp_catlist` CSS class, like this:
+
+`<ul class="lcp_catlist">`
+
+So if you want to customize the appearance of the List Category Posts
+lists, you can just edit the lcp_catlist class in your theme's CSS.
+
+You can also customize what HTML tags different elements will be
+surrounded with, and set a CSS class for this element, or just a CSS class
+which will wrap the element with a `span` tag.
 
 The customizable elements (so far) are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
 
