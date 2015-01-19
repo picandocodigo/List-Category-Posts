@@ -1,4 +1,6 @@
 <?php
+define( 'LCP_PATH', plugin_dir_path( __FILE__ ) );
+require_once ( LCP_PATH . 'lcp-thumbnail.php' );
   /**
    * The CatList object gets the info for the CatListDisplayer to show.
    * Each time you use the shortcode, you get an instance of this class.
@@ -561,72 +563,12 @@ class CatList{
     return $text;
   }
 
-  /**
-   * Get the post Thumbnail
-   * @see http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
-   * @param unknown_type $single
-   *
-   */
   public function get_thumbnail($single, $lcp_thumb_class = null){
-    $lcp_thumbnail = null;
-
-    if ($this->params['thumbnail']=='yes'):
-      $lcp_thumbnail = '';
-      if ( has_post_thumbnail($single->ID) ):
-
-        $available_image_sizes = array_unique(
-                                            array_merge(
-                                                        get_intermediate_image_sizes(),
-                                                        array("thumbnail", "medium", "large", "full")
-                                                        )
-                                            );
-        if ( in_array(
-                      $this->params['thumbnail_size'],
-                      $available_image_sizes
-                      )
-             ):
-          $lcp_thumb_size = $this->params['thumbnail_size'];
-        elseif ($this->params['thumbnail_size']):
-          $lcp_thumb_size = explode(",", $this->params['thumbnail_size']);
-        else:
-          $lcp_thumb_size = 'thumbnail';
-        endif;
-
-        $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
-          '" title="' . esc_attr($single->post_title) . '">';
-
-        $lcp_thumbnail .= get_the_post_thumbnail(
-          $single->ID,
-          $lcp_thumb_size,
-          ($lcp_thumb_class != null) ? array('class' => $lcp_thumb_class ) : null
-        );
-        $lcp_thumbnail .= '</a>';
-
-      # Check for a YouTube video thumbnail
-      elseif (
-              preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/watch(\?v\=|\/v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/", $single->post_content, $matches)
-              ||
-              preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/(v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/", $single->post_content, $matches)
-              ||
-              preg_match("/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/(embed)\/([a-zA-Z0-9\-\_]{11})[^<\s]*/", $single->post_content, $matches)
-              ):
-        $youtubeurl = $matches[0];
-
-        if ($youtubeurl):
-          $imageurl = "http://i.ytimg.com/vi/{$matches[3]}/1.jpg";
-        endif;
-
-        $lcp_ytimage = '<img src="' . $imageurl . '" alt="' . $single->post_title . '" />';
-
-        if ($lcp_thumb_class != null):
-          $thmbn_class = ' class="' . $lcp_thumb_class . '" />';
-        $lcp_ytimage = preg_replace("/\>/", $thmbn_class, $lcp_ytimage);
-        endif;
-
-        $lcp_thumbnail .= '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
-
-      endif;
-    endif;
-    return $lcp_thumbnail;
+    return LcpThumbnail::get_instance()->get_thumbnail(
+      $single,
+      $this->params['thumbnail'],
+      $this->params['thumbnail_size'],
+      $lcp_thumb_class);
   }
+
 }
