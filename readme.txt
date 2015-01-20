@@ -438,10 +438,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.54 =
  * Adds http/https check for pagination links.
  * Fixes `post_status` and `post_type` parameters for using multiple post statuses and types.
+ * Refactor Thumbnail code
 
 = 0.53 =
- * Makes "starting_with" parameter accept several letters, by Diego
- Sorribas. Thank you!
+ * Makes "starting_with" parameter accept several letters, by Diego Sorribas. Thank you!
 
 = 0.52 =
  * Small fix for pagination and query string.

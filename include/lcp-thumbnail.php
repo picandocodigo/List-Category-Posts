@@ -24,14 +24,14 @@ class LcpThumbnail{
       $lcp_thumbnail = '';
 
       if ( has_post_thumbnail($single->ID) ){
-        $available_image_sizes = array_unique(
+        $image_sizes = array_unique(
           array_merge(
             get_intermediate_image_sizes(),
             array("thumbnail", "medium", "large", "full")
           )
         );
 
-        if( in_array( $thumbnail_size,  $available_image_sizes ) ){
+        if( in_array( $thumbnail_size,  $image_sizes ) ){
           $lcp_thumb_size = $thumbnail_size;
         } elseif( $thumbnail_size ) {
           $lcp_thumb_size = explode(",", $thumbnail_size);
