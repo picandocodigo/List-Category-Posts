@@ -325,18 +325,43 @@ class CatListDisplayer {
   /**
    * Auxiliary functions for templates
    */
-  private function get_author($single, $tag = null, $css_class = null){
-    $info = $this->catlist->get_author_to_show($single);
-    return $this->assign_style($info, $tag, $css_class);
+  private function get_comments($single, $tag = null, $css_class = null){
+    return $this->content_getter('comments', $single, $tag, $css_class);
   }
 
-  private function get_comments($single, $tag = null, $css_class = null){
-    $info = $this->catlist->get_comments_count($single);
-    return $this->assign_style($info, $tag, $css_class);
+
+  private function get_author($single, $tag = null, $css_class = null){
+    return $this->content_getter('author', $single, $tag, $css_class);
   }
 
   private function get_content($single, $tag = null, $css_class = null){
-    $info = $this->catlist->get_content($single);
+    return $this->content_getter('content', $single, $tag, $css_class);
+  }
+
+  private function get_excerpt($single, $tag = null, $css_class = null){
+    return $this->content_getter('excerpt', $single, $tag, $css_class);
+  }
+
+/*
+ * These used to be separate functions, now starting to get the code
+ * in the same function for less repetition.
+ */
+  private function content_getter($type, $post, $tag = null, $css_class = null) {
+    $info = '';
+    switch( $type ){
+    case 'comments':
+      $info = $this->catlist->get_comments_count($post);
+      break;
+    case 'author':
+      $info = $this->catlist->get_author_to_show($post);
+      break;
+    case 'content':
+      $info = $this->catlist->get_content($post);
+      break;
+    case 'excerpt':
+      $info = $this->catlist->get_excerpt($post);
+      $info = preg_replace('/\[.*\]/', '', $info);
+    }
     return $this->assign_style($info, $tag, $css_class);
   }
 
@@ -358,12 +383,6 @@ class CatListDisplayer {
 
   private function get_modified_date($single, $tag = null, $css_class = null){
     $info = " " . $this->catlist->get_modified_date_to_show($single);
-    return $this->assign_style($info, $tag, $css_class);
-  }
-
-  private function get_excerpt($single, $tag = null, $css_class = null){
-    $info = $this->catlist->get_excerpt($single);
-    $info = preg_replace('/\[.*\]/', '', $info);
     return $this->assign_style($info, $tag, $css_class);
   }
 
