@@ -4,6 +4,7 @@ require_once ( LCP_PATH . 'lcp-utils.php' );
 class LcpParameters{
   // Singleton implementation
   private static $instance = null;
+  private $starting_with = null;
   private $utils;
 
 	public static function get_instance(){
@@ -97,6 +98,7 @@ class LcpParameters{
 
     // Posts that start with a given letter:
     if ( $this->utils->lcp_not_empty('starting_with') ){
+      $this->starting_with = $params['starting_with'];
       add_filter('posts_where' , array( $this, 'starting_with') );
     }
 
@@ -157,4 +159,15 @@ class LcpParameters{
     return $tag_ids;
   }
 
+  public function starting_with($where){
+    $letters = explode(',', $this->starting_with);
+    $where .= 'AND (wp_posts.post_title ' .
+      'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[0] . "%'";
+    for ($i=1; $i <sizeof($letters); $i++) {
+      $where .= 'OR wp_posts.post_title ' .
+        'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
+    }
+    $where.=')';
+    return $where;
+  }
 }

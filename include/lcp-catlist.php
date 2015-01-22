@@ -61,18 +61,6 @@ class CatList{
     remove_all_filters('posts_where');
   }
 
-  public function starting_with($where){
-    $letters = explode(',', $this->params['starting_with']);
-    $where .= 'AND (wp_posts.post_title ' .
-      'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[0] . "%'";
-    for ($i=1; $i <sizeof($letters); $i++) {
-      $where .= 'OR wp_posts.post_title ' .
-        'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
-    }
-    $where.=')';
-    return $where;
-  }
-
   /* Should I return posts or show that the tag/category or whatever
      posts combination that I called has no posts? By default I've
      always returned the latest posts because that's what the query
