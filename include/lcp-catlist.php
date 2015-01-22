@@ -3,6 +3,7 @@ define( 'LCP_PATH', plugin_dir_path( __FILE__ ) );
 require_once ( LCP_PATH . 'lcp-thumbnail.php' );
 require_once ( LCP_PATH . 'lcp-parameters.php' );
 require_once ( LCP_PATH . 'lcp-utils.php' );
+require_once ( LCP_PATH . 'lcp-category.php' );
 
 /**
  * The CatList object gets the info for the CatListDisplayer to show.
@@ -46,8 +47,6 @@ class CatList{
     $args = $this->lcp_categories();
     $processed_params = LcpParameters::get_instance()->get_query_params($this->params);
     $args = array_merge($args, $processed_params);
-
-
     $args = $this->check_pagination($args);
 
     // for WP_Query compatibility
@@ -105,71 +104,17 @@ class CatList{
     // In a category page:
     if ( $this->utils->lcp_not_empty('categorypage') &&
     $this->params['categorypage'] == 'yes' ||
-    $this->params['id'] == -1):
-      $this->lcp_category_id = $this->lcp_get_current_category();
-    // Using the category name:
-    elseif ( $this->utils->lcp_not_empty('name') ):
-    if (preg_match('/\+/', $this->params['name'])):
-      $categories = array();
-    $cat_array = explode("+", $this->params['name']);
+    $this->params['id'] == -1){
+      // Use current category
+      $this->lcp_category_id = LcpCategory::get_instance()->current_category();
+    } elseif ( $this->utils->lcp_not_empty('name') ){
+      // Using the category name:
+      $this->lcp_category_id = LcpCategory::get_instance()->with_name( $this->params['name'] );
+    } elseif ( isset($this->params['id']) && $this->params['id'] != '0' ){
+      // Using the id:
+      $this->lcp_category_id = LcpCategory::get_instance()->with_id( $this->params['id'] );
+    }
 
-    foreach ($cat_array as $category) :
-    $id = $this->get_category_id_by_name($category);
-    $categories[] = $id;
-    endforeach;
-
-    $this->lcp_category_id = $categories;
-
-    elseif (preg_match('/,/', $this->params['name'])):
-    $categories = '';
-    $cat_array = explode(",", $this->params['name']);
-
-    foreach ($cat_array as $category) :
-    $id = $this->get_category_id_by_name($category);
-    $categories .= $id . ",";
-    endforeach;
-
-    $this->lcp_category_id = $categories;
-
-    else:
-      $this->lcp_category_id = $this->get_category_id_by_name($this->params['name']);
-    endif;
-    // Using the id:
-    elseif ( isset($this->params['id']) && $this->params['id'] != '0' ):
-    if (preg_match('/\+/', $this->params['id'])):
-      if ( preg_match('/(-[0-9]+)+/', $this->params['id'], $matches) ):
-        $this->exclude = implode(',', explode("-", ltrim($matches[0], '-') ));
-    endif;
-    $this->lcp_category_id = array_map('intval', explode( "+", $this->params['id'] ) );
-    else:
-      $this->lcp_category_id = $this->params['id'];
-    endif;
-    endif;
-  }
-
-  public function lcp_get_current_category(){
-    $category = get_category( get_query_var( 'category' ) );
-    if(isset($category->errors) && $category->errors["invalid_term"][0] == __("Empty Term") ):
-      global $post;
-    $categories = get_the_category($post->ID);
-    return $categories[0]->cat_ID;
-    endif;
-    return $category->cat_ID;
-  }
-
-  /**
-   * Get the category id from its name
-   * by Eric Celeste / http://eric.clst.org
-   */
-  private function get_category_id_by_name($cat_name){
-    //TODO: Support multiple names (this used to work, but not anymore)
-    //We check if the name gets the category id, if not, we check the slug.
-    $term = get_term_by('slug', $cat_name, 'category');
-    if (!$term):
-      $term = get_term_by('name', $cat_name, 'category');
-    endif;
-
-    return ($term) ? $term->term_id : 0;
   }
 
   public function get_category_id(){
