@@ -19,14 +19,14 @@ class CatListDisplayer {
   public function __construct($atts) {
     $this->params = $atts;
     $this->catlist = new CatList($atts);
-    $this->define_template();
+    $this->select_template();
   }
 
   public function display(){
     return $this->lcp_output;
   }
 
-  private function define_template(){
+  private function select_template(){
     // Check if we got a template param:
     if (isset($this->params['template']) &&
       !empty($this->params['template'])){

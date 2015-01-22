@@ -438,7 +438,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.54 =
  * Adds http/https check for pagination links.
  * Fixes `post_status` and `post_type` parameters for using multiple post statuses and types.
- * Refactor Thumbnail code
+ * Big refactor: Thumbnail code, parameters moved to new class,
+ created util class, removed bad and repeated code, moved category
+ code to new class.  Small fixes all around the place. Went from a
+ very bad 1.77 GPA to 3.23 on CodeClimate.
+
 
 = 0.53 =
  * Makes "starting_with" parameter accept several letters, by Diego Sorribas. Thank you!

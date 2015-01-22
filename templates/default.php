@@ -41,7 +41,8 @@ $lcp_display_output .= $this->get_category_link('strong');
 $lcp_display_output .= '<ul class="lcp_catlist">';
 
 /**
- * Posts loop.
+ * POSTS LOOP
+ *
  * The code here will be executed for every post in the category.
  * As you can see, the different options are being called from functions on the
  * $this variable which is a CatListDisplayer.
@@ -96,6 +97,7 @@ foreach ($this->catlist->get_categories_posts() as $single){
   $lcp_display_output .= '</li>';
 }
 
+// Close the wrapper I opened at the beginning:
 $lcp_display_output .= '</ul>';
 
 // If there's a "more link", show it:
