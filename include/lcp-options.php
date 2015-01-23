@@ -84,4 +84,4 @@ function list_category_posts_options() {
     </em>
   </p>
 </div>
-<?php } ?>
+<?php }

@@ -6,6 +6,7 @@ class LcpParameters{
   private static $instance = null;
   private $starting_with = null;
   private $utils;
+  private $params;
 
 	public static function get_instance(){
 		if( !isset( self::$instance ) ){
@@ -15,6 +16,7 @@ class LcpParameters{
 	}
 
   public function get_query_params($params){
+    $this->params = $params;
     # Essential parameters:
     $args = array(
       'numberposts' => $params['numberposts'],
@@ -139,7 +141,7 @@ class LcpParameters{
   }
 
   private function lcp_excluded_tags($args){
-    $excluded_tags = explode(",", $params['exclude_tags']);
+    $excluded_tags = explode(",", $this->params['exclude_tags']);
     $tag_ids = array();
     foreach ( $excluded_tags as $excluded){
       $tag_ids[] = get_term_by('slug', $excluded, 'post_tag')->term_id;
