@@ -24,7 +24,7 @@ help you get started. Contact me
 
 # Development
 
-A Vagrantfile is included to set up a box for WordPress development.
+A Vagrantfile is provided to set up a box for WordPress development.
 You need [Vagrant](http://www.vagrantup.com/) installed on your
 computer.
 
@@ -49,7 +49,7 @@ on the code is reflected automatically on the Vagrant box's WordPress.
 
 ### Support the plugin
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :). 
+If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :)
 
 ## License
 __[GPLv3](http://www.gnu.org/licenses/gpl-3.0.html)__

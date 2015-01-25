@@ -4,11 +4,15 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.1
-Stable tag: 0.54.1
+Stable tag: 0.54.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
+**This plugin is looking for maintainers!** Please [take a look at
+this issue on
+GitHub](https://github.com/picandocodigo/List-Category-Posts/issues/134).
+
 List Category Posts allows you to list posts by category in a post/page using the [catlist] shortcode. When you're editing a page or post, directly insert the shortcode in your text and the posts will be listed there. The **basic** usage would be something like this:
 
 `[catlist id=1]`

@@ -95,11 +95,6 @@ class CatList{
     }
   }
 
-  private function lcp_get_current_post_id(){
-    global $post;
-    return $post->ID;
-  }
-
   private function get_lcp_category(){
     // In a category page:
     if ( $this->utils->lcp_not_empty('categorypage') &&

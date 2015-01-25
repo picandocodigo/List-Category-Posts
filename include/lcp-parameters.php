@@ -172,4 +172,9 @@ class LcpParameters{
     $where.=')';
     return $where;
   }
+
+  private function lcp_get_current_post_id(){
+    global $post;
+    return $post->ID;
+  }
 }
