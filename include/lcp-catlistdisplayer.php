@@ -228,12 +228,26 @@ class CatListDisplayer {
     $lcp_display_output .= $this->get_post_title($single);
 
     // Comments count
-    $lcp_display_output .= $this->get_comments($single, $this->params['comments_tag'], $this->params['comments_class']);
+    if (!empty($this->params['comments_tag'])):
+      if (!empty($this->params['comments_class'])):
+        $lcp_display_output .= $this->get_comments($single,
+                                       $this->params['comments_tag'],
+                                       $this->params['comments_class']);
+      else:
+        $lcp_display_output .= $this->get_comments($single, $this->params['comments_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_comments($single);
+    endif;
 
     // Date
-    $lcp_display_output .= $this->get_date($single,
+    if (!empty($this->params['date_tag']) || !empty($this->params['date_class'])):
+      $lcp_display_output .= $this->get_date($single,
                                              $this->params['date_tag'],
                                              $this->params['date_class']);
+    else:
+      $lcp_display_output .= $this->get_date($single);
+    endif;
 
     // Date Modified
     if (!empty($this->params['date_modified_tag']) || !empty($this->params['date_modified_class'])):
@@ -245,9 +259,17 @@ class CatListDisplayer {
     endif;
 
     // Author
-    $lcp_display_output .= $this->get_author($single,
+    if (!empty($this->params['author_tag'])):
+      if (!empty($this->params['author_class'])):
+        $lcp_display_output .= $this->get_author($single,
                                      $this->params['author_tag'],
                                      $this->params['author_class']);
+      else:
+        $lcp_display_output .= $this->get_author($single, $this->params['author_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_author($single);
+    endif;
 
     // Display ID
     if (!empty($this->params['display_id']) && $this->params['display_id'] == 'yes'){
@@ -259,15 +281,29 @@ class CatListDisplayer {
 
     $lcp_display_output .= $this->get_thumbnail($single);
 
-    // Content
-    $lcp_display_output .= $this->get_content($single,
+    if (!empty($this->params['content_tag'])):
+      if (!empty($this->params['content_class'])):
+        $lcp_display_output .= $this->get_content($single,
                                      $this->params['content_tag'],
                                      $this->params['content_class']);
+      else:
+        $lcp_display_output .= $this->get_content($single, $this->params['content_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_content($single);
+    endif;
 
-    // Excerpt
-    $lcp_display_output .= $this->get_excerpt($single,
+    if (!empty($this->params['excerpt_tag'])):
+      if (!empty($this->params['excerpt_class'])):
+        $lcp_display_output .= $this->get_excerpt($single,
                                      $this->params['excerpt_tag'],
                                      $this->params['excerpt_class']);
+      else:
+        $lcp_display_output .= $this->get_excerpt($single, $this->params['excerpt_tag']);
+      endif;
+    else:
+      $lcp_display_output .= $this->get_excerpt($single);
+    endif;
 
     $lcp_display_output .= $this->get_posts_morelink($single);
 
