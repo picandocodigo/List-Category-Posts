@@ -100,6 +100,11 @@ class CatListDisplayer {
 
     $this->lcp_output .= '<' . $tag;
 
+    // Follow the numner of posts in an ordered list with pagination
+    if( $tag == 'ol' && $this->catlist->get_page() > 1 ){
+      $start = $this->catlist->get_number_posts() * ($this->catlist->get_page() - 1) + 1;
+      $this->lcp_output .= ' start="' .  $start . '" ';
+    }
     //Give a class to wrapper tag
     if (isset($this->params['class'])):
       $this->lcp_output .= ' class="' . $this->params['class'] . '"';
