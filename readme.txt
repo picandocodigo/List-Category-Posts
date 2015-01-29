@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.1
-Stable tag: 0.54.2
+Stable tag: 0.55
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -438,6 +438,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.55 =
+ * Ordered lists now follow the posts count when using pagination - https://wordpress.org/support/topic/templateol-resets-count-when-using-pagination
+ * Fixes issue introduced in 0.54 with undefined indexes - https://wordpress.org/support/topic/problem-continues-with-0542
+
+= 0.54.2 =
+ * Fixes call to undefined method lcp_get_current_post_id()
 
 = 0.54.1 =
  * Fixes bug in LcpParameters.
