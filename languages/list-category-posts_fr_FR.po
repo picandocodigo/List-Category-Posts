@@ -1,0 +1,240 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: List Category Posts\n"
+"POT-Creation-Date: 2014-09-03 22:58-0300\n"
+"PO-Revision-Date: 2015-02-06 04:26+0100\n"
+"Last-Translator: Dorian Herlory <dorian.herlory@gmail.com>\n"
+"Language-Team:  <fernando@picandocodigo.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-KeywordsList: __(;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_FR\n"
+"X-Poedit-SearchPath-0: ../include\n"
+"X-Poedit-SearchPath-1: ../.\n"
+"X-Poedit-SearchPath-2: ../templates\n"
+"X-Poedit-SearchPath-3: ..\n"
+
+#: ../include/lcp-widget-form.php:51 .././include/lcp-widget-form.php:51
+msgid "Title"
+msgstr "Titre"
+
+#: ../include/lcp-widget-form.php:61 .././include/lcp-widget-form.php:61
+msgid "Category"
+msgstr "Catégorie"
+
+#: ../include/lcp-widget-form.php:90 .././include/lcp-widget-form.php:90
+msgid "Number of posts"
+msgstr "Nombre d'articles"
+
+#: ../include/lcp-widget-form.php:100 .././include/lcp-widget-form.php:100
+msgid "Offset"
+msgstr "Décalage"
+
+#: ../include/lcp-widget-form.php:109 .././include/lcp-widget-form.php:109
+msgid "Order by"
+msgstr "Trier par"
+
+#: ../include/lcp-widget-form.php:113 ../include/lcp-widget-form.php:184
+#: .././include/lcp-widget-form.php:113 .././include/lcp-widget-form.php:184
+msgid "Date"
+msgstr "Date"
+
+#: ../include/lcp-widget-form.php:114 .././include/lcp-widget-form.php:114
+msgid "Post title"
+msgstr "Titre de l'article"
+
+#: ../include/lcp-widget-form.php:115 ../include/lcp-widget-form.php:196
+#: .././include/lcp-widget-form.php:115 .././include/lcp-widget-form.php:196
+msgid "Author"
+msgstr "Auteur"
+
+#: ../include/lcp-widget-form.php:116 .././include/lcp-widget-form.php:116
+msgid "Random"
+msgstr "Aléatoire"
+
+#: ../include/lcp-widget-form.php:133 .././include/lcp-widget-form.php:133
+msgid "Order"
+msgstr "Trier"
+
+#: ../include/lcp-widget-form.php:139 .././include/lcp-widget-form.php:139
+msgid "Descending"
+msgstr "Décroissant"
+
+#: ../include/lcp-widget-form.php:142 .././include/lcp-widget-form.php:142
+msgid "Ascending"
+msgstr "Croissant"
+
+#: ../include/lcp-widget-form.php:149 .././include/lcp-widget-form.php:149
+msgid "Exclude categories (id's)"
+msgstr "Exclure les catégories (par ID)"
+
+#: ../include/lcp-widget-form.php:159 .././include/lcp-widget-form.php:159
+msgid "Exclude posts (id's)"
+msgstr "Exclure les articles (par ID)"
+
+#: ../include/lcp-widget-form.php:168 .././include/lcp-widget-form.php:168
+msgid "Show"
+msgstr "Montrer"
+
+#: ../include/lcp-widget-form.php:170 .././include/lcp-widget-form.php:170
+msgid "Thumbnail - size"
+msgstr "Miniature - taille"
+
+#: ../include/lcp-widget-form.php:190 .././include/lcp-widget-form.php:190
+msgid "Modified Date"
+msgstr "Date de modification"
+
+#: ../include/lcp-widget-form.php:202 .././include/lcp-widget-form.php:202
+msgid ""
+"Link to category (use 'catlink' on the title field if you want the title of "
+"this widget to be a link to the category)"
+msgstr ""
+"Lien vers la catégorie (utilisez 'catlink' sur le champ de titre si vous "
+"voulez que le titre de ce widget soit un lien vers la catégorie)"
+
+#: ../include/lcp-widget-form.php:208 .././include/lcp-widget-form.php:208
+msgid "Excerpt"
+msgstr "Extrait"
+
+#: ../include/lcp-widget-form.php:212 .././include/lcp-widget-form.php:212
+msgid "Excerpt size"
+msgstr "Taille de l'extrait"
+
+#: ../include/lcp-widget-form.php:221 .././include/lcp-widget-form.php:221
+msgid "More link"
+msgstr "Lien plus"
+
+#: ../include/lcp-widget-form.php:231 .././include/lcp-widget-form.php:231
+msgid "Template"
+msgstr "Template"
+
+#: ../include/lcp-widget.php:11 .././include/lcp-widget.php:11
+msgid "List posts from a specified category"
+msgstr "Lister les articles d'une catégorie spécifiée"
+
+#: ../include/lcp-widget.php:12 .././include/lcp-widget.php:12
+msgid "List Category Posts"
+msgstr "Lister les articles de la catégorie"
+
+#: ../include/lcp-catlist.php:274 .././include/lcp-catlist.php:274
+msgid "Empty Term"
+msgstr "Terme vide"
+
+#: ../include/lcp-catlist.php:494 .././include/lcp-catlist.php:494
+msgid "Continue reading &rarr;"
+msgstr "Continuer la lecture &rarr;"
+
+#: ../include/lcp-options.php:19 .././include/lcp-options.php:19
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Vous n'avez pas les permissions suffisantes pour accéder à cette page."
+
+# Need to know what is designed by "Posts"
+#: ../include/lcp-options.php:36 .././include/lcp-options.php:36
+msgid "Number of Posts"
+msgstr "Nombre d'articles"
+
+#: ../include/lcp-options.php:44 .././include/lcp-options.php:44
+msgid ""
+"Default number of posts (overriden using <code>numberposts</code> parameter "
+"on each shortcode)."
+msgstr ""
+"Nombre d'articles par défaut (outrepassez-le en utilisant le paramètre "
+"<code>numberposts</code> sur chaque shortcode)."
+
+#: ../include/lcp-options.php:46 .././include/lcp-options.php:46
+msgid "0 - displays the max number of posts per page"
+msgstr "0 - Affiche le nombre max d'articles par page"
+
+#: ../include/lcp-options.php:47 .././include/lcp-options.php:47
+msgid "-1 - displays ALL THE POSTS (no limit)"
+msgstr "-1 - Affiche TOUS LES ARTICLES (sans limite)"
+
+#: ../include/lcp-options.php:57 .././include/lcp-options.php:57
+msgid "Thanks for using List Category Posts."
+msgstr "Merci d'utiliser List Category Posts."
+
+#: ../include/lcp-options.php:58 .././include/lcp-options.php:58
+msgid ""
+"If you need help with the plugin, please visit\n"
+"      the <a href='http://wordpress.org/support/plugin/list-category-"
+"posts'>WordPress\n"
+"      support forum</a>. Make sure\n"
+"      you <a href='http://wordpress.org/extend/plugins/list-category-posts/"
+"other_notes/'>read\n"
+"      the instructions</a> to be aware of all the things you can do\n"
+"      with List Category Posts and <a href='https://github.com/picandocodigo/"
+"List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions'>check "
+"out the FAQ</a>."
+msgstr ""
+"Si vous avez besoin d'aide avec le plugin, merci de visiter le\n"
+"<a href='http://wordpress.org/support/plugin/list-category-posts'>\n"
+"Forum d'assistance de Wordpress</a>. Assurez-vous d'avoir\n"
+"<a href='http://wordpress.org/extend/plugins/list-category-posts/"
+"other_notes/'>\n"
+"lu les instructions</a> pour être au courant de toutes les choses que vous "
+"pouvez faire\n"
+"avec List Category Posts et <a href='https://github.com/picandocodigo/List-"
+"Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions'>visitez la "
+"FAQ</a>."
+
+#: ../include/lcp-options.php:69 .././include/lcp-options.php:69
+msgid ""
+"Please post <strong>new feature requests, Bug fixes,\n"
+"      enhancements</strong>\n"
+"      to <a href='https://github.com/picandocodigo/List-Category-Posts/"
+"issues'>GitHub\n"
+"      Issues</a> and check out the\n"
+"      the <a href='https://github.com/picandocodigo/List-Category-"
+"Posts'>GitHub\n"
+"      repo</a> if you want to contribute code."
+msgstr ""
+"S'il vous plaît postez <strong>les demandes de nouvelles fonctionnalités, \n"
+"les corrections de bugs, les améliorations</strong> sur le \n"
+"<a href='https://github.com/picandocodigo/List-Category-Posts/issues'>\n"
+"GitHub Issues</a> et visitez le \n"
+"<a href='https://github.com/picandocodigo/List-Category-Posts'>dépôt GitHub</"
+"a>\n"
+"si vous voulez contribuer au code."
+
+#: ../include/lcp-options.php:77 .././include/lcp-options.php:77
+msgid ""
+"If you've found the plugin useful, consider making\n"
+"      a <a href='http://picandocodigo.net/programacion/wordpress/list-"
+"category-posts-wordpress-plugin-english/'\n"
+"      title='Donate via PayPal' rel='nofollow'>donation via PayPal</a>\n"
+"      or visit my Amazon Wishlist\n"
+"      for <a href='http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/"
+"ref=wl_web'\n"
+"      title='Amazon Wishlist' rel='nofollow'>books</a>\n"
+"      or <a href='http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/"
+"ref=cm_wl_rlist_go_o'\n"
+"      rel='nofollow'>comic books</a> :)."
+msgstr ""
+"Si vous avez trouvé l'extension utile, envisagez de faire un\n"
+"<a href='http://picandocodigo.net/programacion/wordpress/list-category-posts-"
+"wordpress-plugin-english/'\n"
+"title='Donate via PayPal' rel='nofollow'>don  via PayPal</a>\n"
+"ou visitez ma liste de souhaits Amazon pour\n"
+"<a href='http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/"
+"ref=wl_web'\n"
+"title='Amazon Wishlist' rel='nofollow'>les livres</a> ou\n"
+"<a href='http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/"
+"ref=cm_wl_rlist_go_o'\n"
+"rel='nofollow'>les BD</a> :)."
+
+#: .././list_cat_posts.php:143 ../list_cat_posts.php:143
+msgid "How to use"
+msgstr "Comment l'utiliser"
+
+#: .././list_cat_posts.php:144 ../list_cat_posts.php:144
+msgid "Donate"
+msgstr "Doner"
+
+#: .././list_cat_posts.php:145 ../list_cat_posts.php:145
+msgid "Fork on Github"
+msgstr "Forker sur Github"
