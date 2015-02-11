@@ -298,7 +298,7 @@ class CatList{
 
     if ( preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches) ):
       if( empty($this->params['posts_morelink']) ):
-        $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
+        $lcp_more = __('Continue reading', 'list-category-posts');
       else:
         $lcp_more = '';
     endif;
