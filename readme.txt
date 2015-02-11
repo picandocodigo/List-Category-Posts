@@ -227,7 +227,9 @@ update the plugin.
 
 * **content** - **WARNING**: If you want to show the content on your listed posts, you might want to do this from a new [Page Template](http://codex.wordpress.org/Page_Templates) or a [Custom Post Type](http://codex.wordpress.org/Post_Types#Custom_Post_Type_Templates) template. Using this parameter is discouraged, you can have memory issues as well as infinite loop situations when you're displaying a post that's using List Category Posts. You have been warned. Usage:
 
-Show the full content of the post. If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag. Default is 'no'. Ex: `[catlist content=yes]`
+Show the excerpt or full content of the post. If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag. Default is 'no'. Ex: `[catlist content=yes]`
+
+Show the full content of the post regardless of whether there is a &lt;!--more--&gt; tag in the post. Ex: `[catlist content=full]`
 
 * **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: `[catlist catlink=yes]`. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
 
@@ -264,9 +266,9 @@ Show the full content of the post. If there's a &lt;!--more--&gt; tag in the pos
     Default: None.
 
 * **post_suffix** - Pass a String to this parameter to display this
-    String after every post title.  
+    String after every post title.
     Ex: `[catlist numberposts=-1
-    post_suffix="Hello World"]` will create something like:  
+    post_suffix="Hello World"]` will create something like:
 
     ```<ul class="lcp_catlist" id=lcp_instance_0>
        <li>
