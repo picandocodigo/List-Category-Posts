@@ -289,26 +289,26 @@ class CatList{
 
   public function get_content($single){
     if (isset($this->params['content']) &&
-    $this->params['content'] =='yes' &&
+    ($this->params['content'] =='yes' || $this->params['content'] =='full') &&
     $single->post_content):
-
       $lcp_content = $single->post_content;
-    $lcp_content = apply_filters('the_content', $lcp_content);
-    $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
+      $lcp_content = apply_filters('the_content', $lcp_content);
+      $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
 
-    if ( preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches) ):
-      if( empty($this->params['posts_morelink']) ):
-        $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
-      else:
-        $lcp_more = '';
-    endif;
-    $lcp_post_content = explode($matches[1], $lcp_content);
-    $lcp_content = $lcp_post_content[0] .
-      ' <a href="' . get_permalink($single->ID) . '" title="' . "$lcp_more" . '">' .
-      $lcp_more . '</a>';
-    endif;
+      if ($this->params['content'] =='yes' &&
+        preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches) ):
+        if( empty($this->params['posts_morelink']) ):
+          $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
+        else:
+          $lcp_more = '';
+        endif;
+        $lcp_post_content = explode($matches[1], $lcp_content);
+        $lcp_content = $lcp_post_content[0] .
+          ' <a href="' . get_permalink($single->ID) . '" title="' . "$lcp_more" . '">' .
+          $lcp_more . '</a>';
+      endif;
 
-    return $lcp_content;
+      return $lcp_content;
     else:
       return null;
     endif;
