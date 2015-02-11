@@ -303,9 +303,9 @@ class CatList{
           $lcp_more = '';
         endif;
         $lcp_post_content = explode($matches[1], $lcp_content);
-        $lcp_content = $lcp_post_content[0] .
+        $lcp_content = $lcp_post_content[0] . ($lcp_more ?
           ' <a href="' . get_permalink($single->ID) . '" title="' . "$lcp_more" . '">' .
-          $lcp_more . '</a>';
+          $lcp_more . '</a>' : '');
       endif;
 
       return $lcp_content;
