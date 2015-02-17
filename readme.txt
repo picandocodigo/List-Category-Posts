@@ -445,6 +445,7 @@ Template system has changed. Custom templates should be stored in WordPress them
  * Adds Indonesian (Bahasa Indonesia) translation. Thanks Dhyayi Warapsari!
  * Adds french from France language. Thanks Dorian Herlory!
  * Adds content=full parameter to ignore <!--more--> tags when displaying content. Thanks Sophist-UK!
+ * Fixes excluded_tags parameter
 
 = 0.55 =
  * Ordered lists now follow the posts count when using pagination - https://wordpress.org/support/topic/templateol-resets-count-when-using-pagination
