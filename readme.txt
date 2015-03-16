@@ -328,6 +328,8 @@ Will print the value of the Custom Field "Mood" but not the text
 
 * **link_target** - Select the `target` attribute for links to posts (target=_blank, _self, _parent, _top, *framename*). Example: `[catlink id=3 link_target=_blank]` will create: `<a href="http://localhost/wordpress/?p=45" title="Test post" target="_blank">Test post</a>`
 
+* **no_post_titles** - If set to `yes`, no post titles will be shown. This may make sense together with `content=yes`.
+
 == Widget ==
 
 The widget is quite simple, and it doesn't implement all of the plugin's functionality. To use a shortcode in a widget add this code to your theme's functions.php file:

@@ -118,7 +118,8 @@ class ListCategoryPosts{
                              'pagination_next' => '>>',
                              'pagination_prev' => '<<',
                              'no_posts_text' => "",
-                             'instance' => '0'
+                             'instance' => '0',
+                             'no_post_titles' => 'no'
                            ), $atts);
     if( $atts['numberposts'] == ''){
       $atts['numberposts'] = get_option('numberposts');
