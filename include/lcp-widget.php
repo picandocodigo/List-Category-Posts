@@ -13,13 +13,18 @@ class ListCategoryPostsWidget extends WP_Widget{
   }
 
   function widget($args, $instance) {
+    global $post;
     extract( $args );
+
     $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
     $limit = (is_numeric($instance['limit'])) ? $instance['limit'] : 5;
     $orderby = ($instance['orderby']) ? $instance['orderby'] : 'date';
     $order = ($instance['order']) ? $instance['order'] : 'desc';
     $exclude = ($instance['exclude'] != '') ? $instance['exclude'] : 0;
-    $excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
+    if($instance['excludeposts'] == 'current')
+      $excludeposts = $post->ID;
+    if(!isset($excludeposts))
+      $excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
     $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
     $category_id = $instance['categoryid'];
     $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
@@ -65,7 +70,6 @@ class ListCategoryPostsWidget extends WP_Widget{
       $title = '<a href="' . get_category_link($lcp_category->cat_ID) . '">' .
         $lcp_category->name . '</a>';
     } elseif ($title == 'catname') {
-      global $post;
       // If the user has setup 'catname' as the title, replace it with
       // the category link:
       $lcp_category = get_the_category($post->ID);
