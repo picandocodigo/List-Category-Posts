@@ -165,15 +165,17 @@
 </p>
 
 <p>
+  <?php $image_sizes = get_intermediate_image_sizes() ?>
   <label><?php _e("Show", 'list-category-posts')?>: </label><br/>
   <input type="checkbox" <?php checked( (bool) $instance['thumbnail'], true ); ?>
     name="<?php echo $this->get_field_name( 'thumbnail'); ?>" /> <?php _e("Thumbnail - size", 'list-category-posts')?>
     <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
       name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
-      <option value='thumbnail'>thumbnail</option>
-      <option value='medium'>medium</option>
-      <option value='large'>large</option>
-      <option value='full'>full</option>
+      <?php foreach($image_sizes as $image_size) { ?>
+      <option value='<?php echo $image_size ?>'<?php
+        if($thumbnail_size == $image_size) echo 'selected';
+      ?>><?php echo $image_size ?></option>
+      <?php } ?>
     </select>
 </p>
 
