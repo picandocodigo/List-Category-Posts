@@ -52,16 +52,16 @@ on the code is reflected automatically on the Vagrant box's WordPress.
 If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :)
 
 ## License
-__[GPLv3](http://www.gnu.org/licenses/gpl-3.0.html)__
+__[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__
 
 ```
 List Category Posts
 
-Copyright (C) 2008-2013  Fernando Briano (email : fernando@picandocodigo.net)
+Copyright (C) 2008-2015  Fernando Briano (email : fernando@picandocodigo.net)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
+the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
