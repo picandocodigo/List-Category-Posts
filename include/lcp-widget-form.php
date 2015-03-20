@@ -172,7 +172,7 @@
     <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
       name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
       <?php foreach($image_sizes as $image_size) { ?>
-      <option value='<?php echo $image_size ?>'<?php
+      <option value='<?php echo $image_size ?>' <?php
         if($thumbnail_size == $image_size) echo 'selected';
       ?>><?php echo $image_size ?></option>
       <?php } ?>
