@@ -3,7 +3,7 @@
  * List Category Posts sidebar widget.
  * @author fernando@picandocodigo.net
  */
-require_once 'CatListDisplayer.php';
+require_once 'lcp-catlistdisplayer.php';
 
 class ListCategoryPostsWidget extends WP_Widget{
 
@@ -13,17 +13,23 @@ class ListCategoryPostsWidget extends WP_Widget{
   }
 
   function widget($args, $instance) {
+    global $post;
     extract( $args );
+
     $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
     $limit = (is_numeric($instance['limit'])) ? $instance['limit'] : 5;
     $orderby = ($instance['orderby']) ? $instance['orderby'] : 'date';
     $order = ($instance['order']) ? $instance['order'] : 'desc';
     $exclude = ($instance['exclude'] != '') ? $instance['exclude'] : 0;
-    $excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
+    if($instance['excludeposts'] == 'current')
+      $excludeposts = $post->ID;
+    if(!isset($excludeposts))
+      $excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
     $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
     $category_id = $instance['categoryid'];
     $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
     $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
+    $showmodifieddate = ($instance['show_modified_date'] == 'on') ? 'yes' : 'no';
     $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
     $excerptsize = (empty($instance['excerpt_size']) ? 55 : $instance['excerpt_size']);
     $showauthor = ($instance['show_author'] == 'on') ? 'yes' : 'no';
@@ -31,6 +37,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $thumbnail = ($instance['thumbnail'] == 'on') ? 'yes' : 'no';
     $thumbnail_size = ($instance['thumbnail_size']) ? $instance['thumbnail_size'] : 'thumbnail';
     $morelink = empty($instance['morelink']) ? ' ' : $instance['morelink'];
+    $template = empty($instance['template']) ? 'default' : $instance['template'];
 
     $atts = array(
       'id' => $category_id,
@@ -38,6 +45,7 @@ class ListCategoryPostsWidget extends WP_Widget{
       'order' => $order,
       'numberposts' => $limit,
       'date' => $showdate,
+      'date_modified' => $showmodifieddate,
       'author' => $showauthor,
       'dateformat' => $dateformat,
       'template' => 'default',
@@ -49,15 +57,23 @@ class ListCategoryPostsWidget extends WP_Widget{
       'catlink' => $showcatlink,
       'thumbnail' => $thumbnail,
       'thumbnail_size' => $thumbnail_size,
-      'morelink' => $morelink
+      'morelink' => $morelink,
+      'template' => $template
     );
 
     echo $before_widget;
 
-    if($title == 'catlink'){
-      //if the user has setup 'catlink' as the title, replace it with the category link:
+    if ($title == 'catlink') {
+      // If the user has setup 'catlink' as the title, replace it with
+      // the category link:
       $lcp_category = get_category($category_id);
-      $title = '<a href="' . get_category_link($lcp_category->cat_ID) . '">' . $lcp_category->name . '</a>';
+      $title = '<a href="' . get_category_link($lcp_category->cat_ID) . '">' .
+        $lcp_category->name . '</a>';
+    } elseif ($title == 'catname') {
+      // If the user has setup 'catname' as the title, replace it with
+      // the category link:
+      $lcp_category = get_the_category($post->ID);
+      $title = $lcp_category[0]->name;
     }
     echo $before_title . $title . $after_title;
 
@@ -79,6 +95,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['categoryid'] = strip_tags($new_instance['categoryid']);
     $instance['dateformat'] = strip_tags($new_instance['dateformat']);
     $instance['show_date'] = strip_tags($new_instance['show_date']);
+    $instance['show_modified_date'] = strip_tags($new_instance['show_modified_date']);
     $instance['show_excerpt'] = strip_tags($new_instance['show_excerpt']);
     $instance['excerpt_size'] = strip_tags($new_instance['excerpt_size']);
     $instance['show_author'] = strip_tags($new_instance['show_author']);
@@ -87,15 +104,15 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['thumbnail'] = strip_tags($new_instance['thumbnail']);
     $instance['thumbnail_size'] = strip_tags($new_instance['thumbnail_size']);
     $instance['morelink'] = strip_tags($new_instance['morelink']);
+    $instance['template'] = strip_tags($new_instance['template']);
 
     return $instance;
   }
 
   /** @see WP_Widget::form */
   function form($instance) {
-    include('lcp_widget_form.php');
+    include('lcp-widget-form.php');
   }
 }
 
 add_action('widgets_init', create_function('', 'return register_widget("listCategoryPostsWidget");'));
-?>

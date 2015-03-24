@@ -1,116 +1,121 @@
-# Copyright (C) 2012 
-# This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
-"Project-Id-Version: list-category-posts\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp\n"
+"Project-Id-Version: List Category Posts\n"
 "POT-Creation-Date: 2014-09-03 22:58-0300\n"
-"PO-Revision-Date: 2014-09-03 23:58-0300\n"
-"Last-Translator: Fernando Briano <fernando@picandocodigo.net>\n"
+"PO-Revision-Date: 2015-02-03 13:57+0700\n"
+"Last-Translator: Dhyayi Warapsari <aurodigo@gmail.com>\n"
 "Language-Team:  <fernando@picandocodigo.net>\n"
-"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.1\n"
+"X-Poedit-KeywordsList: __(;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: id_ID\n"
+"X-Poedit-SearchPath-0: ../include\n"
+"X-Poedit-SearchPath-1: ../.\n"
+"X-Poedit-SearchPath-2: ../templates\n"
+"X-Poedit-SearchPath-3: ..\n"
 
 #: ../include/lcp-widget-form.php:51 .././include/lcp-widget-form.php:51
 msgid "Title"
-msgstr "Título"
+msgstr "Judul"
 
 #: ../include/lcp-widget-form.php:61 .././include/lcp-widget-form.php:61
 msgid "Category"
-msgstr "Categoría"
+msgstr "Kategori"
 
 #: ../include/lcp-widget-form.php:90 .././include/lcp-widget-form.php:90
 msgid "Number of posts"
-msgstr "Cantidad de posts"
+msgstr "Jumlah post"
 
 #: ../include/lcp-widget-form.php:100 .././include/lcp-widget-form.php:100
 msgid "Offset"
-msgstr "Offset"
+msgstr "Ofset"
 
 #: ../include/lcp-widget-form.php:109 .././include/lcp-widget-form.php:109
 msgid "Order by"
-msgstr "Ordenar por"
+msgstr "Urut berdasarkan"
 
 #: ../include/lcp-widget-form.php:113 ../include/lcp-widget-form.php:184
 #: .././include/lcp-widget-form.php:113 .././include/lcp-widget-form.php:184
 msgid "Date"
-msgstr "Fecha"
+msgstr "Tanggal"
 
 #: ../include/lcp-widget-form.php:114 .././include/lcp-widget-form.php:114
 msgid "Post title"
-msgstr "Título del post"
+msgstr "Judul post"
 
 #: ../include/lcp-widget-form.php:115 ../include/lcp-widget-form.php:196
 #: .././include/lcp-widget-form.php:115 .././include/lcp-widget-form.php:196
 msgid "Author"
-msgstr "Autor"
+msgstr "Penulis"
 
 #: ../include/lcp-widget-form.php:116 .././include/lcp-widget-form.php:116
 msgid "Random"
-msgstr "Al azar"
+msgstr "Acak"
 
 #: ../include/lcp-widget-form.php:133 .././include/lcp-widget-form.php:133
 msgid "Order"
-msgstr "Orden"
+msgstr "Urut"
 
 #: ../include/lcp-widget-form.php:139 .././include/lcp-widget-form.php:139
 msgid "Descending"
-msgstr "Descendiente"
+msgstr "Urut dari bawah"
 
 #: ../include/lcp-widget-form.php:142 .././include/lcp-widget-form.php:142
 msgid "Ascending"
-msgstr "Ascendiente"
+msgstr "Urut dari atas"
 
 #: ../include/lcp-widget-form.php:149 .././include/lcp-widget-form.php:149
 msgid "Exclude categories (id's)"
-msgstr "Excluir categorías (id's)"
+msgstr "Tidak termasuk kategori (id)"
 
 #: ../include/lcp-widget-form.php:159 .././include/lcp-widget-form.php:159
 msgid "Exclude posts (id's)"
-msgstr "Excluir posts (id's)"
+msgstr "Tidak termasuk post (id)"
 
 #: ../include/lcp-widget-form.php:168 .././include/lcp-widget-form.php:168
 msgid "Show"
-msgstr "Mostrar"
+msgstr "Tampilkan"
 
 #: ../include/lcp-widget-form.php:170 .././include/lcp-widget-form.php:170
 msgid "Thumbnail - size"
-msgstr "Vista previa - tamaño"
+msgstr "Thumbnail - ukuran"
 
 #: ../include/lcp-widget-form.php:190 .././include/lcp-widget-form.php:190
 msgid "Modified Date"
-msgstr "Fecha de modificación"
+msgstr "Tanggal Modifikasi"
 
 #: ../include/lcp-widget-form.php:202 .././include/lcp-widget-form.php:202
 msgid ""
 "Link to category (use 'catlink' on the title field if you want the title of "
 "this widget to be a link to the category)"
 msgstr ""
-"Enlace a categoría (usar 'catlink' en el campo de título si quieres que el "
-"título de este widget sea un enlace a la categoría)"
+"Tautan ke kategori (gunakan 'catlink' di kotak isian judul jika Anda mau "
+"judul widget ini menjadi tautan ke kategori)"
 
 #: ../include/lcp-widget-form.php:208 .././include/lcp-widget-form.php:208
 msgid "Excerpt"
-msgstr "Extracto"
+msgstr "Kutipan"
 
 #: ../include/lcp-widget-form.php:212 .././include/lcp-widget-form.php:212
 msgid "Excerpt size"
-msgstr "Tamaño del extracto\t"
+msgstr "Panjang kutipan"
 
 #: ../include/lcp-widget-form.php:221 .././include/lcp-widget-form.php:221
 msgid "More link"
-msgstr "Enlace a más"
+msgstr "Tautan Selanjutnya"
 
 #: ../include/lcp-widget-form.php:231 .././include/lcp-widget-form.php:231
 msgid "Template"
-msgstr "Plantilla"
+msgstr "Template"
 
 #: ../include/lcp-widget.php:11 .././include/lcp-widget.php:11
 msgid "List posts from a specified category"
-msgstr "Listar posts de una categoría especificada"
+msgstr "Daftar post dari kategori tertentu"
 
 #: ../include/lcp-widget.php:12 .././include/lcp-widget.php:12
 msgid "List Category Posts"
@@ -118,39 +123,39 @@ msgstr "List Category Posts"
 
 #: ../include/lcp-catlist.php:274 .././include/lcp-catlist.php:274
 msgid "Empty Term"
-msgstr "Término vacío"
+msgstr "Term Kosong"
 
 #: ../include/lcp-catlist.php:494 .././include/lcp-catlist.php:494
 msgid "Continue reading &rarr;"
-msgstr "Seguir leyendo &rarr;"
+msgstr "Lanjutkan membaca &rarr;"
 
 #: ../include/lcp-options.php:19 .././include/lcp-options.php:19
 msgid "You do not have sufficient permissions to access this page."
-msgstr "No tienes suficientes permisos para acceder a esta página."
+msgstr "Anda tidak memiliki akses yang cukup untuk mengakses laman ini."
 
 #: ../include/lcp-options.php:36 .././include/lcp-options.php:36
 msgid "Number of Posts"
-msgstr "Cantidad de posts"
+msgstr "Jumlah Post"
 
 #: ../include/lcp-options.php:44 .././include/lcp-options.php:44
 msgid ""
 "Default number of posts (overriden using <code>numberposts</code> parameter "
 "on each shortcode)."
 msgstr ""
-"Cantidad de posts por defecto (se pasa por arriba usando el parámetro "
-"<code>numberposts</code> en cada llamada al shortcode)."
+"Jumlah post bawaan (ubah menggunakan parameter <code>numberposts</code> di "
+"setiap shortcode)."
 
 #: ../include/lcp-options.php:46 .././include/lcp-options.php:46
 msgid "0 - displays the max number of posts per page"
-msgstr "0 - muestra la cantidad máxima de posts por página"
+msgstr "0 - menampilkan jumlah post maksimal di setiap laman"
 
 #: ../include/lcp-options.php:47 .././include/lcp-options.php:47
 msgid "-1 - displays ALL THE POSTS (no limit)"
-msgstr "-1 - muestra TODOS LOS POSTS (sin límite)"
+msgstr "-1 - menampilkan SEMUA POST (tidak ada batasan)"
 
 #: ../include/lcp-options.php:57 .././include/lcp-options.php:57
 msgid "Thanks for using List Category Posts."
-msgstr "Gracias por usar List Category Posts."
+msgstr "Terima kasih telah menggunakan List Category Posts."
 
 #: ../include/lcp-options.php:58 .././include/lcp-options.php:58
 msgid ""
@@ -165,16 +170,17 @@ msgid ""
 "List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions'>check "
 "out the FAQ</a>."
 msgstr ""
-"Si necesitas ayuda con el plugin, por favor visita\n"
-"      el <a href='http://wordpress.org/support/plugin/list-category-"
-"posts'>foro de soporte\n"
-"      de WordPress</a>. Asegúrate\n"
-"      de <a href='http://wordpress.org/extend/plugins/list-category-posts/"
-"other_notes/'>leer\n"
-"      las instrucciones</a> para estar al tanto de todo lo que puedes hacer\n"
-"      con List Category Posts y <a href='https://github.com/picandocodigo/"
-"List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-"
-"questions'>revisa el FAQ</a>."
+"Jika Anda butuh bantuan dengan plugin ini, silakan kunjungi\n"
+"      <a href='http://wordpress.org/support/plugin/list-category-"
+"posts'>WordPress\n"
+"      support forum</a>. Pastikan\n"
+"      Anda <a href='http://wordpress.org/extend/plugins/list-category-posts/"
+"other_notes/'>membaca\n"
+"      semua instruksi</a> supaya tahu apa saja yang bisa Anda lakukan "
+"dengan\n"
+"      List Category Posts dan <a href='https://github.com/picandocodigo/List-"
+"Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions'>cek FAQ</"
+"a>."
 
 #: ../include/lcp-options.php:69 .././include/lcp-options.php:69
 msgid ""
@@ -187,13 +193,13 @@ msgid ""
 "Posts'>GitHub\n"
 "      repo</a> if you want to contribute code."
 msgstr ""
-"Por favor publica <strong>pedidos de nuevas características, errores,\n"
-"mejoras</strong>\n"
-"en <a href='https://github.com/picandocodigo/List-Category-Posts/"
+"Mohon kirimkan <strong>permintaan fitur baru, perbaikan bug,\n"
+"      peningkatan plugin</strong>\n"
+"      ke <a href='https://github.com/picandocodigo/List-Category-Posts/"
 "issues'>GitHub\n"
-"Issues</a> y revisa el <a href='https://github.com/picandocodigo/List-"
-"Category-Posts'>repo en GitHub\n"
-"</a> si quieres contribuir código"
+"      Issues</a> dan cek\n"
+"      <a href='https://github.com/picandocodigo/List-Category-Posts'>GitHub\n"
+"      repo</a> jika Anda ingin berkontribusi."
 
 #: ../include/lcp-options.php:77 .././include/lcp-options.php:77
 msgid ""
@@ -209,44 +215,27 @@ msgid ""
 "ref=cm_wl_rlist_go_o'\n"
 "      rel='nofollow'>comic books</a> :)."
 msgstr ""
-"Si has encontrado útil el plugin, considera hacer una\n"
-"      a <a href='http://picandocodigo.net/programacion/wordpress/list-"
+"Jika Anda merasa plugin ini bermanfaat, pertimbangkan untuk memberikan\n"
+"      sebuah <a href='http://picandocodigo.net/programacion/wordpress/list-"
 "category-posts-wordpress-plugin-english/'\n"
-"      title='Donate via PayPal' rel='nofollow'>donación via PayPal</a>\n"
-"      o visita mi Wishlist de Amazon\n"
-"      para <a href='http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/"
-"ref=wl_web'\n"
-"      title='Amazon Wishlist' rel='nofollow'>libros</a>\n"
-"      o <a href='http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/"
+"      title='Donasi melalui PayPal' rel='nofollow'>donasi melalui PayPal</"
+"a>\n"
+"      atau kunjungi Daftar Keinginan saya di Amazon \n"
+"      untuk <a href='http://www.amazon.com/gp/registry/"
+"wishlist/2HU1JYOF7DX5Q/ref=wl_web'\n"
+"      title='Amazon Wishlist' rel='nofollow'>buku</a>\n"
+"      atau <a href='http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/"
 "ref=cm_wl_rlist_go_o'\n"
-"      rel='nofollow'>comics</a> :)."
+"      rel='nofollow'>buku komik</a> :)."
 
 #: .././list_cat_posts.php:143 ../list_cat_posts.php:143
 msgid "How to use"
-msgstr "Cómo usarlo"
+msgstr "Cara menggunakan"
 
 #: .././list_cat_posts.php:144 ../list_cat_posts.php:144
 msgid "Donate"
-msgstr "Donar"
+msgstr "Donasi"
 
 #: .././list_cat_posts.php:145 ../list_cat_posts.php:145
 msgid "Fork on Github"
-msgstr "Forkear en Github"
-
-#~ msgid ""
-#~ "List Category Posts allows you to list posts from a category into a post/"
-#~ "page using the [catlist] shortcode. This shortcode accepts a category "
-#~ "name or id, the order in which you want the posts to display, and the "
-#~ "number of posts to display. You can use [catlist] as many times as needed "
-#~ "with different arguments. Usage: [catlist argument1=value1 "
-#~ "argument2=value2]."
-#~ msgstr ""
-#~ "List Category Posts te permite listar posts de una categoría en una "
-#~ "página o post usando el shortcode [catlist]. Este shortcode acepta el "
-#~ "nombre o id de una categoría, el orden en el que quieres que aparezcan "
-#~ "los post, y la cantidad de posts a mostrar. Puedes usar [catlist] cuantas "
-#~ "veces sea necesario con argumentos diferente. Modo de uso: [catlist "
-#~ "argumento1=valor argumento2=valor]."
-
-#~ msgid "Link to category"
-#~ msgstr "Enlace a la categoría"
+msgstr "Fork di Github"

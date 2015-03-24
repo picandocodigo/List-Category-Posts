@@ -1,4 +1,6 @@
 # List Category Posts
+[![Code Climate](https://codeclimate.com/github/picandocodigo/List-Category-Posts.png)](https://codeclimate.com/github/picandocodigo/List-Category-Posts)
+
 List Category Posts is a **[WordPress](http://wordpress.org) plugin**
 that allows you to list posts from a category into a post/page using
 the [catlist] shortcode. This shortcode accepts a category name or id,
@@ -13,17 +15,29 @@ Please visit the
 [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/)
 to find out more.
 
-Master: [![Build Status](https://travis-ci.org/picandocodigo/List-Category-Posts.png?branch=master)](https://travis-ci.org/picandocodigo/List-Category-Posts)
+# Want to help with the development?
+
+I'm looking for code contributors for the plugin. If you know PHP and
+would like to start contributing to the plugin, let me know! I can
+help you get started. Contact me
+[here](http://picandocodigo.net/about/contacto/).
 
 # Development
 
-A Vagrantfile is included to set up a box for WordPress development.
+A Vagrantfile is provided to set up a box for WordPress development.
 You need [Vagrant](http://www.vagrantup.com/) installed on your
 computer.
 
 Fork the repo, clone it locally and do `vagrant up`. You'll have a
 WordPress instance running on http://127.0.0.1:8080/wordpress/.
-Install WordPress from that URL and activate the plugin on
+
+Install WordPress from that URL with this information:
+
+ * Database Name: `wordpress`
+ * User Name: `wordpressuser`
+ * Password: `wordpresspass`
+
+Activate the plugin on
 http://127.0.0.1:8080/wordpress/wp-admin/plugins.php.
 
 The plugin code is linked directly on the box, so any change you make
@@ -35,28 +49,19 @@ on the code is reflected automatically on the Vagrant box's WordPress.
 
 ### Support the plugin
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :). 
-
-## Developers
-| Name					| GitHub				| WordPress.org			| Web                       | Status				|
-| :----					| :----					| :----					| :----                     | ----:					|
-| Fernando Briano		| [picandocodigo][2.1.1]| [picandocodigo][2.1.2]| http://picandocodigo.net/	| Active				|
-
-[2.1.1]: https://github.com/picandocodigo
-[2.1.2]: http://profiles.wordpress.org/fernandobt
-
+If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :)
 
 ## License
-__[GPLv3](http://www.gnu.org/licenses/gpl-3.0.html)__
+__[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__
 
 ```
 List Category Posts
 
-Copyright (C) 2008-2013  Fernando Briano (email : fernando@picandocodigo.net)
+Copyright (C) 2008-2015  Fernando Briano (email : fernando@picandocodigo.net)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
+the Free Software Foundation, either version 2 of the License, or
 (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,

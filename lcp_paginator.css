@@ -1,6 +1,6 @@
 .lcp_paginator li{
-  display: inline;
+  display: inline-block;
   border: 1px solid;
-  padding: 5px;
+  padding: 0 5px;
   margin: 2px;
 }

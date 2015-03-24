@@ -10,6 +10,7 @@
                     'orderby'=>'',
                     'order'=>'',
                     'show_date'=>'',
+                    'show_modified_date'=>'',
                     'show_author'=>'',
                     'show_excerpt'=>'',
                     'excerpt_size' =>'',
@@ -19,7 +20,8 @@
                     'thumbnail_size' =>'',
                     'offset'=>'',
                     'show_catlink'=>'',
-                    'morelink' =>''
+                    'morelink' =>'',
+                    'template' => ''
                     );
   $instance = wp_parse_args( (array) $instance, $default);
 
@@ -28,6 +30,7 @@
   $orderby = strip_tags($instance['orderby']);
   $order = strip_tags($instance['order']);
   $showdate = strip_tags($instance['show_date']);
+  $showmodifieddate = strip_tags($instance['show_modified_date']);
   $showauthor = strip_tags($instance['show_author']);
   $exclude = strip_tags($instance['exclude']);
   $excludeposts = strip_tags($instance['excludeposts']);
@@ -39,6 +42,7 @@
   $thumbnail = strip_tags($instance['thumbnail']);
   $thumbnail_size = strip_tags($instance['thumbnail_size']);
   $morelink = strip_tags($instance['morelink']);
+  $template = strip_tags($instance['template']);
 
 ?>
 
@@ -161,15 +165,17 @@
 </p>
 
 <p>
+  <?php $image_sizes = get_intermediate_image_sizes() ?>
   <label><?php _e("Show", 'list-category-posts')?>: </label><br/>
   <input type="checkbox" <?php checked( (bool) $instance['thumbnail'], true ); ?>
     name="<?php echo $this->get_field_name( 'thumbnail'); ?>" /> <?php _e("Thumbnail - size", 'list-category-posts')?>
     <select id="<?php echo $this->get_field_id('thumbnail_size'); ?>"
       name="<?php echo $this->get_field_name( 'thumbnail_size' ); ?>" type="text">
-      <option value='thumbnail'>thumbnail</option>
-      <option value='medium'>medium</option>
-      <option value='large'>large</option>
-      <option value='full'>full</option>
+      <?php foreach($image_sizes as $image_size) { ?>
+      <option value='<?php echo $image_size ?>' <?php
+        if($thumbnail_size == $image_size) echo 'selected';
+      ?>><?php echo $image_size ?></option>
+      <?php } ?>
     </select>
 </p>
 
@@ -178,6 +184,12 @@
     <?php checked( (bool) $instance['show_date'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_date' ); ?>" />
   <?php _e("Date", 'list-category-posts')?>
+</p>
+<p>
+  <input class="checkbox"  type="checkbox"
+    <?php checked( (bool) $instance['show_modified_date'], true ); ?>
+    name="<?php echo $this->get_field_name( 'show_modified_date' ); ?>" />
+  <?php _e("Modified Date", 'list-category-posts')?>
 </p>
 <p>
   <input class="checkbox" input type="checkbox"
@@ -214,4 +226,27 @@
   <input class="widefat" id="<?php echo $this->get_field_id('morelink'); ?>"
     name="<?php echo $this->get_field_name('morelink'); ?>" type="text"
     value="<?php echo esc_attr($morelink); ?>" />
+</p>
+
+<p>
+  <label for="<?php echo $this->get_field_id('template'); ?>">
+    <?php _e("Template", 'list-category-posts')?>:
+  </label>
+  <br/>
+  <select id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
+    <?php
+      $templates = CatListDisplayer::get_templates();
+      $templates[] = 'default';
+      foreach ($templates as $tmp) :
+        $option = '<option value="' . $tmp . '" ';
+        if ($tmp == $template) :
+          $option .= ' selected = "selected" ';
+        endif;
+        $option .=  '">';
+        $option .= $tmp;
+        $option .= '</option>';
+        echo $option;
+      endforeach;
+    ?>
+  </select>
 </p>
