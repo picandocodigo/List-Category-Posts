@@ -405,8 +405,10 @@ class CatListDisplayer {
     return $this->assign_style($info, $tag);
   }
 
-  private function get_post_title($single, $tag = null, $css_class = null){
-    if ( !empty($this->params['link_titles']) && $this->params['link_titles'] == "false" ) {
+  // Link is a parameter here in case you want to use it on a template
+  // and not show the links for all the shortcodes using this template:
+  private function get_post_title($single, $tag = null, $css_class = null, $link = true){
+    if ( !$link || !empty($this->params['link_titles']) && $this->params['link_titles'] == "false" ) {
       return $single->post_title;
     }
 
