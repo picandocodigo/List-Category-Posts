@@ -57,7 +57,7 @@ class CatList{
     $this->lcp_categories_posts = $query->query($args);
     $this->posts_count = $query->found_posts;
     remove_all_filters('posts_orderby');
-    remove_all_filters('posts_where');
+    remove_filter('posts_where', array( $this, 'starting_with'));
   }
 
   /* Should I return posts or show that the tag/category or whatever
