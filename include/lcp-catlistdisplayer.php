@@ -206,6 +206,8 @@ class CatListDisplayer {
 
       $link .= "</a></li>";
     }
+    // WA: Replace '?&' by '?' to avoid potential redirection problems later on
+    $link = str_replace('?&', '?', $link );
     return $link;
   }
 
