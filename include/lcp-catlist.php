@@ -100,8 +100,8 @@ class CatList{
   private function get_lcp_category(){
     // In a category page:
     if ( $this->utils->lcp_not_empty('categorypage') &&
-    $this->params['categorypage'] == 'yes' ||
-    $this->params['id'] == -1){
+         $this->params['categorypage'] == 'yes' ||
+         $this->params['id'] == -1){
       // Use current category
       $this->lcp_category_id = LcpCategory::get_instance()->current_category();
     } elseif ( $this->utils->lcp_not_empty('name') ){

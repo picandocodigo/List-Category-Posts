@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.1.1
-Stable tag: 0.57
+Stable tag: 0.58
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -357,7 +357,7 @@ which will wrap the element with a `span` tag.
 The customizable elements (so far) are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
 
 The parameters are:
-`autor_tag, author_class, catlink_tag, catlink_class, comments_tag,
+`author_tag, author_class, catlink_tag, catlink_class, comments_tag,
 comments_class, date_tag, date_class, date_modified_tag,
 date_modified_class, excerpt_tag, excerpt_class, morelink_class,
 thumbnail_class, title_tag, title_class, posts_morelink_class,
@@ -444,6 +444,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.58 =
+* Removes filter interfering with filters set by other plugins. Thanks [zulkamal](https://github.com/zulkamal) for the Pull Request!
+* Adds option to display titles without links. Thanks zulkamal for this Pull Request too! :D
+* Workaround to prevent '?&' to appear in URLs. Thanks [mhoeher](https://github.com/mhoeher) for the Pull Request!
+* General refactors for improving code quality/security.
 
 = 0.57 =
  * Add custom image sizes to the list of selectable image sizes in the widget. Thanks [nuss](https://github.com/nuss) for the Pull Request!
