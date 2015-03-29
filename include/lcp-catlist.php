@@ -71,10 +71,12 @@ class CatList{
 
   private function check_pagination($args){
     if ( $this->utils->lcp_not_empty('pagination') ){
-      if(isset($_SERVER['QUERY_STRING']) &&
-      !empty($_SERVER['QUERY_STRING']) &&
-      ( preg_match('/lcp_page' . preg_quote($this->instance) .
-      '=([0-9]+)/i', $_SERVER['QUERY_STRING'], $match) ) ){
+      if( null !== filter_input(INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING) ){
+        $query = filter_input(INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING);
+      }
+
+      if ($query !== '' && preg_match('/lcp_page' . preg_quote($this->instance) .
+      '=([0-9]+)/i', $query, $match) ) {
         $this->page = $match[1];
         $offset = ($this->page - 1) * $this->params['numberposts'];
         $args = array_merge($args, array('offset' => $offset));
@@ -125,43 +127,43 @@ class CatList{
    */
   public function get_category_link(){
     if(($this->utils->lcp_not_empty('catlink') &&
-    $this->params['catlink'] == 'yes' ||
-    $this->utils->lcp_not_empty('catname') &&
-    $this->params['catname'] == 'yes') &&
-    $this->lcp_category_id != 0):
+        $this->params['catlink'] == 'yes' ||
+        $this->utils->lcp_not_empty('catname') &&
+        $this->params['catname'] == 'yes') &&
+       $this->lcp_category_id != 0){
       // Check for one id or several:
       $ids = null;
-    if (is_array($this->lcp_category_id)){
-      $ids = $this->lcp_category_id;
-    } else{
-      $ids = explode(",", $this->lcp_category_id);
-    }
-
-    $link = array();
-    // Loop on several categories:
-    foreach($ids as $lcp_id){
-      $cat_link = get_category_link($lcp_id);
-      $cat_title = get_cat_name($lcp_id);
-
-      // Use the category title or 'catlink_string' set by user:
-      if ($this->utils->lcp_not_empty('catlink_string')){
-        $cat_string = $this->params['catlink_string'];
-      } else {
-        $cat_string = $cat_title;
+      if (is_array($this->lcp_category_id)){
+        $ids = $this->lcp_category_id;
+      } else{
+        $ids = explode(",", $this->lcp_category_id);
       }
 
-      // Do we want the link or just the title?
-      if ($this->params['catlink'] == 'yes'){
-        $cat_string = '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-          $cat_string .
-          $this->get_category_count($lcp_id) .  '</a>';
+      $link = array();
+      // Loop on several categories:
+      foreach($ids as $lcp_id){
+        $cat_link = get_category_link($lcp_id);
+        $cat_title = get_cat_name($lcp_id);
+
+        // Use the category title or 'catlink_string' set by user:
+        if ($this->utils->lcp_not_empty('catlink_string')){
+          $cat_string = $this->params['catlink_string'];
+        } else {
+          $cat_string = $cat_title;
+        }
+
+        // Do we want the link or just the title?
+        if ($this->params['catlink'] == 'yes'){
+          $cat_string = '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
+                      $cat_string .
+                      $this->get_category_count($lcp_id) .  '</a>';
+        }
+        array_push($link, $cat_string);
       }
-      array_push($link, $cat_string);
-    }
-    return implode(", ", $link);
-    else:
+      return implode(", ", $link);
+    } else {
       return null;
-    endif;
+    }
   }
 
   /**
@@ -339,23 +341,23 @@ class CatList{
   }
 
   private function lcp_trim_excerpt($text = ''){
-    $excerpt_length = intval($this->params['excerpt_size']);
+    $excerpt_length = intval( $this->params['excerpt_size'] );
 
     $text = strip_shortcodes($text);
     $text = apply_filters('the_excerpt', $text);
     $text = str_replace(']]>',']]&gt;', $text);
 
     if( $this->utils->lcp_not_empty('excerpt_strip') &&
-    $this->params['excerpt_strip'] == 'yes'):
+        $this->params['excerpt_strip'] == 'yes' ){
       $text = strip_tags($text);
-    endif;
+    }
 
     $words = explode(' ', $text, $excerpt_length + 1);
-    if(count($words) > $excerpt_length) :
+    if(count($words) > $excerpt_length){
       array_pop($words);
-    array_push($words, '...');
-    $text = implode(' ', $words);
-    endif;
+      array_push($words, '...');
+      $text = implode(' ', $words);
+    }
     return $text;
   }
 
