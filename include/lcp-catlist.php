@@ -107,6 +107,7 @@ class CatList{
     } elseif ( $this->utils->lcp_not_empty('name') ){
       // Using the category name:
       $this->lcp_category_id = LcpCategory::get_instance()->with_name( $this->params['name'] );
+      $this->params['name'] = null;
     } elseif ( isset($this->params['id']) && $this->params['id'] != '0' ){
       // Using the id:
       $this->lcp_category_id = LcpCategory::get_instance()->with_id( $this->params['id'] );

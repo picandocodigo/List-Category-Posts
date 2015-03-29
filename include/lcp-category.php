@@ -28,7 +28,6 @@ class LcpCategory{
       foreach ($cat_array as $category){
         $categories[] = $this->get_category_id_by_name($category);
       }
-
       $lcp_category_id = $categories;
       // OR relationship
     } elseif (preg_match('/,/', $name )){

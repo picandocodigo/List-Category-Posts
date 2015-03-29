@@ -450,6 +450,8 @@ Template system has changed. Custom templates should be stored in WordPress them
 * Adds option to display titles without links. Thanks zulkamal for this Pull Request too! :D
 * Workaround to prevent '?&' to appear in URLs. Thanks [mhoeher](https://github.com/mhoeher) for the Pull Request!
 * General refactors for improving code quality/security.
+* Fixed typo in Readme (Thanks Irma!).
+* Fixes excluding tags when using category name (should fix other issues with category name too since there was a bug there).
 
 = 0.57 =
  * Add custom image sizes to the list of selectable image sizes in the widget. Thanks [nuss](https://github.com/nuss) for the Pull Request!
