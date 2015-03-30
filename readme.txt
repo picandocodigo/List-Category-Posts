@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.1.1
-Stable tag: 0.58
+Stable tag: 0.58.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -444,6 +444,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.58.1 =
+* Fixes an error with pagination links. Accessing $_SERVER filtered not working on some servers, have to investigate further for a future version. 
+* Addresses warning messages when debug enabled.
 
 = 0.58 =
 * Removes filter interfering with filters set by other plugins. Thanks [zulkamal](https://github.com/zulkamal) for the Pull Request!

@@ -71,15 +71,14 @@ class CatList{
 
   private function check_pagination($args){
     if ( $this->utils->lcp_not_empty('pagination') ){
-      if( null !== filter_input(INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING) ){
-        $query = filter_input(INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING);
-      }
-
-      if ($query !== '' && preg_match('/lcp_page' . preg_quote($this->instance) .
-      '=([0-9]+)/i', $query, $match) ) {
-        $this->page = $match[1];
-        $offset = ($this->page - 1) * $this->params['numberposts'];
-        $args = array_merge($args, array('offset' => $offset));
+      if( null !== $_SERVER['QUERY_STRING'] ){
+        $query = $_SERVER['QUERY_STRING'];
+        if ($query !== '' && preg_match('/lcp_page' . preg_quote($this->instance) .
+                                        '=([0-9]+)/i', $query, $match) ) {
+          $this->page = $match[1];
+          $offset = ($this->page - 1) * $this->params['numberposts'];
+          $args = array_merge($args, array('offset' => $offset));
+        }
       }
     }
     return $args;

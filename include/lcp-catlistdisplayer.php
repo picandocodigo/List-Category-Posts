@@ -186,26 +186,25 @@ class CatListDisplayer {
     if ($page == $current_page){
       $link = "<li>$current_page</li>";
     } else {
-      $request_uri = filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_STRING);
-      $query = filter_input(INPUT_SERVER, 'QUERY_STRING', FILTER_SANITIZE_STRING);
+      $request_uri = $_SERVER['REQUEST_URI'];
+      $query = $_SERVER['QUERY_STRING'];
       $amp = ( strpos( $request_uri, "?") ) ? "&" : "";
       $pattern = "/[&|?]?lcp_page" . preg_quote($this->catlist->get_instance()) . "=([0-9]+)/";
       $query = preg_replace($pattern, '', $query);
 
       $url = strtok($request_uri,'?');
       $protocol = "http";
-      $port = filter_input(INPUT_SERVER, 'SERVER_PORT', FILTER_SANITIZE_STRING);
-      $https = filter_input(INPUT_SERVER, 'HTTPS', FILTER_SANITIZE_STRING);
+      $port = $_SERVER['SERVER_PORT'];
+      $https = $_SERVER['HTTPS'];
       if ( (!empty($https) && $https !== 'off') ||
         $port == 443){
         $protocol = "https";
       }
-      $http_host = filter_input(INPUT_SERVER, 'HTTP_HOST', FILTER_SANITIZE_STRING);
+      $http_host = $_SERVER['HTTP_HOST'];
       $page_link = "$protocol://$http_host$url?$query" .
         $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
         "#lcp_instance_" . $this->catlist->get_instance();
       $link .=  "<li><a href='$page_link' title='$page'>";
-
       ($char != null) ? ($link .= $char) : ($link .= $page);
 
       $link .= "</a></li>";
