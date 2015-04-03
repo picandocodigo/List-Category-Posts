@@ -402,8 +402,8 @@ class CatListDisplayer {
 
     if ( !empty($this->params['title_limit']) && $this->params['title_limit'] != "0" ):
       $title_limit = intval($this->params['title_limit']);
-      if( strlen($lcp_post_title) > $title_limit ):
-        $lcp_post_title = substr($lcp_post_title, 0, $title_limit) . "&hellip;";
+      if( mb_strlen($lcp_post_title) > $title_limit ):
+        $lcp_post_title = mb_substr($lcp_post_title, 0, $title_limit) . "&hellip;";
       endif;
     endif;
 
