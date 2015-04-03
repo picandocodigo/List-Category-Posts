@@ -317,18 +317,26 @@ class CatList{
   }
 
   public function get_excerpt($single){
-    if ( !empty($this->params['excerpt']) && $this->params['excerpt']=='yes'){
+    if ( !empty($this->params['excerpt']) &&
+      ($this->params['excerpt']=='yes' || $this->params['excerpt']=='full') ){
 
-      if($single->post_excerpt == ("")){
-        //No excerpt, generate one:
-        $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
+      if($single->post_excerpt == "" ||
+        (!empty($this->params['excerpt_overwrite']) && $this->params['excerpt_overwrite'] == 'yes')){
+        // No explicit excerpt or excerpt_overwrite=yes, so generate from content:
+        $lcp_content = $single->post_content;
+        // <!--more--> tag?
+        if( $this->params['excerpt']=='full' &&
+          preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches) ) {
+
+          $lcp_excerpt = explode($matches[1], $lcp_content);
+        }else{
+          $lcp_excerpt = $this->lcp_trim_excerpt($lcp_content);
+        }
       }else{
-        if(!empty($this->params['excerpt_overwrite']) &&
-        $this->params['excerpt_overwrite'] == 'yes'){
-          // Excerpt but we want to overwrite it:";
-          $lcp_excerpt = $this->lcp_trim_excerpt($single->post_content);
+        // Explicit excerpt and excerpt_overwrite=no:
+        if( $this->params['excerpt']=='full' ){
+          $lcp_excerpt = $single->post_excerpt;
         } else {
-          // Bring post excerpt;
           $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
         }
       }
