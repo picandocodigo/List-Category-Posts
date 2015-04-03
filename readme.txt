@@ -211,7 +211,13 @@ update the plugin.
 
 * **dateformat** - Format of the date output. The default format is the one you've set on your WordPress settings. Example: `[catlist id=42 dateformat="l F dS, Y"]` would display the date as "Monday January 21st, 2013". Check http://codex.wordpress.org/Formatting_Date_and_Time for more options to display date.
 
-* **excerpt** - Display the post's excerpt. Default is 'no', use `excerpt=yes` to activate it. If you don't have an excerpt in your post, the plugin will fetch this text from the content, striping its images, shortcodes and HTML tags. The limit is set by the *excerpt_size* parameter (55 words by default). If you want the automatically generated excerpt to respect your theme's allowed HTML tags, you should use `excerpt_strip=no`. If the post has an excerpt, the HTML tags are automatically stripped. If you want to overwrite the post's excerpt with an automatically generated one (may be usefull to allow HTML tags), use `excerpt_overwrite=yes`. I added this last parameter to have consistency across excerpts.
+* **excerpt** - Display a plain text excerpt of the post. Default is 'no', use `excerpt=yes` or `excerpt=full` to activate it. If you have a separate excerpt in your post, this text will be used. If you don't have an explicit excerpt in your post, the plugin will generate one from the content, striping its images, shortcodes and HTML tags. If you want to overwrite the post's separate excerpt with an automatically generated one (may be useful to allow HTML tags), use `excerpt_overwrite=yes`.
+
+  If you use `excerpt=yes`, the separate excerpt or content will be limited to the number of words set by the *excerpt_size* parameter (55 words by default).
+
+  If you use `excerpt=full` the plugin will act more like Wordpress. If the post has a separate excerpt, it will be used in full. Otherwise if the content has a &lt;!--more--&gt; tag then the excerpt will be the text before this tag, and if there is no &lt;!--more--&gt; tag then the result will be the same as `excerpt=yes`.
+
+  If you want the automatically generated excerpt to respect your theme's allowed HTML tags, you should use `excerpt_strip=no`, otherwise the HTML tags are automatically stripped.
 
 * **excerpt_size** - Set the number of *words* to display from the excerpt. Default is 55. Eg: `excerpt_size=30`
 
@@ -446,7 +452,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 = 0.58.1 =
-* Fixes an error with pagination links. Accessing $_SERVER filtered not working on some servers, have to investigate further for a future version. 
+* Fixes an error with pagination links. Accessing $_SERVER filtered not working on some servers, have to investigate further for a future version.
 * Addresses warning messages when debug enabled.
 
 = 0.58 =
