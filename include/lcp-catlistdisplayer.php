@@ -294,7 +294,7 @@ class CatListDisplayer {
     $stuffFunction = 'get_' . $entity;
     if (!empty($this->params[$entity . '_tag'])):
       if (!empty($this->params[$entity . '_class'])):
-        $result = $this->stuffFunction($single, $this->params[$entity . '_tag'], $this->params[$entity . '_class']);
+        $result = $this->$stuffFunction($single, $this->params[$entity . '_tag'], $this->params[$entity . '_class']);
       else:
         $result = $this->$stuffFunction($single, $this->params[$entity . '_tag']);
       endif;
