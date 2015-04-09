@@ -317,18 +317,18 @@ class CatList{
   }
 
   public function get_excerpt($single){
-    if ( !empty($this->params['excerpt']) &&
-      ($this->params['excerpt']=='yes' || $this->params['excerpt']=='full') ){
+    if ( !empty( $this->params['excerpt'] ) &&
+         ( $this->params['excerpt']=='yes' || $this->params['excerpt']=='full') ){
 
-      if($single->post_excerpt == "" ||
-        (!empty($this->params['excerpt_overwrite']) && $this->params['excerpt_overwrite'] == 'yes')){
+      if( $single->post_excerpt == "" ||
+         ( !empty($this->params['excerpt_overwrite']) && $this->params['excerpt_overwrite'] == 'yes' ) ){
         // No explicit excerpt or excerpt_overwrite=yes, so generate from content:
         $lcp_content = $single->post_content;
         // <!--more--> tag?
         if( $this->params['excerpt']=='full' &&
           preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches) ) {
-
           $lcp_excerpt = explode($matches[1], $lcp_content);
+          $lcp_excerpt = $lcp_excerpt[0];
         }else{
           $lcp_excerpt = $this->lcp_trim_excerpt($lcp_content);
         }
@@ -340,7 +340,6 @@ class CatList{
           $lcp_excerpt = $this->lcp_trim_excerpt($single->post_excerpt);
         }
       }
-
       if( strlen($lcp_excerpt) < 1 ){
         $lcp_excerpt = $single->post_title;
       }
