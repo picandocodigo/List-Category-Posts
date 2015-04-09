@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.1.1
-Stable tag: 0.58.1
+Stable tag: 0.59
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -450,6 +450,19 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.59 =
+
+**Thanks Sophist from UK for this release** :)
+
+By Sophist:
+
+* Fix error causing call to undefined method
+* Add excerpt=full to allow either full explicit excerpt or use <?--more--> to define where the excerpt ends.
+* Fixes link_titles=false creates plain text rather than unlinked formatted text as you might expect.
+* Fixes title_limit not working correctly
+
+Other minor fixes by me.
 
 = 0.58.1 =
 * Fixes an error with pagination links. Accessing $_SERVER filtered not working on some servers, have to investigate further for a future version.
