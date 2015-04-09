@@ -195,9 +195,7 @@ class CatListDisplayer {
       $url = strtok($request_uri,'?');
       $protocol = "http";
       $port = $_SERVER['SERVER_PORT'];
-      $https = $_SERVER['HTTPS'];
-      if ( (!empty($https) && $https !== 'off') ||
-        $port == 443){
+      if ( (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $port == 443){
         $protocol = "https";
       }
       $http_host = $_SERVER['HTTP_HOST'];
