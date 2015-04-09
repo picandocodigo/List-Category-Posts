@@ -398,7 +398,7 @@ class CatListDisplayer {
   private function get_post_title($single, $tag = null, $css_class = null, $link = true){
     $lcp_post_title = apply_filters('the_title', $single->post_title, $single->ID);
 
-    if ( !empty($this->params['title_limit']) && $this->params['title_limit'] != "0" ):
+    if ( !empty($this->params['title_limit']) && $this->params['title_limit'] !== "0" ):
       $title_limit = intval($this->params['title_limit']);
       if( mb_strlen($lcp_post_title) > $title_limit ):
         $lcp_post_title = mb_substr($lcp_post_title, 0, $title_limit) . "&hellip;";
@@ -417,10 +417,8 @@ class CatListDisplayer {
     }
 
     if ( !$link ||
-      (!empty($this->params['link_titles']) &&
-        ($this->params['link_titles'] == "false" || $this->params['link_titles'] == "no" )
-      )
-    ) {
+         (!empty($this->params['link_titles']) &&
+          ( $this->params['link_titles'] === "false" || $this->params['link_titles'] === "no" ) ) ) {
       return $pre . $lcp_post_title . $post;
     }
 
