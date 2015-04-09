@@ -222,9 +222,10 @@ class CatListDisplayer {
     global $post;
 
     $class ='';
-    if ( $post->ID == $single->ID ):
+
+    if ( is_object($post->ID) && is_object($single->ID) && $post->ID == $single->ID ){
       $class = " class = current ";
-    endif;
+    }
 
     $lcp_display_output = '<'. $tag . $class . '>';
 
