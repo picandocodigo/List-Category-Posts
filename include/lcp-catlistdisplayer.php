@@ -224,7 +224,7 @@ class CatListDisplayer {
     global $post;
 
     $class ='';
-    if ( $post->ID == $single->ID ):
+    if ( ! empty( $post->ID ) && $post->ID == $single->ID ):
       $class = " class = current ";
     endif;
 
