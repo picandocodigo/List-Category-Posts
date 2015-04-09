@@ -1,18 +1,53 @@
 <?php
 /**
- * Bootstrap the testing environment
- * Uses wordpress tests (http://github.com/nb/wordpress-tests/) which uses PHPUnit
- * @package wordpress-plugin-tests
+ * Determine where the WP test suite lives. Three options are supported:
  *
- * Usage: change the below array to any plugin(s) you want activated during the tests
- *        value should be the path to the plugin relative to /wp-content/
- *
- * Note: Do note change the name of this file. PHPUnit will automatically fire this file when run.
- *
+ * - Define a WP_DEVELOP_DIR environment variable, which points to a checkout
+ *   of the develop.svn.wordpress.org repository (this is recommended)
+ * - Define a WP_TESTS_DIR environment variable, which points to a checkout of
+ *   WordPress test suite
+ * - Assume that we are inside of a develop.svn.wordpress.org setup, and walk
+ *   up the directory tree
  */
+if ( false !== getenv( 'WP_TESTS_DIR' ) ) {
+	define( 'WP_TESTS_DIR', getenv( 'WP_TESTS_DIR' ) );
+	define( 'WP_ROOT_DIR', WP_TESTS_DIR );
+} else {
+	// Support WP_DEVELOP_DIR, as used by some plugins
+	if ( false !== getenv( 'WP_DEVELOP_DIR' ) ) {
+		define( 'WP_ROOT_DIR', getenv( 'WP_DEVELOP_DIR' ) );
+	} else {
+		define( 'WP_ROOT_DIR', dirname( dirname( dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) ) ) );
+	}
 
-$GLOBALS['wp_tests_options'] = array(
-	'active_plugins' => array( 'List-Category-Posts/list_cat_posts.php' ),
-);
+	define( 'WP_TESTS_DIR', WP_ROOT_DIR . '/tests/phpunit' );
+}
 
-require dirname( __FILE__ ) . '/lib/bootstrap.php';
+// Based on the tests directory, look for a config file
+if ( file_exists( WP_ROOT_DIR . '/wp-tests-config.php' ) ) {
+	// Standard develop.svn.wordpress.org setup
+	define( 'WP_TESTS_CONFIG_PATH', WP_ROOT_DIR . '/wp-tests-config.php' );
+
+} elseif ( file_exists( dirname( dirname( WP_TESTS_DIR ) ) . '/wp-tests-config.php' ) ) {
+	// Environment variable exists and points to tests/phpunit of
+	// develop.svn.wordpress.org setup
+	define( 'WP_TESTS_CONFIG_PATH', dirname( dirname( WP_TESTS_DIR ) ) . '/wp-tests-config.php' );
+
+} else {
+	die( "wp-tests-config.php could not be found.\n" );
+}
+
+// Require the WP test suite utilities.
+if ( ! file_exists( WP_TESTS_DIR . '/includes/functions.php' ) ) {
+	die( "The WordPress PHPUnit test suite could not be found.\n" );
+}
+require_once WP_TESTS_DIR . '/includes/functions.php';
+
+// Bootstrap the plugin.
+function _install_and_load_lcp() {
+	require dirname( dirname( __FILE__ ) ) . '/list_cat_posts.php';
+}
+tests_add_filter( 'plugins_loaded', '_install_and_load_lcp' );
+
+// Bootstrap WP.
+require WP_TESTS_DIR . '/includes/bootstrap.php';
