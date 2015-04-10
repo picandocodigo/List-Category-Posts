@@ -223,16 +223,15 @@ class CatListDisplayer {
 
     $class ='';
 
-    if ( is_object($post->ID) && is_object($single->ID) && $post->ID == $single->ID ){
+    if ( is_object($post) && is_object($single) && $post->ID == $single->ID ){
       $class = " class = current ";
     }
 
     $lcp_display_output = '<'. $tag . $class . '>';
 
-
-    if ( $this->params['no_post_titles'] != 'yes' ):
+    if ( empty($this->params['no_post_titles']) || !empty($this->params['no_post_titles']) && $this->params['no_post_titles'] !== 'yes' ) {
       $lcp_display_output .= $this->get_post_title($single);
-    endif;
+    }
 
     // Comments count
     $lcp_display_output .= $this->get_stuff_with_tags_and_classes('comments', $single);
