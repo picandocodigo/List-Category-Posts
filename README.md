@@ -17,10 +17,14 @@ to find out more.
 
 # Want to help with the development?
 
-I'm looking for code contributors for the plugin. If you know PHP and
-would like to start contributing to the plugin, let me know! I can
-help you get started. Contact me
-[here](http://picandocodigo.net/about/contacto/).
+The evolution of this plugin wouldn't be possible without the help of
+[these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors).
+Special thanks to [Sophist](https://github.com/Sophist-UK) for the
+hard work :+1:
+
+The plugin's mostly moving forward through code contributions by its
+users. If you know PHP and would like to start contributing to the
+plugin, let me know! I can help you get started. Contact me [here](http://picandocodigo.net/about/contacto/).
 
 # Development
 
