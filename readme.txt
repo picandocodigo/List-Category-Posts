@@ -3,8 +3,8 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.2
-Stable tag: 0.59.2
+Tested up to: 4.2.1
+Stable tag: 0.60
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -450,6 +450,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.60 =
+
+* Fixes the loop so that other plugins work as if this was a blog or archive post.
+See [issue
+#156](https://github.com/picandocodigo/List-Category-Posts/issues/156)
+on Github. Thanks Sophist-UK for this new version :)
 
 = 0.59.2 =
 
