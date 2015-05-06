@@ -28,6 +28,7 @@ class CatListDisplayer {
     $this->catlist->get_posts();
     $this->select_template();
     $this->catlist->restore_wp_query();
+    wp_reset_query();
     return $this->lcp_output;
   }
 
