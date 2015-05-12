@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.2.2
-Stable tag: 0.60.1
+Stable tag: 0.61
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -451,6 +451,12 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.61 =
+
+* Adds Portuguese from Portugal (pt_PT) translation, muito obrigado Joaquim Félix!
+* Fixes translation paths, [thanks monpelaud](https://wordpress.org/support/topic/error-of-name-on-some-translation-files-1)!.
+
+
 = 0.60.1 =
 
 * Reverts switching to the loop til we find a way around for using templates.
@@ -458,8 +464,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.60 =
 
 * Fixes the loop so that other plugins work as if this was a blog or archive post.
-See [issue
-#156](https://github.com/picandocodigo/List-Category-Posts/issues/156)
+See [issue #156](https://github.com/picandocodigo/List-Category-Posts/issues/156)
 on Github. Thanks Sophist-UK for this new version :)
 
 = 0.59.2 =
