@@ -143,6 +143,11 @@ class CatList{
     return $this->lcp_category_id;
   }
 
+  public function get_categories_posts(){
+    global $wp_query;
+    return $wp_query->get_posts();
+  }
+
   /**
    * Load category name and link to the category:
    */
