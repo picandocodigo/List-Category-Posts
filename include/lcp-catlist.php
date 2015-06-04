@@ -194,8 +194,7 @@ class CatList{
    * @param int $post_id
    */
   public function get_custom_fields($custom_key, $post_id){
-    if ( $this->utils->lcp_not_empty( 'customfield_display' ) &&
-        $this->params['customfield_display'] != '' ) :
+    if ( $this->utils->lcp_not_empty( 'customfield_display' ) ) :
       $lcp_customs = '';
 
       //Doesn't work for many custom fields when having spaces:
