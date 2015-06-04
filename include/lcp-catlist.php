@@ -213,7 +213,7 @@ class CatList{
           //Browse through the custom field values:
           foreach ( $custom_fields[$user_customfield] as $key => $value ) :
             if ( $this->params['customfield_display_name'] != 'no' )
-              $value = $user_customfield . ' : ' . $value;
+              $value = $user_customfield . $this->params['customfield_display_name_glue'] . $value;
             $lcp_customs[] = $value;
           endforeach;
         endif;

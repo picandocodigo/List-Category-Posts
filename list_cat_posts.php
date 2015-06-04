@@ -100,6 +100,7 @@ class ListCategoryPosts{
                              'customfield_display' =>'',
                              'customfield_display_glue' => '',
                              'customfield_display_name' =>'',
+                             'customfield_display_name_glue' => ' : ',
                              'customfield_display_separately' => 'no',
                              'customfield_orderby' =>'',
                              'customfield_tag' => '',
