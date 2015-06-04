@@ -188,14 +188,14 @@ class CatList{
   }
 
   /**
-   * Display custom fields.
+   * Array of custom fields.
    * @see http://codex.wordpress.org/Function_Reference/get_post_custom
    * @param string $custom_key
    * @param int $post_id
    */
   public function get_custom_fields($custom_key, $post_id){
     if ( $this->utils->lcp_not_empty( 'customfield_display' ) ) :
-      $lcp_customs = '';
+      $lcp_customs = [];
 
       //Doesn't work for many custom fields when having spaces:
       $custom_key = trim( $custom_key );
@@ -208,16 +208,14 @@ class CatList{
 
       //Loop on custom fields and if there's a value, add it:
       foreach ( $custom_array as $user_customfield ) :
+        // Check that the custom field is wanted:
         if ( isset( $custom_fields[$user_customfield] ) ) :
-          $my_custom_field = $custom_fields[$user_customfield];
-
-          if ( sizeof( $my_custom_field ) > 0 ) :
-            foreach ( $my_custom_field as $key => $value ) :
-              if ( $this->params['customfield_display_name'] != 'no' )
-                $lcp_customs .= $user_customfield . ' : ';
-              $lcp_customs .= $value;
-            endforeach;
-          endif;
+          //Browse through the custom field values:
+          foreach ( $custom_fields[$user_customfield] as $key => $value ) :
+            if ( $this->params['customfield_display_name'] != 'no' )
+              $value = $user_customfield . ' : ' . $value;
+            $lcp_customs[] = $value;
+          endforeach;
         endif;
       endforeach;
 
