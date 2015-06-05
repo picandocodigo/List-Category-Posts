@@ -136,6 +136,17 @@ update the plugin.
 
 ==Other parameters==
 
+* **conditional_title** - Display a custom title before the posts list.
+    The title is not displayed if the list is empty. Set to the empty string
+    (default value) to disable.
+    Example: `[catlist conditional_title="Other posts"]`.
+
+* **conditional_title_tag** - Specify the tag used for the conditional title.
+    Defaults to 'h3'.
+
+* **conditional_title_class** - Specify the class used for the conditional
+    title. Defaults to the empty string (no special class).
+
 * **author_posts** - Get posts by author. Use 'user_nicename' (NOT
     name). Example: `[catlist author_posts="fernando"]`
 

@@ -118,6 +118,8 @@ class CatListDisplayer {
     $this->lcp_output .= '>';
     $inner_tag = ( ($tag == 'ul') || ($tag == 'ol') ) ? 'li' : 'p';
 
+    $this->lcp_output .= $this->get_conditional_title();
+
     //Posts loop
     foreach ($this->catlist->get_categories_posts() as $single) :
       if ( !post_password_required($single) ||
@@ -359,6 +361,19 @@ class CatListDisplayer {
       $info = preg_replace('/\[.*\]/', '', $info);
     }
     return $this->assign_style($info, $tag, $css_class);
+  }
+
+  private function get_conditional_title(){
+    if(!empty($this->params['conditional_title_tag']))
+      $tag = $this->params['conditional_title_tag'];
+    else
+      $tag = 'h3';
+    if(!empty($this->params['conditional_title_class']))
+      $class = $this->params['conditional_title_class'];
+    else
+      $class = '';
+
+    return $this->assign_style($this->catlist->get_conditional_title(), $tag, $class);
   }
 
   private function get_custom_fields($single){

@@ -187,6 +187,12 @@ class CatList{
     endif;
   }
 
+  public function get_conditional_title(){
+    if($this->utils->lcp_not_empty('conditional_title') && $this->get_posts_count() > 0):
+      return trim($this->params['conditional_title']);
+    endif;
+  }
+
   /**
    * Display custom fields.
    * @see http://codex.wordpress.org/Function_Reference/get_post_custom
