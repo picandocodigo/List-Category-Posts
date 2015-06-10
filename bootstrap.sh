@@ -69,5 +69,5 @@ fi
 if [ -x /usr/local/bin/phpunit -a -f /var/www/wordpress ];
 then
     cd /var/www/wp-content/plugins/list-category-posts
-    bash bin/install-wp-tests.sh wordpress_test root rootpass localhost latest
+    sudo -u www-data WP_TESTS_DIR=/var/www/wp-tests-lib/includes WP_CORE_DIR=/var/www/ bash bin/install-wp-tests.sh wordpress_test root rootpass localhost latest
 fi
