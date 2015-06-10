@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Update the system and install PHP5 + MySQL
+# Update the system and install SVN + PHP5 + MySQL
 if [ ! -x /usr/bin/mysql ];
 then
     sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password rootpass'
@@ -8,7 +8,7 @@ then
 
     apt-get update
 
-    apt-get install -y apache2 php5 libapache2-mod-php5 mysql-server-5.5 php5-mysql
+    apt-get install -y subversion apache2 php5 libapache2-mod-php5 mysql-server-5.5 php5-mysql
 fi
 
 # Create the WordPress database and corresponding user
@@ -55,4 +55,19 @@ then
     sudo rm wptest.xml
     sudo ln -s /vagrant/ /var/www/wp-content/plugins/list-category-posts
     sudo touch wordpress
+fi
+
+# Install PHPUnit
+if [ ! -x /usr/local/bin/phpunit ];
+then
+    cd /usr/local/bin
+    wget -O phpunit https://phar.phpunit.de/phpunit.phar
+    chmod a+x phpunit
+fi
+
+# Initiate the testing framework
+if [ -x /usr/local/bin/phpunit -a -f /var/www/wordpress ];
+then
+    cd /var/www/wp-content/plugins/list-category-posts
+    bash bin/install-wp-tests.sh wordpress_test root rootpass localhost latest
 fi
