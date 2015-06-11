@@ -19,10 +19,16 @@ class CatListDisplayer {
   public function __construct($atts) {
     $this->params = $atts;
     $this->catlist = new CatList($atts);
-    $this->select_template();
+    global $post;
+    $this->parent = $post;
   }
 
   public function display(){
+    $this->catlist->save_wp_query();
+    $this->catlist->get_posts();
+    $this->select_template();
+    $this->catlist->restore_wp_query();
+    wp_reset_query();
     return $this->lcp_output;
   }
 
@@ -121,20 +127,20 @@ class CatListDisplayer {
     $this->lcp_output .= $this->get_conditional_title();
 
     //Posts loop
-    foreach ($this->catlist->get_categories_posts() as $single) :
-      if ( !post_password_required($single) ||
-           ( post_password_required($single) && (
+    global $post;
+    while ( have_posts() ) : the_post();
+      if ( !post_password_required($post) ||
+           ( post_password_required($post) && (
                                                  isset($this->params['show_protected']) &&
                                                  $this->params['show_protected'] == 'yes' ) )):
-        $this->lcp_output .= $this->lcp_build_post($single, $inner_tag);
+        $this->lcp_output .= $this->lcp_build_post($post, $inner_tag);
       endif;
-    endforeach;
+    endwhile;
 
     if ( ($this->catlist->get_posts_count() == 0) &&
          ($this->params["no_posts_text"] != '') ) {
       $this->lcp_output .= $this->params["no_posts_text"];
     }
-
 
     //Close wrapper tag
     $this->lcp_output .= '</' . $tag . '>';
@@ -221,14 +227,11 @@ class CatListDisplayer {
    * @return string
    */
   private function lcp_build_post($single, $tag){
-    global $post;
 
     $class ='';
-
-    if ( is_object($post) && is_object($single) && $post->ID == $single->ID ){
-      $class = " class = current ";
+    if ( is_object($this->parent) && is_object($single) && $this->parent->ID == $single->ID ){
+      $class = ' class="current" ';
     }
-
     $lcp_display_output = '<'. $tag . $class . '>';
 
     if ( empty($this->params['no_post_titles']) || !empty($this->params['no_post_titles']) && $this->params['no_post_titles'] !== 'yes' ) {
