@@ -111,6 +111,7 @@
     <select  id="<?php echo $this->get_field_id('orderby'); ?>"
       name="<?php echo $this->get_field_name('orderby'); ?>" type="text" >
       <?php $lcp_orders = array("date" => __("Date", "list-category-posts"),
+                                "modified" => __("Modified Date", "list-category-posts"),
                                 "title" => __("Post title", "list-category-posts"),
                                 "author" => __("Author", "list-category-posts"),
                                 "rand" => __("Random", "list-category-posts"));

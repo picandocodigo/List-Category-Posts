@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.2.2
-Stable tag: 0.61
+Stable tag: 0.62
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -463,6 +463,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.62 =
+
+* Dutch translation by Gerhard Hoogterp, thank you!
+* Re-add the loop fixes and fixes function missing from last time by Sophist-UK, thanks!
+* Allow to order by the modified date in the widget by bibz, thanks!
 
 = 0.61 =
 

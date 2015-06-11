@@ -35,9 +35,34 @@ class CatList{
     if ( $this->utils->lcp_not_empty('instance') ){
       $this->instance = $atts['instance'];
     }
-    //Get the category posts:
+  }
+
+  /**
+   * Determine the categories of posts and execute the WP_query
+   */
+  public function get_posts() {
     $this->get_lcp_category();
     $this->set_lcp_parameters();
+  }
+
+  /**
+   * Save the existing wp_query
+   */
+  public function save_wp_query() {
+    global $wp_query;
+    if ( isset($wp_query) ) {
+      $this->saved_wp_query = clone $wp_query;
+    }
+  }
+
+  /**
+   * Restore the previous wp_query
+   */
+  public function restore_wp_query() {
+    global $wp_query;
+    if ( isset($this->saved_wp_query) ) {
+      $wp_query = clone $this->saved_wp_query;
+    }
   }
 
   /**
@@ -53,9 +78,9 @@ class CatList{
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
 
-    $query = new WP_Query;
-    $this->lcp_categories_posts = $query->query($args);
-    $this->posts_count = $query->found_posts;
+    query_posts($args);
+    global $wp_query;
+    $this->posts_count = $wp_query->found_posts;
     remove_all_filters('posts_orderby');
     remove_filter('posts_where', array( $this, 'starting_with'));
   }
@@ -119,7 +144,8 @@ class CatList{
   }
 
   public function get_categories_posts(){
-    return $this->lcp_categories_posts;
+    global $wp_query;
+    return $wp_query->get_posts();
   }
 
   /**
