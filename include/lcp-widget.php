@@ -9,7 +9,7 @@ class ListCategoryPostsWidget extends WP_Widget{
 
   function ListCategoryPostsWidget() {
     $opts = array('description' => __('List posts from a specified category','list-category-posts') );
-    parent::WP_Widget(false, $name = __('List Category Posts','list-category-posts'), $opts);
+    parent::__construct(false, $name = __('List Category Posts','list-category-posts'), $opts);
   }
 
   function widget($args, $instance) {
