@@ -154,8 +154,8 @@ class LcpParameters{
     $tags = get_the_tags();
     $tag_ids = array();
     if( !empty($tags) ){
-      foreach ($tags as $tag_id => $tag) {
-        array_push($tag_ids, $tag_id);
+      foreach ($tags as $tag) {
+        array_push($tag_ids, $tag->term_id);
       }
     }
     return $tag_ids;

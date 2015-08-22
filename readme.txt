@@ -142,7 +142,7 @@ update the plugin.
 * **tags** - Tag support, display posts from a certain tag.
 
 * **currenttags** - Display posts from the current post's tags (won't
-    work on pages since they have no tags).
+    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`
 
 * **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
 
@@ -391,7 +391,7 @@ class will be assigned to the `a` tag like this:
 Will produce:
 `<a href="http://127.0.0.1/wordpress/?p=38" title="Test" class="lcp_title">Test</a>`
 But if you use both:
-`[catlist numberposts=5 title_class=lcp_title tag=h4]`
+`[catlist numberposts=5 title_class=lcp_title title_tag=h4]`
 You will get:
 `<h4 class="lcp_title">
     <a title="Hipchat" href="http://127.0.0.1:8080/wordpress/?p=40"></a>
