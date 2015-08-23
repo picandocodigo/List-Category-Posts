@@ -36,13 +36,18 @@ You need [Vagrant](http://www.vagrantup.com/) installed on your
 computer.
 
 Fork the repo, clone it locally and do `vagrant up`. You'll have a
-WordPress instance running on http://127.0.0.1:8080/wordpress/.
+WordPress instance running on http://127.0.0.1:8080/.
 
-Install WordPress from that URL with this information:
+WordPress is installed with this information:
 
  * Database Name: `wordpress`
  * User Name: `wordpressuser`
  * Password: `wordpresspass`
+
+You can access the admin dashboard with the following credentials:
+
+ * Admin user: `adminuser`
+ * Admin password: `adminpass`
 
 Activate the plugin on
 http://127.0.0.1:8080/wordpress/wp-admin/plugins.php.
@@ -50,13 +55,35 @@ http://127.0.0.1:8080/wordpress/wp-admin/plugins.php.
 The plugin code is linked directly on the box, so any change you make
 on the code is reflected automatically on the Vagrant box's WordPress.
 
+## Testing
+
+PHPUnit has been setup by [bibz](https://github.com/bibz), you can run `phpunit` on the Virtual Machine:
+
+```bash
+vagrant@vagrant-ubuntu-precise-32:/vagrant$ phpunit
+Installing...
+Running as single site... To run multisite, use -c tests/phpunit/multisite.xml
+Not running ajax tests. To execute these, use --group ajax.
+Not running ms-files tests. To execute these, use --group ms-files.
+Not running external-http tests. To execute these, use --group external-http.
+PHPUnit 4.7.3 by Sebastian Bergmann and contributors.
+
+.
+
+Time: 3.11 seconds, Memory: 46.25Mb
+
+OK (1 test, 12 assertions)
+```
+
+The code needs lots of refactoring and probably some more documentation to be able to write some more relevant tests. This is a task where you can really help the development of the plugin if you're interested in contributing.
+
 ### Usage
 
 `[catlist argument1=value1 argument2=value2]`
 
 ### Support the plugin
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/ "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :)
+If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :)
 
 ## License
 __[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__
