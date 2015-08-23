@@ -37,6 +37,9 @@ $lcp_display_output = '';
 // Show category link:
 $lcp_display_output .= $this->get_category_link('strong');
 
+// Show the conditional title:
+$lcp_display_output .= $this->get_conditional_title();
+
 //Add 'starting' tag. Here, I'm using an unordered list (ul) as an example:
 $lcp_display_output .= '<ul class="lcp_catlist">';
 
