@@ -309,6 +309,15 @@ Show the full content of the post regardless of whether there is a &lt;!--more--
     set a different tag (instead of the div) and a specific class
     (instead of lcp-customfield).
 
+* **customfield_display_glue** - Specify the text to appear between two custom
+    fields if displayed together, defaults to the empty string. Not used if
+    the `customfield_display_separately` parameter if defined.
+
+* **customfield_display_separately** - Display the custom fields separately.
+    Each custom field is displayd within its own tag (see `customfield_tag`).
+    Dfaults to 'no', set to 'yes' to enable. Superseeds the
+    `customfield_display_glue` parameter when enabled.
+
 * **customfield_display_name** - To use with `customfield_display`.
     Use it to just print the value of the Custom field and not the
     name. Example:
@@ -316,6 +325,10 @@ Show the full content of the post regardless of whether there is a &lt;!--more--
    customfield_display_name="no"]`
 Will print the value of the Custom Field "Mood" but not the text
     "Mood: [value]".
+
+* **customfield_display_name_glue** - To use with `customfield_display_name`.
+    Use it to specify the text between the name and the value, defaults to
+    ' : '.
 
 * **template** - By default, posts will be listed in an unordered list
     (ul tag) with the class 'lcp_catlist':

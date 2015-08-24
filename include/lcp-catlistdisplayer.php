@@ -386,7 +386,19 @@ class CatListDisplayer {
         $tag = 'div';
       if(empty($this->params['customfield_class']) || $this->params['customfield_class'] == null)
         $css_class = 'lcp_customfield';
-      return $this->assign_style($info, $tag, $css_class);
+      $final_info = '';
+      if(!is_array($info)){
+        $final_info = $this->assign_style($info, $tag, $css_class);
+      }else{
+        if($this->params['customfield_display_separately'] != 'no'){
+          foreach($info as $i)
+            $final_info .= $this->assign_style($i, $tag, $css_class);
+        }else{
+          $one_info = implode($this->params['customfield_display_glue'], $info);
+          $final_info = $this->assign_style($one_info, $tag, $css_class);
+        }
+      }
+      return $final_info;
     }
   }
 
