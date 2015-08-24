@@ -227,7 +227,7 @@ class CatList{
    */
   public function get_custom_fields($custom_key, $post_id){
     if ( $this->utils->lcp_not_empty( 'customfield_display' ) ) :
-      $lcp_customs = [];
+      $lcp_customs = array();
 
       //Doesn't work for many custom fields when having spaces:
       $custom_key = trim( $custom_key );

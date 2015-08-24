@@ -311,11 +311,11 @@ Show the full content of the post regardless of whether there is a &lt;!--more--
 
 * **customfield_display_glue** - Specify the text to appear between two custom
     fields if displayed together, defaults to the empty string. Not used if
-    the `customfield_display_separately` parameter if defined.
+    the `customfield_display_separately` parameter is defined.
 
 * **customfield_display_separately** - Display the custom fields separately.
     Each custom field is displayd within its own tag (see `customfield_tag`).
-    Dfaults to 'no', set to 'yes' to enable. Superseeds the
+    Defaults to 'no', set to 'yes' to enable. Superseeds the
     `customfield_display_glue` parameter when enabled.
 
 * **customfield_display_name** - To use with `customfield_display`.
