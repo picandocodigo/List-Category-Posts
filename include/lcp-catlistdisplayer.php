@@ -423,6 +423,22 @@ class CatListDisplayer {
     return $this->assign_style($info, $tag);
   }
 
+  private function get_post_link($single, $text, $class = null){
+    $info = '<a href="' . get_permalink($single->ID) . '" title="' . wptexturize($single->post_title) . '"';
+
+    if ( !empty($this->params['link_target']) ):
+      $info .= ' target="' . $this->params['link_target'] . '"';
+    endif;
+
+    if ( !empty($class ) ):
+      $info .= ' class="' . $class . '"';
+    endif;
+
+    $info .= '>' . $text . '</a>';
+
+    return $info;
+  }
+
   // Link is a parameter here in case you want to use it on a template
   // and not show the links for all the shortcodes using this template:
   private function get_post_title($single, $tag = null, $css_class = null, $link = true){
@@ -458,18 +474,7 @@ class CatListDisplayer {
       return $pre . $lcp_post_title . $post;
     }
 
-    $info = '<a href="' . get_permalink($single->ID) . '" title="' . wptexturize($single->post_title) . '"';
-
-    if (!empty($this->params['link_target'])):
-      $info .= ' target="' . $this->params['link_target'] . '" ';
-    endif;
-
-    if ( !empty($this->params['title_class'] ) &&
-         empty($this->params['title_tag']) ):
-      $info .= ' class="' . $this->params['title_class'] . '"';
-    endif;
-
-    $info .= '>' . $lcp_post_title . '</a>';
+    $info = $this->get_post_link($single, $lcp_post_title, (!empty($this->params['title_class']) && empty($this->params['title_tag'])) ? $this->params['title_class'] : null);
 
     if( !empty($this->params['post_suffix']) ):
       $info .= " " . $this->params['post_suffix'];
