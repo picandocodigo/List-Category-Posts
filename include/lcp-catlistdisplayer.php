@@ -403,7 +403,13 @@ class CatListDisplayer {
   }
 
   private function get_date($single, $tag = null, $css_class = null){
-    $info = " " . $this->catlist->get_date_to_show($single);
+    $info = $this->catlist->get_date_to_show($single);
+
+    if ( !empty($this->params['link_dates']) && ( 'yes' === $this->params['link_dates'] || 'true' === $this->params['link_dates'] ) ):
+      $info = $this->get_post_link($single, $info);
+    endif;
+
+    $info = ' ' . $info;
     return $this->assign_style($info, $tag, $css_class);
   }
 
