@@ -13,7 +13,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 this issue on
 GitHub](https://github.com/picandocodigo/List-Category-Posts/issues/134).
 
-List Category Posts allows you to list posts by category in a post/page using the [catlist] shortcode. When you're editing a page or post, directly insert the shortcode in your text and the posts will be listed there. The **basic** usage would be something like this:
+List Category Posts allows you to list posts by category in a post or page using the `[catlist]` shortcode. When you're editing a page or post, directly insert the shortcode in your text and the posts will be listed there. The *basic* usage would be something like this:
 
 `[catlist id=1]`
 
@@ -22,17 +22,23 @@ List Category Posts allows you to list posts by category in a post/page using th
 The shortcode accepts a category name or id, the order in which you
 want the posts to display, and the number of posts to display. You can
 also display the post author, date, excerpt, custom field values, even
-the content!
+the content! A lot of parameters have been added to customize what to
+display and how to show it. Check [the full
+documentation](https://wordpress.org/plugins/list-category-posts/other_notes/)
+to learn about the different ways to use it.
 
-The [catlist] shortcode can be used as many times as needed with
-different arguments on each post/page. You can add a lot more
-parameters according to what and how you want to show your post's
-list:
+The `[catlist]` shortcode can be used as many times as needed with
+different arguments on each post/page.
 `[catlist id=1 numberposts=10]`
 
-There's an options page with only one option -for the moment-, new options will be implemented on demand.
+There's an options page with only one option -for the moment-, new
+options will be implemented on demand (as long as they make
+sense). Right now the only global option is the `numberposts`
+parameter, to define a default number of posts to show for each
+instance (you can override this value by using the `numberposts`
+parameter in your shortcode).
 
-**[Please read the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)** to learn which parameters are available and how to use them.
+**[Read the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)** to learn which parameters are available and how to use them.
 
 If you want to **List Categories** instead of posts you can use my other plugin **[List categories](http://wordpress.org/plugins/list-categories/)**.
 
@@ -40,15 +46,23 @@ You can find **Frequently Asked Questions** [here](https://github.com/picandocod
 
 **Customization**
 
-The different elements to display con be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
+The different elements to display can be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
 
 **Widget**
 
-The plugin includes a widget which works pretty much the same as the plugin. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page.
+The plugin includes a widget which works pretty much the same as the
+plugin. Just add as many widgets as you want, and select all the
+available options from the Appearence > Widgets page. Not all the
+functionality in the shortcode has been implemented in the widget
+yet. You can use the shortcode for the most flexibility.
 
-Please, read the information on [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) and [Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/) to be aware of new functionality, and improvements to the plugin.
+Please, read the information on [Other
+Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)
+and
+[Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/)
+to be aware of new functionality, and improvements to the plugin.
 
 **Videos**
 
@@ -64,21 +78,21 @@ If you've found the plugin useful, consider making a [donation via PayPal](http:
 
 **Development**
 
-I've moved the development to [GitHub](https://github.com/picandocodigo/List-Category-Posts). Fork it, code, make a pull request, suggest improvements, etc. over there. I dream of the day all of the WordPress plugins will be hosted on Github :)
+Development is being tracked on [GitHub](https://github.com/picandocodigo/List-Category-Posts). Fork it, code, make a pull request, suggest improvements, etc. over there. I dream of the day all of the WordPress plugins will be hosted on Git :)
 
 
 ==Installation==
 
-* Upload listcat directory into your wp-content/plugins/ directory.
+* Upload the `list-category-posts` directory to your wp-content/plugins/ directory.
 * Login to your WordPress Admin menu, go to Plugins, and activate it.
 * You can find the List Category Posts widget in the Appearence > Widgets section on your WordPress Dashboard.
 * If you want to customize the way the plugin displays the information, check the section on Templates on this documentation.
 
 ==Other notes==
 
-==INSTRUCTIONS on how to use the plugin==
+==Instructions on how to use the plugin==
 
-==Selecting the category==
+==SELECTING THE CATEGORY==
 The plugin can figure out the category from which you want to list posts in several ways. **You should use only one of these methods** since these are all mutually exclusive, weird results are expected when using more than one:
 
 * Using the *category id*.
@@ -90,19 +104,20 @@ The plugin can figure out the category from which you want to list posts in seve
 
 When using List Category Posts whithout a category id, name or slug, it will post the latest posts from **every category**.
 
-==Using more than one category==
+==USING MORE THAN ONE CATEGORY==
 
 * Posts from several categories with an **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
 * Posts from several categories with an **OR** relationship, posts that belong to any of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
 * **Exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, you should write the categories you want to include first, and then the ones you want to exclude. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
 
-==Pagination==
+==PAGINATION==
 
 To use pagination, you need to set the following parameters:
 
-* **pagination** set it to yes.
+* **pagination** set it to yes. `[catlist pagination=yes]`
 
-* **numberposts** - Posts per page are set with the `numberposts` parameter.
+* **numberposts** - Posts per page are set with the `numberposts`
+    parameter. `[catlist pagination=yes numberposts=5]`
 
 * **instance** (only necessary when using the shortcode with
     pagination more than once in the same page/post) - a number or
@@ -134,7 +149,7 @@ theme's directory and customize it. Do not customize the file on the
 plugin's directory since this file will be overwritten every time you
 update the plugin.
 
-==Other parameters==
+==OTHER PARAMETERS==
 
 * **conditional_title** - Display a custom title before the posts list.
     The title is not displayed if the list is empty. Set to the empty string
@@ -333,7 +348,7 @@ Will print the value of the Custom Field "Mood" but not the text
 * **template** - By default, posts will be listed in an unordered list
     (ul tag) with the class 'lcp_catlist':
 
-    `<ul class="lcp_catlist"><li><a href="post1">Post 1</li>...`
+    `<ul class="lcp_catlist"><li><a href="post1">Post 1</a></li>...`
 
     You can use a different class by using the *class* parameter.
 
@@ -346,11 +361,11 @@ Will print the value of the Custom Field "Mood" but not the text
     results:
       * `div` - This will output a div with the `lcp_catlist` class
     (or one you pass as a parameter with the `class` argument). The
-    posts will be displayed between p tags.
+    posts will be displayed between p tags. `[catlist template=div]`
 
       * `ol` - This will output an ordered list with the `lcp_catlist`
       css class (or the one you pass as a parameter with the `class`
-      argument) and each post will be a list item inside the ordered list.
+      argument) and each post will be a list item inside the ordered list. `[catlist template=ol]`.
 
 * **morelink** - Include a "more" link to access the category archive for the category. The link is inserted after listing the posts. It receives a string of characters as a parameter which will be used as the text of the link. Example: `[catlist id=38 morelink="Read more"]`
 
@@ -434,15 +449,28 @@ If the template file were templatename.php.
 You can have as many different templates as you want, and use them in different pages and posts. The template code is pretty well documented, so if you're a bit familiar with HTML and PHP, you'll have no problems creating your own template. I'm planning on reworking the template system in order to have a really user friendly way to create templates.
 
 == Frequently Asked Questions ==
-* **Instructions** on how to use the plugin: http://wordpress.org/extend/plugins/list-category-posts/other_notes/ - **Read it**.
-* **Template system** how to customize the way the posts are shown: http://wordpress.org/extend/plugins/list-category-posts/other_notes/. I am aware the Template System is not really friendly right now, I'll work on this whenever I get the time to work on the plugin for a while.
-* **New feature requests, Bug fixes, enhancements** - You can post them on [GitHub Issues](https://github.com/picandocodigo/List-Category-Posts/issues).
-* **Questions** For questions either use the [Support forum](http://wordpress.org/support/plugin/list-category-posts) or [WordPress Answers](http://wordpress.stackexchange.com/).Just [ask your question](http://wordpress.stackexchange.com/questions/ask?tags=plugin-list-category-posts) using the 'plugin-list-category-post' tag.
 
+**FAQ**
 
-* **FAQ**
 You can find the Frequently Asked Questions [here](https://github.com/picandocodigo/List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions).
 
+**INSTRUCTIONS ON HOW TO USE THE PLUGIN**
+
+http://wordpress.org/extend/plugins/list-category-posts/other_notes/ -
+
+Please read the instructions and the FAQ before opening a new topic in the support forums.
+
+**TEMPLATE SYSTEM**
+
+How to customize the way the posts are shown: http://wordpress.org/extend/plugins/list-category-posts/other_notes/. I am aware the Template System is not the friendliest right now, I'll work on improving this if I ever get the time to work on it.
+
+**NEW FEATURE REQUESTS, BUG FIXES, ENHANCEMENTS**
+
+You can post them on [GitHub Issues](https://github.com/picandocodigo/List-Category-Posts/issues).
+
+**FURTHER QUESTIONS**
+
+For questions either use the [Support forum](http://wordpress.org/support/plugin/list-category-posts) or [WordPress Answers](http://wordpress.stackexchange.com/) (just [ask your question](http://wordpress.stackexchange.com/questions/ask?tags=plugin-list-category-posts) using the 'plugin-list-category-post' tag).
 
 == Upgrade Notice ==
 
@@ -482,6 +510,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 * Fixes get_current_tags
 * Some updates on the documentation
 * Introduces a conditional title, only displayed when posts are found, thanks [bibz](https://github.com/bibz) for this Pull Request!
+* Introduces `customfield_display_separately`, `customfield_display_glue` and `customfield_display_name_glue` parameters for multiple custom fields handling by bibz. Thanks! :D
 
 = 0.63.1 =
 * Remove renamed file (Damn using subversion), should fix issues updating.
