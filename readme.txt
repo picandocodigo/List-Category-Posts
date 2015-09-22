@@ -362,6 +362,8 @@ Will print the value of the Custom Field "Mood" but not the text
 
 * **link_titles** - Option to display titles without links. If set to `false`, the post titles won't be linking to the article.
 
+* **link_dates** - Option to wrap dates with a link to the post. Set to `true` or `yes` to enable, set to `false` or `no` to disable. Defaults to `false`.
+
 == Widget ==
 
 The widget is quite simple, and it doesn't implement all of the plugin's functionality. To use a shortcode in a widget add this code to your theme's functions.php file:

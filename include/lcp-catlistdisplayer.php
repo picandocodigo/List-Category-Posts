@@ -403,7 +403,13 @@ class CatListDisplayer {
   }
 
   private function get_date($single, $tag = null, $css_class = null){
-    $info = " " . $this->catlist->get_date_to_show($single);
+    $info = $this->catlist->get_date_to_show($single);
+
+    if ( !empty($this->params['link_dates']) && ( 'yes' === $this->params['link_dates'] || 'true' === $this->params['link_dates'] ) ):
+      $info = $this->get_post_link($single, $info);
+    endif;
+
+    $info = ' ' . $info;
     return $this->assign_style($info, $tag, $css_class);
   }
 
@@ -421,6 +427,22 @@ class CatListDisplayer {
     endif;
 
     return $this->assign_style($info, $tag);
+  }
+
+  private function get_post_link($single, $text, $class = null){
+    $info = '<a href="' . get_permalink($single->ID) . '" title="' . wptexturize($single->post_title) . '"';
+
+    if ( !empty($this->params['link_target']) ):
+      $info .= ' target="' . $this->params['link_target'] . '"';
+    endif;
+
+    if ( !empty($class ) ):
+      $info .= ' class="' . $class . '"';
+    endif;
+
+    $info .= '>' . $text . '</a>';
+
+    return $info;
   }
 
   // Link is a parameter here in case you want to use it on a template
@@ -458,18 +480,7 @@ class CatListDisplayer {
       return $pre . $lcp_post_title . $post;
     }
 
-    $info = '<a href="' . get_permalink($single->ID) . '" title="' . wptexturize($single->post_title) . '"';
-
-    if (!empty($this->params['link_target'])):
-      $info .= ' target="' . $this->params['link_target'] . '" ';
-    endif;
-
-    if ( !empty($this->params['title_class'] ) &&
-         empty($this->params['title_tag']) ):
-      $info .= ' class="' . $this->params['title_class'] . '"';
-    endif;
-
-    $info .= '>' . $lcp_post_title . '</a>';
+    $info = $this->get_post_link($single, $lcp_post_title, (!empty($this->params['title_class']) && empty($this->params['title_tag'])) ? $this->params['title_class'] : null);
 
     if( !empty($this->params['post_suffix']) ):
       $info .= " " . $this->params['post_suffix'];

@@ -126,7 +126,8 @@ class ListCategoryPosts{
                              'no_posts_text' => "",
                              'instance' => '0',
                              'no_post_titles' => 'no',
-                             'link_titles' => true
+                             'link_titles' => true,
+                             'link_dates' => 'no',
                            ), $atts);
     if( $atts['numberposts'] == ''){
       $atts['numberposts'] = get_option('numberposts');
