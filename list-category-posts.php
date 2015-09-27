@@ -129,10 +129,12 @@ class ListCategoryPosts{
                              'link_titles' => true,
                              'link_dates' => 'no',
                            ), $atts);
-    if( $atts['numberposts'] == ''){
+    if($atts['numberposts'] == ''){
       $atts['numberposts'] = get_option('numberposts');
     }
-    if( $atts['pagination'] == 'yes'){
+    if($atts['pagination'] == 'yes' ||
+       (get_option('lcp_pagination') === 'true' &&
+        $atts['pagination'] == 'no') ){
       lcp_pagination_css();
     }
     $catlist_displayer = new CatListDisplayer($atts);

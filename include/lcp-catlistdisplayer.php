@@ -10,6 +10,7 @@ class CatListDisplayer {
   private $catlist;
   private $params = array();
   private $lcp_output;
+
   public static function getTemplatePaths(){
     $template_path = TEMPLATEPATH . "/list-category-posts/";
     $stylesheet_path = STYLESHEETPATH . "/list-category-posts/";
@@ -154,7 +155,11 @@ class CatListDisplayer {
 
   public function get_pagination(){
     $pag_output = '';
-    if (!empty($this->params['pagination']) && $this->params['pagination'] == "yes"):
+    if (!empty($this->params['pagination']) && $this->params['pagination'] == "yes" ||
+        # Check if the pagination option is set to true, and the param
+        # is not set to 'no' (since shortcode parameters should
+        # override general options.
+        (get_option('lcp_pagination') === 'true' && $this->params['pagination'] == 'no') ):
       $lcp_paginator = '';
       $number_posts = $this->catlist->get_number_posts();
       $pages_count = ceil (

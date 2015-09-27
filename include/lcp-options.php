@@ -6,6 +6,7 @@ if ( is_admin() ){
 
 function lcp_settings() { // whitelist options
   register_setting( 'list_category_posts_group', 'numberposts' );
+  register_setting( 'list_category_posts_group', 'lcp_pagination' );
 }
 
 function list_category_posts_menu() {
@@ -47,6 +48,21 @@ function list_category_posts_options() {
               </ul>
             </small>
           </td>
+        </tr>
+
+        <tr valign="top">
+          <th scope="row">
+            <label for="lcp_pagination">
+              <strong><?php _e("Pagination", "list-category-posts"); ?> :</strong>
+            </label>
+          </th>
+          <td>
+            <select name="lcp_pagination" id="lcp_pagination">
+              <option value="true" <?php if(get_option('lcp_pagination') === 'true') echo 'selected="selected"' ?>>true</option>
+              <option value="false" <?php if(get_option('lcp_pagination') != 'true') echo 'selected="selected"' ?>>false</option>
+            </select>
+          </td>
+        </tr>
       </tbody>
     </table>
     <?php submit_button(); ?>
