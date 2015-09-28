@@ -112,7 +112,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 ==PAGINATION==
 
-To use pagination, you need to set the following parameters:
+To use pagination, you need to set the following parameters in the shortcode:
 
 * **pagination** set it to yes. `[catlist pagination=yes]`
 
@@ -140,6 +140,8 @@ in the pagination navigation. Use the following params:
  button in the pagination navigation with a custom text.
  * **pagination_next** - Replace the ">>" characters in the "next"
  button in the pagination navigation with a custom text.
+
+You can also set a default value for pagination in the Options Page. This will apply every time you use the shortcode. You can override the option by using `pagination='yes'` and `pagination='no'` in the shortcode.
 
 ==Changing the pagination CSS==
 
@@ -504,6 +506,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.65 =
+
+* Adds pagination parameter to the options page.
+* Changes the loop in the default template.
+* Fixes 'morelink_class not working with templates' in the default template.
+
 
 = 0.64 =
 

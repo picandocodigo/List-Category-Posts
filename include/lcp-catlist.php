@@ -96,7 +96,7 @@ class CatList{
 
   private function check_pagination($args){
     if ( $this->utils->lcp_not_empty('pagination') ){
-      if( null !== $_SERVER['QUERY_STRING'] ){
+      if( array_key_exists('QUERY_STRING', $_SERVER) && null !== $_SERVER['QUERY_STRING'] ){
         $query = $_SERVER['QUERY_STRING'];
         if ($query !== '' && preg_match('/lcp_page' . preg_quote($this->instance) .
                                         '=([0-9]+)/i', $query, $match) ) {

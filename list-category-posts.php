@@ -134,7 +134,7 @@ class ListCategoryPosts{
     }
     if($atts['pagination'] == 'yes' ||
        (get_option('lcp_pagination') === 'true' &&
-        $atts['pagination'] == 'no') ){
+        $atts['pagination'] !== 'false') ){
       lcp_pagination_css();
     }
     $catlist_displayer = new CatListDisplayer($atts);

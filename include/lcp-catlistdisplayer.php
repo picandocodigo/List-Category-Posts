@@ -149,17 +149,17 @@ class CatListDisplayer {
     // More link
     $this->lcp_output .= $this->get_morelink();
 
-
     $this->lcp_output .= $this->get_pagination();
   }
 
   public function get_pagination(){
     $pag_output = '';
-    if (!empty($this->params['pagination']) && $this->params['pagination'] == "yes" ||
+    $lcp_pag_param_present = !empty($this->params['pagination']);
+    if ($lcp_pag_param_present && $this->params['pagination'] == "yes" ||
         # Check if the pagination option is set to true, and the param
         # is not set to 'no' (since shortcode parameters should
         # override general options.
-        (get_option('lcp_pagination') === 'true' && $this->params['pagination'] == 'no') ):
+        (get_option('lcp_pagination') === 'true' && ($lcp_pag_param_present && $this->params['pagination'] !== 'false'))):
       $lcp_paginator = '';
       $number_posts = $this->catlist->get_number_posts();
       $pages_count = ceil (

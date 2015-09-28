@@ -22,6 +22,9 @@ function list_category_posts_options() {
 ?>
 <div class="wrap">
   <h2>List Category Posts</h2>
+  <p>
+    <?php _e("These are general default options for List Category Posts. The idea in general will be that you can override them using the corresponding parameters in your shortcodes.","list-category-posts")?>
+  </p>
   <form method="post" action="options.php">
     <?php
       settings_fields('list_category_posts_group');
@@ -58,8 +61,8 @@ function list_category_posts_options() {
           </th>
           <td>
             <select name="lcp_pagination" id="lcp_pagination">
-              <option value="true" <?php if(get_option('lcp_pagination') === 'true') echo 'selected="selected"' ?>>true</option>
               <option value="false" <?php if(get_option('lcp_pagination') != 'true') echo 'selected="selected"' ?>>false</option>
+              <option value="true" <?php if(get_option('lcp_pagination') === 'true') echo 'selected="selected"' ?>>true</option>
             </select>
           </td>
         </tr>
