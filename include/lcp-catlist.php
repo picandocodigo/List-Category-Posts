@@ -209,7 +209,7 @@ class CatList{
 
   public function get_category_count(){
     if($this->utils->lcp_not_empty('category_count') && $this->params['category_count'] == 'yes'):
-      return ' (' . get_category($this->lcp_category_id)->category_count . ')';
+      return ' ' . get_category($this->lcp_category_id)->category_count;
     endif;
   }
 
