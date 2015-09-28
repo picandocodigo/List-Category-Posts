@@ -476,6 +476,9 @@ For questions either use the [Support forum](http://wordpress.org/support/plugin
 
 == Upgrade Notice ==
 
+= 0.65 =
+Full release notes here: https://github.com/picandocodigo/List-Category-Posts/releases/tag/0.65
+
 = 0.37 =
 
 When using `content=yes`, if the post has a more tag, the plugin will only show the content previous to the more tag and not all the content as it used before (it now supports the more tag the same way as WordPress).
@@ -512,7 +515,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 * Adds pagination parameter to the options page.
 * Changes the loop in the default template.
 * Fixes 'morelink_class not working with templates' in the default template.
-
+* Adds link to post wrapper for the post date. If you have a chance, please thank [bibz](https://github.com/bibz) who is doing awesome Pull Requests to this plugin and occasionally helping out on the support forums here too :)
 
 = 0.64 =
 
