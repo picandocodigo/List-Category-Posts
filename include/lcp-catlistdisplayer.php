@@ -536,7 +536,7 @@ class CatListDisplayer {
     return $info;
   }
 
-  private function get_category_count(){
+  public function get_category_count(){
     return $this->catlist->get_category_count();
   }
 

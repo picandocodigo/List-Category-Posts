@@ -110,6 +110,9 @@ $lcp_display_output .= '</ul>';
 // If there's a "more link", show it:
 $lcp_display_output .= $this->get_morelink();
 
+// Get category posts count
+$lcp_display_output .= $this->get_category_count();
+
 //Pagination
 $lcp_display_output .= $this->get_pagination();
 

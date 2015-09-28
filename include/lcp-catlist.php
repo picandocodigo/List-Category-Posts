@@ -182,7 +182,7 @@ class CatList{
         if ($this->params['catlink'] == 'yes'){
           $cat_string = '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
                       $cat_string .
-                      $this->get_category_count($lcp_id) .  '</a>';
+                      $this->get_category_count() .  '</a>';
         }
         array_push($link, $cat_string);
       }
@@ -207,9 +207,9 @@ class CatList{
 
 
 
-  public function get_category_count($id){
+  public function get_category_count(){
     if($this->utils->lcp_not_empty('category_count') && $this->params['category_count'] == 'yes'):
-      return ' (' . get_category($id)->category_count . ')';
+      return ' (' . get_category($this->lcp_category_id)->category_count . ')';
     endif;
   }
 
