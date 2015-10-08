@@ -7,6 +7,8 @@ if ( is_admin() ){
 function lcp_settings() { // whitelist options
   register_setting( 'list_category_posts_group', 'numberposts' );
   register_setting( 'list_category_posts_group', 'lcp_pagination' );
+  register_setting( 'list_category_posts_group', 'lcp_orderby' );
+  register_setting( 'list_category_posts_group', 'lcp_order' );
 }
 
 function list_category_posts_menu() {
@@ -56,7 +58,7 @@ function list_category_posts_options() {
         <tr valign="top">
           <th scope="row">
             <label for="lcp_pagination">
-              <strong><?php _e("Pagination", "list-category-posts"); ?> :</strong>
+              <strong><?php _e("Pagination", "list-category-posts"); ?> </strong>
             </label>
           </th>
           <td>
@@ -66,6 +68,54 @@ function list_category_posts_options() {
             </select>
           </td>
         </tr>
+
+        <tr>
+          <th scope="row">
+            <label for="lcp_orderby">
+              <strong><?php _e("Order by", "list-category-posts"); ?></strong>
+            </label>
+          </th>
+          <td>
+            <select id="lcp_orderby" name="lcp_orderby" type="text" >
+              <?php
+              $lcp_orders = array("date" => __("Date", "list-category-posts"),
+                                  "modified" => __("Modified Date", "list-category-posts"),
+                                  "title" => __("Post title", "list-category-posts"),
+                                  "author" => __("Author", "list-category-posts"),
+                                  "rand" => __("Random", "list-category-posts"));
+              $orderby = get_option('lcp_orderby');
+              foreach ($lcp_orders as $key=>$value){
+                $option = '<option value="' . $key . '" ';
+                if ($orderby == $key){
+                  $option .= ' selected = "selected" ';
+                }
+                $option .=  '>';
+                echo $option;
+                _e($value, 'list-category-posts');
+                echo '</option>';
+              }
+              ?>
+            </select>
+          </td>
+        </tr>
+
+        <th scope="row">
+          <label for="lcp_order">
+            <strong><?php _e("Order", "list-category-posts"); ?></strong>
+          </label>
+        </th>
+        <td>
+          <select id="lcp_order" name="lcp_order" type="text">
+            <?php $order = get_option('lcp_order'); ?>
+            <option value='desc' <?php if($order == 'desc'): echo "selected: selected"; endif;?>>
+              <?php _e("Descending", 'list-category-posts')?>
+            </option>
+            <option value='asc' <?php if($order == 'asc'): echo "selected: selected"; endif; ?>>
+              <?php _e("Ascending", 'list-category-posts')?>
+            </option>
+          </select>
+        </td>
+
       </tbody>
     </table>
     <?php submit_button(); ?>

@@ -24,6 +24,17 @@ class LcpParameters{
       'order' => $params['order'],
       'offset' => $params['offset']
     );
+
+    if( get_option('lcp_orderby') && $params['orderby'] === ''){
+      $orderby = array('orderby' => get_option('lcp_orderby'));
+      $args = array_merge($args, $orderby);
+    }
+
+    if( get_option('lcp_order') && $params['order'] === ''){
+      $order = array('order' => get_option('lcp_order'));
+      $args = array_merge($args, $order);
+    }
+
     $this->utils = new LcpUtils($params);
 
     // Check posts to exclude

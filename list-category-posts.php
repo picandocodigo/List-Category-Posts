@@ -42,8 +42,8 @@ class ListCategoryPosts{
     $atts = shortcode_atts(array(
                              'id' => '0',
                              'name' => '',
-                             'orderby' => 'date',
-                             'order' => 'desc',
+                             'orderby' => '',
+                             'order' => '',
                              'numberposts' => '',
                              'date' => 'no',
                              'date_tag' => '',
