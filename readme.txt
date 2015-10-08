@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.3.1
-Stable tag: 0.65
+Stable tag: 0.66
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -110,6 +110,54 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 * Posts from several categories with an **OR** relationship, posts that belong to any of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
 * **Exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, you should write the categories you want to include first, and then the ones you want to exclude. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
 
+==Other ways of selecting what posts to show==
+
+* **author_posts** - Get posts by author. Use 'user_nicename' (NOT
+    name). Example: `[catlist author_posts="fernando"]`
+
+* **tags** - Tag support, display posts from a certain tag. You can use an "OR" relationship `[catlist tags="nintendo,sega"]` or "AND" relationship (posts that belong to all of the listed tags): `[catilst tags="nintendo+sega"]`.
+
+* **taxonomy** - You can select posts using custom taxonomies. You need to set the taxonomy and the terms: `[catlist taxonomy='person' terms='bob']`.
+
+* **currenttags** - Display posts from the current post's tags (won't
+    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`
+
+* **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
+
+* **starting_with** - Get posts whose title starts with a certain
+    letter. Example: `[catlist starting_with="l"]` will list all posts
+    whose title starts with L. You can use several letters: `[catlist starting_with="m,o,t"]`.
+
+* **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 monthnum=12]` will list posts from December 2012.
+
+* **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
+
+* **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: `[catlist excludeposts=this,12,52,37]`
+
+* **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
+
+* **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types. You can use several types, example: `[catlist post_type="page,post" numberposts=-1]`
+
+* **post_status** - use post status, default value is 'publish'. Valid values:
+  * **publish** - a published post or page.
+  * **pending** - post is pending review.
+  * **draft** - a post in draft status.
+  * **auto-draft** - a newly created post, with no content.
+  * **future** - a post to publish in the future.
+  * **private** - not visible to users who are not logged in.
+  * **inherit** - a revision. see get_children.
+  * **trash** - post is in trashbin (available with Version 2.9).
+  * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true.
+  You can use several post statuses. Example: `[catlist post_status="future, publish" excludeposts=this]`
+
+* **show_protected** - Show posts protected by password. By default
+    they are not displayed. Use: `[catlist show_protected=yes]`
+
+* **post_parent** - Show only the children of the post with this ID.
+    Default: None.
+
+* **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work.
+
 ==PAGINATION==
 
 To use pagination, you need to set the following parameters in the shortcode:
@@ -164,16 +212,6 @@ update the plugin.
 * **conditional_title_class** - Specify the class used for the conditional
     title. Defaults to the empty string (no special class).
 
-* **author_posts** - Get posts by author. Use 'user_nicename' (NOT
-    name). Example: `[catlist author_posts="fernando"]`
-
-* **tags** - Tag support, display posts from a certain tag.
-
-* **currenttags** - Display posts from the current post's tags (won't
-    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`
-
-* **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
-
 * **orderby** - To customize the order. Valid values are:
   * **author** - Sort by the numeric author IDs.
   * **category** - Sort by the numeric category IDs.
@@ -197,10 +235,6 @@ update the plugin.
   * **ASC** - Ascending (lowest to highest).
   * **DESC** - Descending (highest to lowest). Ex: `[catlist name=mycategory orderby=title order=asc]`
 
-* **starting_with** - Get posts whose title starts with a certain
-    letter. Example: `[catlist starting_with="l"]` will list all posts
-    whose title starts with L. You can use several letters: `[catlist starting_with="m,o,t"]`.
-
 * **numberposts** - Number of posts to return. Set to 0 to use the max
     number of posts per page. Set to -1 to remove the limit.
     Ex: `[catlist name=mycategory numberposts=10]`
@@ -210,10 +244,6 @@ update the plugin.
 * **no_posts_text** - Text to display when no posts are found. If you
     don't specify it, nothing will get displayed where the posts
     should be.
-
-* **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 monthnum=12]` will list posts from December 2012.
-
-* **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
 
 * **date** - Display post's date next to the title. Default is 'no',
     use date=yes to activate it. You can set a css class and an html
@@ -255,10 +285,6 @@ update the plugin.
     `[catlist id=2 title_limit=50]` will show only the first 50
     characters of the title and add "…" at the end.
 
-* **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: `[catlist excludeposts=this,12,52,37]`
-
-* **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
-
 * **content** - **WARNING**: If you want to show the content on your listed posts, you might want to do this from a new [Page Template](http://codex.wordpress.org/Page_Templates) or a [Custom Post Type](http://codex.wordpress.org/Post_Types#Custom_Post_Type_Templates) template. Using this parameter is discouraged, you can have memory issues as well as infinite loop situations when you're displaying a post that's using List Category Posts. You have been warned. Usage:
 
 Show the excerpt or full content of the post. If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag. Default is 'no'. Ex: `[catlist content=yes]`
@@ -279,26 +305,6 @@ Show the full content of the post regardless of whether there is a &lt;!--more--
 
 * **thumbnail_class** - Set a CSS class for the thumbnail.
 
-* **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types. You can use several types, example: `[catlist post_type="page,post" numberposts=-1]`
-
-* **post_status** - use post status, default value is 'publish'. Valid values:
-  * **publish** - a published post or page.
-  * **pending** - post is pending review.
-  * **draft** - a post in draft status.
-  * **auto-draft** - a newly created post, with no content.
-  * **future** - a post to publish in the future.
-  * **private** - not visible to users who are not logged in.
-  * **inherit** - a revision. see get_children.
-  * **trash** - post is in trashbin (available with Version 2.9).
-  * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true.
-  You can use several post statuses. Example: `[catlist post_status="future, publish" excludeposts=this]`
-
-* **show_protected** - Show posts protected by password. By default
-    they are not displayed. Use: `[catlist show_protected=yes]`
-
-* **post_parent** - Show only the children of the post with this ID.
-    Default: None.
-
 * **post_suffix** - Pass a String to this parameter to display this
     String after every post title.
     Ex: `[catlist numberposts=-1
@@ -313,8 +319,6 @@ Show the full content of the post regardless of whether there is a &lt;!--more--
 * **display_id** - Set it to yes to show the Post's ID next to the post title: `[catlist id=3 display_id=yes]`
 
 * **class** - CSS class for the default UL generated by the plugin.
-
-* **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work.
 
 * **customfield_display** - Display custom field(s). You can specify
     many fields to show, separating them with a coma. If you want to

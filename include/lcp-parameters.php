@@ -79,13 +79,17 @@ class LcpParameters{
     }
 
     // Custom taxonomy support
-    if ( $this->utils->lcp_not_empty('taxonomy') && $this->utils->lcp_not_empty('tags') ){
+    // Why didn't I document this?!?
+    if ( $this->utils->lcp_not_empty('taxonomy') && $this->utils->lcp_not_empty('terms') ){
       $args['tax_query'] = array(array(
         'taxonomy' => $params['taxonomy'],
         'field' => 'slug',
-        'terms' => explode(",",$params['tags'])
+        'terms' => explode(",",$params['terms'])
       ));
-    } elseif ( !empty($params['tags']) ) {
+    }
+
+    // Tag support
+    if ( $this->utils->lcp_not_empty('tags') ) {
       $args['tag'] = $params['tags'];
     }
 
