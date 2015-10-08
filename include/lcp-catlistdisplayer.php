@@ -105,6 +105,8 @@ class CatListDisplayer {
   private function build_output($tag){
     $this->category_title();
 
+    $this->get_category_description();
+
     $this->lcp_output .= '<' . $tag;
 
     // Follow the numner of posts in an ordered list with pagination
@@ -326,6 +328,12 @@ class CatListDisplayer {
     else:
       $this->lcp_output .= $this->get_category_link("strong");
     endif;
+  }
+
+  public function get_category_description(){
+    if(!empty($this->params['category_description']) && $this->params['category_description'] == 'yes'){
+      $this->lcp_output .= $this->catlist->get_category_description();
+    }
   }
 
   /**

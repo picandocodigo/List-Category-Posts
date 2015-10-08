@@ -184,6 +184,7 @@ class CatList{
                       $cat_string .
                       $this->get_category_count() .  '</a>';
         }
+
         array_push($link, $cat_string);
       }
       return implode(", ", $link);
@@ -213,6 +214,11 @@ class CatList{
     endif;
   }
 
+  public function get_category_description(){
+    if ($this->utils->lcp_not_empty('category_description') && $this->params['category_description'] == 'yes'){
+      return '<p>' . category_description( $this->lcp_category_id) . '</p>';
+    }
+  }
   public function get_conditional_title(){
     if($this->utils->lcp_not_empty('conditional_title') && $this->get_posts_count() > 0):
       return trim($this->params['conditional_title']);
