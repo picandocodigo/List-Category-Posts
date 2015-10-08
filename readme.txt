@@ -293,6 +293,8 @@ Show the full content of the post regardless of whether there is a &lt;!--more--
 
 * **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: `[catlist catlink=yes]`. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
 
+* **category_description** Show the category description wrapped in a p tag: `[catlist id=1 category_description='yes']`
+
 * **catname** - Show the title of the category (or categories), works exactly as `catlink`, but it doesn't add a link to the category.
 
 * **category_count** -  Shows the posts count in that category, only works when using the **catlink** option: `[catlist name=nintendo catlink=yes category_count=yes]`
@@ -513,6 +515,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.66 =
+* Orders the README a bit.
+* Issues with tags when using more than one tag for OR and AND relationships should be fixed.
+* Documented the use of custom taxonomies. For some reason I never came around to do that. I changed the parameters for taxonomies, it used the 'tags' parameter for 'terms' before, so I added a 'terms' parameter to make this independent from the tags parameter. So now it looks like this: `[catlist taxonomy='person' terms='bob']`. This might break some current uses of taxonomy, but since it was written so long ago and I don't know why it used "tags", I decided to just create the 'terms' parameter. People using the custom taxonomies were people who are looking at the code anyway since I can't find it documented anywhere. Sorry for the inconveniences!
+* Adds category description parameter.
+* Adds orderby and order to options page. Removes default values since they're the default anyway.
 
 = 0.65 =
 
