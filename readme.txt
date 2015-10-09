@@ -112,6 +112,8 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 ==Other ways of selecting what posts to show==
 
+* **child_categories** - Exclude/include posts from the child categories. By default they are included. If you have a "Parent Category" and you use: `[catlist name="Parent Category"]`, you'll see posts from it's child categories as if they were posts from the same category. You can use this parameter to exclude these posts: `[catlist name="Parent Category" child_categories=false]`.
+
 * **author_posts** - Get posts by author. Use 'user_nicename' (NOT
     name). Example: `[catlist author_posts="fernando"]`
 
@@ -482,6 +484,10 @@ For questions either use the [Support forum](http://wordpress.org/support/plugin
 
 == Upgrade Notice ==
 
+= 0.66 =
+Full release notes:
+https://github.com/picandocodigo/List-Category-Posts/releases/tag/0.66
+
 = 0.65 =
 Full release notes here: https://github.com/picandocodigo/List-Category-Posts/releases/tag/0.65
 
@@ -517,6 +523,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 = 0.66 =
+* Full release notes: https://github.com/picandocodigo/List-Category-Posts/releases/tag/0.66
 * Orders the README a bit.
 * Issues with tags when using more than one tag for OR and AND relationships should be fixed.
 * Documented the use of custom taxonomies. For some reason I never came around to do that. I changed the parameters for taxonomies, it used the 'tags' parameter for 'terms' before, so I added a 'terms' parameter to make this independent from the tags parameter. So now it looks like this: `[catlist taxonomy='person' terms='bob']`. This might break some current uses of taxonomy, but since it was written so long ago and I don't know why it used "tags", I decided to just create the 'terms' parameter. People using the custom taxonomies were people who are looking at the code anyway since I can't find it documented anywhere. Sorry for the inconveniences!

@@ -117,6 +117,9 @@ class CatList{
     if ( is_array($this->lcp_category_id) ){
       return array('category__and' => $this->lcp_category_id);
     } else {
+      if($this->utils->lcp_not_empty('child_categories') && ($this->params['child_categories'] == ('no' || 'false') )){
+        return array('category__in'=> $this->lcp_category_id);
+      }
       return array('cat'=> $this->lcp_category_id);
     }
   }

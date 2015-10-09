@@ -79,6 +79,7 @@ class ListCategoryPosts{
                              'catlink_string' => '',
                              'catlink_tag' =>'',
                              'catlink_class' => '',
+                             'child_categories' => 'yes',
                              'comments' => 'no',
                              'comments_tag' => '',
                              'comments_class' => '',
