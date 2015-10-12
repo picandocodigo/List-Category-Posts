@@ -199,7 +199,7 @@ class CatListDisplayer {
     $link = '';
 
     if ($page == $current_page){
-      $link = "<li>$current_page</li>";
+      $link = "<li class='lcp_currentpage'>$current_page</li>";
     } else {
       $request_uri = $_SERVER['REQUEST_URI'];
       $query = $_SERVER['QUERY_STRING'];

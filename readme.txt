@@ -201,6 +201,14 @@ theme's directory and customize it. Do not customize the file on the
 plugin's directory since this file will be overwritten every time you
 update the plugin.
 
+The current page in pagination has its own CSS class:
+
+`
+<li class='lcp_currentpage'>current_page</li>
+`
+
+So you can style the current page number differently if you want to.
+
 ==OTHER PARAMETERS==
 
 * **conditional_title** - Display a custom title before the posts list.
