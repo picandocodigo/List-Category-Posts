@@ -49,6 +49,11 @@ class LcpThumbnail{
         );
         $lcp_thumbnail .= '</a>';
       }
+      else { // if thumbnail is requested but not found as featured image, grab first image in the content of the post
+          if (preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $matches)) {
+              $lcp_thumbnail = '<a href="' . esc_url($matches[0]) . '" title="' . esc_attr() . '">';
+          }
+      }
     } else {
       # Check for a YouTube video thumbnail
       $lcp_thumbnail = $this->check_youtube_thumbnail($single->content);
