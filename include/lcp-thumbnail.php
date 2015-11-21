@@ -49,9 +49,19 @@ class LcpThumbnail{
         );
         $lcp_thumbnail .= '</a>';
       }
-      else { // if thumbnail is requested but not found as featured image, grab first image in the content of the post
-          if (preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $matches)) {
-              $lcp_thumbnail = '<a href="' . esc_url($matches[0]) . '" title="' . esc_attr() . '">';
+      else {  // if thumbnail is requested but not found as featured image, grab first image in the content of the 
+          if (preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $imgMatches)) {
+              $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
+                '" title="' . esc_attr($single->post_title) . '">';
+
+              $lcp_thumbnail .= '<img src="' . esc_url($imgMatches[1]) . '" ';
+              if ( $lcp_thumb_class != null ) {  // thumbnail class passed as parameter to shortcode
+                  $lcp_thumbnail .= 'class="' . $lcp_thumb_class . '" ';
+              }
+              else { // Otherwise, use this class name
+                  $lcp_thumbnail .= 'class="lcp_thumbnail" ';
+              }
+              $lcp_thumbnail .= ' /></a>';
           }
       }
     } else {
