@@ -313,6 +313,8 @@ Show the full content of the post regardless of whether there is a &lt;!--more--
 
 * **thumbnail** - Show post thumbnail (http://markjaquith.wordpress.com/2009/12/23/new-in-wordpress-2-9-post-thumbnail-images/). Default is 'no'. Ex: `[catlist thumbnail=yes]`.
 
+* **force_thumbnail** - If the previous parameter is set to 'yes', and there's no featured image, setting this to 'yes' or 'true' will make the plugin look for the first image in the post and use it as a thumbnail. Ex: `[catlist thumbnail=yes force_thumbnail=yes]`.
+
 * **thumbnail_size** - Either a string keyword (thumbnail, medium, large or full) or 2 values representing width and height in pixels. Ex: `[catlist thumbnail_size=32,32]` or `[catlist thumbnail_size=thumbnail]`
 
 * **thumbnail_class** - Set a CSS class for the thumbnail.
@@ -533,6 +535,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.67 =
 * Adds custom css class to current page in pagination `lcp_currentpage`.
 * Adds child_categories parameter to being able to exclude child categories' posts from a list.
+* New feature to look for the first image in a post when requesting a thumbnail and the post has no featured image. Thanks Michael J. Gibbs for writing this code :)
 
 = 0.66 =
 * Full release notes: https://github.com/picandocodigo/List-Category-Posts/releases/tag/0.66
