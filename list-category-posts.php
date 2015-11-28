@@ -87,6 +87,7 @@ class ListCategoryPosts{
                              'thumbnail' => 'no',
                              'thumbnail_size' => 'thumbnail',
                              'thumbnail_class' => '',
+                             'force_thumbnail' => '',
                              'title_tag' => '',
                              'title_class' => '',
                              'title_limit' => '0',

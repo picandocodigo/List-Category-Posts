@@ -407,10 +407,16 @@ class CatList{
   }
 
   public function get_thumbnail($single, $lcp_thumb_class = null){
+    if ($this->utils->lcp_not_empty('force_thumbnail')){
+      $force_thumbnail = $this->params['force_thumbnail'];
+    } else {
+      $force_thumbnail = 'no';
+    }
     return LcpThumbnail::get_instance()->get_thumbnail(
       $single,
       $this->params['thumbnail'],
       $this->params['thumbnail_size'],
+      $force_thumbnail,
       $lcp_thumb_class);
   }
 

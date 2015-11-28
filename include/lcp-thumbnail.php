@@ -1,6 +1,5 @@
 <?php
 class LcpThumbnail{
-
   // Singleton implementation
   private static $instance = null;
 
@@ -11,13 +10,13 @@ class LcpThumbnail{
 		return self::$instance;
 	}
 
-      /**
+  /**
    * Get the post Thumbnail
    * @see http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
    * @param unknown_type $single
    *
    */
-  public function get_thumbnail($single, $thumbnail, $thumbnail_size, $lcp_thumb_class = null){
+  public function get_thumbnail($single, $thumbnail, $thumbnail_size, $force_thumbnail, $lcp_thumb_class = null){
     $lcp_thumbnail = null;
 
     if( $thumbnail == 'yes' ){
@@ -40,7 +39,7 @@ class LcpThumbnail{
         }
 
         $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
-          '" title="' . esc_attr($single->post_title) . '">';
+                       '" title="' . esc_attr($single->post_title) . '">';
 
         $lcp_thumbnail .= get_the_post_thumbnail(
           $single->ID,
@@ -48,6 +47,21 @@ class LcpThumbnail{
           ( $lcp_thumb_class != null ) ? array( 'class' => $lcp_thumb_class ) : null
         );
         $lcp_thumbnail .= '</a>';
+      } else {
+        // if thumbnail is requested but not found as featured image, grab first image in the content of the post
+        if ( ($force_thumbnail === 'yes'|| $force_thumbnail === 'true') && preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $imgMatches)) {
+          $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
+                         '" title="' . esc_attr($single->post_title) . '">';
+
+          $lcp_thumbnail .= '<img src="' . esc_url($imgMatches[1]) . '" ';
+          if ( $lcp_thumb_class != null ) {  // thumbnail class passed as parameter to shortcode
+            $lcp_thumbnail .= 'class="' . $lcp_thumb_class . '" ';
+          }
+          else { // Otherwise, use this class name
+            $lcp_thumbnail .= 'class="lcp_thumbnail" ';
+          }
+          $lcp_thumbnail .= ' /></a>';
+        }
       }
     } else {
       # Check for a YouTube video thumbnail
@@ -68,21 +82,20 @@ class LcpThumbnail{
       preg_match($yt_pattern, $content, $matches) ||
       preg_match($yt_vpattern, $content, $matches) ||
       preg_match($yt_epattern, $content, $matches)
-    ){
-        $youtubeurl = $matches[0];
+    ) {
+      $youtubeurl = $matches[0];
 
-        if ($youtubeurl):
-          $imageurl = "http://i.ytimg.com/vi/{$matches[3]}/1.jpg";
-        endif;
+      if ($youtubeurl){
+        $imageurl = "http://i.ytimg.com/vi/{$matches[3]}/1.jpg";
+      }
 
-        $lcp_ytimage = '<img src="' . $imageurl . '" alt="' . $single->post_title . '" />';
+      $lcp_ytimage = '<img src="' . $imageurl . '" alt="' . $single->post_title . '" />';
 
-        if ($lcp_thumb_class != null):
-          $thmbn_class = ' class="' . $lcp_thumb_class . '" />';
+      if ($lcp_thumb_class != null){
+        $thmbn_class = ' class="' . $lcp_thumb_class . '" />';
         $lcp_ytimage = preg_replace("/\>/", $thmbn_class, $lcp_ytimage);
-        endif;
-
-        $lcp_thumbnail .= '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
+      }
+      $lcp_thumbnail .= '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
     }
   }
 }
