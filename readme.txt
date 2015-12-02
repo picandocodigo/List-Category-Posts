@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.3.1
-Stable tag: 0.67
+Stable tag: 0.67.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -531,6 +531,9 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.67.1 =
+* Bugfix release, this should fix the issues with Parent Categories listings.
 
 = 0.67 =
 * Adds custom css class to current page in pagination `lcp_currentpage`.
