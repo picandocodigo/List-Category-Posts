@@ -165,6 +165,12 @@ function lpc_meta($links, $file) {
 
 add_filter( 'plugin_row_meta', 'lpc_meta', 10, 2 );
 
+//adds a default value to numberposts on plugin activation
+function set_default_numberposts() {
+    add_option('numberposts', 10);
+}
+register_activation_hook( __FILE__, 'set_default_numberposts' );
+
 function load_i18n(){
   load_plugin_textdomain( 'list-category-posts', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
