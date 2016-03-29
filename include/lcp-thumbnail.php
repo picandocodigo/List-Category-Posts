@@ -60,7 +60,7 @@ class LcpThumbnail{
           else { // Otherwise, use this class name
             $lcp_thumbnail .= 'class="lcp_thumbnail" ';
           }
-          $lcp_thumbnail .= ' /></a>';
+          $lcp_thumbnail .= ' alt="' . esc_attr($single->post_title) . '" /></a>';
         }
       }
     } else {
