@@ -50,7 +50,7 @@ You can access the admin dashboard with the following credentials:
  * Admin password: `adminpass`
 
 Activate the plugin on
-http://127.0.0.1:8080/wordpress/wp-admin/plugins.php.
+http://localhost:8080/wp-admin/plugins.php
 
 The plugin code is linked directly on the box, so any change you make
 on the code is reflected automatically on the Vagrant box's WordPress.
@@ -91,7 +91,7 @@ __[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__
 ```
 List Category Posts
 
-Copyright (C) 2008-2015  Fernando Briano (email : fernando@picandocodigo.net)
+Copyright (C) 2008-2016  Fernando Briano (email : fernando@picandocodigo.net)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
