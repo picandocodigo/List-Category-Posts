@@ -373,7 +373,7 @@ class CatListDisplayer {
       $info = $this->catlist->get_content($post);
       break;
     case 'excerpt':
-      $info = $this->catlist->get_excerpt($post);
+      $info = $this->catlist->lcp_get_excerpt($post);
       $info = preg_replace('/\[.*\]/', '', $info);
     }
     return $this->assign_style($info, $tag, $css_class);
