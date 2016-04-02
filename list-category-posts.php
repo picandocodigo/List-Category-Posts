@@ -10,7 +10,7 @@
   Text Domain:   list-category-posts
   Domain Path:   /languages/
 
-  Copyright 2008-2015  Fernando Briano  (email : fernando@picandocodigo.net)
+  Copyright 2008-2016  Fernando Briano  (email : fernando@picandocodigo.net)
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
