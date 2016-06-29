@@ -7,7 +7,7 @@ require_once 'lcp-catlistdisplayer.php';
 
 class ListCategoryPostsWidget extends WP_Widget{
 
-  function ListCategoryPostsWidget() {
+  function __construct() {
     $opts = array('description' => __('List posts from a specified category','list-category-posts') );
     parent::__construct(false, $name = __('List Category Posts','list-category-posts'), $opts);
   }
