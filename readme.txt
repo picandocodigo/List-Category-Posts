@@ -3,8 +3,8 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.3.1
-Stable tag: 0.67.1
+Tested up to: 4.4.2
+Stable tag: 0.68
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -531,6 +531,14 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.68 =
+Thanks @mmatthews1981, @ottadvantage and @mhoeher for their contributions on this version:
+
+* Adds Alt Tag to thumbnail
+* Handle child_categories flag correctly - https://github.com/picandocodigo/List-Category-Posts/pull/185
+* Adds a default value to numberposts on plugin activation - https://github.com/picandocodigo/List-Category-Posts/pull/193
+
 
 = 0.67.1 =
 * Bugfix release, this should fix the issues with Parent Categories listings.
