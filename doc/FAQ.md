@@ -7,7 +7,7 @@
  * [How do I display the Thumbnail next to the title?](#thumbnail)
  * [How to not display the title](#no-title)
  * [How do I remove the bullets from the list?](#bullets)
- * [The plugin doesn't work on servers with PHP < 5](#php4)
+ * [The plugin doesn't work on servers with PHP < 5](#php5)
  * [Plugin could not be activated because it triggered a fatal error](#fatal-error)
 
 ##<a name="no_link"></a>How can I remove the hyperlink of the title of the post?
@@ -44,13 +44,15 @@ this:
 
 Then in your theme's stylesheet add this code:
 
-`.lcp_thumbnail{
+```
+.lcp_thumbnail{
   float: left;
 }
 
 .lcp_catlist li{
   clear: both;
-}`
+}
+```
 
 If you want the thumbnail to the right, just change the `float: left`
 attribute to `float: right`.
