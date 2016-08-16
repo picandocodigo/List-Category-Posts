@@ -132,6 +132,12 @@ class ListCategoryPosts{
                              'no_post_titles' => 'no',
                              'link_titles' => true,
                              'link_dates' => 'no',
+                             'after_year' => '',
+                             'after_month' => '',
+                             'after_day' => '',
+                             'before_year' => '',
+                             'before_month' => '',
+                             'before_day' => '',
                            ), $atts);
     if($atts['numberposts'] == ''){
       $atts['numberposts'] = get_option('numberposts');
