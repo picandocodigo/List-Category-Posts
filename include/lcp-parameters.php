@@ -59,6 +59,31 @@ class LcpParameters{
       $args['author_name'] = $params['author_posts'];
     endif;
 
+    // Posts within given date range:
+    if ( $this->utils->lcp_not_empty('after_year') ) {
+      $this->after_year = $params['after_year'];
+    }
+
+    if ( $this->utils->lcp_not_empty('after_month') ) {
+      $this->after_month = $params['after_month'];
+    }
+
+    if ( $this->utils->lcp_not_empty('after_day') ) {
+      $this->after_day = $params['after_day'];
+    }
+
+    if ( $this->utils->lcp_not_empty('before_year') ) {
+      $this->before_year = $params['before_year'];
+    }
+
+    if ( $this->utils->lcp_not_empty('before_month') ) {
+      $this->before_month = $params['before_month'];
+    }
+
+    if ( $this->utils->lcp_not_empty('before_day') ) {
+      $this->before_day = $params['before_day'];
+    }
+
     /*
      * Custom fields 'customfield_name' & 'customfield_value'
      * should both be defined
