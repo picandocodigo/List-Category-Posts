@@ -62,6 +62,11 @@ class LcpParameters{
     endif;
 
     // Posts within given date range:
+    if ( $this->utils->lcp_not_empty('after') ) {
+      $this->after = $params['after'];
+      $date_query = true;
+    }
+
     if ( $this->utils->lcp_not_empty('after_year') ) {
       $this->after_year = $params['after_year'];
       $date_query = true;
@@ -74,6 +79,11 @@ class LcpParameters{
 
     if ( $this->utils->lcp_not_empty('after_day') ) {
       $this->after_day = $params['after_day'];
+      $date_query = true;
+    }
+
+    if ( $this->utils->lcp_not_empty('before') ) {
+      $this->after = $params['before'];
       $date_query = true;
     }
 
@@ -239,15 +249,22 @@ class LcpParameters{
   private function create_date_query_args() {
     $date_query = array();
     $params_set = array(
+      'after' => false,
       'after_year' => false,
       'after_month' => false,
       'after_day' => false,
+      'before' => false,
       'before_year' => false,
       'before_month' => false,
       'before_day' => false,
     );
     $after = false;
     $before = false;
+
+    if ( isset($this->after) ) {
+      $params_set['after'] = true;
+      $after = true;
+    }
 
     if ( isset($this->after_year) ) {
       $params_set['after_year'] = true;
@@ -262,6 +279,11 @@ class LcpParameters{
     if ( isset($this->after_day) ) {
       $params_set['after_day'] = true;
       $after = true;
+    }
+
+    if ( isset($this->before) ) {
+      $params_set['before'] = true;
+      $before = true;
     }
 
     if ( isset($this->before_year) ) {
@@ -280,15 +302,23 @@ class LcpParameters{
     }
 
     if ($after) {
-      if ( $params_set['after_year'] ) $date_query['after']['year'] = $this->after_year;
-      if ( $params_set['after_month'] ) $date_query['after']['month'] = $this->after_month;
-      if ( $params_set['after_day'] ) $date_query['after']['day'] = $this->after_day;
+      if ($params_set['after']) {
+        $date_query['after'] = $this->after;
+      } else {
+        if ( $params_set['after_year'] ) $date_query['after']['year'] = $this->after_year;
+        if ( $params_set['after_month'] ) $date_query['after']['month'] = $this->after_month;
+        if ( $params_set['after_day'] ) $date_query['after']['day'] = $this->after_day;
+      }
     }
 
     if ($before) {
-      if ( $params_set['before_year'] ) $date_query['before']['year'] = $this->before_year;
-      if ( $params_set['before_month'] ) $date_query['before']['month'] = $this->before_month;
-      if ( $params_set['before_day'] ) $date_query['before']['day'] = $this->before_day;
+      if ($params_set['before']) {
+        $date_query['before'] = $this->before;
+      } else {
+        if ( $params_set['before_year'] ) $date_query['before']['year'] = $this->before_year;
+        if ( $params_set['before_month'] ) $date_query['before']['month'] = $this->before_month;
+        if ( $params_set['before_day'] ) $date_query['before']['day'] = $this->before_day;
+      }
     }
 
     return $date_query;
