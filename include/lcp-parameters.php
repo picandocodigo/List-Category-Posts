@@ -73,6 +73,7 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('after_month') ) {
+      // after_month should be in the range [1, 12]
       if ($params['after_month'] >= 1 && $params['after_month'] <= 12) {
         $this->after_month = $params['after_month'];
         $date_query = true;
@@ -80,6 +81,7 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('after_day') ) {
+      // after_day should be in the range [1, 31]
       if ($params['after_day'] >= 1 && $params['after_day'] <= 31) {
         $this->after_day = $params['after_day'];
         $date_query = true;
@@ -97,6 +99,7 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('before_month') ) {
+      // before_month should be in the range [1, 12]
       if ($params['before_month'] >= 1 && $params['before_month'] <= 12) {
         $this->before_month = $params['before_month'];
         $date_query = true;
@@ -104,13 +107,14 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('before_day') ) {
+      // before_day should be in the range [1, 31]
       if ($params['before_day'] >= 1 && $params['before_day'] <= 31) {
         $this->before_day = $params['before_day'];
         $date_query = true;
       }
     }
 
-    // Only generate date_query args if a before/after paramater found
+    // Only generate date_query args if a before/after paramater was found
     if ($date_query) {
       $args['date_query'] = $this->create_date_query_args();
     }
@@ -256,6 +260,8 @@ class LcpParameters{
    */
   private function create_date_query_args() {
     $date_query = array();
+
+    // Keep track of parameters that are set to build the argument array.
     $params_set = array(
       'after' => false,
       'after_year' => false,
@@ -266,9 +272,15 @@ class LcpParameters{
       'before_month' => false,
       'before_day' => false,
     );
+
+    // Booleans to track which subarrays should be created.
     $after = false;
     $before = false;
 
+    /*
+     *  Check which paramaters are set and find out which subarrays
+     *  should be created.
+     */
     if ( isset($this->after) ) {
       $params_set['after'] = true;
       $after = true;
@@ -309,6 +321,11 @@ class LcpParameters{
       $before = true;
     }
 
+    /*
+     * Build the subarrays.
+     * The after parameter takes priority over after_* parameters.
+     * Simlarly, the before parameter takes priority over before_* parameters.
+     */
     if ($after) {
       if ($params_set['after']) {
         $date_query['after'] = $this->after;
