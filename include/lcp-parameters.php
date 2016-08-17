@@ -73,13 +73,17 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('after_month') ) {
-      $this->after_month = $params['after_month'];
-      $date_query = true;
+      if ($params['after_month'] >= 1 && $params['after_month'] <= 12) {
+        $this->after_month = $params['after_month'];
+        $date_query = true;
+      }
     }
 
     if ( $this->utils->lcp_not_empty('after_day') ) {
-      $this->after_day = $params['after_day'];
-      $date_query = true;
+      if ($params['after_day'] >= 1 && $params['after_day'] <= 31) {
+        $this->after_day = $params['after_day'];
+        $date_query = true;
+      }
     }
 
     if ( $this->utils->lcp_not_empty('before') ) {
@@ -93,13 +97,17 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('before_month') ) {
-      $this->before_month = $params['before_month'];
-      $date_query = true;
+      if ($params['before_month'] >= 1 && $params['before_month'] <= 12) {
+        $this->before_month = $params['before_month'];
+        $date_query = true;
+      }
     }
 
     if ( $this->utils->lcp_not_empty('before_day') ) {
-      $this->before_day = $params['before_day'];
-      $date_query = true;
+      if ($params['before_day'] >= 1 && $params['before_day'] <= 31) {
+        $this->before_day = $params['before_day'];
+        $date_query = true;
+      }
     }
 
     // Only generate date_query args if a before/after paramater found
