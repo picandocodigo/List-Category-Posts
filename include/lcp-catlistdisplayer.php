@@ -234,7 +234,6 @@ class CatListDisplayer {
    * @return string
    */
   private function lcp_build_post($single, $tag){
-
     $class ='';
     if ( is_object($this->parent) && is_object($single) && $this->parent->ID == $single->ID ){
       $class = ' class="current" ';
@@ -395,10 +394,18 @@ class CatListDisplayer {
   private function get_custom_fields($single){
     if(!empty($this->params['customfield_display'])){
       $info = $this->catlist->get_custom_fields($this->params['customfield_display'], $single->ID);
-      if(empty($this->params['customfield_tag']) || $this->params['customfield_tag'] == null)
+      if(empty($this->params['customfield_tag']) || $this->params['customfield_tag'] == null){
         $tag = 'div';
-      if(empty($this->params['customfield_class']) || $this->params['customfield_class'] == null)
+      } else {
+        $tag = $this->params['customfield_tag'];
+      }
+
+      if(empty($this->params['customfield_class']) || $this->params['customfield_class'] == null){
         $css_class = 'lcp_customfield';
+      } else {
+        $css_class = $this->params['customfield_class'];
+      }
+
       $final_info = '';
       if(!is_array($info)){
         $final_info = $this->assign_style($info, $tag, $css_class);
