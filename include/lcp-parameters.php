@@ -5,6 +5,8 @@ class LcpParameters{
   // Singleton implementation
   private static $instance = null;
   private $starting_with = null;
+  // $date_query tells us if we need to generate date_query args
+  private $date_query = false;
   private $utils;
   private $params;
 
@@ -58,6 +60,64 @@ class LcpParameters{
     if($this->utils->lcp_not_empty('author_posts')):
       $args['author_name'] = $params['author_posts'];
     endif;
+
+    // Posts within given date range:
+    if ( $this->utils->lcp_not_empty('after') ) {
+      $this->after = $params['after'];
+      $date_query = true;
+    }
+
+    if ( $this->utils->lcp_not_empty('after_year') ) {
+      $this->after_year = $params['after_year'];
+      $date_query = true;
+    }
+
+    if ( $this->utils->lcp_not_empty('after_month') ) {
+      // after_month should be in the range [1, 12]
+      if ($params['after_month'] >= 1 && $params['after_month'] <= 12) {
+        $this->after_month = $params['after_month'];
+        $date_query = true;
+      }
+    }
+
+    if ( $this->utils->lcp_not_empty('after_day') ) {
+      // after_day should be in the range [1, 31]
+      if ($params['after_day'] >= 1 && $params['after_day'] <= 31) {
+        $this->after_day = $params['after_day'];
+        $date_query = true;
+      }
+    }
+
+    if ( $this->utils->lcp_not_empty('before') ) {
+      $this->after = $params['before'];
+      $date_query = true;
+    }
+
+    if ( $this->utils->lcp_not_empty('before_year') ) {
+      $this->before_year = $params['before_year'];
+      $date_query = true;
+    }
+
+    if ( $this->utils->lcp_not_empty('before_month') ) {
+      // before_month should be in the range [1, 12]
+      if ($params['before_month'] >= 1 && $params['before_month'] <= 12) {
+        $this->before_month = $params['before_month'];
+        $date_query = true;
+      }
+    }
+
+    if ( $this->utils->lcp_not_empty('before_day') ) {
+      // before_day should be in the range [1, 31]
+      if ($params['before_day'] >= 1 && $params['before_day'] <= 31) {
+        $this->before_day = $params['before_day'];
+        $date_query = true;
+      }
+    }
+
+    // Only generate date_query args if a before/after paramater was found
+    if ($date_query) {
+      $args['date_query'] = $this->create_date_query_args();
+    }
 
     /*
      * Custom fields 'customfield_name' & 'customfield_value'
@@ -191,5 +251,101 @@ class LcpParameters{
   private function lcp_get_current_post_id(){
     global $post;
     return $post->ID;
+  }
+
+  /*
+   * Create date_query args according to https://codex.wordpress.org/Class_Reference/WP_Query#Date_Parameters
+   * There's probably a better way to check if values exist.
+   * Code should be cleaned up (this is first attempt at a solution).
+   */
+  private function create_date_query_args() {
+    $date_query = array();
+
+    // Keep track of parameters that are set to build the argument array.
+    $params_set = array(
+      'after' => false,
+      'after_year' => false,
+      'after_month' => false,
+      'after_day' => false,
+      'before' => false,
+      'before_year' => false,
+      'before_month' => false,
+      'before_day' => false,
+    );
+
+    // Booleans to track which subarrays should be created.
+    $after = false;
+    $before = false;
+
+    /*
+     *  Check which paramaters are set and find out which subarrays
+     *  should be created.
+     */
+    if ( isset($this->after) ) {
+      $params_set['after'] = true;
+      $after = true;
+    }
+
+    if ( isset($this->after_year) ) {
+      $params_set['after_year'] = true;
+      $after = true;
+    }
+
+    if ( isset($this->after_month) ) {
+      $params_set['after_month'] = true;
+      $after = true;
+    }
+
+    if ( isset($this->after_day) ) {
+      $params_set['after_day'] = true;
+      $after = true;
+    }
+
+    if ( isset($this->before) ) {
+      $params_set['before'] = true;
+      $before = true;
+    }
+
+    if ( isset($this->before_year) ) {
+      $params_set['before_year'] = true;
+      $before = true;
+    }
+
+    if ( isset($this->before_month) ) {
+      $params_set['before_month'] = true;
+      $before = true;
+    }
+
+    if ( isset($this->before_day) ) {
+      $params_set['before_day'] = true;
+      $before = true;
+    }
+
+    /*
+     * Build the subarrays.
+     * The after parameter takes priority over after_* parameters.
+     * Simlarly, the before parameter takes priority over before_* parameters.
+     */
+    if ($after) {
+      if ($params_set['after']) {
+        $date_query['after'] = $this->after;
+      } else {
+        if ( $params_set['after_year'] ) $date_query['after']['year'] = $this->after_year;
+        if ( $params_set['after_month'] ) $date_query['after']['month'] = $this->after_month;
+        if ( $params_set['after_day'] ) $date_query['after']['day'] = $this->after_day;
+      }
+    }
+
+    if ($before) {
+      if ($params_set['before']) {
+        $date_query['before'] = $this->before;
+      } else {
+        if ( $params_set['before_year'] ) $date_query['before']['year'] = $this->before_year;
+        if ( $params_set['before_month'] ) $date_query['before']['month'] = $this->before_month;
+        if ( $params_set['before_day'] ) $date_query['before']['day'] = $this->before_day;
+      }
+    }
+
+    return $date_query;
   }
 }
