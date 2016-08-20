@@ -394,13 +394,17 @@ class CatListDisplayer {
   private function get_custom_fields($single){
     if(!empty($this->params['customfield_display'])){
       $info = $this->catlist->get_custom_fields($this->params['customfield_display'], $single->ID);
-      if(empty($this->params['customfield_tag']) || $this->params['customfield_tag'] == null)
+      if(empty($this->params['customfield_tag']) || $this->params['customfield_tag'] == null){
         $tag = 'div';
-      else $tag = $this->params['customfield_tag'];
+      } else {
+        $tag = $this->params['customfield_tag'];
+      }
 
-      if(empty($this->params['customfield_class']) || $this->params['customfield_class'] == null)
+      if(empty($this->params['customfield_class']) || $this->params['customfield_class'] == null){
         $css_class = 'lcp_customfield';
-      else $css_class = $this->params['customfield_class'];
+      } else {
+        $css_class = $this->params['customfield_class'];
+      }
 
       $final_info = '';
       if(!is_array($info)){

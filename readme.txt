@@ -532,6 +532,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.70 =
+
+* Fixed [customfield_class and customfield_tag issues](https://github.com/picandocodigo/List-Category-Posts/issues/201). Thanks [vacuus](https://github.com/vacuus)!!
+
 = 0.69 =
 
 * Update lcp-widget.php for PHP 7 compatibility. Thanks @kenshin23!
