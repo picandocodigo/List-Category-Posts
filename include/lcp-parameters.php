@@ -115,7 +115,7 @@ class LcpParameters{
     }
 
     // Only generate date_query args if a before/after paramater was found
-    if ($date_query) {
+    if (isset($date_query) ){
       $args['date_query'] = $this->create_date_query_args();
     }
 
@@ -345,7 +345,6 @@ class LcpParameters{
         if ( $params_set['before_day'] ) $date_query['before']['day'] = $this->before_day;
       }
     }
-
     return $date_query;
   }
 }
