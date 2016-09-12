@@ -89,7 +89,7 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('before') ) {
-      $this->after = $params['before'];
+      $this->before = $params['before'];
       $date_query = true;
     }
 
