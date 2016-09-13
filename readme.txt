@@ -3,7 +3,7 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.6
+Tested up to: 4.6.1
 Stable tag: 0.70
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ want the posts to display, and the number of posts to display. You can
 also display the post author, date, excerpt, custom field values, even
 the content! A lot of parameters have been added to customize what to
 display and how to show it. Check [the full
-documentation](https://wordpress.org/plugins/list-category-posts/other_notes/)
+documentation](https://github.com/picandocodigo/List-Category-Posts/wiki)
 to learn about the different ways to use it.
 
 The `[catlist]` shortcode can be used as many times as needed with
@@ -38,7 +38,7 @@ parameter, to define a default number of posts to show for each
 instance (you can override this value by using the `numberposts`
 parameter in your shortcode).
 
-**[Read the instructions](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)** to learn which parameters are available and how to use them.
+**[Read the instructions](https://github.com/picandocodigo/List-Category-Posts/wiki)** to learn which parameters are available and how to use them.
 
 If you want to **List Categories** instead of posts you can use my other plugin **[List categories](http://wordpress.org/plugins/list-categories/)**.
 
@@ -46,7 +46,7 @@ You can find **Frequently Asked Questions** [here](https://github.com/picandocod
 
 **Customization**
 
-The different elements to display can be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [Other Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/) for usage.
+The different elements to display can be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [the documentation](https://github.com/picandocodigo/List-Category-Posts/wiki) for usage.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
 
@@ -58,8 +58,7 @@ available options from the Appearence > Widgets page. Not all the
 functionality in the shortcode has been implemented in the widget
 yet. You can use the shortcode for the most flexibility.
 
-Please, read the information on [Other
-Notes](http://wordpress.org/extend/plugins/list-category-posts/other_notes/)
+Please, read the information on [the wiki](https://github.com/picandocodigo/List-Category-Posts/wiki)
 and
 [Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/)
 to be aware of new functionality, and improvements to the plugin.
@@ -85,10 +84,13 @@ Development is being tracked on [GitHub](https://github.com/picandocodigo/List-C
 
 * Upload the `list-category-posts` directory to your wp-content/plugins/ directory.
 * Login to your WordPress Admin menu, go to Plugins, and activate it.
+* Start using the '[catlist]` shortcode in your posts and/or pages.
 * You can find the List Category Posts widget in the Appearence > Widgets section on your WordPress Dashboard.
-* If you want to customize the way the plugin displays the information, check the section on Templates on this documentation.
+* If you want to customize the way the plugin displays the information, check [HTML & CSS Customization](https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization) or the [section on Templates](https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System) on the wiki.
 
 ==Other notes==
+
+Since the documentation on how to use the plugin has passed wordpress.org's character limit, the text was cut. I've since started using [a wiki](https://github.com/picandocodigo/List-Category-Posts/wiki) for more comfortable reading and maintaining. Please check it out, suggestions are welcome on GitHub issues!
 
 ==Instructions on how to use the plugin==
 
@@ -132,6 +134,21 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 monthnum=12]` will list posts from December 2012.
 
+* **date ranges** - You can also use date ranges for listing posts. For example "list every post after March 14th, 2005". The parameters are: ```after, after_year, after_month, after_day, before, before_year, before_month,  before_day```. These parameters are used to specify data_query arguments (see: [the codex](https://codex.wordpress.org/Class_Reference/WP_Query#Date_Parameters)).  
+
+     If you want to list all the posts before a given date, say `Jun 17th, 2007` you can use these two options:  
+     `[catlist before_year=2007 before_month=06 before_day=17]`  
+     Or you can use the `before` parameter with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):  
+     `[catlist before='2007/06/17']`  
+
+     The same works for posts after a given date, you can use:  
+     `[catlist after_year=2007 after_month=06 after_day=17]`  
+     Or just `after` with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):  
+     `[catlist after='2007/06/17']`  
+
+    `after` takes priority over `after_year`, `after_month`, and `after_day`.  
+    `before` takes priority over `before_year`, `before_month`, and `before_day`.  
+
 * **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
 
 * **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: `[catlist excludeposts=this,12,52,37]`
@@ -160,54 +177,9 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work.
 
-==PAGINATION==
+==PAGINATION
 
-To use pagination, you need to set the following parameters in the shortcode:
-
-* **pagination** set it to yes. `[catlist pagination=yes]`
-
-* **numberposts** - Posts per page are set with the `numberposts`
-    parameter. `[catlist pagination=yes numberposts=5]`
-
-* **instance** (only necessary when using the shortcode with
-    pagination more than once in the same page/post) - a number or
-    name to identify the instance where you are using pagination.
-    Since you can use the shortcode several times in the same page or
-    post, you need to identify the instance so that you paginate only
-    that instance.
-
-
-Example:
-
-`[catlist id=3 numberposts=5 pagination=yes instance=1]`
-
-`[catlist id=5 numberposts=15 pagination=yes instance=2]`
-
-You can customize what to show for the "next" and "previous" buttons
-in the pagination navigation. Use the following params:
-
- * **pagination_prev** - Replace the "<<" characters in the "previous"
- button in the pagination navigation with a custom text.
- * **pagination_next** - Replace the ">>" characters in the "next"
- button in the pagination navigation with a custom text.
-
-You can also set a default value for pagination in the Options Page. This will apply every time you use the shortcode. You can override the option by using `pagination='yes'` and `pagination='no'` in the shortcode.
-
-==Changing the pagination CSS==
-
-If you want to customize the way the pagination is displayed, you can
-copy the `lcp_paginator.css` file from the plugin's directory to your
-theme's directory and customize it. Do not customize the file on the
-plugin's directory since this file will be overwritten every time you
-update the plugin.
-
-The current page in pagination has its own CSS class:
-
-`
-<li class='lcp_currentpage'>current_page</li>
-`
-
-So you can style the current page number differently if you want to.
+https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination
 
 ==OTHER PARAMETERS==
 
@@ -297,9 +269,9 @@ So you can style the current page number differently if you want to.
 
 * **content** - **WARNING**: If you want to show the content on your listed posts, you might want to do this from a new [Page Template](http://codex.wordpress.org/Page_Templates) or a [Custom Post Type](http://codex.wordpress.org/Post_Types#Custom_Post_Type_Templates) template. Using this parameter is discouraged, you can have memory issues as well as infinite loop situations when you're displaying a post that's using List Category Posts. You have been warned. Usage:
 
-Show the excerpt or full content of the post. If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag. Default is 'no'. Ex: `[catlist content=yes]`
+    * `yes` - Show the excerpt or full content of the post. If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag. Default is 'no'. Ex: `[catlist content=yes]`
 
-Show the full content of the post regardless of whether there is a &lt;!--more--&gt; tag in the post. Ex: `[catlist content=full]`
+    * `full` - Show the full content of the post regardless of whether there is a &lt;!--more--&gt; tag in the post. Ex: `[catlist content=full]`
 
 * **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: `[catlist catlink=yes]`. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
 
@@ -409,64 +381,11 @@ Then just add a new text widget to your blog and use the shortcode there as the 
 
 == HTML & CSS Customization ==
 
-By default, the plugin lists the posts in an unordered list with the
-`lcp_catlist` CSS class, like this:
-
-`<ul class="lcp_catlist">`
-
-So if you want to customize the appearance of the List Category Posts
-lists, you can just edit the lcp_catlist class in your theme's CSS.
-
-You can also customize what HTML tags different elements will be
-surrounded with, and set a CSS class for this element, or just a CSS class
-which will wrap the element with a `span` tag.
-
-The customizable elements (so far) are: author, catlink (category link), comments, date, excerpt, morelink ("Read More" link), thumbnail and title (post title).
-
-The parameters are:
-`author_tag, author_class, catlink_tag, catlink_class, comments_tag,
-comments_class, date_tag, date_class, date_modified_tag,
-date_modified_class, excerpt_tag, excerpt_class, morelink_class,
-thumbnail_class, title_tag, title_class, posts_morelink_class,
-customfield_tag, customfield_class`
-
-So let's say you want to wrap the displayed comments count with the p tag and a "lcp_comments" class, you would do:
-`[catlist id=7 comments=yes comments_tag=p comments_class=lcp_comments]`
-This would produce the following code:
-`<p class="lcp_comments"> (3)</p>`
-
-Or you just want to style the displayed date, you could wrap it with a span tag:
-`[catlist name=blog date=yes date_tag=span date_class=lcp_date]`
-This would produce the following code:
-`<span class="lcp_date">March 21, 2011</span>`
-
-Elements without a specified tag, but a specified class, will be wrapped with a span tag and its class. For example this:
-`[catlist id=7  date=yes date_class="lcp_date"]`
-Will produce the following:
-`<span class="lcp_date">October 23, 2013</span>`
-
-The only exceptions here are the **title_tag** and **title_class**
-parameters. If you only use the **title_class** parameter, the CSS
-class will be assigned to the `a` tag like this:
-`[catlist id=1 title_class="lcp_title"]`
-Will produce:
-`<a href="http://127.0.0.1/wordpress/?p=38" title="Test" class="lcp_title">Test</a>`
-But if you use both:
-`[catlist numberposts=5 title_class=lcp_title title_tag=h4]`
-You will get:
-`<h4 class="lcp_title">
-    <a title="Hipchat" href="http://127.0.0.1:8080/wordpress/?p=40"></a>
-</h4>`
+https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization
 
 == Template System ==
 
-Templates for the List Category Plugin are searched for in your WordPress theme's folder. You should create a folder named list-category-posts under 'wp-content/themes/your-theme-folder'. Template files are .php files.
-
-You can use the included template as an example to start. It's in the plugin's template folder under the name default.php. To use a template, use this code:
-`[catlist id=1 template=templatename]`
-If the template file were templatename.php.
-
-You can have as many different templates as you want, and use them in different pages and posts. The template code is pretty well documented, so if you're a bit familiar with HTML and PHP, you'll have no problems creating your own template. I'm planning on reworking the template system in order to have a really user friendly way to create templates.
+https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System
 
 == Frequently Asked Questions ==
 
@@ -476,13 +395,13 @@ You can find the Frequently Asked Questions [here](https://github.com/picandocod
 
 **INSTRUCTIONS ON HOW TO USE THE PLUGIN**
 
-http://wordpress.org/extend/plugins/list-category-posts/other_notes/ -
+https://github.com/picandocodigo/List-Category-Posts/wiki/
 
 Please read the instructions and the FAQ before opening a new topic in the support forums.
 
 **TEMPLATE SYSTEM**
 
-How to customize the way the posts are shown: http://wordpress.org/extend/plugins/list-category-posts/other_notes/. I am aware the Template System is not the friendliest right now, I'll work on improving this if I ever get the time to work on it.
+How to customize the way the posts are shown: https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System. I am aware the Template System is not the friendliest right now, I'll work on improving this if I ever get the time to work on it.
 
 **NEW FEATURE REQUESTS, BUG FIXES, ENHANCEMENTS**
 
@@ -535,6 +454,8 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.70 =
 
 * Fixed [customfield_class and customfield_tag issues](https://github.com/picandocodigo/List-Category-Posts/issues/201). Thanks [vacuus](https://github.com/vacuus)!!
+* Tested up to WordPress 4.6.1
+* Added date range, thanks again [vacuus](https://github.com/vacuus)!! Check [the docs](https://github.com/picandocodigo/List-Category-Posts/wiki/How-to-select-which-posts-to-show) to read how to use this.
 
 = 0.69 =
 
