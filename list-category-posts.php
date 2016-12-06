@@ -140,6 +140,7 @@ class ListCategoryPosts{
                              'before_year' => '',
                              'before_month' => '',
                              'before_day' => '',
+                             'tags_as_class' => 'no',
                            ), $atts);
     if($atts['numberposts'] == ''){
       $atts['numberposts'] = get_option('numberposts');
