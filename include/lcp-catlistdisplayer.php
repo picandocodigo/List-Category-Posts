@@ -235,17 +235,23 @@ class CatListDisplayer {
    */
   private function lcp_build_post($single, $tag){
     $class ='';
+    $tag_css = '';
     if ( is_object($this->parent) && is_object($single) && $this->parent->ID == $single->ID ){
-      $class = ' current ';
+      $class = 'current';
     }
 
-    if ( !empty($this->params['tags_as_class']) ) {
+    if ( $this->params['tags_as_class'] == 'yes' ) {
       $post_tags = wp_get_post_Tags($single->ID);
-      foreach ($post_tags as $post_tag) {
-        $class .= " $post_tag->slug ";
+      if ( !empty($post_tags) ){
+        foreach ($post_tags as $post_tag) {
+          $class .= " $post_tag->slug ";
+        }
       }
     }
-    $lcp_display_output = '<'. $tag . ' class=' . $class . '>';
+    if ( !empty($class) ){
+      $tag_css = 'class="' . $class . '"';
+    }
+    $lcp_display_output = '<'. $tag . ' ' . $tag_css . '>';
 
     if ( empty($this->params['no_post_titles']) || !empty($this->params['no_post_titles']) && $this->params['no_post_titles'] !== 'yes' ) {
       $lcp_display_output .= $this->get_post_title($single);
