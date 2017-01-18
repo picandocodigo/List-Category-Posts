@@ -21,7 +21,8 @@
                     'offset'=>'',
                     'show_catlink'=>'',
                     'morelink' =>'',
-                    'template' => ''
+                    'tags_as_class' => '',
+                    'template' => '',
                     );
   $instance = wp_parse_args( (array) $instance, $default);
 
@@ -42,6 +43,7 @@
   $thumbnail = strip_tags($instance['thumbnail']);
   $thumbnail_size = strip_tags($instance['thumbnail_size']);
   $morelink = strip_tags($instance['morelink']);
+  $tags_as_class = strip_tags($instance['tags_as_class']);
   $template = strip_tags($instance['template']);
 
 ?>
@@ -227,6 +229,20 @@
   <input class="widefat" id="<?php echo $this->get_field_id('morelink'); ?>"
     name="<?php echo $this->get_field_name('morelink'); ?>" type="text"
     value="<?php echo esc_attr($morelink); ?>" />
+</p>
+<p>
+  <label for="<?php echo $this->get_field_id('tags_as_class'); ?>">
+    <?php _e("Tags as class", 'list-category-posts'); ?>:
+  </label>
+  <br/>
+  <select id="<?php echo $this->get_field_id('tags_as_class'); ?>" name="<?php echo $this->get_field_name('tags_as_class'); ?>" type="text">
+    <option value='no' <?php if($tags_as_class == 'no'): echo "selected: selected"; endif;?>>
+      <?php _e("No", 'list-category-posts')?>
+    </option>
+    <option value='yes' <?php if($tags_as_class == 'yes'): echo "selected: selected"; endif;?>>
+      <?php _e("Yes", 'list-category-posts')?>
+    </option>
+  </select>
 </p>
 
 <p>
