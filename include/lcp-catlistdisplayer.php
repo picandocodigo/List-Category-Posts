@@ -240,7 +240,7 @@ class CatListDisplayer {
       $class = 'current';
     }
 
-    if ( $this->params['tags_as_class'] == 'yes' ) {
+    if ( array_key_exists('tags_as_class', $this->params) && $this->params['tags_as_class'] == 'yes' ) {
       $post_tags = wp_get_post_Tags($single->ID);
       if ( !empty($post_tags) ){
         foreach ($post_tags as $post_tag) {
