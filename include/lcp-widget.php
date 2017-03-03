@@ -37,6 +37,9 @@ class ListCategoryPostsWidget extends WP_Widget{
     $thumbnail = ($instance['thumbnail'] == 'on') ? 'yes' : 'no';
     $thumbnail_size = ($instance['thumbnail_size']) ? $instance['thumbnail_size'] : 'thumbnail';
     $morelink = empty($instance['morelink']) ? ' ' : $instance['morelink'];
+	if ( empty( $instance['tags_as_class'] ) ) {
+		$instance['tags_as_class'] = 'no';
+	}
     $tags_as_class = ($instance['tags_as_class'] == 'yes') ? 'yes' : 'no';
     $template = empty($instance['template']) ? 'default' : $instance['template'];
 
