@@ -46,7 +46,7 @@ You can find **Frequently Asked Questions** [here](https://github.com/picandocod
 
 **Customization**
 
-The different elements to display can be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [the documentation](https://github.com/picandocodigo/List-Category-Posts/wiki) for usage.
+The different elements to display can be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [the documentation](https://github.com/picandocodigo/List-Category-Posts/wiki) for usage. You can also check [this nice tutorial](http://sundari-webdesign.com/wordpress-the-quest-to-my-perfect-list-view-for-posts-events-and-articles/) which gives lots of tips and how-to's to customize how to display the posts.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
 
@@ -65,10 +65,9 @@ to be aware of new functionality, and improvements to the plugin.
 
 **Videos**
 
-Some users have made videos on how to use the plugin, (thank you! you people are awesome!). Check them out here:
+Some users have made videos on how to use the plugin (thank you, you are awesome!), check them out here:
 
  * [Manage WordPress Content with List Category Posts Plugin](http://www.youtube.com/watch?v=kBy_qoGKpdo)
- * [Build A Start Here Page with List Category Posts](http://www.youtube.com/watch?v=9YJpZfHIwIY)
  * [WordPress: How to List Category Posts on a Page](http://www.youtube.com/watch?v=Zfnzk4IWPNA)
 
 **Support the plugin**
