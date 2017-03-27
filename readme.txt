@@ -3,8 +3,8 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.7.2
-Stable tag: 0.71.1
+Tested up to: 4.7.3
+Stable tag: 0.72
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -456,6 +456,20 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.72 =
+
+Several bug fixes:
+
+* Makes sure the `tags_as_class` instance variable is defined. This squelched an 'undefined index' PHP Notice that appeared for widgets that were last saved before upgrading to 0.71.1. Fix by Matthew Eppelsheimer (@MatthewEppelsheimer on GitHub).
+* Adds a new tutorial in the docs, check it out!
+* Fixes a bug where customfield_value wouldn't work if a custom field's value = 0
+* Adds tag/class html customization refactor to excerpt to behave as expected:
+    * If you provide `excerpt_tag` but not `excerpt_class`, excerpt will be wrapped with given tag.
+    * If you provide `excerpt_tag` and `excerpt_class`, excerpt will be wrapped with provided tag and given class.
+    * If you provide `excerpt_class` but not `excerpt_tag`, excerpt will be wrapped with a span and the given class.
+* Fixes an error notice when widget is displayed for "current category" on post without category - `Notice: Undefined offset: 0 in /include/lcp-category.php on line 69`
+
 
 = 0.71.1 =
 
