@@ -293,17 +293,7 @@ class CatListDisplayer {
 
     $lcp_display_output .= $this->get_stuff_with_tags_and_classes('content', $single);
 
-    if (!empty($this->params['excerpt_tag'])):
-      if (!empty($this->params['excerpt_class'])):
-        $lcp_display_output .= $this->get_excerpt($single,
-                                     $this->params['excerpt_tag'],
-                                     $this->params['excerpt_class']);
-      else:
-        $lcp_display_output .= $this->get_excerpt($single, $this->params['excerpt_tag']);
-      endif;
-    else:
-      $lcp_display_output .= $this->get_excerpt($single);
-    endif;
+    $lcp_display_output .= $this->get_stuff_with_tags_and_classes('excerpt', $single);
 
     $lcp_display_output .= $this->get_posts_morelink($single);
 
@@ -311,18 +301,28 @@ class CatListDisplayer {
     return $lcp_display_output;
   }
 
+  /**
+   * Several checks going on here:
+   * - Tag provided, no class - wrap content with tag
+   * - Tag and class provided - wrap content with tag and class
+   * - Class provided, no tag - wrap content with span and class
+  */
   private function get_stuff_with_tags_and_classes($entity, $single){
     $result = '';
     $stuffFunction = 'get_' . $entity;
-    if (!empty($this->params[$entity . '_tag'])):
-      if (!empty($this->params[$entity . '_class'])):
+    if (!empty($this->params[$entity . '_class'])){
+      if (empty($this->params[$entity . '_tag'])){
+        $result = $this->$stuffFunction($single, 'span', $this->params[$entity . '_class']);
+      } else {
         $result = $this->$stuffFunction($single, $this->params[$entity . '_tag'], $this->params[$entity . '_class']);
-      else:
+      }
+    } else {
+      if (!empty($this->params[$entity . '_tag'])){
         $result = $this->$stuffFunction($single, $this->params[$entity . '_tag']);
-      endif;
-    else:
-      $result = $this->$stuffFunction($single);
-    endif;
+      } else {
+        $result = $this->$stuffFunction($single);
+      }
+    }
     return $result;
   }
 
@@ -354,7 +354,6 @@ class CatListDisplayer {
   private function get_comments($single, $tag = null, $css_class = null){
     return $this->content_getter('comments', $single, $tag, $css_class);
   }
-
 
   private function get_author($single, $tag = null, $css_class = null){
     return $this->content_getter('author', $single, $tag, $css_class);
