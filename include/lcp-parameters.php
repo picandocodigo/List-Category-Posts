@@ -123,7 +123,7 @@ class LcpParameters{
      * Custom fields 'customfield_name' & 'customfield_value'
      * should both be defined
      */
-    if( $this->utils->lcp_not_empty('customfield_value') ){
+    if( $this->utils->lcp_not_empty('customfield_name') ){
       $args['meta_key'] = $params['customfield_name'];
       $args['meta_value'] = $params['customfield_value'];
     }

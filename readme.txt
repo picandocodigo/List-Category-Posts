@@ -174,7 +174,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 * **post_parent** - Show only the children of the post with this ID.
     Default: None.
 
-* **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work.
+* **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. `customfield_name` defines the name of the field, and you should choose the values for which you want posts to display. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work. Eg: `[catlist customfield_name="color" customfield_value="green"]` will display posts with the value `green` set on the custom field `color`.
 
 ==PAGINATION
 
@@ -415,7 +415,7 @@ You can post them on [GitHub Issues](https://github.com/picandocodigo/List-Categ
 
 **FURTHER QUESTIONS**
 
-For questions either use the [Support forum](http://wordpress.org/support/plugin/list-category-posts) or [WordPress Answers](http://wordpress.stackexchange.com/) (just [ask your question](http://wordpress.stackexchange.com/questions/ask?tags=plugin-list-category-posts) using the 'plugin-list-category-post' tag).
+Please check the [FAQ](https://github.com/picandocodigo/List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions) before posting a question. You can post questions in the [Support forum](http://wordpress.org/support/plugin/list-category-posts) or [add a new issue on GitHub](https://github.com/picandocodigo/List-Category-Posts/issues).
 
 == Upgrade Notice ==
 
