@@ -281,70 +281,32 @@ class LcpParameters{
      *  Check which paramaters are set and find out which subarrays
      *  should be created.
      */
-    if ( isset($this->after) ) {
-      $params_set['after'] = true;
-      $after = true;
-    }
-
-    if ( isset($this->after_year) ) {
-      $params_set['after_year'] = true;
-      $after = true;
-    }
-
-    if ( isset($this->after_month) ) {
-      $params_set['after_month'] = true;
-      $after = true;
-    }
-
-    if ( isset($this->after_day) ) {
-      $params_set['after_day'] = true;
-      $after = true;
-    }
-
-    if ( isset($this->before) ) {
-      $params_set['before'] = true;
-      $before = true;
-    }
-
-    if ( isset($this->before_year) ) {
-      $params_set['before_year'] = true;
-      $before = true;
-    }
-
-    if ( isset($this->before_month) ) {
-      $params_set['before_month'] = true;
-      $before = true;
-    }
-
-    if ( isset($this->before_day) ) {
-      $params_set['before_day'] = true;
-      $before = true;
+    foreach ($params_set as $key=>$value){
+      if ( isset($this->{$key}) ){
+        $params_set[$key] = true;
+        $trutify = substr($key, 0, strpos( $key, '_') );
+        ${$trutify} = true;
+      }
     }
 
     /*
      * Build the subarrays.
      * The after parameter takes priority over after_* parameters.
-     * Simlarly, the before parameter takes priority over before_* parameters.
+     * Similarly, the before parameter takes priority over before_* parameters.
      */
-    if ($after) {
-      if ($params_set['after']) {
-        $date_query['after'] = $this->after;
-      } else {
-        if ( $params_set['after_year'] ) $date_query['after']['year'] = $this->after_year;
-        if ( $params_set['after_month'] ) $date_query['after']['month'] = $this->after_month;
-        if ( $params_set['after_day'] ) $date_query['after']['day'] = $this->after_day;
+    $time_periods = array('before', 'after');
+    foreach ($time_periods as $period){
+      if (${$period}){
+        if ($params_set[$period]) {
+          $date_query[$period] = $this->$period;
+        } else {
+          if ( $params_set[$period . '_year'] )  $date_query[$period]['year']  = $this->{$period . '_year'};
+          if ( $params_set[$period . '_month'] ) $date_query[$period]['month'] = $this->{$period . '_month'};
+          if ( $params_set[$period . '_day'] )   $date_query[$period]['day']   = $this->{$period . '_day'};
+        }
       }
     }
 
-    if ($before) {
-      if ($params_set['before']) {
-        $date_query['before'] = $this->before;
-      } else {
-        if ( $params_set['before_year'] ) $date_query['before']['year'] = $this->before_year;
-        if ( $params_set['before_month'] ) $date_query['before']['month'] = $this->before_month;
-        if ( $params_set['before_day'] ) $date_query['before']['day'] = $this->before_day;
-      }
-    }
     return $date_query;
   }
 }
