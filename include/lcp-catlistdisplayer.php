@@ -156,12 +156,12 @@ class CatListDisplayer {
 
   public function get_pagination(){
     $pag_output = '';
-    $lcp_pag_param_present = !empty($this->params['pagination']);
-    if ($lcp_pag_param_present && $this->params['pagination'] == "yes" ||
+    $lcp_pag_present = !empty($this->params['pagination']);
+    if ($lcp_pag_present && $this->params['pagination'] == "yes" ||
         # Check if the pagination option is set to true, and the param
         # is not set to 'no' (since shortcode parameters should
         # override general options.
-        (get_option('lcp_pagination') === 'true' && ($lcp_pag_param_present && $this->params['pagination'] !== 'false'))):
+        (get_option('lcp_pagination') === 'true' && ($lcp_pag_present && $this->params['pagination'] !== 'false'))):
       $lcp_paginator = '';
       $number_posts = $this->catlist->get_number_posts();
       $pages_count = ceil (
@@ -201,19 +201,20 @@ class CatListDisplayer {
     if ($page == $current_page){
       $link = "<li class='lcp_currentpage'>$current_page</li>";
     } else {
-      $request_uri = $_SERVER['REQUEST_URI'];
-      $query = $_SERVER['QUERY_STRING'];
+      $server_vars = add_magic_quotes($_SERVER);
+      $request_uri = $server_vars['REQUEST_URI'];
+      $query = $server_vars['QUERY_STRING'];
       $amp = ( strpos( $request_uri, "?") ) ? "&" : "";
       $pattern = "/[&|?]?lcp_page" . preg_quote($this->catlist->get_instance()) . "=([0-9]+)/";
       $query = preg_replace($pattern, '', $query);
 
       $url = strtok($request_uri,'?');
       $protocol = "http";
-      $port = $_SERVER['SERVER_PORT'];
-      if ( (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $port == 443){
+      $port = $server_vars['SERVER_PORT'];
+      if ( (!empty($server_vars['HTTPS']) && $server_vars['HTTPS'] !== 'off') || $port == 443){
         $protocol = "https";
       }
-      $http_host = $_SERVER['HTTP_HOST'];
+      $http_host = $server_vars['HTTP_HOST'];
       $page_link = "$protocol://$http_host$url?$query" .
         $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
         "#lcp_instance_" . $this->catlist->get_instance();
@@ -482,20 +483,9 @@ class CatListDisplayer {
   private function get_post_title($single, $tag = null, $css_class = null, $link = true){
     $lcp_post_title = apply_filters('the_title', $single->post_title, $single->ID);
 
-    if ( !empty($this->params['title_limit']) && $this->params['title_limit'] !== "0" ):
-      $title_limit = intval($this->params['title_limit']);
-      if( function_exists('mb_strlen') && function_exists('mb_substr') ):
-        if( mb_strlen($lcp_post_title) > $title_limit ):
-          $lcp_post_title = mb_substr($lcp_post_title, 0, $title_limit) . "&hellip;";
-        endif;
-      else:
-        if( strlen($lcp_post_title) > $title_limit ):
-          $lcp_post_title = substr($lcp_post_title, 0, $title_limit) . "&hellip;";
-        endif;
-      endif;
-    endif;
+    $lcp_post_title = $this->lcp_title_limit( $lcp_post_title );
 
-    if (!empty($this->params['title_tag'])){
+    if ( !empty($this->params['title_tag']) ) {
       $pre = "<" . $this->params['title_tag'];
       if (!empty($this->params['title_class'])){
         $pre .= ' class="' . $this->params['title_class'] . '"';
@@ -506,8 +496,7 @@ class CatListDisplayer {
       $pre = $post = '';
     }
 
-    if ( !$link ||
-         (!empty($this->params['link_titles']) &&
+    if ( !$link || ( !empty($this->params['link_titles'] ) &&
           ( $this->params['link_titles'] === "false" || $this->params['link_titles'] === "no" ) ) ) {
       return $pre . $lcp_post_title . $post;
     }
@@ -525,6 +514,21 @@ class CatListDisplayer {
     }
 
     return $info;
+  }
+
+  // Transform the title into the sub string if `title_limit` is present
+  private function lcp_title_limit( $lcp_post_title ){
+    if ( !empty($this->params['title_limit']) && $this->params['title_limit'] !== "0" ){
+      $title_limit = intval($this->params['title_limit']);
+      if( function_exists('mb_strlen') && function_exists('mb_substr') && mb_strlen($lcp_post_title) > $title_limit ){
+        $lcp_post_title = mb_substr($lcp_post_title, 0, $title_limit) . "&hellip;";
+      } else {
+        if( strlen($lcp_post_title) > $title_limit ){
+          $lcp_post_title = substr($lcp_post_title, 0, $title_limit) . "&hellip;";
+        }
+      }
+    }
+    return $lcp_post_title;
   }
 
   private function get_posts_morelink($single){
