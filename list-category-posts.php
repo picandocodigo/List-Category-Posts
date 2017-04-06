@@ -111,6 +111,8 @@ class ListCategoryPosts{
                              'customfield_tag' => '',
                              'customfield_class' => '',
                              'taxonomy' => '',
+                             'taxonomies_and' => '',
+                             'taxonomies_or' => '',
                              'terms' => '',
                              'categorypage' => '',
                              'category_count' => '',
