@@ -1,0 +1,102 @@
+﻿# Translation of List category posts in Irish
+# This file is distributed under the same license as the List category posts package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-04-10 14:49:20+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: translate.foe-services.de/ReGlot/0.1\n"
+"Project-Id-Version: List category posts\n"
+"Language-Team: ChameleonJohn.com <jordan.silaen@chameleonjohn.com>\n"
+"Language: Irish\n"
+
+#: include/lcp_widget_form.php:40
+msgid "Title"
+msgstr "Teideal"
+
+#: include/lcp_widget_form.php:47
+msgid "Category"
+msgstr "Catagóir"
+
+#: include/lcp_widget_form.php:65
+msgid "Number of posts"
+msgstr "Líon na bpost"
+
+#: include/lcp_widget_form.php:72
+msgid "Offset"
+msgstr "Fritháireamh"
+
+#: include/lcp_widget_form.php:78
+msgid "Order by"
+msgstr "Ordú ag"
+
+#: include/lcp_widget_form.php:81 include/lcp_widget_form.php:123
+msgid "Date"
+msgstr "Dáta"
+
+#: include/lcp_widget_form.php:82
+msgid "Post title"
+msgstr "Post teideal"
+
+#: include/lcp_widget_form.php:83 include/lcp_widget_form.php:127
+msgid "Author"
+msgstr "údar"
+
+#: include/lcp_widget_form.php:84
+msgid "Random"
+msgstr "Randamach"
+
+#: include/lcp_widget_form.php:88
+msgid "Order"
+msgstr "Ordú"
+
+#: include/lcp_widget_form.php:91
+msgid "Descending"
+msgstr "Ag dul síos"
+
+#: include/lcp_widget_form.php:92
+msgid "Ascending"
+msgstr "Ag dul suas"
+
+#: include/lcp_widget_form.php:96
+msgid "Exclude categories (id's)"
+msgstr "Catagóirí Fág amach (id s)"
+
+#: include/lcp_widget_form.php:102
+msgid "Exclude posts (id's)"
+msgstr "post Fág amach (id s)"
+
+#: include/lcp_widget_form.php:109
+msgid "Show"
+msgstr "Taispeáin"
+
+#: include/lcp_widget_form.php:112
+msgid "Thumbnail - size"
+msgstr "Mionsamhail - Méid"
+
+#: include/lcp_widget_form.php:131
+msgid "Link to category"
+msgstr "Nasc le catagóir"
+
+#: include/lcp_widget_form.php:135
+msgid "Excerpt"
+msgstr "sliocht"
+
+#: include/lcp_widget_form.php:138
+msgid "More link"
+msgstr "níos mó link"
+
+#: include/ListCategoryPostsWidget.php:5
+msgid "List Category Posts allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments. Usage: [catlist argument1=value1 argument2=value2]."
+msgstr "Liosta Category Poist is féidir leat chun poist ó aicme liosta isteach ar phost / leathanach ag baint úsáide as an [Catlist] shortcode. Glacann an shortcode ainm catagóir nó id, an t-ord inar mian leat na poist a chur ar taispeáint, agus an líon post a chur ar taispeáint. Is féidir leat úsáid a bhaint [Catlist] mar a mhéad uair mar is gá le hargóintí éagsúla. Úsáid: [Catlist argument1 = value1 argument2 = value2]."
+
+#: include/ListCategoryPostsWidget.php:11
+msgid "List posts from a specified category"
+msgstr "post Liosta ó earnáil shonraithe"
+
+#: include/ListCategoryPostsWidget.php:12
+msgid "List Category Posts"
+msgstr "Liosta Category Poist"
+
