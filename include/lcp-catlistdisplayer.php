@@ -125,7 +125,7 @@ class CatListDisplayer {
     }
 
     $this->lcp_output .= '>';
-    $inner_tag = ( ($tag == 'ul') || ($tag == 'ol') ) ? 'li' : 'p';
+    $inner_tag = ( ($tag == 'ul') || ($tag == 'ol') ) ? 'li class="' . $this->params['li_class'] . '"' : 'p';
 
     $this->lcp_output .= $this->get_conditional_title();
 
