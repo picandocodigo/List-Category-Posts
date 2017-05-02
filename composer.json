@@ -7,7 +7,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@github.com:rangiTM/List-Category-Posts"
+      "url": "git@github.com:rangiTM/List-Category-Posts.git"
     }
   ],
   "require": {
