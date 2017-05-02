@@ -1,0 +1,20 @@
+{
+  "name": "rangitm/List-Category-Posts",
+  "description": "List Category Posts for Composer",
+  "type": "wordpress-plugin",
+  "license": "GPL-3.0",
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:rangiTM/List-Category-Posts"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "composer/installers": "~1.0"
+  },
+  "extra": {
+    "installer-name": "List-Category-Posts"
+  }
+}
