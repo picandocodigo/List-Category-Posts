@@ -3,13 +3,15 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.7.3
+Tested up to: 4.9
+Requires PHP: 5.2.4
 Stable tag: 0.72
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+List Category Posts allows you to list posts by category and many other parameters in a post, page or widget. You use the [catlist] shortcode to select which posts to show and how. There's tons of customizations available.
+
 == Description ==
-**This plugin is looking for maintainers!** Please [take a look at this issue on GitHub](https://github.com/picandocodigo/List-Category-Posts/issues/134).
 
 List Category Posts allows you to list posts by category in a post or page using the `[catlist]` shortcode. When you're editing a page or post, directly insert the shortcode in your text and the posts will be listed there. The *basic* usage would be something like this:
 
@@ -17,24 +19,12 @@ List Category Posts allows you to list posts by category in a post or page using
 
 `[catlist name="news"]`
 
-The shortcode accepts a category name or id, the order in which you
-want the posts to display, and the number of posts to display. You can
-also display the post author, date, excerpt, custom field values, even
-the content! A lot of parameters have been added to customize what to
-display and how to show it. Check [the full
-documentation](https://github.com/picandocodigo/List-Category-Posts/wiki)
-to learn about the different ways to use it.
+The shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can also display the post author, date, excerpt, custom field values, even the content! A lot of parameters have been added to customize what to display and how to show it. Check [the full documentation](https://github.com/picandocodigo/List-Category-Posts/wiki) to learn about the different ways to use it.
 
-The `[catlist]` shortcode can be used as many times as needed with
-different arguments on each post/page.
+The `[catlist]` shortcode can be used as many times as needed with different arguments on each post/page.
 `[catlist id=1 numberposts=10]`
 
-There's an options page with only one option -for the moment-, new
-options will be implemented on demand (as long as they make
-sense). Right now the only global option is the `numberposts`
-parameter, to define a default number of posts to show for each
-instance (you can override this value by using the `numberposts`
-parameter in your shortcode).
+There's an options page with only one option -for the moment-, new options will be implemented on demand (as long as they make sense). Right now the only global option is the `numberposts` parameter, to define a default number of posts to show for each instance (you can override this value by using the `numberposts` parameter in your shortcode).
 
 **[Read the instructions](https://github.com/picandocodigo/List-Category-Posts/wiki)** to learn which parameters are available and how to use them.
 
@@ -50,16 +40,11 @@ Great to use WordPress as a CMS, and create pages with several categories posts.
 
 **Widget**
 
-The plugin includes a widget which works pretty much the same as the
-plugin. Just add as many widgets as you want, and select all the
-available options from the Appearence > Widgets page. Not all the
-functionality in the shortcode has been implemented in the widget
-yet. You can use the shortcode for the most flexibility.
+Since WordPress 4.9, [you can use shortcode in text widgets](https://make.wordpress.org/core/2017/10/24/widget-improvements-in-wordpress-4-9/). So you can just add a text widget in Appearence > Widgets and write the List Category Posts shortcode.
 
-Please, read the information on [the wiki](https://github.com/picandocodigo/List-Category-Posts/wiki)
-and
-[Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/)
-to be aware of new functionality, and improvements to the plugin.
+The plugin also includes a widget as a simple interface for its functionality. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page. Not all the functionality in the shortcode has been implemented in the widget yet. You can use the shortcode for the most flexibility.
+
+Please, read the information on [the wiki](https://github.com/picandocodigo/List-Category-Posts/wiki) and [Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/) to be aware of new functionality, and improvements to the plugin.
 
 **Videos**
 
@@ -75,17 +60,6 @@ If you've found the plugin useful, consider making a [donation via PayPal](http:
 **Development**
 
 Development is being tracked on [GitHub](https://github.com/picandocodigo/List-Category-Posts). Fork it, code, make a pull request, suggest improvements, etc. over there. I dream of the day all of the WordPress plugins will be hosted on Git :)
-
-
-==Installation==
-
-* Upload the `list-category-posts` directory to your wp-content/plugins/ directory.
-* Login to your WordPress Admin menu, go to Plugins, and activate it.
-* Start using the '[catlist]` shortcode in your posts and/or pages.
-* You can find the List Category Posts widget in the Appearence > Widgets section on your WordPress Dashboard.
-* If you want to customize the way the plugin displays the information, check [HTML & CSS Customization](https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization) or the [section on Templates](https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System) on the wiki.
-
-==Other notes==
 
 Since the documentation on how to use the plugin has passed wordpress.org's character limit, the text was cut. I've since started using [a wiki](https://github.com/picandocodigo/List-Category-Posts/wiki) for more comfortable reading and maintaining. Please check it out, suggestions are welcome on GitHub issues!
 
@@ -118,7 +92,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **tags** - Tag support, display posts from a certain tag. You can use an "OR" relationship `[catlist tags="nintendo,sega"]` or "AND" relationship (posts that belong to all of the listed tags): `[catilst tags="nintendo+sega"]`.
 
-* **taxonomy** - You can select posts using custom taxonomies. You need to set the taxonomy and the terms: `[catlist taxonomy='person' terms='bob']`.
+* **taxonomy** - You can select posts using custom taxonomies. You need to set the taxonomy and the terms: `[catlist taxonomy='person' terms='bob']`. It supports both the "IN" and "AND" logical relationships between each inner taxonomy. For the `AND` relationship, separate terms with a plus sign: ` [catlist taxonomy='topic' terms='topic1+topic2']`. For the `OR` relationship, separate terms with a comma: `[catlist taxonomy='topic' terms='topic1,topic2']`.
 
 * **currenttags** - Display posts from the current post's tags (won't
     work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`
@@ -391,6 +365,17 @@ https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customizati
 
 https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System
 
+
+
+
+==Installation==
+
+* Upload the `list-category-posts` directory to your wp-content/plugins/ directory.
+* Login to your WordPress Admin menu, go to Plugins, and activate it.
+* Start using the '[catlist]` shortcode in your posts and/or pages.
+* You can find the List Category Posts widget in the Appearence > Widgets section on your WordPress Dashboard.
+* If you want to customize the way the plugin displays the information, check [HTML & CSS Customization](https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization) or the [section on Templates](https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System) on the wiki.
+
 == Frequently Asked Questions ==
 
 **FAQ**
@@ -454,6 +439,9 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.74 =
+* Support "and" relationship for custom taxonomies, by [Dalton Rooney](https://github.com/daltonrooney).
 
 = 0.73 =
 
