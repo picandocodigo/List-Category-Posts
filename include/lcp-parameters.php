@@ -152,10 +152,19 @@ class LcpParameters{
     // Custom taxonomy support
     // Why didn't I document this?!?
     if ( $this->utils->lcp_not_empty('taxonomy') && $this->utils->lcp_not_empty('terms') ){
+      if ( strpos($params['terms'],'+') !== false ) {
+        $terms = explode("+",$params['terms']);
+        $operator = 'AND';
+      } else {
+        $terms = explode(",",$params['terms']);
+        $operator = 'IN';
+      }
+
       $args['tax_query'] = array(array(
         'taxonomy' => $params['taxonomy'],
         'field' => 'slug',
-        'terms' => explode(",",$params['terms'])
+        'terms' => $terms,
+        'operator' => $operator
       ));
     }
 
