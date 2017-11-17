@@ -168,6 +168,32 @@ class LcpParameters{
       ));
     }
 
+    // Multiple taxonomies support in the form
+    // taxonomies_or="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"
+    // taxonomies_and="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"
+    if ( $this->utils->lcp_not_empty('taxonomies_or') || $this->utils->lcp_not_empty('taxonomies_and') ) {
+        if($this->utils->lcp_not_empty('taxonomies_or')) {
+            $operator = "OR";
+            $taxonomies = $params['taxonomies_or'];
+        } else {
+            $operator = "AND";
+            $taxonomies = $params['taxonomies_and'];
+        }
+        $count = preg_match_all('/([^:]+):\{([^:]+)\}(?:;|$)/im', $taxonomies, $matches, PREG_SET_ORDER, 0);
+        if($count > 0) {
+            $tax_arr = array('relation' => $operator);
+            foreach ($matches as $match) {
+                $tax_term = array(
+                    'taxonomy' => $match[1],
+                    'field' => 'slug',
+                    'terms' => explode(",",$match[2])
+                );
+                array_push($tax_arr,$tax_term);
+            }
+            $args['tax_query'] = $tax_arr;
+        }
+    }
+
     // Tag support
     if ( $this->utils->lcp_not_empty('tags') ) {
       $args['tag'] = $params['tags'];
