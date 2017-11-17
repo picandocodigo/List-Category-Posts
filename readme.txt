@@ -354,24 +354,6 @@ Will print the value of the Custom Field "Mood" but not the text
 
 * **link_dates** - Option to wrap dates with a link to the post. Set to `true` or `yes` to enable, set to `false` or `no` to disable. Defaults to `false`.
 
-== Widget ==
-
-The widget is quite simple, and it doesn't implement all of the plugin's functionality. To use a shortcode in a widget add this code to your theme's functions.php file:
-
-`add_filter('widget_text', 'do_shortcode');`
-
-Then just add a new text widget to your blog and use the shortcode there as the widget's content.
-
-== HTML & CSS Customization ==
-
-https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization
-
-== Template System ==
-
-https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System
-
-
-
 
 ==Installation==
 
@@ -383,19 +365,32 @@ https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System
 
 == Frequently Asked Questions ==
 
-**FAQ**
-
 You can find the Frequently Asked Questions [here](https://github.com/picandocodigo/List-Category-Posts/blob/master/doc/FAQ.md#frequently-asked-questions).
 
 **INSTRUCTIONS ON HOW TO USE THE PLUGIN**
 
-https://github.com/picandocodigo/List-Category-Posts/wiki/
+Check out [the Wiki](https://github.com/picandocodigo/List-Category-Posts/wiki/)
 
 Please read the instructions and the FAQ before opening a new topic in the support forums.
 
+**Widget**
+
+The widget is quite simple, and it doesn't implement all of the plugin's functionality.
+
+Since WordPress 4.9, you can use a shortcode in a widget. If you're using a previous WordPress version, add this code to your theme's functions.php file:
+
+`add_filter('widget_text', 'do_shortcode');`
+
+Then just add a new text widget to your blog and use the shortcode there as the widget's content.
+
+**HTML & CSS Customization**
+
+[HTML and CSS Customization](https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization)
+
+
 **TEMPLATE SYSTEM**
 
-How to customize the way the posts are shown: https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System. I am aware the Template System is not the friendliest right now, I'll work on improving this if I ever get the time to work on it.
+How to customize the way the posts are shown: [Template System](https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System). I am aware the Template System is not the friendliest right now, I'll work on improving this if I ever get the time to work on it.
 
 **NEW FEATURE REQUESTS, BUG FIXES, ENHANCEMENTS**
 
