@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9
 Requires PHP: 5.2.4
-Stable tag: 0.72
+Stable tag: 0.73
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,7 +92,12 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **tags** - Tag support, display posts from a certain tag. You can use an "OR" relationship `[catlist tags="nintendo,sega"]` or "AND" relationship (posts that belong to all of the listed tags): `[catilst tags="nintendo+sega"]`.
 
-* **taxonomy** - You can select posts using custom taxonomies. You need to set the taxonomy and the terms: `[catlist taxonomy='person' terms='bob']`. It supports both the "IN" and "AND" logical relationships between each inner taxonomy. For the `AND` relationship, separate terms with a plus sign: ` [catlist taxonomy='topic' terms='topic1+topic2']`. For the `OR` relationship, separate terms with a comma: `[catlist taxonomy='topic' terms='topic1,topic2']`.
+* **taxonomy** - You can select posts using custom taxonomies. There's two ways of selecting taxonomies:
+    * You need to set the taxonomy and the terms: `[catlist taxonomy='person' terms='bob']`. It supports both the "IN" and "AND" logical relationships between each inner taxonomy. For the `AND` relationship, separate terms with a plus sign: ` [catlist taxonomy='topic' terms='topic1+topic2']`. For the `OR` relationship, separate terms with a comma: `[catlist taxonomy='topic' terms='topic1,topic2']`.
+    * Multiple taxonomies: You can use multiple taxonomy terms in one shortcode like this:
+      * OR - `taxonomies_or="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"`
+      * AND - `taxonomies_and="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"`
+
 
 * **currenttags** - Display posts from the current post's tags (won't
     work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`
@@ -441,7 +446,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 = 0.74 =
+
 * Support "and" relationship for custom taxonomies, by [Dalton Rooney](https://github.com/daltonrooney).
+* Support for multiple taxonomies in the same shortcode by [TheSquiffy](https://github.com/TheSquiffy)
+* Tested up to WordPress 4.9
 
 = 0.73 =
 
