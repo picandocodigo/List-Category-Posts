@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9
 Requires PHP: 5.2.4
-Stable tag: 0.73
+Stable tag: 0.73.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -440,14 +440,15 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
-= 0.74 =
+= 0.73.1 =
+
+* Bumped version because WordPress.org wouldn't grab the previous one.
+
+= 0.73 =
 
 * Support "and" relationship for custom taxonomies, by [Dalton Rooney](https://github.com/daltonrooney).
 * Support for multiple taxonomies in the same shortcode by [TheSquiffy](https://github.com/TheSquiffy)
 * Tested up to WordPress 4.9
-
-= 0.73 =
-
 * Adds Irish translation by Jordan Silaen.
 
 = 0.72 =
