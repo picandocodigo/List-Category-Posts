@@ -60,7 +60,7 @@ class LcpCategory{
 
   public function current_category(){
     $category = get_category( get_query_var( 'category' ) );
-    if( isset( $category->errors ) && $category->errors["invalid_term"][0] == __("Empty Term") ){
+    if( isset( $category->errors ) && $category->errors["invalid_term"][0] == __("Empty Term.") ){
       global $post;
       $categories = get_the_category($post->ID);
       if ( !empty($categories) ){

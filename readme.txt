@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9
 Requires PHP: 5.2.4
-Stable tag: 0.73.1
+Stable tag: 0.73.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -439,6 +439,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.73.2 =
+
+* Bug fix release: `[catlist categorypage="yes"]` had stopped working with WordPress 4.9. This is because the category check would compare a return value against the "Empty Term" translation key which was changed [in this commit](https://github.com/WordPress/WordPress/commit/a42b9cebdebb2809b484f4187757555f30c9ee08#diff-efd15818123d55a117706670be80c15aR749) adding periods at the end of some error messages. So it was just a matter of adding the period in the if condition. Thanks helmutka for reporting this!
 
 = 0.73.1 =
 
