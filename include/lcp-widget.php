@@ -64,6 +64,9 @@ class ListCategoryPostsWidget extends WP_Widget{
       'morelink' => $morelink,
       'tags_as_class' => $tags_as_class,
       'template' => $template,
+      'pagination_next' => '>>',
+      'pagination_prev' => '<<',
+      'pagination' => 'no'
     );
 
     echo $before_widget;

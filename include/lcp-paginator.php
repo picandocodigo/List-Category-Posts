@@ -6,6 +6,8 @@
 
 class LcpPaginator {
   private $catlist;
+  private $prev_page_num;
+  private $next_page_num;
 
   // Singleton implementation
   private static $instance = null;
@@ -48,14 +50,16 @@ class LcpPaginator {
 
           // Add "Previous" link
           if ($params['page'] > 1){
-              $pag_output .= $this->lcp_page_link( intval($params['page']) - 1, $params['page'], $params['instance'], $params['previous'] );
+            $this->prev_page_num = intval(intval($params['page']) - 1);
+            $pag_output .= $this->lcp_page_link($this->prev_page_num , $params['page'], $params['instance'], $params['previous'] );
           }
 
           $pag_output .= $lcp_paginator;
 
           // Add "Next" link
           if ($params['page'] < $pages_count){
-              $pag_output .= $this->lcp_page_link( intval($params['page']) + 1, $params['page'], $params['instance'], $params['next']);
+            $this->next_page_num = intval($params['page'] + 1);
+            $pag_output .= $this->lcp_page_link($this->next_page_num, $params['page'], $params['instance'], $params['next']);
           }
 
           $pag_output .= "</ul>";
@@ -89,7 +93,13 @@ class LcpPaginator {
       $page_link = "$protocol://$http_host$url?$query" .
                    $amp . "lcp_page" . $lcp_instance . "=". $page .
                    "#lcp_instance_" . $lcp_instance;
-      $link .=  "<li><a href='$page_link' title='$page'>";
+      $link .=  "<li><a href='$page_link' title='$page'";
+      if ($page === $this->prev_page_num) {
+          $link .= "class='lcp_prevlink'";
+      } elseif ($page === $this->next_page_num) {
+          $link .= "class='lcp_nextlink'";
+      }
+      $link .= ">";
       ($char != null) ? ($link .= $char) : ($link .= $page);
 
       $link .= "</a></li>";

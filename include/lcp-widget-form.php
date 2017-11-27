@@ -45,7 +45,6 @@
   $morelink = strip_tags($instance['morelink']);
   $tags_as_class = strip_tags($instance['tags_as_class']);
   $template = strip_tags($instance['template']);
-
 ?>
 
 <p>
