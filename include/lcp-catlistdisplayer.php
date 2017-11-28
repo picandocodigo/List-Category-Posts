@@ -151,7 +151,7 @@ class CatListDisplayer {
     // More link
     $this->lcp_output .= $this->get_morelink();
 
-    $this->lcp_output .= $this->get_pagination();
+    $this->lcp_output .= $this->catlist->get_pagination();
   }
 
   public function get_pagination(){
