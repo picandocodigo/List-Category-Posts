@@ -10,12 +10,12 @@ class LcpParameters{
   private $utils;
   private $params;
 
-	public static function get_instance(){
-		if( !isset( self::$instance ) ){
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
+  public static function get_instance(){
+    if( !isset( self::$instance ) ){
+      self::$instance = new self;
+    }
+    return self::$instance;
+  }
 
   public function get_query_params($params){
     $this->params = $params;

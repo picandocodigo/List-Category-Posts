@@ -8,12 +8,12 @@ class LcpCategory{
   // Singleton implementation
   private static $instance = null;
 
-	public static function get_instance(){
-		if( !isset( self::$instance ) ){
-			self::$instance = new self;
-		}
-		return self::$instance;
-	}
+  public static function get_instance(){
+    if( !isset( self::$instance ) ){
+      self::$instance = new self;
+    }
+    return self::$instance;
+  }
 
   /*
    * When the category is set using the `name` parameter.
