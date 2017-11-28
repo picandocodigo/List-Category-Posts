@@ -4,6 +4,7 @@ require_once ( LCP_PATH . 'lcp-thumbnail.php' );
 require_once ( LCP_PATH . 'lcp-parameters.php' );
 require_once ( LCP_PATH . 'lcp-utils.php' );
 require_once ( LCP_PATH . 'lcp-category.php' );
+require_once ( LCP_PATH . 'lcp-paginator.php' );
 
 /**
  * The CatList object gets the info for the CatListDisplayer to show.
@@ -422,4 +423,16 @@ class CatList{
       $lcp_thumb_class);
   }
 
+  public function get_pagination(){
+    $paginator_params = array(
+          'instance'    => $this->get_instance(),
+          'next'        => $this->params['pagination_next'],
+          'numberposts' => $this->get_number_posts(),
+          'page'        => $this->get_page(),
+          'pagination'  => $this->params['pagination'],
+          'posts_count' => $this->get_posts_count(),
+          'previous'    => $this->params['pagination_prev']
+    );
+    return LcpPaginator::get_instance()->get_pagination($paginator_params);
+  }
 }
