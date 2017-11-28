@@ -10,6 +10,8 @@ class CatListDisplayer {
   private $catlist;
   private $params = array();
   private $lcp_output;
+  private $prev_page_num;
+  private $next_page_num;
 
   public static function getTemplatePaths(){
     $template_path = TEMPLATEPATH . "/list-category-posts/";
@@ -178,14 +180,16 @@ class CatListDisplayer {
 
         // Add "Previous" link
         if ($this->catlist->get_page() > 1){
-          $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) - 1, $this->params['pagination_prev'] );
+          $this->prev_page_num = intval($this->catlist->get_page() - 1);
+          $pag_output .= $this->lcp_page_link( $this->prev_page_num, $this->params['pagination_prev'] );
         }
 
         $pag_output .= $lcp_paginator;
 
         // Add "Next" link
         if ($this->catlist->get_page() < $pages_count){
-          $pag_output .= $this->lcp_page_link( intval($this->catlist->get_page()) + 1, $this->params['pagination_next']);
+          $this->next_page_num = intval($this->catlist->get_page() + 1);
+          $pag_output .= $this->lcp_page_link( $this->next_page_num, $this->params['pagination_next']);
         }
 
         $pag_output .= "</ul>";
@@ -218,7 +222,14 @@ class CatListDisplayer {
       $page_link = "$protocol://$http_host$url?$query" .
         $amp . "lcp_page" . $this->catlist->get_instance() . "=". $page .
         "#lcp_instance_" . $this->catlist->get_instance();
-      $link .=  "<li><a href='$page_link' title='$page'>";
+      $link .=  "<li><a href='$page_link' title='$page'";
+      if ($page === $this->prev_page_num) {
+          $link .= "class='lcp_prevlink'";
+      } elseif ($page === $this->next_page_num) {
+          $link .= "class='lcp_nextlink'";
+      }
+      $link .= ">";
+      
       ($char != null) ? ($link .= $char) : ($link .= $page);
 
       $link .= "</a></li>";
