@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Class to build pagination
  * @author fernando@picandocodigo.net
@@ -32,7 +32,7 @@ class LcpPaginator {
            );
   }
 
-    public function get_pagination($params){
+  public function get_pagination($params){
     if ($this->show_pagination($params['pagination'])){
       $lcp_paginator = '';
       $pages_count = ceil (

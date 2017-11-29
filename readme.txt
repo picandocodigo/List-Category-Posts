@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9
 Requires PHP: 5.2.4
-Stable tag: 0.74
+Stable tag: 0.74.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -439,6 +439,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.74.1 =
+
+* Possibly fixed a bug where the code for the Paginator class would show up in some blogs. Apparently some PHP ini accept "<?" as a valid way of starting a php file, others don't.
 
 = 0.74 =
 * Adds "next" and "previous" classes to the previous and next buttons in pagination menu. The classes are `lcp_prevlink` and `lcp_nextlink`. Thanks @zymeth25.
