@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-# Update the system and install SVN + PHP5 + MySQL
+# Update the system and install SVN + PHP7.0 + MySQL 5.7
 if [ ! -x /usr/bin/mysql ];
 then
-    sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password rootpass'
-    sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password rootpass'
+    sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password rootpass'
+    sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password rootpass'
 
     apt-get update
 
-    apt-get install -y subversion apache2 php5 libapache2-mod-php5 mysql-server-5.5 php5-mysql
+    apt-get install -y subversion apache2 php7.0 php7.0-xml libapache2-mod-php7.0 mysql-server-5.7 php7.0-mysql
 fi
 
 # Create the WordPress database and corresponding user
@@ -26,7 +26,11 @@ fi
 if [ ! -f /var/log/webserversetup ];
 then
     a2enmod rewrite
-    sed -i '/AllowOverride None/c AllowOverride All' /etc/apache2/sites-available/default
+    sedcmd='/var\/www/ c\DocumentRoot /var/www\
+       <Directory /var/www>\
+       AllowOverride All\
+       </Directory>'
+    sed -i "$sedcmd" /etc/apache2/sites-available/000-default.conf
     service apache2 restart
 
     touch /var/log/webserversetup
