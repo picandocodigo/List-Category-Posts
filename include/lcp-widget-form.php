@@ -23,6 +23,7 @@
                     'morelink' =>'',
                     'tags_as_class' => '',
                     'template' => '',
+                    'pagination' => ''
                     );
   $instance = wp_parse_args( (array) $instance, $default);
 
@@ -45,6 +46,8 @@
   $morelink = strip_tags($instance['morelink']);
   $tags_as_class = strip_tags($instance['tags_as_class']);
   $template = strip_tags($instance['template']);
+  $pagination = strip_tags($instance['pagination']);
+
 ?>
 
 <p>
@@ -183,10 +186,18 @@
 
 <p>
   <input class="checkbox"  type="checkbox"
+    <?php checked( (bool) $instance['pagination'], true ); ?>
+    name="<?php echo $this->get_field_name( 'pagination' ); ?>" />
+  <?php _e("Pagination", 'list-category-posts')?>
+</p>
+
+<p>
+  <input class="checkbox"  type="checkbox"
     <?php checked( (bool) $instance['show_date'], true ); ?>
     name="<?php echo $this->get_field_name( 'show_date' ); ?>" />
   <?php _e("Date", 'list-category-posts')?>
 </p>
+
 <p>
   <input class="checkbox"  type="checkbox"
     <?php checked( (bool) $instance['show_modified_date'], true ); ?>

@@ -29,6 +29,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $category_id = $instance['categoryid'];
     $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
     $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
+    $pagination = ($instance['pagination'] == 'on') ? 'yes' : 'no';
     $showmodifieddate = ($instance['show_modified_date'] == 'on') ? 'yes' : 'no';
     $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
     $excerptsize = (empty($instance['excerpt_size']) ? 55 : $instance['excerpt_size']);
@@ -66,7 +67,8 @@ class ListCategoryPostsWidget extends WP_Widget{
       'template' => $template,
       'pagination_next' => '>>',
       'pagination_prev' => '<<',
-      'pagination' => 'no'
+      'pagination' => $pagination,
+      'instance' => $this->id
     );
 
     echo $before_widget;
@@ -114,6 +116,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['morelink'] = strip_tags($new_instance['morelink']);
     $instance['tags_as_class'] = strip_tags($new_instance['tags_as_class']);
     $instance['template'] = strip_tags($new_instance['template']);
+    $instance['pagination'] = strip_tags($new_instance['pagination']);
 
     return $instance;
   }
