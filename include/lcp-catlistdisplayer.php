@@ -294,10 +294,14 @@ class CatListDisplayer {
     return $this->content_getter('excerpt', $single, $tag, $css_class);
   }
 
-/*
- * These used to be separate functions, now starting to get the code
- * in the same function for less repetition.
- */
+  private function get_pagination(){
+    $this->catlist->get_pagination();
+  }
+
+  /*
+  * These used to be separate functions, now starting to get the code
+  * in the same function for less repetition.
+  */
   private function content_getter($type, $post, $tag = null, $css_class = null) {
     $info = '';
     switch( $type ){
