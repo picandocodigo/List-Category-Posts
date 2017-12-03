@@ -67,7 +67,7 @@
   <br/>
   <select id="<?php echo $this->get_field_id('categoryid'); ?>" name="<?php echo $this->get_field_name('categoryid'); ?>">
     <?php
-      $categories=  get_categories();
+      $categories=  get_categories(array('hide_empty' => false));
       $option = '<option value="-1"';
       if ($categoryid == -1) :
         $option .= ' selected = "selected" ';
