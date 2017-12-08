@@ -120,6 +120,10 @@ class CatListDisplayer {
     return $this->content_getter('excerpt', $single, $tag, $css_class);
   }
 
+  public function get_posts_tags($single, $tag = null, $css_class = null){
+    return $this->content_getter('posts_tags', $single, $tag, $css_class);
+  }
+
   private function get_modified_date($single, $tag = null, $css_class = null){
     return $info = $this->content_getter('date_modified', $single, $tag, $css_class);
   }
@@ -205,6 +209,10 @@ class CatListDisplayer {
       // Default wrapper behavior not supported here,
       // class is only used inside the <a> element.
       $css_class = null;
+      break;
+    case 'posts_tags':
+      $info = $this->catlist->get_posts_tags($post);
+      break;
     }
     return $this->wrapper->wrap($info, $tag, $css_class);
   }

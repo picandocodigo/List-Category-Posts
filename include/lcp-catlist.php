@@ -286,6 +286,69 @@ class CatList{
     }
   }
 
+  /**
+   * Parse posts_tags parameters
+   */
+  public function get_posts_tags($single) {
+    // Check if tags should be displayed.
+    if ('yes' !== $this->params['posts_tags'])  {
+      return null;
+    }
+    // Get parsed parameters.
+    $params = $this->get_posts_tags_params();
+
+    // Get the post's tags IDs, returns false if post has no tags.
+    $tags = get_the_tags($single->ID);
+
+    // Construct output string based on $params.
+    $output = '';
+    if (is_array($tags)) {
+      $output .= $params['prefix'];
+      $parsed_tags = array();
+      foreach($tags as $tag) {
+        $tag_string = $tag->name;
+        $tag_string = $this->pt_taglink_wrapper($params['taglink'], $tag, $tag_string);
+        $tag_string = $this->pt_inner_wrapper($params['inner'], $tag, $tag_string);
+        $parsed_tags[] = $tag_string;
+      }
+      $output .= implode($params['glue'], $parsed_tags);
+      return $output;
+    } else {
+      return null;
+    }
+  }
+
+  private function get_posts_tags_params() {
+    return array(
+      'taglink' => 'yes' === $this->params['taglink'] ? true : false,
+      'prefix'  => $this->params['posts_tags_prefix'] ?: null,
+      'glue'    => $this->params['posts_tags_glue'] ?: null,
+      'inner'   => $this->params['posts_tags_inner'] ?: null,
+    );
+  }
+
+  private function pt_taglink_wrapper($taglink, $tag, $tag_string) {
+    if ($taglink) {
+      $tag_string = $this->wrapper->to_html(
+        'a',
+        ['href' => get_tag_link($tag->term_id)],
+        $tag_string
+      );
+    }
+    return $tag_string;
+  }
+
+  private function pt_inner_wrapper($inner, $tag, $tag_string) {
+    if ($inner) {
+      $tag_string = $this->wrapper->to_html(
+        $inner,
+        ['class' => 'tag-' . $tag->slug],
+        $tag_string
+      );
+    }
+    return $tag_string;
+  }
+
   public function get_author_to_show($single) {
     if ($this->params['author'] == 'yes') {
       $lcp_userdata = get_userdata($single->post_author);
