@@ -44,7 +44,7 @@ Since WordPress 4.9, [you can use shortcode in text widgets](https://make.wordpr
 
 The plugin also includes a widget as a simple interface for its functionality. Just add as many widgets as you want, and select all the available options from the Appearence > Widgets page. Not all the functionality in the shortcode has been implemented in the widget yet. You can use the shortcode for the most flexibility.
 
-Please, read the information on [the wiki](https://github.com/picandocodigo/List-Category-Posts/wiki) and [Changelog](http://wordpress.org/extend/plugins/list-category-posts/changelog/) to be aware of new functionality, and improvements to the plugin.
+Please, read the information on [the wiki](https://github.com/picandocodigo/List-Category-Posts/wiki) and [Changelog](https://wordpress.org/plugins/list-category-posts/#developers) to be aware of new functionality, and improvements to the plugin.
 
 **Videos**
 
@@ -110,20 +110,20 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 * **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 monthnum=12]` will list posts from December 2012.
 
-* **date ranges** - You can also use date ranges for listing posts. For example "list every post after March 14th, 2005". The parameters are: ```after, after_year, after_month, after_day, before, before_year, before_month,  before_day```. These parameters are used to specify data_query arguments (see: [the codex](https://codex.wordpress.org/Class_Reference/WP_Query#Date_Parameters)).  
+* **date ranges** - You can also use date ranges for listing posts. For example "list every post after March 14th, 2005". The parameters are: ```after, after_year, after_month, after_day, before, before_year, before_month,  before_day```. These parameters are used to specify data_query arguments (see: [the codex](https://codex.wordpress.org/Class_Reference/WP_Query#Date_Parameters)).
 
-     If you want to list all the posts before a given date, say `Jun 17th, 2007` you can use these two options:  
-     `[catlist before_year=2007 before_month=06 before_day=17]`  
-     Or you can use the `before` parameter with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):  
-     `[catlist before='2007/06/17']`  
+     If you want to list all the posts before a given date, say `Jun 17th, 2007` you can use these two options:
+     `[catlist before_year=2007 before_month=06 before_day=17]`
+     Or you can use the `before` parameter with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):
+     `[catlist before='2007/06/17']`
 
-     The same works for posts after a given date, you can use:  
-     `[catlist after_year=2007 after_month=06 after_day=17]`  
-     Or just `after` with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):  
-     `[catlist after='2007/06/17']`  
+     The same works for posts after a given date, you can use:
+     `[catlist after_year=2007 after_month=06 after_day=17]`
+     Or just `after` with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):
+     `[catlist after='2007/06/17']`
 
-    `after` takes priority over `after_year`, `after_month`, and `after_day`.  
-    `before` takes priority over `before_year`, `before_month`, and `before_day`.  
+    `after` takes priority over `after_year`, `after_month`, and `after_day`.
+    `before` takes priority over `before_year`, `before_month`, and `before_day`.
 
 * **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
 
@@ -155,7 +155,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 ==PAGINATION
 
-https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination
+See the wiki: [Pagination](https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination).
 
 ==OTHER PARAMETERS==
 
@@ -272,11 +272,11 @@ https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination
     Ex: `[catlist numberposts=-1
     post_suffix="Hello World"]` will create something like:
 
-    ```<ul class="lcp_catlist" id=lcp_instance_0>
-       <li>
-         <a href="http://127.0.0.1:8080/wordpress/?p=42" title="WordPress">
-           WordPress
-         </a> Hello World </li>```
+    `<ul class="lcp_catlist" id=lcp_instance_0>`
+    `   <li>`
+    `     <a href="http://127.0.0.1:8080/wordpress/?p=42" title="WordPress">`
+    `       WordPress`
+    `     </a> Hello World </li>`
 
 * **display_id** - Set it to yes to show the Post's ID next to the post title: `[catlist id=3 display_id=yes]`
 
