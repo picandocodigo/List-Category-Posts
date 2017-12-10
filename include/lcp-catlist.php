@@ -81,8 +81,9 @@ class CatList{
     $args['posts_per_page'] = $args['numberposts'];
 
     if ( !$this->lcp_should_return_posts($flags) ) {
-      // Don't return any posts (but allow sticky posts)
+      // Don't return any posts
       $args['post__in'] = array(0);
+      $args['ignore_sticky_posts'] = true;
     }
     query_posts($args);
     global $wp_query;
