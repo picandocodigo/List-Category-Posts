@@ -27,8 +27,7 @@ class LcpPaginator {
     return !empty($pagination) &&
            $pagination == 'yes' ||
            (get_option('lcp_pagination') === 'true' &&
-             ($lcp_pag_present &&
-             $pagination !== 'false')
+            ($pagination !== 'false')
            );
   }
 
