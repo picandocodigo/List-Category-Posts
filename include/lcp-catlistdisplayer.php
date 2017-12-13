@@ -295,7 +295,7 @@ class CatListDisplayer {
   }
 
   private function get_pagination(){
-    $this->catlist->get_pagination();
+    return $this->catlist->get_pagination();
   }
 
   /*
