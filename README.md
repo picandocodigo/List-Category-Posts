@@ -11,7 +11,7 @@ Please visit the [plugin's page on WordPress.org](http://wordpress.org/extend/pl
 
 # Want to help with the development?
 
-The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK) and [bibz](https://github.com/bibz) for the hard work :+1:
+The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK), [bibz](https://github.com/bibz), [vacuus](https://github.com/vacuus), [zymeth25](https://github.com/zymeth25) for their contributions and hard work and [every other person](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors) who's contributed to this plugin:+1:
 
 Currently the plugin is mostly being developed through code contributions by its users. Sometimes Pull Request take a while for me to review, but I'll eventually get to all of them. If you open a PR, feel free to add your wordpress.org user so if it gets merged I can add you to the list of contributors in the plugin's readme file.
 

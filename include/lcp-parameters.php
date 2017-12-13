@@ -45,21 +45,9 @@ class LcpParameters{
     // Check type, status, parent params
     $args = $this->lcp_types_and_statuses($args);
 
-    if($this->utils->lcp_not_empty('year')):
-      $args['year'] = $params['year'];
-    endif;
-
-    if($this->utils->lcp_not_empty('monthnum')):
-      $args['monthnum'] = $params['monthnum'];
-    endif;
-
-    if($this->utils->lcp_not_empty('search')):
-      $args['s'] = $params['search'];
-    endif;
-
-    if($this->utils->lcp_not_empty('author_posts')):
-      $args['author_name'] = $params['author_posts'];
-    endif;
+    // Parameters which need to be checked simply, if they exist, add them to
+    // final return array ($args)
+    $args = $this->lcp_check_basic_params($args);
 
     // Posts within given date range:
     if ( $this->utils->lcp_not_empty('after') ) {
@@ -168,31 +156,8 @@ class LcpParameters{
       ));
     }
 
-    // Multiple taxonomies support in the form
-    // taxonomies_or="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"
-    // taxonomies_and="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"
-    if ( $this->utils->lcp_not_empty('taxonomies_or') || $this->utils->lcp_not_empty('taxonomies_and') ) {
-        if($this->utils->lcp_not_empty('taxonomies_or')) {
-            $operator = "OR";
-            $taxonomies = $params['taxonomies_or'];
-        } else {
-            $operator = "AND";
-            $taxonomies = $params['taxonomies_and'];
-        }
-        $count = preg_match_all('/([^:]+):\{([^:]+)\}(?:;|$)/im', $taxonomies, $matches, PREG_SET_ORDER, 0);
-        if($count > 0) {
-            $tax_arr = array('relation' => $operator);
-            foreach ($matches as $match) {
-                $tax_term = array(
-                    'taxonomy' => $match[1],
-                    'field' => 'slug',
-                    'terms' => explode(",",$match[2])
-                );
-                array_push($tax_arr,$tax_term);
-            }
-            $args['tax_query'] = $tax_arr;
-        }
-    }
+    // Multiple taxonomies support
+    $args = $this->lcp_taxonomies($args);
 
     // Tag support
     if ( $this->utils->lcp_not_empty('tags') ) {
@@ -217,6 +182,16 @@ class LcpParameters{
     return $args;
   }
 
+    private function lcp_check_basic_params($args){
+      $simple_args = array('year', 'monthnum', 'search', 'author_posts', 'after');
+      foreach($simple_args as $key){
+        if($this->utils->lcp_not_empty($key)){
+            $args[$key] = $this->params[$key];
+        }
+      }
+      return $args;
+    }
+
   // Check posts to exclude
   private function lcp_check_excludes($args){
     if( $this->utils->lcp_not_empty('excludeposts') ){
@@ -233,6 +208,36 @@ class LcpParameters{
     }
     return $args;
   }
+
+    private function lcp_taxonomies($args){
+      // Multiple taxonomies support in the form
+      // taxonomies_or="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"
+      // taxonomies_and="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"
+      if ( $this->utils->lcp_not_empty('taxonomies_or') ||
+           $this->utils->lcp_not_empty('taxonomies_and') ) {
+        if($this->utils->lcp_not_empty('taxonomies_or')) {
+          $operator = "OR";
+          $taxonomies = $this->params['taxonomies_or'];
+        } else {
+          $operator = "AND";
+          $taxonomies = $this->params['taxonomies_and'];
+        }
+        $count = preg_match_all('/([^:]+):\{([^:]+)\}(?:;|$)/im', $taxonomies, $matches, PREG_SET_ORDER, 0);
+        if($count > 0) {
+          $tax_arr = array('relation' => $operator);
+          foreach ($matches as $match) {
+            $tax_term = array(
+              'taxonomy' => $match[1],
+              'field' => 'slug',
+              'terms' => explode(",",$match[2])
+            );
+            array_push($tax_arr, $tax_term);
+          }
+          $args['tax_query'] = $tax_arr;
+        }
+      }
+      return $args;
+    }
 
   private function lcp_types_and_statuses($args){
     // Post type, status, parent params:
