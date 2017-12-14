@@ -151,7 +151,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 * **post_parent** - Show only the children of the post with this ID.
     Default: None.
 
-* **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. `customfield_name` defines the name of the field, and you should choose the values for which you want posts to display. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work. Eg: `[catlist customfield_name="color" customfield_value="green"]` will display posts with the value `green` set on the custom field `color`.
+* **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. `customfield_name` defines the name of the field, and you should choose the values for which you want posts to display. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work. Eg: `[catlist customfield_name="color" customfield_value="green"]` will display posts with the value `green` set on the custom field `color`. This parameter can be used together with `customfield_orderby`, see further below for more information.
 
 ==PAGINATION
 
@@ -187,7 +187,7 @@ https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination
   * **title** - Sort by title.
   * **type** - Sort by type. Ex: `[catlist name=mycategory orderby=date]`
 
-* **customfield_orderby** - You can order the posts by a custom field. For example: `[catlist numberposts=-1 customfield_orderby=Mood order=desc]` will list all the posts with a "Mood" custom field. Remember the default order is descending, more on order:
+* **customfield_orderby** - You can order the posts by a custom field. For example: `[catlist numberposts=-1 customfield_orderby=Mood order=desc]` will list all the posts with a "Mood" custom field. This parameter can be used toghether with `customfield_name` and `customfield_value`, you can use those parameters to select posts and then `customfield_orderby` to sort by this or another custom field.  Remember the default order is descending, more on order:
 
 * **order** - How to sort **orderby**. Valid values are:
   * **ASC** - Ascending (lowest to highest).
