@@ -19,6 +19,7 @@ class LcpParameters{
 
   public function get_query_params($params){
     $this->params = $params;
+    $meta_query = array();
     # Essential parameters:
     $args = array(
       'numberposts' => $params['numberposts'],
@@ -112,8 +113,10 @@ class LcpParameters{
      * should both be defined
      */
     if( $this->utils->lcp_not_empty('customfield_name') ){
-      $args['meta_key'] = $params['customfield_name'];
-      $args['meta_value'] = $params['customfield_value'];
+      $meta_query['select_clause'] = array(
+        'key' => $params['customfield_name'],
+        'value' => $params['customfield_value']
+      );
     }
 
     //Get private posts
@@ -169,8 +172,17 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('customfield_orderby') ){
-      $args['orderby'] = 'meta_value';
-      $args['meta_key'] = $params['customfield_orderby'];
+      $meta_query['orderby_clause'] = array(
+        'key' => $params['customfield_orderby'],
+        'compare' => 'EXISTS',
+      );
+      $args['orderby'] = 'orderby_clause';
+    }
+    
+    // If either select_clause or orderby_clause were added to $meta_query,
+    // it needs to be added to args.
+    if ( !empty($meta_query) ) {
+      $args['meta_query'] = $meta_query;
     }
 
     // Posts that start with a given letter:
