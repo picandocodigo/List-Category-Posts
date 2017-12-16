@@ -73,6 +73,8 @@ class ListCategoryPostsWidget extends WP_Widget{
 
     echo $before_widget;
 
+    if ($pagination === 'yes') lcp_pagination_css();
+
     if ($title == 'catlink') {
       // If the user has setup 'catlink' as the title, replace it with
       // the category link:

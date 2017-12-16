@@ -126,7 +126,7 @@ class ListCategoryPosts{
                              'monthnum' => '',
                              'search' => '',
                              'link_target' => '',
-                             'pagination' => 'no',
+                             'pagination' => '',
                              'pagination_next' => '>>',
                              'pagination_prev' => '<<',
                              'no_posts_text' => "",

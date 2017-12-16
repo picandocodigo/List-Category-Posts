@@ -24,10 +24,14 @@ class LcpPaginator {
   # override general options).
   # Receives params['pagination'] from CatList
   private function show_pagination($pagination){
-    return !empty($pagination) &&
-           $pagination == 'yes' ||
+    return (!empty($pagination) && (
+            $pagination == 'yes' ||
+            $pagination == 'true')
+           )
+           ||
            (get_option('lcp_pagination') === 'true' &&
-            ($pagination !== 'false')
+            ($pagination !== 'false') &&
+            ($pagination !== 'no')
            );
   }
 
