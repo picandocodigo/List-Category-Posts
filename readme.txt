@@ -440,6 +440,12 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.75.1 =
+
+* Fix a case where pagination would show up but the CSS wasn't being loaded.
+* Fixes other issues with pagination
+Thanks Klemens Starybrat (zymeth25) for the fixes in this release :)
+
 = 0.75 =
 
 * Improvements to `custom_fields` and `customfield_orderby`. Please check the readme for more information.
