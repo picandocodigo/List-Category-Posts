@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9
 Requires PHP: 5.2.4
-Stable tag: 0.75
+Stable tag: 0.75.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -439,6 +439,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.75.1 =
+
+* Fix a case where pagination would show up but the CSS wasn't being loaded.
+* Fixes other issues with pagination
+Thanks Klemens Starybrat (zymeth25) for the fixes in this release :)
 
 = 0.75 =
 
