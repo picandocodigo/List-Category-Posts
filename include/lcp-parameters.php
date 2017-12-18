@@ -46,6 +46,13 @@ class LcpParameters{
     // Check type, status, parent params
     $args = $this->lcp_types_and_statuses($args);
 
+    if($this->utils->lcp_not_empty('search')):
+      $args['s'] = $params['search'];
+    endif;
+
+    if($this->utils->lcp_not_empty('author_posts')):
+      $args['author_name'] = $params['author_posts'];
+    endif;
     // Parameters which need to be checked simply, if they exist, add them to
     // final return array ($args)
     $args = $this->lcp_check_basic_params($args);
@@ -178,7 +185,7 @@ class LcpParameters{
       );
       $args['orderby'] = 'orderby_clause';
     }
-    
+
     // If either select_clause or orderby_clause were added to $meta_query,
     // it needs to be added to args.
     if ( !empty($meta_query) ) {
@@ -195,7 +202,7 @@ class LcpParameters{
   }
 
     private function lcp_check_basic_params($args){
-      $simple_args = array('year', 'monthnum', 'search', 'author_posts', 'after');
+      $simple_args = array('year', 'monthnum', 'after');
       foreach($simple_args as $key){
         if($this->utils->lcp_not_empty($key)){
             $args[$key] = $this->params[$key];
