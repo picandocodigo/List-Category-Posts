@@ -44,6 +44,8 @@ class LcpPaginator {
           max( array( 1, $params['numberposts'] ) )
       );
       $pag_output = '';
+      $this->prev_page_num = null;
+      $this->next_page_num = null;
       if ($pages_count > 1){
           for($i = 1; $i <= $pages_count; $i++){
               $lcp_paginator .=  $this->lcp_page_link($i, $params['page'], $params['instance']);
