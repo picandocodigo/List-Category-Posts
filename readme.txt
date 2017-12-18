@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9
 Requires PHP: 5.2.4
-Stable tag: 0.75.1
+Stable tag: 0.75.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -439,6 +439,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.75.2 =
+
+* Fix `author_post` and `search` parameters.
+* Multiple instances pagination fix.
+* New test for the LcpPaginator class.
 
 = 0.75.1 =
 
