@@ -25,6 +25,7 @@
                     'template' => '',
                     'pagination' => ''
                     );
+  include_once("lcp-utils.php");
   $instance = wp_parse_args( (array) $instance, $default);
 
   $title = strip_tags($instance['title']);
@@ -114,11 +115,7 @@
   </label> <br/>
     <select  id="<?php echo $this->get_field_id('orderby'); ?>"
       name="<?php echo $this->get_field_name('orderby'); ?>" type="text" >
-      <?php $lcp_orders = array("date" => __("Date", "list-category-posts"),
-                                "modified" => __("Modified Date", "list-category-posts"),
-                                "title" => __("Post title", "list-category-posts"),
-                                "author" => __("Author", "list-category-posts"),
-                                "rand" => __("Random", "list-category-posts"));
+      <?php $lcp_orders = LcpUtils::lcp_orders();
       foreach ($lcp_orders as $key=>$value):
         $option = '<option value="' . $key . '" ';
         if ($orderby == $key):

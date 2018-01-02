@@ -16,4 +16,12 @@ class LcpUtils{
       $this->params[$param] !== ''
     );
   }
+
+    public static function lcp_orders(){
+      return array("date" => __("Date", "list-category-posts"),
+                   "modified" => __("Modified Date", "list-category-posts"),
+                   "title" => __("Post title", "list-category-posts"),
+                   "author" => __("Author", "list-category-posts"),
+                   "rand" => __("Random", "list-category-posts"));
+    }
 }

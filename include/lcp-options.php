@@ -1,4 +1,5 @@
 <?php
+include_once("lcp-utils.php");
 if ( is_admin() ){
   add_action( 'admin_menu', 'list_category_posts_menu' );
   add_action( 'admin_init', 'lcp_settings' );
@@ -12,15 +13,15 @@ function lcp_settings() { // whitelist options
 }
 
 function list_category_posts_menu() {
-	add_options_page( 'List Category Posts Options', 'List Category Posts',
+    add_options_page( 'List Category Posts Options', 'List Category Posts',
                     'manage_options', 'list-category-posts',
                     'list_category_posts_options' );
 }
 
 function list_category_posts_options() {
-	if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
+    if ( !current_user_can( 'manage_options' ) )  {
+        wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+    }
 ?>
 <div class="wrap">
   <h2>List Category Posts</h2>
@@ -78,11 +79,7 @@ function list_category_posts_options() {
           <td>
             <select id="lcp_orderby" name="lcp_orderby" type="text" >
               <?php
-              $lcp_orders = array("date" => __("Date", "list-category-posts"),
-                                  "modified" => __("Modified Date", "list-category-posts"),
-                                  "title" => __("Post title", "list-category-posts"),
-                                  "author" => __("Author", "list-category-posts"),
-                                  "rand" => __("Random", "list-category-posts"));
+              $lcp_orders = LcpUtils::lcp_orders();
               $orderby = get_option('lcp_orderby');
               foreach ($lcp_orders as $key=>$value){
                 $option = '<option value="' . $key . '" ';
