@@ -332,29 +332,28 @@ class CatList{
 
   public function get_content($single){
     if (isset($this->params['content']) &&
-    ($this->params['content'] =='yes' || $this->params['content'] =='full') &&
-    $single->post_content):
-      $lcp_content = $single->post_content;
-      $lcp_content = apply_filters('the_content', $lcp_content);
-      $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
+      ($this->params['content'] =='yes' || $this->params['content'] == 'full') &&
+      $single->post_content){
+        // get_extended - get content split by <!--more-->
+        $lcp_extended = get_extended($single->post_content);
+        $lcp_content = $lcp_extended['main'];
+        $lcp_content = apply_filters('the_content', $lcp_content);
+        $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
 
-      if ($this->params['content'] =='yes' &&
-        preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches) ):
-        if( empty($this->params['posts_morelink']) ):
-          $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
-        else:
-          $lcp_more = '';
-        endif;
-        $lcp_post_content = explode($matches[1], $lcp_content);
-        $lcp_content = $lcp_post_content[0] . ($lcp_more ?
-          ' <a href="' . get_permalink($single->ID) . '" title="' . "$lcp_more" . '">' .
-          $lcp_more . '</a>' : '');
-      endif;
-
-      return $lcp_content;
-    else:
-      return null;
-    endif;
+        if ($this->params['content'] == 'full') {
+          $lcp_extended_content = str_replace(']]>', ']]&gt', apply_filters('the_content', $lcp_extended['extended']) );
+          $lcp_content .= $lcp_extended_content;
+        } else {
+          if( empty($this->params['posts_morelink']) ){
+            $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
+            $lcp_content .= ' <a href="' . get_permalink($single->ID) . '" title="' . "$lcp_more" . '">' .
+                         $lcp_more . '</a>';
+          }
+        }
+        return $lcp_content;
+    }else {
+        return null;
+    }
   }
 
   public function get_excerpt($single){
