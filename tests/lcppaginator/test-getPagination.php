@@ -21,67 +21,6 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
         $_SERVER['QUERY_STRING'] = '';
     }
 
-    public function test_should_display_pagination() {
-        $paginator = LcpPaginator::get_instance();
-
-        // Empty shortcode parameter, 'false' in backend
-        update_option('lcp_pagination', 'false');
-        $params = array('pagination' => '');
-        $this->assertSame(null, $paginator->get_pagination($params));
-
-        // Random string as parameter, 'false' in backend
-        $params = array('pagination' => 'this is a random string');
-        $this->assertSame(null, $paginator->get_pagination($params));
-
-        // 'yes' as parameter, 'false' in backend
-        $params = array_merge($this->test_params,
-                              array('pagination' => 'yes'));
-        $this->assertTrue(is_string($paginator->get_pagination($params)));
-
-        // 'true' as parameter, 'false' in backend
-        $params = array_merge($this->test_params,
-                              array('pagination' => 'true'));
-        $this->assertTrue(is_string($paginator->get_pagination($params)));
-
-        // 'false' as parameter, 'false' in backend
-        $params = array('pagination' => 'false');
-        $this->assertSame(null, $paginator->get_pagination($params));
-
-        // 'no' as parameter, 'false' in backend
-        $params = array('pagination' => 'no');
-        $this->assertSame(null, $paginator->get_pagination($params));
-
-        update_option('lcp_pagination', 'true');
-
-        // Empty shortcode parameter, 'true' in backend
-        $params = array_merge($this->test_params,
-                              array('pagination' => ''));
-        $this->assertTrue(is_string($paginator->get_pagination($params)));
-
-        // Random string as parameter, 'true' in backend
-        $params = array_merge($this->test_params,
-                              array('pagination' => 'this is a random string'));
-        $this->assertTrue(is_string($paginator->get_pagination($params)));
-
-        // 'yes' as parameter, 'true' in backend
-        $params = array_merge($this->test_params,
-                              array('pagination' => 'yes'));
-        $this->assertTrue(is_string($paginator->get_pagination($params)));
-
-        // 'true' as parameter, 'true' in backend
-        $params = array_merge($this->test_params,
-                              array('pagination' => 'true'));
-        $this->assertTrue(is_string($paginator->get_pagination($params)));
-
-        // 'no' as parameter, 'false' in backend
-        $params = array('pagination' => 'no');
-        $this->assertSame(null, $paginator->get_pagination($params));
-
-        // 'false' as parameter, 'true' in backend
-        $params = array('pagination' => 'false');
-        $this->assertSame(null, $paginator->get_pagination($params));
-    }
-
     public function test_pagination_string() {
         $paginator = LcpPaginator::get_instance();
 
