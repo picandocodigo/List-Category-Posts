@@ -24,7 +24,7 @@ class LcpUtils{
                  "author" => __("Author", "list-category-posts"),
                  "rand" => __("Random", "list-category-posts"));
   }
-  
+
   public static function lcp_show_pagination($pagination){
     return (!empty($pagination) && (
             $pagination == 'yes' ||
