@@ -23,20 +23,9 @@ class LcpPaginator {
   # is not set to 'no' (since shortcode parameters should
   # override general options).
   # Receives params['pagination'] from CatList
-  private function show_pagination($pagination){
-    return (!empty($pagination) && (
-            $pagination == 'yes' ||
-            $pagination == 'true')
-           )
-           ||
-           (get_option('lcp_pagination') === 'true' &&
-            ($pagination !== 'false') &&
-            ($pagination !== 'no')
-           );
-  }
 
   public function get_pagination($params){
-    if ($this->show_pagination($params['pagination'])){
+    if (LcpUtils::lcp_show_pagination($params['pagination'])){
       $lcp_paginator = '';
       $pages_count = ceil (
           $params['posts_count'] /

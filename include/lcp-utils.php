@@ -17,11 +17,23 @@ class LcpUtils{
     );
   }
 
-    public static function lcp_orders(){
-      return array("date" => __("Date", "list-category-posts"),
-                   "modified" => __("Modified Date", "list-category-posts"),
-                   "title" => __("Post title", "list-category-posts"),
-                   "author" => __("Author", "list-category-posts"),
-                   "rand" => __("Random", "list-category-posts"));
-    }
+  public static function lcp_orders(){
+    return array("date" => __("Date", "list-category-posts"),
+                 "modified" => __("Modified Date", "list-category-posts"),
+                 "title" => __("Post title", "list-category-posts"),
+                 "author" => __("Author", "list-category-posts"),
+                 "rand" => __("Random", "list-category-posts"));
+  }
+  
+  public static function lcp_show_pagination($pagination){
+    return (!empty($pagination) && (
+            $pagination == 'yes' ||
+            $pagination == 'true')
+           )
+           ||
+           (get_option('lcp_pagination') === 'true' &&
+            ($pagination !== 'false') &&
+            ($pagination !== 'no')
+           );
+  }
 }
