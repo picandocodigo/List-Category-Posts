@@ -5,9 +5,11 @@
  * @author fernando@picandocodigo.net
  */
 require_once 'lcp-catlist.php';
+require_once 'lcp-wrapper.php';
 
 class CatListDisplayer {
   public $catlist;
+  private $wrapper;
   private $params = array();
   private $lcp_output;
 
@@ -20,6 +22,7 @@ class CatListDisplayer {
   public function __construct($atts) {
     $this->params = $atts;
     $this->catlist = new CatList($atts);
+    $this->wrapper = LcpWrapper::get_instance();
     global $post;
     $this->parent = $post;
   }
@@ -103,9 +106,9 @@ class CatListDisplayer {
   }
 
   private function build_output($tag){
-    $this->category_title();
+    $this->lcp_output .= $this->get_category_link();
 
-    $this->get_category_description();
+    $this->lcp_output .= $this->get_category_description();
 
     $this->lcp_output .= $this->get_conditional_title();
 
@@ -185,28 +188,16 @@ class CatListDisplayer {
     }
 
     // Comments count
-    $lcp_display_output .= $this->get_stuff_with_tags_and_classes('comments', $single);
+    $lcp_display_output .= $this->get_comments($single);
 
     // Date
-    if (!empty($this->params['date_tag']) || !empty($this->params['date_class'])):
-      $lcp_display_output .= $this->get_date($single,
-                                             $this->params['date_tag'],
-                                             $this->params['date_class']);
-    else:
-      $lcp_display_output .= $this->get_date($single);
-    endif;
+    $lcp_display_output .= $this->get_date($single);
 
     // Date Modified
-    if (!empty($this->params['date_modified_tag']) || !empty($this->params['date_modified_class'])):
-      $lcp_display_output .= $this->get_modified_date($single,
-                                             $this->params['date_modified_tag'],
-                                             $this->params['date_modified_class']);
-    else:
-      $lcp_display_output .= $this->get_modified_date($single);
-    endif;
+    $lcp_display_output .= $this->get_modified_date($single);
 
     // Author
-    $lcp_display_output .= $this->get_stuff_with_tags_and_classes('author', $single);
+    $lcp_display_output .= $this->get_author($single);
 
     // Display ID
     if (!empty($this->params['display_id']) && $this->params['display_id'] == 'yes'){
@@ -218,9 +209,9 @@ class CatListDisplayer {
 
     $lcp_display_output .= $this->get_thumbnail($single);
 
-    $lcp_display_output .= $this->get_stuff_with_tags_and_classes('content', $single);
+    $lcp_display_output .= $this->get_content($single);
 
-    $lcp_display_output .= $this->get_stuff_with_tags_and_classes('excerpt', $single);
+    $lcp_display_output .= $this->get_excerpt($single);
 
     $lcp_display_output .= $this->get_posts_morelink($single);
 
@@ -229,55 +220,37 @@ class CatListDisplayer {
   }
 
   /**
-   * Several checks going on here:
-   * - Tag provided, no class - wrap content with tag
-   * - Tag and class provided - wrap content with tag and class
-   * - Class provided, no tag - wrap content with span and class
-  */
-  private function get_stuff_with_tags_and_classes($entity, $single){
-    $result = '';
-    $stuffFunction = 'get_' . $entity;
-    if (!empty($this->params[$entity . '_class'])){
-      if (empty($this->params[$entity . '_tag'])){
-        $result = $this->$stuffFunction($single, 'span', $this->params[$entity . '_class']);
-      } else {
-        $result = $this->$stuffFunction($single, $this->params[$entity . '_tag'], $this->params[$entity . '_class']);
-      }
-    } else {
-      if (!empty($this->params[$entity . '_tag'])){
-        $result = $this->$stuffFunction($single, $this->params[$entity . '_tag']);
-      } else {
-        $result = $this->$stuffFunction($single);
-      }
-    }
-    return $result;
+   * Auxiliary functions for templates
+   */
+
+  /* Use outside The Loop */
+
+  private function get_morelink($tag = null, $css_class = null){
+    return $info = $this->content_getter('morelink', null, $tag, $css_class);
   }
 
-  private function category_title(){
-    // More link
-    if (!empty($this->params['catlink_tag'])):
-      if (!empty($this->params['catlink_class'])):
-        $this->lcp_output .= $this->get_category_link(
-          $this->params['catlink_tag'],
-          $this->params['catlink_class']
-        );
-      else:
-        $this->lcp_output .= $this->get_category_link($this->params['catlink_tag']);
-      endif;
-    else:
-      $this->lcp_output .= $this->get_category_link("strong");
-    endif;
+  private function get_category_link($tag = 'strong', $css_class = null){
+    return $this->content_getter('catlink', null, $tag, $css_class);
+  }
+
+  private function get_conditional_title($tag = 'h3', $css_class = null){
+    return $this->content_getter('conditional_title', null, $tag, $css_class);
+  }
+
+  private function get_pagination(){
+    return $this->catlist->get_pagination();
+  }
+
+  public function get_category_count(){
+    return $this->catlist->get_category_count();
   }
 
   public function get_category_description(){
-    if(!empty($this->params['category_description']) && $this->params['category_description'] == 'yes'){
-      $this->lcp_output .= $this->catlist->get_category_description();
-    }
+    return $this->catlist->get_category_description();
   }
 
-  /**
-   * Auxiliary functions for templates
-   */
+  /* Use within The Loop */
+
   private function get_comments($single, $tag = null, $css_class = null){
     return $this->content_getter('comments', $single, $tag, $css_class);
   }
@@ -294,8 +267,24 @@ class CatListDisplayer {
     return $this->content_getter('excerpt', $single, $tag, $css_class);
   }
 
-  private function get_pagination(){
-    return $this->catlist->get_pagination();
+  private function get_modified_date($single, $tag = null, $css_class = null){
+    return $info = $this->content_getter('date_modified', $single, $tag, $css_class);
+  }
+
+  private function get_custom_fields($single, $tag='div', $css_class='lcp-customfield'){
+    return $this->content_getter('customfield', $single, $tag, $css_class);
+  }
+
+  private function get_date($single, $tag=null, $css_class=null) {
+    return $this->content_getter('date', $single, $tag, $css_class);
+  }
+
+  private function get_thumbnail($single, $tag=null, $css_class=null) {
+    return $this->content_getter('thumbnail', $single, $tag, $css_class);
+  }
+
+  private function get_posts_morelink($single, $css_class=null) {
+    return $this->content_getter('posts_morelink', $single, null, $css_class);
   }
 
   /*
@@ -303,6 +292,11 @@ class CatListDisplayer {
   * in the same function for less repetition.
   */
   private function content_getter($type, $post, $tag = null, $css_class = null) {
+    // Shortcode parameters take precedence over function arguments
+    // for tags and classes. 'posts_morelink_tag' param doesn't exist
+    if ($type !== 'posts_morelink') $tag = $this->params[$type . '_tag'] ?: $tag;
+    $css_class = $this->params[$type . '_class'] ?: $css_class;
+
     $info = '';
     switch( $type ){
     case 'comments':
@@ -317,79 +311,42 @@ class CatListDisplayer {
     case 'excerpt':
       $info = $this->catlist->get_excerpt($post);
       $info = preg_replace('/\[.*\]/', '', $info);
+      break;
+    case 'date_modified':
+      $info = $this->catlist->get_modified_date_to_show($post);
+      break;
+    case 'morelink':
+      $info = $this->catlist->get_morelink();
+      break;
+    case 'catlink':
+      $info = $this->catlist->get_category_link();
+      break;
+    case 'conditional_title':
+      $info = $this->catlist->get_conditional_title();
+      break;
+    case 'customfield':
+      $info = $this->catlist->get_custom_fields($this->params['customfield_display'], $post->ID);
+      break;
+    case 'date':
+      $info = $this->catlist->get_date_to_show($post);
+      if ( !empty($this->params['link_dates']) && ( 'yes' === $this->params['link_dates'] || 'true' === $this->params['link_dates'] ) ):
+      $info = $this->get_post_link($post, $info);
+      endif;
+      $info = ' ' . $info;
+      break;
+    case 'thumbnail':
+      $info = $this->catlist->get_thumbnail($post, $css_class);
+      // Default wrapper behavior not supported here,
+      // class is only used inside the <img> element.
+      $css_class = null;
+      break;
+    case 'posts_morelink':
+      $info = $this->catlist->get_posts_morelink($post, $css_class);
+      // Default wrapper behavior not supported here,
+      // class is only used inside the <a> element.
+      $css_class = null;
     }
-    return $this->assign_style($info, $tag, $css_class);
-  }
-
-  private function get_conditional_title(){
-    if(!empty($this->params['conditional_title_tag']))
-      $tag = $this->params['conditional_title_tag'];
-    else
-      $tag = 'h3';
-    if(!empty($this->params['conditional_title_class']))
-      $class = $this->params['conditional_title_class'];
-    else
-      $class = '';
-
-    return $this->assign_style($this->catlist->get_conditional_title(), $tag, $class);
-  }
-
-  private function get_custom_fields($single){
-    if(!empty($this->params['customfield_display'])){
-      $info = $this->catlist->get_custom_fields($this->params['customfield_display'], $single->ID);
-      if(empty($this->params['customfield_tag']) || $this->params['customfield_tag'] == null){
-        $tag = 'div';
-      } else {
-        $tag = $this->params['customfield_tag'];
-      }
-
-      if(empty($this->params['customfield_class']) || $this->params['customfield_class'] == null){
-        $css_class = 'lcp_customfield';
-      } else {
-        $css_class = $this->params['customfield_class'];
-      }
-
-      $final_info = '';
-      if(!is_array($info)){
-        $final_info = $this->assign_style($info, $tag, $css_class);
-      }else{
-        if($this->params['customfield_display_separately'] != 'no'){
-          foreach($info as $i)
-            $final_info .= $this->assign_style($i, $tag, $css_class);
-        }else{
-          $one_info = implode($this->params['customfield_display_glue'], $info);
-          $final_info = $this->assign_style($one_info, $tag, $css_class);
-        }
-      }
-      return $final_info;
-    }
-  }
-
-  private function get_date($single, $tag = null, $css_class = null){
-    $info = $this->catlist->get_date_to_show($single);
-
-    if ( !empty($this->params['link_dates']) && ( 'yes' === $this->params['link_dates'] || 'true' === $this->params['link_dates'] ) ):
-      $info = $this->get_post_link($single, $info);
-    endif;
-
-    $info = ' ' . $info;
-    return $this->assign_style($info, $tag, $css_class);
-  }
-
-  private function get_modified_date($single, $tag = null, $css_class = null){
-    $info = " " . $this->catlist->get_modified_date_to_show($single);
-    return $this->assign_style($info, $tag, $css_class);
-  }
-
-  private function get_thumbnail($single, $tag = null){
-    if ( !empty($this->params['thumbnail_class']) ) :
-      $lcp_thumb_class = $this->params['thumbnail_class'];
-      $info = $this->catlist->get_thumbnail($single, $lcp_thumb_class);
-    else:
-      $info = $this->catlist->get_thumbnail($single);
-    endif;
-
-    return $this->assign_style($info, $tag);
+    return $this->wrapper->wrap($info, $tag, $css_class);
   }
 
   private function get_post_link($single, $text, $class = null){
@@ -443,7 +400,7 @@ class CatListDisplayer {
     $info = $pre . $info . $post;
 
     if( $tag !== null || $css_class !== null){
-      $info = $this->assign_style($info, $tag, $css_class);
+      $info = $this->wrapper->wrap($info, $tag, $css_class);
     }
 
     return $info;
@@ -462,68 +419,5 @@ class CatListDisplayer {
       }
     }
     return $lcp_post_title;
-  }
-
-  private function get_posts_morelink($single){
-    if(!empty($this->params['posts_morelink'])){
-      $href = 'href="' . get_permalink($single->ID) . '"';
-      $class = "";
-      if ( !empty($this->params['posts_morelink_class']) ):
-        $class = 'class="' . $this->params['posts_morelink_class'] . '" ';
-      endif;
-      $readmore = $this->params['posts_morelink'];
-      return ' <a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
-    }
-  }
-
-  private function get_category_link($tag = null, $css_class = null){
-    $info = $this->catlist->get_category_link();
-    return $this->assign_style($info, $tag, $css_class);
-  }
-
-  private function get_morelink(){
-    $info = $this->catlist->get_morelink();
-    if ( !empty($this->params['morelink_tag'])){
-      if( !empty($this->params['morelink_class']) ){
-        return "<" . $this->params['morelink_tag'] . " class='" .
-          $this->params['morelink_class'] . "'>" . $info .
-          "</" . $this->params["morelink_tag"] . ">";
-      } else {
-        return "<" . $this->params['morelink_tag'] . ">" .
-          $info . "</" . $this->params["morelink_tag"] . ">";
-      }
-    } else{
-      if ( !empty($this->params['morelink_class']) ){
-        return str_replace("<a", "<a class='" . $this->params['morelink_class'] . "' ", $info);
-      }
-    }
-    return $info;
-  }
-
-  public function get_category_count(){
-    return $this->catlist->get_category_count();
-  }
-
-  /**
-   * Assign style to the info delivered by CatList. Tag is an HTML tag
-   * which is passed and will sorround the info. Css_class is the css
-   * class we want to assign to this tag.
-   * @param string $info
-   * @param string $tag
-   * @param string $css_class
-   * @return string
-   */
-  private function assign_style($info, $tag = null, $css_class = null){
-     if (!empty($info)):
-      if (empty($tag) && !empty($css_class)):
-        $tag = "span";
-      elseif (empty($tag)):
-        return $info;
-      elseif (!empty($tag) && empty($css_class)) :
-        return '<' . $tag . '>' . $info . '</' . $tag . '>';
-      endif;
-      $css_class = sanitize_html_class($css_class);
-      return '<' . $tag . ' class="' . $css_class . '">' . $info . '</' . $tag . '>';
-    endif;
   }
 }
