@@ -71,14 +71,20 @@ class CatList{
    */
   private function set_lcp_parameters(){
     $args = $this->lcp_categories();
-    $processed_params = LcpParameters::get_instance()->get_query_params($this->params);
-    $args = array_merge($args, $processed_params);
+    $processed_params = LcpParameters::get_instance()->get_query_params($this->params); 
+    $flags = $processed_params[1];
+    $args = array_merge($args, $processed_params[0]);
     $args = $this->check_pagination($args);
 
     // for WP_Query compatibility
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
 
+    if ( !$this->lcp_should_return_posts($flags) ) {
+      // Don't return any posts
+      $args['post__in'] = array(0);
+      $args['ignore_sticky_posts'] = true;
+    }
     query_posts($args);
     global $wp_query;
     $this->posts_count = $wp_query->found_posts;
@@ -90,8 +96,19 @@ class CatList{
      posts combination that I called has no posts? By default I've
      always returned the latest posts because that's what the query
      does when the params are "wrong". But could make for a better user
-     experience if I returned an empty list in certain cases.
-     private function lcp_should_return_posts() */
+     experience if I returned an empty list in certain cases.*/
+  
+  /**
+   * Check flags set by set_lcp_parameters
+   */
+  private function lcp_should_return_posts($flags) {
+    // This only checkes if flags are set but it could parse specific flags.
+    if ( !empty($flags)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   /** HELPER FUNCTIONS **/
 
