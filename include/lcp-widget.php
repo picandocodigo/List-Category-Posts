@@ -70,6 +70,7 @@ class ListCategoryPostsWidget extends WP_Widget{
       'pagination' => $pagination,
       'instance' => $this->id
     );
+    $atts = array_merge(ListCategoryPosts::default_params(), $atts);
 
     echo $before_widget;
 
