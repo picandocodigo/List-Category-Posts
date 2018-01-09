@@ -332,7 +332,7 @@ class CatListDisplayer {
       if ( !empty($this->params['link_dates']) && ( 'yes' === $this->params['link_dates'] || 'true' === $this->params['link_dates'] ) ):
       $info = $this->get_post_link($post, $info);
       endif;
-      $info = ' ' . $info;
+      ($info) ? ($info = ' ' . $info) : null;
       break;
     case 'thumbnail':
       $info = $this->catlist->get_thumbnail($post, $css_class);
