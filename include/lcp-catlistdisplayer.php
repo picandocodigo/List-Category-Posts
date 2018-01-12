@@ -6,18 +6,14 @@
  */
 require_once 'lcp-catlist.php';
 require_once 'lcp-wrapper.php';
+require_once 'lcp-templater.php';
 
 class CatListDisplayer {
   public $catlist;
   private $wrapper;
+  private $templater;
   private $params = array();
   private $lcp_output;
-
-  public static function getTemplatePaths(){
-    $template_path = TEMPLATEPATH . "/list-category-posts/";
-    $stylesheet_path = STYLESHEETPATH . "/list-category-posts/";
-    return array($template_path, $stylesheet_path);
-  }
 
   public function __construct($atts) {
     $this->params = $atts;
@@ -25,191 +21,20 @@ class CatListDisplayer {
     $this->wrapper = LcpWrapper::get_instance();
     global $post;
     $this->parent = $post;
+    $this->templater = new LcpTemplater($atts['template']);
   }
 
   public function display(){
     $this->catlist->save_wp_query();
     $this->catlist->get_posts();
-    $this->select_template();
+    $this->create_output();
     $this->catlist->restore_wp_query();
     wp_reset_query();
     return $this->lcp_output;
   }
 
-  private function select_template(){
-    // The default values for ul, ol and div:
-    if (preg_match('/^ul$|^div$|^ol$/i', $this->params['template'], $matches)){
-      $this->build_output($matches[0]);
-    } else {
-      // Else try an actual template from the params
-      $this->template();
-    }
-  }
-
-  /**
-   * Template code
-   */
-  private function template(){
-    $tplFileName = null;
-    $template_param = $this->params['template'];
-    $templates = array();
-
-    // Get templates paths and add the incoming parameter to search
-    // for the php file:
-    if($template_param){
-      $paths = self::getTemplatePaths();
-      foreach($paths as $path){
-        $templates[] = $path . $template_param . '.php';
-      }
-    }
-
-    // Check if we can read the template file:
-    foreach ($templates as $file) :
-      if ( is_file($file) && is_readable($file) ) :
-        $tplFileName = $file;
-      endif;
-    endforeach;
-
-    if($tplFileName){
-      require($tplFileName);
-    } else {
-      $this->build_output('ul');
-    }
-  }
-
-  public static function get_templates($param = null){
-    $templates = array();
-    $paths = self::getTemplatePaths();
-    foreach ($paths as $templatePath){
-      if (is_dir($templatePath) && scandir($templatePath)){
-        foreach (scandir($templatePath) as $file){
-          // Check that the files found are well formed
-          if ( ($file[0] != '.') && (substr($file, -4) == '.php') &&
-          is_file($templatePath.$file) && is_readable($templatePath.$file) ){
-            $templateName = substr($file, 0, strlen($file)-4);
-            // Add the template only if necessary
-            if (!in_array($templateName, $templates)){
-              $templates[] = $templateName;
-            }
-          }
-        }
-      }
-    }
-    return $templates;
-  }
-
-  private function build_output($tag){
-    $this->lcp_output .= $this->get_category_link();
-
-    $this->lcp_output .= $this->get_category_description();
-
-    $this->lcp_output .= $this->get_conditional_title();
-
-    $this->lcp_output .= '<' . $tag;
-
-    // Follow the numner of posts in an ordered list with pagination
-    if( $tag == 'ol' && $this->catlist->get_page() > 1 ){
-      $start = $this->catlist->get_number_posts() * ($this->catlist->get_page() - 1) + 1;
-      $this->lcp_output .= ' start="' .  $start . '" ';
-    }
-    //Give a class to wrapper tag
-    if (isset($this->params['class'])):
-      $this->lcp_output .= ' class="' . $this->params['class'] . '"';
-    endif;
-
-    //Give id to wrapper tag
-    if (isset($this->params['instance'])){
-      $this->lcp_output .= ' id="lcp_instance_' . $this->params['instance'] . '"';
-    }
-
-    $this->lcp_output .= '>';
-    $inner_tag = ( ($tag == 'ul') || ($tag == 'ol') ) ? 'li' : 'p';
-
-    //Posts loop
-    global $post;
-    while ( have_posts() ) : the_post();
-      if ( !post_password_required($post) ||
-           ( post_password_required($post) && (
-                                                 isset($this->params['show_protected']) &&
-                                                 $this->params['show_protected'] == 'yes' ) )):
-        $this->lcp_output .= $this->lcp_build_post($post, $inner_tag);
-      endif;
-    endwhile;
-
-    if ( ($this->catlist->get_posts_count() == 0) &&
-         ($this->params["no_posts_text"] != '') ) {
-      $this->lcp_output .= $this->params["no_posts_text"];
-    }
-
-    //Close wrapper tag
-    $this->lcp_output .= '</' . $tag . '>';
-
-    // More link
-    $this->lcp_output .= $this->get_morelink();
-
-    $this->lcp_output .= $this->catlist->get_pagination();
-  }
-
-  /**
-   * This function should be overriden for template system.
-   * @param post $single
-   * @param HTML tag to display $tag
-   * @return string
-   */
-  private function lcp_build_post($single, $tag){
-    $class ='';
-    $tag_css = '';
-    if ( is_object($this->parent) && is_object($single) && $this->parent->ID == $single->ID ){
-      $class = 'current';
-    }
-
-    if ( array_key_exists('tags_as_class', $this->params) && $this->params['tags_as_class'] == 'yes' ) {
-      $post_tags = wp_get_post_Tags($single->ID);
-      if ( !empty($post_tags) ){
-        foreach ($post_tags as $post_tag) {
-          $class .= " $post_tag->slug ";
-        }
-      }
-    }
-    if ( !empty($class) ){
-      $tag_css = 'class="' . $class . '"';
-    }
-    $lcp_display_output = '<'. $tag . ' ' . $tag_css . '>';
-
-    if ( empty($this->params['no_post_titles']) || !empty($this->params['no_post_titles']) && $this->params['no_post_titles'] !== 'yes' ) {
-      $lcp_display_output .= $this->get_post_title($single);
-    }
-
-    // Comments count
-    $lcp_display_output .= $this->get_comments($single);
-
-    // Date
-    $lcp_display_output .= $this->get_date($single);
-
-    // Date Modified
-    $lcp_display_output .= $this->get_modified_date($single);
-
-    // Author
-    $lcp_display_output .= $this->get_author($single);
-
-    // Display ID
-    if (!empty($this->params['display_id']) && $this->params['display_id'] == 'yes'){
-        $lcp_display_output .= $single->ID;
-    }
-
-    // Custom field display
-    $lcp_display_output .= $this->get_custom_fields($single);
-
-    $lcp_display_output .= $this->get_thumbnail($single);
-
-    $lcp_display_output .= $this->get_content($single);
-
-    $lcp_display_output .= $this->get_excerpt($single);
-
-    $lcp_display_output .= $this->get_posts_morelink($single);
-
-    $lcp_display_output .= '</' . $tag . '>';
-    return $lcp_display_output;
+  private function create_output() {
+    require $this->templater->get_template();
   }
 
   /**
@@ -217,6 +42,15 @@ class CatListDisplayer {
    */
 
   /* Use outside The Loop */
+
+  private function open_outer_tag($tag='ul', $css_class='lcp_catlist') {
+    $this->templater->update_outer_tag($tag);
+    return $this->catlist->get_outer_tag($this->templater->outer_tag, $css_class);
+  }
+
+  private function close_outer_tag() {
+    return '</' . $this->templater->outer_tag . '>';
+  }
 
   private function get_morelink($tag = null, $css_class = null){
     return $info = $this->content_getter('morelink', null, $tag, $css_class);
@@ -242,7 +76,25 @@ class CatListDisplayer {
     return $this->catlist->get_category_description();
   }
 
+  private function get_no_posts_text() {
+    return $this->catlist->get_no_posts_text();
+  }
+
   /* Use within The Loop */
+
+  private function open_inner_tag($single, $tag, $css_class='') {
+    $this->templater->update_inner_tag( $tag );
+    return $this->catlist->get_inner_tag(
+      $single,
+      $this->parent,
+      $this->templater->inner_tag,
+      $css_class
+    );
+  }
+
+  private function close_inner_tag() {
+    return '</' . $this->templater->inner_tag . '>';
+  }
 
   private function get_comments($single, $tag = null, $css_class = null){
     return $this->content_getter('comments', $single, $tag, $css_class);
@@ -278,6 +130,10 @@ class CatListDisplayer {
 
   private function get_posts_morelink($single, $css_class=null) {
     return $this->content_getter('posts_morelink', $single, null, $css_class);
+  }
+
+  private function get_display_id($single) {
+    return $this->catlist->get_display_id($single);
   }
 
   /*
@@ -364,6 +220,11 @@ class CatListDisplayer {
   // Link is a parameter here in case you want to use it on a template
   // and not show the links for all the shortcodes using this template:
   private function get_post_title($single, $tag = null, $css_class = null, $link = true){
+    // Don't do anything if no_post_titles is specified.
+    if ( 'yes' === $this->params['no_post_titles'] ) {
+      return;
+    }
+
     $lcp_post_title = apply_filters('the_title', $single->post_title, $single->ID);
 
     $lcp_post_title = $this->lcp_title_limit( $lcp_post_title );
@@ -412,5 +273,17 @@ class CatListDisplayer {
       }
     }
     return $lcp_post_title;
+  }
+
+  /**
+   * Checks if a protected post should be included in the LCP output.
+   *
+   *
+   * @param  object $post A post to be checked.
+   * @return bool         Whether a post should be included in the LCP output.
+   */
+  private function check_show_protected($post) {
+    return ! post_password_required($post) ||
+      post_password_required($post) && 'yes' === $this->params['show_protected'];
   }
 }

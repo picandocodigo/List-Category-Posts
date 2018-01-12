@@ -40,11 +40,14 @@ $lcp_display_output = '';
 // Show category link:
 $lcp_display_output .= $this->get_category_link('strong');
 
+// Show category description:
+$lcp_display_output .= $this->get_category_description();
+
 // Show the conditional title:
 $lcp_display_output .= $this->get_conditional_title();
 
 //Add 'starting' tag. Here, I'm using an unordered list (ul) as an example:
-$lcp_display_output .= '<ul class="lcp_catlist">';
+$lcp_display_output .= $this->open_outer_tag('ul', 'lcp_catlist');
 
 /* Posts Loop
  *
@@ -61,23 +64,29 @@ global $post;
 while ( have_posts() ):
   the_post();
 
+  // Check if protected post should be displayed
+  if (!$this->check_show_protected($post)) continue;
+
   //Start a List Item for each post:
-  $lcp_display_output .= "<li>";
+  $lcp_display_output .= $this->open_inner_tag($post, 'li');
 
   //Show the title and link to the post:
-  $lcp_display_output .= $this->get_post_title($post, 'h3', 'lcp_post');
+  $lcp_display_output .= $this->get_post_title($post);
 
   //Show comments:
   $lcp_display_output .= $this->get_comments($post);
 
   //Show date:
-  $lcp_display_output .= ' ' . $this->get_date($post);
+  $lcp_display_output .= $this->get_date($post);
 
   //Show date modified:
-  $lcp_display_output .= ' ' . $this->get_modified_date($post);
+  $lcp_display_output .= $this->get_modified_date($post);
 
   //Show author
   $lcp_display_output .= $this->get_author($post);
+
+  // Show post ID
+  $lcp_display_output .= $this->get_display_id($post);
 
   //Custom fields:
   $lcp_display_output .= $this->get_custom_fields($post);
@@ -101,11 +110,14 @@ while ( have_posts() ):
   $lcp_display_output .= $this->get_posts_morelink($post);
 
   //Close li tag
-  $lcp_display_output .= '</li>';
+  $lcp_display_output .= $this->close_inner_tag();
 endwhile;
 
+// Show no posts text if there are no posts
+$lcp_display_output .= $this->get_no_posts_text();
+
 // Close the wrapper I opened at the beginning:
-$lcp_display_output .= '</ul>';
+$lcp_display_output .= $this->close_outer_tag();
 
 // If there's a "more link", show it:
 $lcp_display_output .= $this->get_morelink();

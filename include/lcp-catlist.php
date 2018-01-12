@@ -338,7 +338,7 @@ class CatList{
   public function get_date_to_show($single){
     if ($this->params['date'] == 'yes'):
       //by Verex, great idea!
-      return get_the_time($this->params['dateformat'], $single);
+      return ' ' . get_the_time($this->params['dateformat'], $single);
     else:
       return null;
     endif;
@@ -350,6 +350,19 @@ class CatList{
     else:
       return null;
     endif;
+  }
+
+  public function get_display_id($single) {
+    if (!empty($this->params['display_id']) && $this->params['display_id'] == 'yes'){
+      $lcp_display_output .= $single->ID;
+    }
+  }
+
+  public function get_no_posts_text() {
+    if ( ($this->get_posts_count() == 0) &&
+         ($this->params["no_posts_text"] != '') ) {
+      return $this->params["no_posts_text"];
+    }
   }
 
   public function get_content($single){
@@ -442,6 +455,49 @@ class CatList{
       $this->params['thumbnail_size'],
       $force_thumbnail,
       $lcp_thumb_class);
+  }
+
+  public function get_outer_tag($tag, $css_class) {
+    $css_class = $this->params['class'] ?: $css_class;
+
+    $tag_string = '<' . $tag;
+
+    // Follow the numner of posts in an ordered list with pagination
+    if( 'ol' === $tag && $this->page > 1 ){
+      $start = $this->params['number_posts'] * ( $this->page - 1 ) + 1;
+      $tag_string .= ' start="' .  $start . '" ';
+    }
+    //Give a class to wrapper tag
+    $tag_string .= ' class="' . $css_class . '"';
+
+    //Give id to wrapper tag
+    $tag_string .= ' id="lcp_instance_' . $this->instance . '"';
+
+    $tag_string .= '>';
+
+    return $tag_string;
+  }
+
+  public function get_inner_tag( $single, $parent, $tag, $css_class='' ) {
+    $class = $css_class;
+    $tag_css = '';
+    if ( is_object( $parent ) && is_object( $single ) &&
+        $parent->ID === $single->ID ) {
+      $class .= 'current';
+    }
+
+    if ( $this->params['tags_as_class'] === 'yes' ) {
+      $post_tags = wp_get_post_Tags( $single->ID );
+      if ( !empty( $post_tags ) ) {
+        foreach ( $post_tags as $post_tag ) {
+          $class .= " $post_tag->slug ";
+        }
+      }
+    }
+    if ( !empty($class) ) {
+      $tag_css = 'class="' . $class . '"';
+    }
+    return '<'. $tag . ' ' . $tag_css . '>';
   }
 
   public function get_pagination(){

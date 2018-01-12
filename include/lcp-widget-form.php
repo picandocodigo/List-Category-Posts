@@ -259,7 +259,7 @@
   <br/>
   <select id="<?php echo $this->get_field_id('template'); ?>" name="<?php echo $this->get_field_name('template'); ?>">
     <?php
-      $templates = CatListDisplayer::get_templates();
+      $templates = LcpTemplater::get_templates();
       $templates[] = 'default';
       foreach ($templates as $tmp) :
         $option = '<option value="' . $tmp . '" ';
