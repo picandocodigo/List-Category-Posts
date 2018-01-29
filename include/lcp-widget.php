@@ -83,7 +83,9 @@ class ListCategoryPostsWidget extends WP_Widget{
 
     // Fetch the category id from the Catlist instance.
     $category_id = $catlist_displayer->catlist->get_category_id();
-    if ($title == 'catlink') {
+    if ($category_id === null && ($title == 'catlink' || $title == 'catname')) {
+      $title = '';
+    } elseif ($title == 'catlink') {
       // If the user has setup 'catlink' as the title, replace it with
       // the category link:
       $lcp_category = get_category($category_id);
