@@ -24,6 +24,7 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
 
     public function test_pagination_string() {
         $paginator = LcpPaginator::get_instance();
+        $this->go_to('/');
 
         // Check first page
         $params = array_merge($this->test_params,
@@ -32,9 +33,9 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
 
         $exp_string = "<ul class='lcp_paginator'>" .
                       "<li class='lcp_currentpage'>1</li>" .
-                      "<li><a href='http://example.org?lcp_page0=2#lcp_instance_0' title='2'>2</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=3#lcp_instance_0' title='3'>3</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=2#lcp_instance_0' title='2' class='lcp_nextlink'>>></a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=2#lcp_instance_0' title='2'>2</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=3#lcp_instance_0' title='3'>3</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=2#lcp_instance_0' title='2' class='lcp_nextlink'>>></a></li>" .
                       "</ul>";
         $this->assertSame($exp_string, $pag_string);
 
@@ -45,11 +46,11 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
         $pag_string = $paginator->get_pagination($params);
 
         $exp_string = "<ul class='lcp_paginator'>" .
-                      "<li><a href='http://example.org?lcp_page0=1#lcp_instance_0' title='1' class='lcp_prevlink'><<</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=1#lcp_instance_0' title='1'>1</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=1#lcp_instance_0' title='1' class='lcp_prevlink'><<</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=1#lcp_instance_0' title='1'>1</a></li>" .
                       "<li class='lcp_currentpage'>2</li>" .
-                      "<li><a href='http://example.org?lcp_page0=3#lcp_instance_0' title='3'>3</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=3#lcp_instance_0' title='3' class='lcp_nextlink'>>></a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=3#lcp_instance_0' title='3'>3</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=3#lcp_instance_0' title='3' class='lcp_nextlink'>>></a></li>" .
                       "</ul>";
         $this->assertSame($exp_string, $pag_string);
 
@@ -60,9 +61,9 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
         $pag_string = $paginator->get_pagination($params);
 
         $exp_string = "<ul class='lcp_paginator'>" .
-                      "<li><a href='http://example.org?lcp_page0=2#lcp_instance_0' title='2' class='lcp_prevlink'><<</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=1#lcp_instance_0' title='1'>1</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=2#lcp_instance_0' title='2'>2</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=2#lcp_instance_0' title='2' class='lcp_prevlink'><<</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=1#lcp_instance_0' title='1'>1</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=2#lcp_instance_0' title='2'>2</a></li>" .
                       "<li class='lcp_currentpage'>3</li>" .
                       "</ul>";
         $this->assertSame($exp_string, $pag_string);
@@ -77,9 +78,9 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
 
         $exp_string = "<ul class='lcp_paginator'>" .
                       "<li class='lcp_currentpage'>1</li>" .
-                      "<li><a href='http://example.org?lcp_page0=2' title='2'>2</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=3' title='3'>3</a></li>" .
-                      "<li><a href='http://example.org?lcp_page0=2' title='2' class='lcp_nextlink'>>></a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=2' title='2'>2</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=3' title='3'>3</a></li>" .
+                      "<li><a href='http://example.org/?lcp_page0=2' title='2' class='lcp_nextlink'>>></a></li>" .
                       "</ul>";
         $this->assertSame($exp_string, $pag_string);
     }

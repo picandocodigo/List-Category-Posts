@@ -1,7 +1,5 @@
 <?php
-/**
- * @runTestsInSeparateProcesses
- */
+
 class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
   protected static $test_post;
