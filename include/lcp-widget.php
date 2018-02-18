@@ -75,7 +75,17 @@ class ListCategoryPostsWidget extends WP_Widget{
 
     if ($pagination === 'yes') lcp_pagination_css();
 
-    if ($title == 'catlink') {
+    // To make the widget title replacement work with "Current category" we need to
+    // run the displayer here to determine the current cat id.
+    // Otherwise the id remains set to "-1".
+    $catlist_displayer = new CatListDisplayer($atts);
+    $lcp_display = $catlist_displayer->display();
+
+    // Fetch the category id from the Catlist instance.
+    $category_id = $catlist_displayer->catlist->get_category_id();
+    if ($category_id === null && ($title == 'catlink' || $title == 'catname')) {
+      $title = '';
+    } elseif ($title == 'catlink') {
       // If the user has setup 'catlink' as the title, replace it with
       // the category link:
       $lcp_category = get_category($category_id);
@@ -84,13 +94,12 @@ class ListCategoryPostsWidget extends WP_Widget{
     } elseif ($title == 'catname') {
       // If the user has setup 'catname' as the title, replace it with
       // the category link:
-      $lcp_category = get_the_category($post->ID);
-      $title = $lcp_category[0]->name;
+      $lcp_category = get_category($category_id);
+      $title = $lcp_category->name;
     }
     echo $before_title . $title . $after_title;
 
-    $catlist_displayer = new CatListDisplayer($atts);
-    echo  $catlist_displayer->display();
+    echo $lcp_display;
     echo $after_widget;
   }
 

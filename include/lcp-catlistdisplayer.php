@@ -7,7 +7,7 @@
 require_once 'lcp-catlist.php';
 
 class CatListDisplayer {
-  private $catlist;
+  public $catlist;
   private $params = array();
   private $lcp_output;
 
