@@ -297,11 +297,16 @@ class LcpParameters{
 
   public function starting_with($where){
     $letters = explode(',', $this->starting_with);
+
+    // Support for both utf8 and utf8mb4
+    global $wpdb;
+    $charset = $wpdb->get_col_charset('wp_posts', 'post_title');
+    
     $where .= 'AND (wp_posts.post_title ' .
-      'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[0] . "%'";
+      'COLLATE ' . strtoupper($charset) . '_GENERAL_CI LIKE \'' . $letters[0] . "%'";
     for ($i=1; $i <sizeof($letters); $i++) {
       $where .= 'OR wp_posts.post_title ' .
-        'COLLATE UTF8_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
+        'COLLATE ' . strtoupper($charset) . '_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
     }
     $where.=')';
     return $where;
