@@ -64,9 +64,30 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
     $this->go_to('/?page_id=' . self::$test_page);
     $this->assertQueryTrue('is_singular', 'is_page');
-    $this->assertSame(null, $lcpcategory->current_category());
+    $this->assertSame([0], $lcpcategory->current_category());
+  }
+
+  public function test_home_page() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to('/');
+    $this->assertQueryTrue('is_home', 'is_front_page');
+    $this->assertSame([0], $lcpcategory->current_category());
+  }
+
+  public function test_date_archive() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to(get_month_link('',''));
+    $this->assertQueryTrue('is_archive', 'is_date', 'is_month');
+    $this->assertSame([0], $lcpcategory->current_category());
+  }
+
+  public function test_author_archive() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to(get_author_posts_url(1));
+    $this->assertQueryTrue('is_archive', 'is_author');
+    $this->assertSame([0], $lcpcategory->current_category());
   }
 }
-
-// TODO: write tests for month archives and home page, but this
-// requires changing the curent_category method so that it can handle those cases.
