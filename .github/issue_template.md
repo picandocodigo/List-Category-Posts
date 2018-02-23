@@ -1,3 +1,8 @@
+<!-- Please make sure you've read the following links before creating an issue:
+* WIKI: https://github.com/picandocodigo/List-Category-Posts/wiki
+* Frequently Asked Questions: https://github.com/picandocodigo/List-Category-Posts/blob/master/doc/FAQ.md) 
+--->
+
 ### Expected behavior
 
 
