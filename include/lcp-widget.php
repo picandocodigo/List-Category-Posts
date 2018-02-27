@@ -138,4 +138,7 @@ class ListCategoryPostsWidget extends WP_Widget{
   }
 }
 
-add_action('widgets_init', create_function('', 'return register_widget("listCategoryPostsWidget");'));
+function lcp_register_widget() {
+  return register_widget("listCategoryPostsWidget");
+}
+add_action('widgets_init', 'lcp_register_widget');
