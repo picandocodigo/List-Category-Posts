@@ -346,9 +346,9 @@ class LcpParameters{
      *  should be created.
      */
     foreach ($params_set as $key=>$value){
-      if ( isset($this->{$key}) ){
+      if ( property_exists($this, $key) ){
         $params_set[$key] = true;
-        $trutify = substr($key, 0, strpos( $key, '_') );
+        $trutify = explode('_', $key)[0];
         ${$trutify} = true;
       }
     }
