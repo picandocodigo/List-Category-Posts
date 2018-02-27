@@ -285,7 +285,7 @@ class CatList{
     if($this->utils->lcp_not_empty('author_posts_link') &&
     $this->params['author_posts_link'] == 'yes'){
       $link = get_author_posts_url($lcp_userdata->ID);
-      return "<a href=" . $link . " title='" . $author_name .
+      return "<a href='" . $link . "' title='" . $author_name .
         "'>" . $author_name . "</a>";
     } else {
       return $author_name;
