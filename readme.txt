@@ -3,9 +3,9 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.9
+Tested up to: 4.9.4
 Requires PHP: 5.2.4
-Stable tag: 0.75.2
+Stable tag: 0.76
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -439,6 +439,16 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.76 =
+
+* Starting_with support for utf8mb4 charset
+* Improve catlink/catlist in widget
+* Avoid PHP Notices when trying to replace widget title but no category is present.
+* Fix 'current category' handling
+* Better test coverage
+* Fix dates parameters: `before` and `after` are now working again
+* Remove warning for deprecated `create_function` in PHP 7
 
 = 0.75.2 =
 
