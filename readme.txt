@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9.4
 Requires PHP: 5.2.4
-Stable tag: 0.76
+Stable tag: 0.76.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -439,6 +439,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.76.1 =
+
+* Fixes parsing error for PHP < 5.4. We will be dropping support for PHP pre 5.4 soon, so we recommend you to upgrade to a newer version.
 
 = 0.76 =
 
