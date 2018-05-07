@@ -9,6 +9,7 @@
  * [How do I remove the bullets from the list?](#bullets)
  * [The plugin doesn't work on servers with PHP < 5](#php5)
  * [Plugin could not be activated because it triggered a fatal error](#fatal-error)
+ * [If a post has many categories, categorypage=yes only detects one of them](#categorypage)
 
 ## <a name="no_link"></a>How can I remove the hyperlink of the title of the post?
 
@@ -152,3 +153,9 @@ protected accessors. Try updating your server or using an [older version](http:/
 
 Please check:
 http://wordpress.stackexchange.com/questions/9338/list-category-posts-plugin-upgrade-fails-fatal-error/9340#9340
+
+## <a name="categorypage"></a>If a post has many categories, categorypage=yes only detects one of them
+
+This is how it works in the current implementation, there are no shortcode parameters to change this behavior.
+We have already received feature requests to make `categorypage=yes` work with multiple categories and it should be
+implemented at some stage.
