@@ -300,12 +300,13 @@ class LcpParameters{
 
     // Support for both utf8 and utf8mb4
     global $wpdb;
-    $charset = $wpdb->get_col_charset('wp_posts', 'post_title');
+    $wp_posts_prefix = $wpdb->prefix . 'posts';
+    $charset = $wpdb->get_col_charset($wp_posts_prefix, 'post_title');
     
-    $where .= 'AND (wp_posts.post_title ' .
+    $where .= 'AND (' . $wp_posts_prefix . '.post_title ' .
       'COLLATE ' . strtoupper($charset) . '_GENERAL_CI LIKE \'' . $letters[0] . "%'";
     for ($i=1; $i <sizeof($letters); $i++) {
-      $where .= 'OR wp_posts.post_title ' .
+      $where .= 'OR ' . $wp_posts_prefix . '.post_title ' .
         'COLLATE ' . strtoupper($charset) . '_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
     }
     $where.=')';
