@@ -3,9 +3,9 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.9.4
+Tested up to: 4.9.6
 Requires PHP: 5.2.4
-Stable tag: 0.76.1
+Stable tag: 0.77
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,7 +55,7 @@ Some users have made videos on how to use the plugin (thank you, you are awesome
 
 **Support the plugin**
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ref=wl_web "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/ref=cm_wl_rlist_go_o) :).
+If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal").
 
 **Development**
 
@@ -439,6 +439,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.77 =
+
+* Improvements in testing by @zymeth25.
+* Removed hardcoded wp_ as table prefix and replaced with $wpdb->prefix to allow for WordPress database tables which are setup to use more secure prefixes by @djadan.
 
 = 0.76.1 =
 
