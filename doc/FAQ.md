@@ -13,28 +13,7 @@
 
 ## <a name="no_link"></a>How can I remove the hyperlink of the title of the post?
 
-I had never considered this at all, but user osckar shared his solution
-on [the Forum](http://wordpress.org/support/topic/removing-hyperlink):
-
-Add this class to your css file:
-
-```css
-.no_link {
-  cursor: default !important;
-  pointer-events: none;
-}
-```
-
-And add the class to the shortcode: `title_class=no_link`.
-
-For those who may already have a `title_class` in their code you can
-simply add the following to your current `title_class` style and it will
-accomplish the same thing:
-
-```css
-cursor: default !important;
-pointer-events: none;
-```
+Add `link_titles=false` to your shortcode.
 
 ## <a name="thumbnail"></a>How do I display the Thumbnail next to the title?
 
@@ -61,16 +40,7 @@ attribute to `float: right`.
 
 ## <a name="no-title"></a>How to not display the title
 
-You have to add a CSS class to the title with the `title_class` parameter. Then edit the title_class class in your theme's CSS file. Something like this:
-
-In the post:
-`[catlist id=3 title_class=lcp_title numberposts=1]`
-
-And in your theme's CSS:
-
-`.lcp_title{
-  display: none;
-}`
+Add `no_post_titles=yes` to your shortcode.
 
 ## <a name="shortcode-theme"></a>How to insert the shortcode on the theme and not a post or page
 
@@ -112,7 +82,8 @@ The offset should equal the number of posts (`numberposts`) times the number of 
 ```
 ## <a name="widget"></a>How can I use the shortcode in a Widget?
 
-Add this code to your theme's functions.php file:
+Since WordPress 4.9, you can use a shortcode in a widget.
+If you’re using a previous WordPress version, add this code to your theme’s functions.php file:
 ```php
 add_filter('widget_text', 'do_shortcode');
 ```
