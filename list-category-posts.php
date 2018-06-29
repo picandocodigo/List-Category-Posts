@@ -143,6 +143,7 @@ class ListCategoryPosts{
                              'before_month' => '',
                              'before_day' => '',
                              'tags_as_class' => 'no',
+                             'pagination_bookmarks' => '',
                            ), $atts);
     if($atts['numberposts'] == ''){
       $atts['numberposts'] = get_option('numberposts');

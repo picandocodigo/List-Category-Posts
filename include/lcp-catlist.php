@@ -430,7 +430,8 @@ class CatList{
           'page'        => $this->get_page(),
           'pagination'  => $this->params['pagination'],
           'posts_count' => $this->get_posts_count(),
-          'previous'    => $this->params['pagination_prev']
+          'previous'    => $this->params['pagination_prev'],
+          'bookmarks'   => $this->params['pagination_bookmarks']
     );
     return LcpPaginator::get_instance()->get_pagination($paginator_params);
   }

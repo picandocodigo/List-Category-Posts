@@ -37,7 +37,8 @@ class LcpPaginator {
       $this->next_page_num = null;
       if ($pages_count > 1){
           for($i = 1; $i <= $pages_count; $i++){
-              $lcp_paginator .=  $this->lcp_page_link($i, $params['page'], $params['instance']);
+              $lcp_paginator .=  $this->lcp_page_link($i, $params['page'], $params['instance'],
+                                                      null, $params['bookmarks']);
           }
 
           $pag_output .= "<ul class='lcp_paginator'>";
@@ -45,7 +46,8 @@ class LcpPaginator {
           // Add "Previous" link
           if ($params['page'] > 1){
             $this->prev_page_num = intval(intval($params['page']) - 1);
-            $pag_output .= $this->lcp_page_link($this->prev_page_num , $params['page'], $params['instance'], $params['previous'] );
+            $pag_output .= $this->lcp_page_link($this->prev_page_num , $params['page'], $params['instance'],
+                                                $params['previous'], $params['bookmarks']);
           }
 
           $pag_output .= $lcp_paginator;
@@ -53,7 +55,8 @@ class LcpPaginator {
           // Add "Next" link
           if ($params['page'] < $pages_count){
             $this->next_page_num = intval($params['page'] + 1);
-            $pag_output .= $this->lcp_page_link($this->next_page_num, $params['page'], $params['instance'], $params['next']);
+            $pag_output .= $this->lcp_page_link($this->next_page_num, $params['page'],
+                                                $params['instance'], $params['next'], $params['bookmarks']);
           }
 
           $pag_output .= "</ul>";
@@ -64,7 +67,7 @@ class LcpPaginator {
 
 
   // `char` is the string from pagination_prev/pagination_next
-  private function lcp_page_link($page, $current_page, $lcp_instance, $char = null){
+  private function lcp_page_link($page, $current_page, $lcp_instance, $char = null, $bookmark){
     $link = '';
 
     if ($page == $current_page){
@@ -85,8 +88,11 @@ class LcpPaginator {
       }
       $http_host = $server_vars['HTTP_HOST'];
       $page_link = "$protocol://$http_host$url?$query" .
-                   $amp . "lcp_page" . $lcp_instance . "=". $page .
-                   "#lcp_instance_" . $lcp_instance;
+                   $amp . "lcp_page" . $lcp_instance . "=". $page;
+
+      // Append a bookmark if not disabled by 'pagination_bookmarks=no'
+      if ($bookmark !== "no") $page_link .= "#lcp_instance_" . $lcp_instance;
+
       $link .=  "<li><a href='$page_link' title='$page'";
       if ($page === $this->prev_page_num) {
           $link .= " class='lcp_prevlink'";
