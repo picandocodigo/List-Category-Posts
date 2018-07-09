@@ -53,6 +53,8 @@ class CatList{
     global $wp_query;
     if ( isset($wp_query) ) {
       $this->saved_wp_query = clone $wp_query;
+      global $post;
+      $this->saved_post = $post;
     }
   }
 
@@ -63,6 +65,8 @@ class CatList{
     global $wp_query;
     if ( isset($this->saved_wp_query) ) {
       $wp_query = clone $this->saved_wp_query;
+      global $post;
+      $post = $this->saved_post;
     }
   }
 
