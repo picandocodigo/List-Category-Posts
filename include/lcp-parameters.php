@@ -85,7 +85,11 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('before') ) {
-      $this->before = $params['before'];
+      if(strcmp(strtolower($params['before']), "today") == 0) {
+          $this->before = date("Y/m/d");
+      } else {
+          $this->before = $params['before'];
+      }
       $date_query = true;
     }
 
