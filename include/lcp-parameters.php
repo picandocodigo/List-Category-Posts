@@ -126,6 +126,45 @@ class LcpParameters{
       );
     }
 
+    if ($this->utils->lcp_not_empty('customfield_date')
+        && (
+            $this->utils->lcp_not_empty('customfield_after')
+            || $this->utils->lcp_not_empty('customfield_before')
+        )
+    ) {
+      $customfield_date = $params['customfield_date'];
+      $date_clause = array('relation' => 'AND');
+
+      $customfield_after = isset($params['customfield_after']) ? $params['customfield_after'] : null;
+
+      if ($customfield_after) {
+        $date_clause_after = array(
+            'key' => $customfield_date,
+            'value' => date('c', strtotime($customfield_after)),
+            'compare' => '>',
+            'type' => 'DATETIME'
+        );
+
+        $date_clause[] = $date_clause_after;
+      }
+
+      $customfield_before = isset($params['customfield_before']) ? $params['customfield_before'] : null;
+
+      if ($customfield_before) {
+        $date_clause_before = array(
+            'key' => $customfield_date,
+            'value' => date('c', strtotime($customfield_before)),
+            'compare' => '<',
+            'type' => 'DATETIME'
+        );
+
+        $date_clause[] = $date_clause_before;
+      }
+
+      $meta_query['relation'] = 'AND';
+      $meta_query['date_clause'] = $date_clause;
+    }
+
     //Get private posts
     if( is_user_logged_in() ){
       if ( !empty($args['post_status']) ){
