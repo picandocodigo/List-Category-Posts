@@ -38,7 +38,7 @@ class LcpPaginator {
       if ($pages_count > 1){
           for($i = 1; $i <= $pages_count; $i++){
               $lcp_paginator .=  $this->lcp_page_link($i, $params['page'], $params['instance'],
-                                                      null, $params['bookmarks']);
+                                                      $params['bookmarks']);
           }
 
           $pag_output .= "<ul class='lcp_paginator'>";
@@ -47,7 +47,7 @@ class LcpPaginator {
           if ($params['page'] > 1){
             $this->prev_page_num = intval(intval($params['page']) - 1);
             $pag_output .= $this->lcp_page_link($this->prev_page_num , $params['page'], $params['instance'],
-                                                $params['previous'], $params['bookmarks']);
+                                                $params['bookmarks'], $params['previous']);
           }
 
           $pag_output .= $lcp_paginator;
@@ -55,8 +55,8 @@ class LcpPaginator {
           // Add "Next" link
           if ($params['page'] < $pages_count){
             $this->next_page_num = intval($params['page'] + 1);
-            $pag_output .= $this->lcp_page_link($this->next_page_num, $params['page'],
-                                                $params['instance'], $params['next'], $params['bookmarks']);
+            $pag_output .= $this->lcp_page_link($this->next_page_num, $params['page'], $params['instance'],
+                                                $params['bookmarks'], $params['next']);
           }
 
           $pag_output .= "</ul>";
@@ -67,7 +67,7 @@ class LcpPaginator {
 
 
   // `char` is the string from pagination_prev/pagination_next
-  private function lcp_page_link($page, $current_page, $lcp_instance, $char = null, $bookmark){
+    private function lcp_page_link($page, $current_page, $lcp_instance, $bookmark, $char = null){
     $link = '';
 
     if ($page == $current_page){

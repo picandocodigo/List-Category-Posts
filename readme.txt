@@ -443,6 +443,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 = 0.78 =
 
 * Adds `before=today`, when you use it the plugin will get today's date dynamically and display only old posts. Thanks @nnasirzada for the PR implementing this!
+* Changes in pagination: You can now have no anchor links in the pagination. Check [the wiki](https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination) for more info. Thanks @zymeth25 for this feature! If you're using the `lcp_page_link` somewhere or customized the `lcp-paginator.php` file somehow, watch out because we refactored this function. Also, let us know what you changed to see if we can incorporate it in the core plugin :)
 
 = 0.77.1 =
 
