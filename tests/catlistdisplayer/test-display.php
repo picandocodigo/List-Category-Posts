@@ -32,7 +32,7 @@ class Tests_CatListDisplayer_Display extends WP_UnitTestCase {
     $displayer = new CatListDisplayer(array_merge(ListCategoryPosts::default_params()));
 
     $this->assertSame('<ul class="lcp_catlist" id="lcp_instance_0">' .
-                      '<li class="current"><a href="http://example.org/?p=' . $test_post->ID . 
+                      '<li ><a href="http://example.org/?p=' . $test_post->ID .
                       '" title="Test post">Test post</a></li></ul>',
                       $displayer->display());
   }
