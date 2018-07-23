@@ -73,7 +73,7 @@ The plugin can figure out the category from which you want to list posts in seve
 * The *category name or slug*.
   * **name** - To display posts from a category using the category's name or slug. Ex: `[catlist name=mycategory]`
 * *Detecting the current post's category*. You can use the *categorypage* parameter to make it detect the category id of the current post, and list posts from that category.
-  * **categorypage** - Set it to "yes" if you want to list the posts from the current post's category. `[catlist categorypage="yes"]`
+  * **categorypage** - Set it to "yes" if you want to list the posts from the current post's category. `[catlist categorypage="yes"]` This will not work on pages that don't have a category: home page, author archive, date archive, etc. -- the plugin will display no posts in these cases. You can handle this with the `no_posts_text` parameter.
 
 When using List Category Posts whithout a category id, name or slug, it will post the latest posts from **every category**.
 
