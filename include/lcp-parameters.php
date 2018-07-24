@@ -130,43 +130,58 @@ class LcpParameters{
       );
     }
 
-    if ($this->utils->lcp_not_empty('customfield_date')
+    if ($this->utils->lcp_not_empty('customfield_compare')
         && (
-            $this->utils->lcp_not_empty('customfield_after')
-            || $this->utils->lcp_not_empty('customfield_before')
+            $this->utils->lcp_not_empty('customfield_greaterthan')
+            || $this->utils->lcp_not_empty('customfield_lessthan')
         )
     ) {
-      $customfield_date = $params['customfield_date'];
-      $date_clause = array('relation' => 'AND');
+      $customfield_compare = $params['customfield_compare'];
+      // Default type is CHAR
+      // https://codex.wordpress.org/Class_Reference/WP_Meta_Query
+      $customfield_compare_type = strtoupper(
+        $params['customfield_compare_type'] ?: 'CHAR'
+      );
+      // Prepare a value formatter to use in customfield comparisons.
+      // this returns a function that takes field value as an argument.
+      $format_value = call_user_func(
+        'LcpUtils::lcp_format_customfield',
+        $customfield_compare_type
+      );
+      // 'AND' is the default relation, keeping this line
+      // for better readability.
+      $compare_clause = array('relation' => 'AND');
 
-      $customfield_after = isset($params['customfield_after']) ? $params['customfield_after'] : null;
+      $customfield_greaterthan = $params['customfield_greaterthan'] ?: null;
 
-      if ($customfield_after) {
-        $date_clause_after = array(
-            'key' => $customfield_date,
-            'value' => date('c', strtotime($customfield_after)),
+      if ($customfield_greaterthan) {
+        $compare_clause_greaterthan = array(
+            'key' => $customfield_compare,
+            'value' => $format_value($customfield_greaterthan),
             'compare' => '>',
-            'type' => 'DATETIME'
+            'type' => $customfield_compare_type
         );
 
-        $date_clause[] = $date_clause_after;
+        $compare_clause[] = $compare_clause_greaterthan;
       }
 
-      $customfield_before = isset($params['customfield_before']) ? $params['customfield_before'] : null;
+      $customfield_lessthan = $params['customfield_lessthan'] ?: null;
 
-      if ($customfield_before) {
-        $date_clause_before = array(
-            'key' => $customfield_date,
-            'value' => date('c', strtotime($customfield_before)),
+      if ($customfield_lessthan) {
+        $compare_clause_lessthan = array(
+            'key' => $customfield_compare,
+            'value' => $format_value($customfield_lessthan),
             'compare' => '<',
-            'type' => 'DATETIME'
+            'type' => $customfield_compare_type
         );
 
-        $date_clause[] = $date_clause_before;
+        $compare_clause[] = $compare_clause_lessthan;
       }
 
+      // 'AND' is the default relation, keeping this line
+      // for better readability.
       $meta_query['relation'] = 'AND';
-      $meta_query['date_clause'] = $date_clause;
+      $meta_query['compare_clause'] = $compare_clause;
     }
 
     //Get private posts
