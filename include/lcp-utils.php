@@ -47,7 +47,7 @@ class LcpUtils{
         $format = 'Y-m-d';
         break;
       case 'TIME':
-        $format = 'H-i-s';
+        $format = 'H:i:s';
     }
 
     return function($value) use ($format) {
