@@ -140,7 +140,7 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('exclude_tags') ){
-      $args = $this->lcp_excluded_tags($params);
+      $args = $this->lcp_excluded_tags($args);
     }
 
     // Current tags
@@ -279,7 +279,7 @@ class LcpParameters{
   }
 
   private function lcp_excluded_tags($args){
-    $excluded_tags = explode(",", $args['exclude_tags']);
+    $excluded_tags = explode(",", $this->params['exclude_tags']);
     $tag_ids = array();
     foreach ( $excluded_tags as $excluded){
       $tag_ids[] = get_term_by('slug', $excluded, 'post_tag')->term_id;
