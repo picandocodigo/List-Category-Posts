@@ -100,7 +100,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 
 * **currenttags** - Display posts from the current post's tags (won't
-    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`
+    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`. `OR` is the default relationship, use `currenttags="all"` for the `AND` relationship.
 
 * **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
 
