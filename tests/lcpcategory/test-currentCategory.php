@@ -57,7 +57,7 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
       $this->go_to('/?cat=' . $category->cat_ID);
       $this->assertQueryTrue('is_category', 'is_archive');
 
-      $this->assertSame($category->cat_ID, $lcpcategory->current_category());
+      $this->assertSame($category->cat_ID, $lcpcategory->current_category('yes'));
     }
   }
 
@@ -66,15 +66,49 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
     $this->go_to('/?p=' . self::$test_post);
     $this->assertQueryTrue('is_singular', 'is_single');
-    $this->assertSame((string) self::$test_cat, $lcpcategory->current_category());
-    $this->assertSame('Lcp test cat', get_category($lcpcategory->current_category())->cat_name);
+    $this->assertSame((string) self::$test_cat, $lcpcategory->current_category('yes'));
+    $this->assertSame('Lcp test cat', get_category($lcpcategory->current_category('yes'))->cat_name);
 
     // More than one category
     $cat_ID_1 = self::$test_cat;
     $cat_ID_2 = self::$test_cat_2;
     $this->go_to('/?p=' . self::$test_post_2);
     $this->assertQueryTrue('is_singular', 'is_single');
-    $this->assertSame("${cat_ID_1},${cat_ID_2}", $lcpcategory->current_category());
+    $this->assertSame("${cat_ID_1},${cat_ID_2}", $lcpcategory->current_category('yes'));
+  }
+
+  public function test_all_mode() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to('/?p=' . self::$test_post_2);
+    $this->assertQueryTrue('is_singular', 'is_single');
+    $this->assertSame(
+      [self::$test_cat, self::$test_cat_2],
+      $lcpcategory->current_category('all')
+    );
+  }
+
+  public function test_other_mode() {
+    $lcpcategory = LcpCategory::get_instance();
+    $cat_ID_1 = self::$test_cat;
+    $cat_ID_2 = self::$test_cat_2;
+
+    $this->go_to('/?p=' . self::$test_post_2);
+    $this->assertQueryTrue('is_singular', 'is_single');
+    $this->assertSame(
+      "-${cat_ID_1},-${cat_ID_2}",
+      $lcpcategory->current_category('other')
+    );
+  }
+
+  public function test_empty_string_equals_yes_mode() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to('/?p=' . self::$test_post);
+    $this->assertSame(
+      $lcpcategory->current_category('yes'),
+      $lcpcategory->current_category('')
+    );
   }
 
   public function test_single_page_with_no_categories() {
@@ -82,7 +116,7 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
     $this->go_to('/?page_id=' . self::$test_page);
     $this->assertQueryTrue('is_singular', 'is_page');
-    $this->assertSame([0], $lcpcategory->current_category());
+    $this->assertSame([0], $lcpcategory->current_category('yes'));
   }
 
   public function test_home_page() {
@@ -90,7 +124,7 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
     $this->go_to('/');
     $this->assertQueryTrue('is_home', 'is_front_page');
-    $this->assertSame([0], $lcpcategory->current_category());
+    $this->assertSame([0], $lcpcategory->current_category('yes'));
   }
 
   public function test_date_archive() {
@@ -98,7 +132,7 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
     $this->go_to(get_month_link('',''));
     $this->assertQueryTrue('is_archive', 'is_date', 'is_month');
-    $this->assertSame([0], $lcpcategory->current_category());
+    $this->assertSame([0], $lcpcategory->current_category('yes'));
   }
 
   public function test_author_archive() {
@@ -106,6 +140,6 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
     $this->go_to(get_author_posts_url(1));
     $this->assertQueryTrue('is_archive', 'is_author');
-    $this->assertSame([0], $lcpcategory->current_category());
+    $this->assertSame([0], $lcpcategory->current_category('yes'));
   }
 }
