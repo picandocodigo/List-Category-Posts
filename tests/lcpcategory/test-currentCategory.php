@@ -3,8 +3,10 @@
 class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
   protected static $test_post;
+  protected static $test_post_2;
   protected static $test_page;
   protected static $test_cat;
+  protected static $test_cat_2;
 
   public static function wpSetUpBeforeClass($factory) {
     // Create some random categories
@@ -18,15 +20,26 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
       ));
     }
 
-    // Create test category, test post and test page (no categories for page)
+    // Create test categories, test posts and test page (no categories for page)
     self::$test_cat = $factory->term->create(array(
       'taxonomy' => 'category',
       'name' => 'Lcp test cat'
     ));
 
+    self::$test_cat_2 = $factory->term->create(array(
+      'taxonomy' => 'category',
+      'name' => 'Lcp test cat 2'
+    ));
+
     self::$test_post = $factory->post->create(array(
       'post_title' => 'Lcp test post',
       'post_category' => array(self::$test_cat)
+    ));
+
+    // Post with 2 categories
+    self::$test_post_2 = $factory->post->create(array(
+      'post_title' => 'Lcp test post',
+      'post_category' => array(self::$test_cat, self::$test_cat_2)
     ));
 
     self::$test_page = $factory->post->create(array(
@@ -53,8 +66,15 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
     $this->go_to('/?p=' . self::$test_post);
     $this->assertQueryTrue('is_singular', 'is_single');
-    $this->assertSame(self::$test_cat, $lcpcategory->current_category());
+    $this->assertSame((string) self::$test_cat, $lcpcategory->current_category());
     $this->assertSame('Lcp test cat', get_category($lcpcategory->current_category())->cat_name);
+
+    // More than one category
+    $cat_ID_1 = self::$test_cat;
+    $cat_ID_2 = self::$test_cat_2;
+    $this->go_to('/?p=' . self::$test_post_2);
+    $this->assertQueryTrue('is_singular', 'is_single');
+    $this->assertSame("${cat_ID_1},${cat_ID_2}", $lcpcategory->current_category());
   }
 
   public function test_single_page_with_no_categories() {

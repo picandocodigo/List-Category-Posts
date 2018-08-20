@@ -71,7 +71,9 @@ class LcpCategory{
         $categories = get_the_category($post->ID);
       }
       if ( !empty($categories) ){
-        return $categories[0]->cat_ID;
+        return implode(',', array_map(function($cat) {
+          return $cat->cat_ID;
+        }, $categories));
       } else {
         return [0]; // workaround to display no posts
       }
