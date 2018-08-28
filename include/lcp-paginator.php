@@ -35,11 +35,42 @@ class LcpPaginator {
       $pag_output = '';
       $this->prev_page_num = null;
       $this->next_page_num = null;
-      if ($pages_count > 1){
-          for($i = 1; $i <= $pages_count; $i++){
-              $lcp_paginator .=  $this->lcp_page_link($i, $params['page'], $params['instance'],
-                                                      $params['bookmarks']);
+      if ( $pages_count > 1 ) {
+        /* Dynamic pagination inspired by
+         * https://gist.github.com/shlomohass/9869e138a4fba0e7dc4c
+         */
+        // Print first page.
+        $lcp_paginator .=  $this->lcp_page_link(
+          1,
+          $params['page'],
+          $params['instance'],
+          $params['bookmarks']
+        );
+        // Padding around current page. How many pages will be printed
+        // before and after current page.
+        $pad = intval( $params['padding'] );
+        // Print opening ellipsis if needed
+        $params['page'] - $pad > 2 && $lcp_paginator .= '...';
+        // Loop over pages excluding first and last page.
+        for( $i = 2; $i < $pages_count; $i++ ) {
+          if ( $i >= $params['page'] - $pad && $i <= $params['page'] + $pad ) {
+            $lcp_paginator .=  $this->lcp_page_link(
+              $i,
+              $params['page'],
+              $params['instance'],
+              $params['bookmarks']
+            );
           }
+        }
+        // Print closing ellipsis if needed
+        $params['page'] + $pad < $pages_count - 1 && $lcp_paginator .= '...';
+        // Print last page.
+        $lcp_paginator .=  $this->lcp_page_link(
+          $pages_count,
+          $params['page'],
+          $params['instance'],
+          $params['bookmarks']
+        );
 
           $pag_output .= "<ul class='lcp_paginator'>";
 

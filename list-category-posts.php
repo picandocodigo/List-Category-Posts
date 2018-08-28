@@ -126,6 +126,7 @@ class ListCategoryPosts{
         'pagination' => '',
         'pagination_next' => '>>',
         'pagination_prev' => '<<',
+        'pagination_padding' => '5',
         'no_posts_text' => "",
         'instance' => '0',
         'no_post_titles' => 'no',
