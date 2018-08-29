@@ -440,6 +440,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.79 =
+
+* Add 'id' to widget ordering options (thanks @zymeth25! 🎉)
+* Add currenttags=all for AND relationship (thanks @zymeth25! 🎉)
+
 = 0.78.1 =
 
 * Refactor in widget parameters by @zymeth25, all widget related issues with missing parameters will be gone for good.
