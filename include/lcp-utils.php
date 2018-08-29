@@ -22,6 +22,7 @@ class LcpUtils{
                  "modified" => __("Modified Date", "list-category-posts"),
                  "title" => __("Post title", "list-category-posts"),
                  "author" => __("Author", "list-category-posts"),
+                 "id" => __("ID", "list-category-posts"),
                  "rand" => __("Random", "list-category-posts"));
   }
 
