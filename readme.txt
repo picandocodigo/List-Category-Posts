@@ -3,9 +3,9 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 4.9.7
+Tested up to: 4.9.8
 Requires PHP: 5.2.4
-Stable tag: 0.78
+Stable tag: 0.78.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,7 +100,7 @@ When using List Category Posts whithout a category id, name or slug, it will pos
 
 
 * **currenttags** - Display posts from the current post's tags (won't
-    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`
+    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`. `OR` is the default relationship, use `currenttags="all"` for the `AND` relationship.
 
 * **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
 
@@ -439,6 +439,15 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.79 =
+
+* Add 'id' to widget ordering options (thanks @zymeth25! 🎉)
+* Add currenttags=all for AND relationship (thanks @zymeth25! 🎉)
+
+= 0.78.1 =
+
+* Refactor in widget parameters by @zymeth25, all widget related issues with missing parameters will be gone for good.
 
 = 0.78 =
 
