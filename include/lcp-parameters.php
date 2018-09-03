@@ -147,6 +147,11 @@ class LcpParameters{
       add_filter('posts_where' , array( $this, 'starting_with') );
     }
 
+    // Post stickiness
+    if ( 'yes' === $params['ignore_sticky_posts'] ) {
+      $args['ignore_sticky_posts'] = true;
+    }
+
     return $args;
   }
 

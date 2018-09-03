@@ -167,6 +167,7 @@ class ListCategoryPosts{
         'ol_offset' => '',
         'main_query' => '',
         'keep_orderby_filters' => '',
+        'ignore_sticky_posts' => '',
       );
     }
     return self::$default_params;
