@@ -107,6 +107,8 @@ class CatListDisplayer {
 
     $this->get_category_description();
 
+    $this->lcp_output .= $this->get_conditional_title();
+
     $this->lcp_output .= '<' . $tag;
 
     // Follow the numner of posts in an ordered list with pagination
@@ -126,8 +128,6 @@ class CatListDisplayer {
 
     $this->lcp_output .= '>';
     $inner_tag = ( ($tag == 'ul') || ($tag == 'ol') ) ? 'li' : 'p';
-
-    $this->lcp_output .= $this->get_conditional_title();
 
     //Posts loop
     global $post;
