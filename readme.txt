@@ -65,294 +65,59 @@ Since the documentation on how to use the plugin has passed wordpress.org's char
 
 ==Instructions on how to use the plugin==
 
-==SELECTING THE CATEGORY==
-The plugin can figure out the category from which you want to list posts in several ways. **You should use only one of these methods** since these are all mutually exclusive, weird results are expected when using more than one:
+Below you can find common shortcode use cases. You can use the shortcode while editing posts, pages, custom post types, text widgets and in all "page builder" plugins that support shortcodes.
 
-* Using the *category id*.
-  * **id** - To display posts from a category using the category's id. Ex: `[catlist id=24]`.
-* The *category name or slug*.
-  * **name** - To display posts from a category using the category's name or slug. Ex: `[catlist name=mycategory]`
-* *Detecting the current post's category*. You can use the *categorypage* parameter to make it detect the category id of the current post, and list posts from that category.
-  * **categorypage** - Set it to "yes" if you want to list the posts from the current post's category. `[catlist categorypage="yes"]`
+Read the **[full documentation](https://github.com/picandocodigo/List-Category-Posts/wiki)** to discover many more features, including:
 
-When using List Category Posts whithout a category id, name or slug, it will post the latest posts from **every category**.
+* **advanced post selection options** (by date, search terms, custom fields, post types, custom taxonomies and more)
+* **output customizations** (show each post's date, author, excerpt, thumbnail and more)
+* **custom templates** of your own design, based on a simple PHP example
 
-==USING MORE THAN ONE CATEGORY==
+List 10 latest posts:
+`[catlist]`
 
-* Posts from several categories with an **AND** relationship, posts that belong to all of the listed categories (note this does not show posts from any children of these categories): `[catlist id=17+25+2]` - `[catlist name=sega+nintendo]`.
-* Posts from several categories with an **OR** relationship, posts that belong to any of the listed categories: `[catlist id=17,24,32]` - `[catlist name=sega,nintendo]`.
-* **Exclude** a category with the minus sign (-): `[catlist id=11,-32,16]`, `[catlist id=1+2-3]`. **Important**: When using the *and* relationship, you should write the categories you want to include first, and then the ones you want to exclude. So `[catlist id=1+2-3]` will work, but `[catlist id=1+2-3+4]` won't.
+The default number of listed posts is 10, to modify it you need to specify `numberposts` parameter:
+`[catlist numberposts=15]`
 
-==Other ways of selecting what posts to show==
+List posts from the "Dogs" category:
+`[catlist name=Dogs]`
 
-* **child_categories** - Exclude/include posts from the child categories. By default they are included. If you have a "Parent Category" and you use: `[catlist name="Parent Category"]`, you'll see posts from it's child categories as if they were posts from the same category. You can use this parameter to exclude these posts: `[catlist name="Parent Category" child_categories=false]`.
+List posts from the category with id `2`:
+`[catlist id=2]`
 
-* **author_posts** - Get posts by author. Use 'user_nicename' (NOT
-    name). Example: `[catlist author_posts="fernando"]`
+By default only the "post" post type is included. To list pages use:
+`[catlist post_type=page]`
+and for both posts and pages:
+`[catlist post_type="post,page"]`
 
-* **tags** - Tag support, display posts from a certain tag. You can use an "OR" relationship `[catlist tags="nintendo,sega"]` or "AND" relationship (posts that belong to all of the listed tags): `[catilst tags="nintendo+sega"]`.
+If we combine the above options we can get a shortcode that lists 15 items, including post and pages, from the "Dogs" category:
+`[catlist name=Dogs post_type="post,page" numberposts=15]`
+Most of the parameters you will find in the documentation can be used together.
 
-* **taxonomy** - You can select posts using custom taxonomies. There's two ways of selecting taxonomies:
-    * You need to set the taxonomy and the terms: `[catlist taxonomy='person' terms='bob']`. It supports both the "IN" and "AND" logical relationships between each inner taxonomy. For the `AND` relationship, separate terms with a plus sign: ` [catlist taxonomy='topic' terms='topic1+topic2']`. For the `OR` relationship, separate terms with a comma: `[catlist taxonomy='topic' terms='topic1,topic2']`.
-    * Multiple taxonomies: You can use multiple taxonomy terms in one shortcode like this:
-      * OR - `taxonomies_or="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"`
-      * AND - `taxonomies_and="tax1:{term1_1,term1_2};tax2:{term2_1,term2_2,term2_3}"`
+The plugin can detect current post's category and use it for listing:
+`[catlist categorypage=yes]`
+Same goes for tags:
+`[catlist currenttags=yes]`
 
+To show each post's excerpt use:
+`[catlist excerpt=yes]`
 
-* **currenttags** - Display posts from the current post's tags (won't
-    work on pages since they have no tags). Pass it the 'yes' string for it to work: `[catlist currenttags="yes"]`. `OR` is the default relationship, use `currenttags="all"` for the `AND` relationship.
+If you want to show the date, author and comments count next to each post, use:
+`[catlist date=yes author=yes comments=yes]`
 
-* **exclude_tags** - Exclude posts from one or more tags: `[catlist tags="videogames" exclude_tags="sega,sony"]`
+You can specify html tags and classes for many elements. Let's modify the previous shortcode and wrap dates and authors in tags and classes of our choice:
+`[catlist date=yes date_tag=span date_class="my-date" author=yes author_tag=p author_class="my-author" comments=yes]`
+[Read more about this feature](https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization)
 
-* **starting_with** - Get posts whose title starts with a certain
-    letter. Example: `[catlist starting_with="l"]` will list all posts
-    whose title starts with L. You can use several letters: `[catlist starting_with="m,o,t"]`.
+You can order posts by date:
+`[catlist orderby=date]`
+You can also use `title`, `author`, `ID`. More options are described in the documentation.
 
-* **monthnum** and **year** - List posts from a certain year or month. You can use these together or independently. Example: `[catlist year=2015]` will list posts from the year 2015. `[catlist monthnum=8]` will list posts published in August of every year. `[catlist year=2012 monthnum=12]` will list posts from December 2012.
+The plugin also supports pagination. You need to specify `numberposts` to tell the plugin how many posts per page you want:
+`[catlist pagination=yes numberposts=5]`
+See the wiki: [Pagination](https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination) for more information.
 
-* **date ranges** - You can also use date ranges for listing posts. For example "list every post after March 14th, 2005". The parameters are: ```after, after_year, after_month, after_day, before, before_year, before_month,  before_day```. You can use `today` as a value, the plugin will get today's date dynamically and display only old posts. These parameters are used to specify data_query arguments (see: [the codex](https://codex.wordpress.org/Class_Reference/WP_Query#Date_Parameters)).
-
-     If you want to list all the posts before a given date, say `Jun 17th, 2007` you can use these two options:
-     `[catlist before_year=2007 before_month=06 before_day=17]`
-     Or you can use the `before` parameter with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):
-     `[catlist before='2007/06/17']`
-
-     The same works for posts after a given date, you can use:
-     `[catlist after_year=2007 after_month=06 after_day=17]`
-     Or just `after` with a [strtotime()-compatible string](http://php.net/manual/en/datetime.formats.date.php):
-     `[catlist after='2007/06/17']`
-
-    `after` takes priority over `after_year`, `after_month`, and `after_day`.
-    `before` takes priority over `before_year`, `before_month`, and `before_day`.
-
-* **search** - List posts that match a search term. `[catlist search="The Cake is a lie"]`
-
-* **excludeposts** - IDs of posts to exclude from the list. Use 'this' to exclude the current post. Ex: `[catlist excludeposts=this,12,52,37]`
-
-* **offset** - You can displace or pass over one or more initial posts which would normally be collected by your query through the use of the offset parameter.
-
-* **post_type** - The type of post to show. Available options are: post - Default, page, attachment, any - all post types. You can use several types, example: `[catlist post_type="page,post" numberposts=-1]`
-
-* **post_status** - use post status, default value is 'publish'. Valid values:
-  * **publish** - a published post or page.
-  * **pending** - post is pending review.
-  * **draft** - a post in draft status.
-  * **auto-draft** - a newly created post, with no content.
-  * **future** - a post to publish in the future.
-  * **private** - not visible to users who are not logged in.
-  * **inherit** - a revision. see get_children.
-  * **trash** - post is in trashbin (available with Version 2.9).
-  * **any** - retrieves any status except those from post types with 'exclude_from_search' set to true.
-  You can use several post statuses. Example: `[catlist post_status="future, publish" excludeposts=this]`
-
-* **show_protected** - Show posts protected by password. By default
-    they are not displayed. Use: `[catlist show_protected=yes]`
-
-* **post_parent** - Show only the children of the post with this ID.
-    Default: None.
-
-* **custom fields** - To use custom fields, you must specify two values: customfield_name and customfield_value. `customfield_name` defines the name of the field, and you should choose the values for which you want posts to display. Using this only show posts that contain a custom field with this name and value. Both parameters must be defined, or neither will work. Eg: `[catlist customfield_name="color" customfield_value="green"]` will display posts with the value `green` set on the custom field `color`. This parameter can be used together with `customfield_orderby`, see further below for more information.
-
-==PAGINATION
-
-See the wiki: [Pagination](https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination).
-
-==OTHER PARAMETERS==
-
-* **conditional_title** - Display a custom title before the posts list.
-    The title is not displayed if the list is empty. Set to the empty string
-    (default value) to disable.
-    Example: `[catlist conditional_title="Other posts"]`.
-
-* **conditional_title_tag** - Specify the tag used for the conditional title.
-    Defaults to 'h3'.
-
-* **conditional_title_class** - Specify the class used for the conditional
-    title. Defaults to the empty string (no special class).
-
-* **orderby** - To customize the order. Valid values are:
-  * **author** - Sort by the numeric author IDs.
-  * **category** - Sort by the numeric category IDs.
-  * **content** - Sort by content.
-  * **date** - Sort by creation date.
-  * **ID** - Sort by numeric post ID.
-  * **menu_order** - Sort by the menu order. Only useful with pages.
-  * **mime_type** - Sort by MIME type. Only useful with attachments.
-  * **modified** - Sort by last modified date.
-  * **name** - Sort by stub.
-  * **parent** - Sort by parent ID.
-  * **password** - Sort by password.
-  * **rand** - Randomly sort results.
-  * **status** - Sort by status.
-  * **title** - Sort by title.
-  * **type** - Sort by type. Ex: `[catlist name=mycategory orderby=date]`
-
-* **customfield_orderby** - You can order the posts by a custom field. For example: `[catlist numberposts=-1 customfield_orderby=Mood order=desc]` will list all the posts with a "Mood" custom field. This parameter can be used toghether with `customfield_name` and `customfield_value`, you can use those parameters to select posts and then `customfield_orderby` to sort by this or another custom field.  Remember the default order is descending, more on order:
-
-* **order** - How to sort **orderby**. Valid values are:
-  * **ASC** - Ascending (lowest to highest).
-  * **DESC** - Descending (highest to lowest). Ex: `[catlist name=mycategory orderby=title order=asc]`
-
-* **numberposts** - Number of posts to return. Set to 0 to use the max
-    number of posts per page. Set to -1 to remove the limit.
-    Ex: `[catlist name=mycategory numberposts=10]`
-    You can set the default number of posts globally on the options
-    page on your Dashboard in Settings / List Category Posts.
-
-* **no_posts_text** - Text to display when no posts are found. If you
-    don't specify it, nothing will get displayed where the posts
-    should be.
-
-* **date** - Display post's date next to the title. Default is 'no',
-    use date=yes to activate it. You can set a css class and an html
-    tag to wrap the date in with `date_class` and `date_tag` (see HTML
-    & CSS Customization further below).
-
-* **date_modified** - Display the date a post was last modified next
-    to the title. You can set a css class and an html tag to wrap the
-    date in with `date_modified_class` and `date_modified_tag` (see
-    HTML & CSS Customization further below).
-
-* **author** - Display the post's author next to the title. Default is
-    'no', use author=yes to activate it. You can set a css class and an html
-    tag to wrap the author name in with `author_class` and `author_tag` (see HTML
-    & CSS Customization further below).
-
-    When displaying the post author, you can also display a link to the
-    author's page. The following parameter **only works if author=yes
-    is present in the shortcode**:
-
-    * **author_posts_link** - Gets the URL of the author page for the
-      author. The HTML and CSS customization are the ones applied to `author`.
-
-* **dateformat** - Format of the date output. The default format is the one you've set on your WordPress settings. Example: `[catlist id=42 dateformat="l F dS, Y"]` would display the date as "Monday January 21st, 2013". Check http://codex.wordpress.org/Formatting_Date_and_Time for more options to display date.
-
-* **excerpt** - Display a plain text excerpt of the post. Default is 'no', use `excerpt=yes` or `excerpt=full` to activate it. If you have a separate excerpt in your post, this text will be used. If you don't have an explicit excerpt in your post, the plugin will generate one from the content, striping its images, shortcodes and HTML tags. If you want to overwrite the post's separate excerpt with an automatically generated one (may be useful to allow HTML tags), use `excerpt_overwrite=yes`.
-
-  If you use `excerpt=yes`, the separate excerpt or content will be limited to the number of words set by the *excerpt_size* parameter (55 words by default).
-
-  If you use `excerpt=full` the plugin will act more like Wordpress. If the post has a separate excerpt, it will be used in full. Otherwise if the content has a &lt;!--more--&gt; tag then the excerpt will be the text before this tag, and if there is no &lt;!--more--&gt; tag then the result will be the same as `excerpt=yes`.
-
-  If you want the automatically generated excerpt to respect your theme's allowed HTML tags, you should use `excerpt_strip=no`, otherwise the HTML tags are automatically stripped.
-
-* **excerpt_size** - Set the number of *words* to display from the excerpt. Default is 55. Eg: `excerpt_size=30`
-
-* **excerpt_strip** - Set it to `yes` to strip the excerpt's HTML tags. If the excerpt is auto generated by the plugin, the HTML tags will be stripped, and you should use `excerpt_strip=no` to see the excerpt with HTML formatting.
-
-* **title_limit** - Set the limit of characters for the title. Ex:
-    `[catlist id=2 title_limit=50]` will show only the first 50
-    characters of the title and add "…" at the end.
-
-* **content** - **WARNING**: If you want to show the content on your listed posts, you might want to do this from a new [Page Template](http://codex.wordpress.org/Page_Templates) or a [Custom Post Type](http://codex.wordpress.org/Post_Types#Custom_Post_Type_Templates) template. Using this parameter is discouraged, you can have memory issues as well as infinite loop situations when you're displaying a post that's using List Category Posts. You have been warned. Usage:
-
-    * `yes` - Show the excerpt or full content of the post. If there's a &lt;!--more--&gt; tag in the post, then it will behave just as WordPress does: only show the content previous to the more tag. Default is 'no'. Ex: `[catlist content=yes]`
-
-    * `full` - Show the full content of the post regardless of whether there is a &lt;!--more--&gt; tag in the post. Ex: `[catlist content=full]`
-
-* **catlink** - Show the title of the category with a link to the category. Use the **catlink_string** option to change the link text. Default is 'no'. Ex: `[catlist catlink=yes]`. The way it's programmed, it should only display the title for the first category you chose, and include the posts from all of the categories. I thought of this parameter mostly for using several shortcodes on one page or post, so that each group of posts would have the title of that group's category. If you need to display several titles with posts, you should use one [catlist] shortcode for each category you want to display.
-
-* **category_description** Show the category description wrapped in a p tag: `[catlist id=1 category_description='yes']`
-
-* **catname** - Show the title of the category (or categories), works exactly as `catlink`, but it doesn't add a link to the category.
-
-* **category_count** -  Shows the posts count in that category, only works when using the **catlink** option: `[catlist name=nintendo catlink=yes category_count=yes]`
-
-* **comments** - Show comments count for each post. Default is 'no'. Ex: `[catlist comments=yes]`.
-
-* **thumbnail** - Show post thumbnail (http://markjaquith.wordpress.com/2009/12/23/new-in-wordpress-2-9-post-thumbnail-images/). Default is 'no'. Ex: `[catlist thumbnail=yes]`.
-
-* **force_thumbnail** - If the previous parameter is set to 'yes', and there's no featured image, setting this to 'yes' or 'true' will make the plugin look for the first image in the post and use it as a thumbnail. Ex: `[catlist thumbnail=yes force_thumbnail=yes]`.
-
-* **thumbnail_size** - Either a string keyword (thumbnail, medium, large or full) or 2 values representing width and height in pixels. Ex: `[catlist thumbnail_size=32,32]` or `[catlist thumbnail_size=thumbnail]`
-
-* **thumbnail_class** - Set a CSS class for the thumbnail.
-
-* **post_suffix** - Pass a String to this parameter to display this
-    String after every post title.
-    Ex: `[catlist numberposts=-1
-    post_suffix="Hello World"]` will create something like:
-
-    `<ul class="lcp_catlist" id=lcp_instance_0>`
-    `   <li>`
-    `     <a href="http://127.0.0.1:8080/wordpress/?p=42" title="WordPress">`
-    `       WordPress`
-    `     </a> Hello World </li>`
-
-* **display_id** - Set it to yes to show the Post's ID next to the post title: `[catlist id=3 display_id=yes]`
-
-* **class** - CSS class for the default UL generated by the plugin.
-
-* **tags_as_class** - Use a post's tags as a class for the `li` that lists the posts. Default is `no`. For example, `[catlist tags_as_class=yes]` will show a post that has the `fun` tag like this:
-```
-<li class=" fun ">
-  <a href="http://localhost:8080/?p=1267" title="Post Title">Post Title</a>
-</li>
-```
-
-* **customfield_display** - Display custom field(s). You can specify
-    many fields to show, separating them with a coma. If you want to
-    display just the value and not the name of the custom field, use
-    `customfield_display_name` and set it to no.
-    By default, the custom fields will show inside a div with a
-    specific class: `<div class="lcp-customfield">`. You can customize
-    this using the customfield_tag and customfield_class parameters to
-    set a different tag (instead of the div) and a specific class
-    (instead of lcp-customfield).
-
-* **customfield_display_glue** - Specify the text to appear between two custom
-    fields if displayed together, defaults to the empty string. Not used if
-    the `customfield_display_separately` parameter is defined.
-
-* **customfield_display_separately** - Display the custom fields separately.
-    Each custom field is displayd within its own tag (see `customfield_tag`).
-    Defaults to 'no', set to 'yes' to enable. Superseeds the
-    `customfield_display_glue` parameter when enabled.
-
-* **customfield_display_name** - To use with `customfield_display`.
-    Use it to just print the value of the Custom field and not the
-    name. Example:
-`[catlist numberposts=-1 customfield_display="Mood"
-   customfield_display_name="no"]`
-Will print the value of the Custom Field "Mood" but not the text
-    "Mood: [value]".
-
-* **customfield_display_name_glue** - To use with `customfield_display_name`.
-    Use it to specify the text between the name and the value, defaults to
-    ' : '.
-
-* **template** - By default, posts will be listed in an unordered list
-    (ul tag) with the class 'lcp_catlist':
-
-    `<ul class="lcp_catlist"><li><a href="post1">Post 1</a></li>...`
-
-    You can use a different class by using the *class* parameter.
-
-    You can create your own template file (Check **Template System**
-    further down this document) and pass it as a parameter here. The
-    parameter is the template name without the extension. For example
-    for `mytemplate.php`, the value would be `mytemplate`.
-
-    You can also pass these two parameters which yield different
-    results:
-      * `div` - This will output a div with the `lcp_catlist` class
-    (or one you pass as a parameter with the `class` argument). The
-    posts will be displayed between p tags. `[catlist template=div]`
-
-      * `ol` - This will output an ordered list with the `lcp_catlist`
-      css class (or the one you pass as a parameter with the `class`
-      argument) and each post will be a list item inside the ordered list. `[catlist template=ol]`.
-
-* **morelink** - Include a "more" link to access the category archive for the category. The link is inserted after listing the posts. It receives a string of characters as a parameter which will be used as the text of the link. Example: `[catlist id=38 morelink="Read more"]`
-
-* **posts_morelink** - Include a "read more" link after each post. It receives a string of characters as a parameter which will be used as the text of the link. Example: `[catlist id=38 posts_morelink="Read more about this post"]`
-
-* **link_target** - Select the `target` attribute for links to posts (target=_blank, _self, _parent, _top, *framename*). Example: `[catlink id=3 link_target=_blank]` will create: `<a href="http://localhost/wordpress/?p=45" title="Test post" target="_blank">Test post</a>`
-
-* **no_post_titles** - If set to `yes`, no post titles will be shown. This may make sense together with `content=yes`.
-
-* **link_titles** - Option to display titles without links. If set to `false`, the post titles won't be linking to the article.
-
-* **link_dates** - Option to wrap dates with a link to the post. Set to `true` or `yes` to enable, set to `false` or `no` to disable. Defaults to `false`.
+Please read the **[full documentation](https://github.com/picandocodigo/List-Category-Posts/wiki)** for detailed documentation of all plugin features, use cases and shortcode parameters.
 
 
 ==Installation==
