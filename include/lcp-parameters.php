@@ -140,14 +140,22 @@ class LcpParameters{
     }
 
     if ( $this->utils->lcp_not_empty('exclude_tags') ){
-      $args = $this->lcp_excluded_tags($params);
+      $args = $this->lcp_excluded_tags($args);
     }
 
     // Current tags
-    if ( $this->utils->lcp_not_empty('currenttags') && $params['currenttags'] == "yes" ){
+    $currenttags = $params['currenttags'];
+    if ( $currenttags === 'yes' || $currenttags === 'all' ) {
       $tags = $this->lcp_get_current_tags();
-      if ( !empty($tags) ){
-        $args['tag__in'] = $tags;
+
+      if ( !empty($tags) ) {
+        // OR relationship
+        if ( 'yes' === $currenttags ) {
+          $args['tag__in'] = $tags;
+        } else {
+          // AND relationship
+          $args['tag__and'] = $tags;
+        }
       }
     }
 
@@ -279,7 +287,7 @@ class LcpParameters{
   }
 
   private function lcp_excluded_tags($args){
-    $excluded_tags = explode(",", $args['exclude_tags']);
+    $excluded_tags = explode(",", $this->params['exclude_tags']);
     $tag_ids = array();
     foreach ( $excluded_tags as $excluded){
       $tag_ids[] = get_term_by('slug', $excluded, 'post_tag')->term_id;
@@ -306,7 +314,7 @@ class LcpParameters{
     global $wpdb;
     $wp_posts_prefix = $wpdb->prefix . 'posts';
     $charset = $wpdb->get_col_charset($wp_posts_prefix, 'post_title');
-    
+
     $where .= 'AND (' . $wp_posts_prefix . '.post_title ' .
       'COLLATE ' . strtoupper($charset) . '_GENERAL_CI LIKE \'' . $letters[0] . "%'";
     for ($i=1; $i <sizeof($letters); $i++) {
