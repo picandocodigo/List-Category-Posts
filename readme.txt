@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9.8
 Requires PHP: 5.2.4
-Stable tag: 0.78.1
+Stable tag: 0.79
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,11 @@ You can find **Frequently Asked Questions** [here](https://github.com/picandocod
 The different elements to display can be styled with CSS. you can define an HTML tag to wrap the element with, and a CSS class for this tag. Check [the documentation](https://github.com/picandocodigo/List-Category-Posts/wiki) for usage. You can also check [this nice tutorial](http://sundari-webdesign.com/wordpress-the-quest-to-my-perfect-list-view-for-posts-events-and-articles/) which gives lots of tips and how-to's to customize how to display the posts.
 
 Great to use WordPress as a CMS, and create pages with several categories posts.
+
+**GUI**
+
+Klemens Starybrat has created a GUI for List Category Posts. It helps you create a shortcode from a nice visual interface in WordPress' text editor. Check it out:
+[GUI for List Category Posts](https://wordpress.org/plugins/gui-for-lcp/)
 
 **Widget**
 
@@ -207,6 +212,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.79 =
 
+* Possibly one of the last versions before 1.0.
+* Fixes in current category (thanks @zymeth25! 🎉)
+* Added link to Klemens' GUI.
+* Moved documentation to the wiki: https://github.com/picandocodigo/List-Category-Posts/wiki
 * Add 'id' to widget ordering options (thanks @zymeth25! 🎉)
 * Add currenttags=all for AND relationship (thanks @zymeth25! 🎉)
 
