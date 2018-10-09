@@ -212,6 +212,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.79 =
 
+* `categorypage` now suppports `yes` for all post's categories with OR relationship, `all` for AND relationship and `other` to get all categories except current categories (with OR relationship) (thanks @zymeth25! 🎉)
 * Possibly one of the last versions before 1.0.
 * Fixes in current category (thanks @zymeth25! 🎉)
 * Added link to Klemens' GUI.
