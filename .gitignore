@@ -7,7 +7,6 @@
 *.pydevproject
 .project
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
@@ -53,7 +52,8 @@ nbproject/
 # SVN
 .svn
 
+# Vagrant
 .vagrant/
 vagrant
-
-ubuntu-xenial-16.04-cloudimg-console.log
+wordpress/
+ubuntu*

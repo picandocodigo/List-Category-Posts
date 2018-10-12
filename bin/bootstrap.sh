@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Update the system and install SVN + PHP7.0 + MySQL 5.7
+# Update the system and install SVN + PHP7.2 + MySQL 5.7
 if [ ! -x /usr/bin/mysql ];
 then
     sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password rootpass'
@@ -8,7 +8,8 @@ then
 
     apt-get update
 
-    apt-get install -y subversion apache2 php7.0 php7.0-xml libapache2-mod-php7.0 mysql-server-5.7 php7.0-mysql
+    apt-get install -y subversion apache2 php7.2 php7.2-xml php7.2-mysql\
+        php7.2-gd libapache2-mod-php7.2 mysql-server-5.7
 fi
 
 # Create the WordPress database and corresponding user
@@ -40,7 +41,7 @@ fi
 if [ ! -x /usr/local/bin/wp ];
 then
     cd /usr/local/bin
-    wget -O wp https://raw.github.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    wget -O wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
     chmod a+x wp
 fi
 
@@ -52,6 +53,8 @@ then
     sudo chown www-data:www-data .
     sudo -u www-data wp core download
     sudo -u www-data wp core config --dbname=wordpress --dbuser=wordpressuser --dbpass=wordpresspass
+    sudo -u www-data wp config set WP_DEBUG true --type=constant
+    sudo -u www-data wp config set WP_DEBUG_LOG true --type=constant
     sudo -u www-data wp core install --url="http://localhost:8080" --title="Testing the LCP plugin" --admin_user=adminuser --admin_password=adminpass --admin_email="admin@example.com"
     sudo -u www-data wp plugin install wordpress-importer --activate
     sudo -u www-data wget https://raw.githubusercontent.com/manovotny/wptest/master/wptest.xml
@@ -65,7 +68,7 @@ fi
 if [ ! -x /usr/local/bin/phpunit ];
 then
     cd /usr/local/bin
-    wget -O phpunit https://phar.phpunit.de/phpunit.phar
+    wget -O phpunit https://phar.phpunit.de/phpunit-6.phar
     chmod a+x phpunit
 fi
 
@@ -73,5 +76,5 @@ fi
 if [ -x /usr/local/bin/phpunit -a -f /var/www/wordpress ];
 then
     cd /var/www/wp-content/plugins/list-category-posts
-    sudo -u www-data WP_TESTS_DIR=/var/www/wp-tests-lib/includes WP_CORE_DIR=/var/www/ bash bin/install-wp-tests.sh wordpress_test root rootpass localhost latest
+    sudo -u www-data WP_TESTS_DIR=/var/www/wp-tests-lib WP_CORE_DIR=/var/www/ bash bin/install-wp-tests.sh wordpress_test root rootpass localhost latest
 fi

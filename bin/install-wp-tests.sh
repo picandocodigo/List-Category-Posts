@@ -11,8 +11,9 @@ DB_PASS=$3
 DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 
-WP_TESTS_DIR=${WP_TESTS_DIR-/tmp/wordpress-tests-lib/includes}
+WP_TESTS_DIR=${WP_TESTS_DIR-/tmp/wordpress-tests-lib/}
 WP_CORE_DIR=${WP_CORE_DIR-/tmp/wordpress/}
+WP_TESTS_INCLUDES_DIR=$WP_TESTS_DIR/includes/
 
 set -ex
 
@@ -53,22 +54,22 @@ install_test_suite() {
 	fi
 
 	# set up testing suite if it doesn't yet exist
-	if [ ! "$(ls -A $WP_TESTS_DIR)" ]; then
+	if [ ! "$(ls -A $WP_TESTS_INCLUDES_DIR)" ]; then
 		# set up testing suite
-		mkdir -p $WP_TESTS_DIR
-		svn co --quiet http://develop.svn.wordpress.org/trunk/tests/phpunit/includes/ $WP_TESTS_DIR
-		svn co --quiet http://develop.svn.wordpress.org/trunk/tests/phpunit/data/ $WP_TESTS_DIR/../data
+		mkdir -p $WP_TESTS_INCLUDES_DIR
+		svn co --quiet http://develop.svn.wordpress.org/trunk/tests/phpunit/includes/ $WP_TESTS_INCLUDES_DIR
+		svn co --quiet http://develop.svn.wordpress.org/trunk/tests/phpunit/data/ $WP_TESTS_DIR/data
 	fi
 
-	cd $WP_TESTS_DIR
+	cd $WP_TESTS_INCLUDES_DIR
 
 	if [ ! -f wp-tests-config.php ]; then
-		download https://develop.svn.wordpress.org/trunk/wp-tests-config-sample.php $(dirname ${WP_TESTS_DIR})/wp-tests-config.php
-		sed $ioption "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR':" $(dirname ${WP_TESTS_DIR})/wp-tests-config.php
-		sed $ioption "s/youremptytestdbnamehere/$DB_NAME/" $(dirname ${WP_TESTS_DIR})/wp-tests-config.php
-		sed $ioption "s/yourusernamehere/$DB_USER/" $(dirname ${WP_TESTS_DIR})/wp-tests-config.php
-		sed $ioption "s/yourpasswordhere/$DB_PASS/" $(dirname ${WP_TESTS_DIR})/wp-tests-config.php
-		sed $ioption "s|localhost|${DB_HOST}|" $(dirname ${WP_TESTS_DIR})/wp-tests-config.php
+		download https://develop.svn.wordpress.org/trunk/wp-tests-config-sample.php $(dirname ${WP_TESTS_INCLUDES_DIR})/wp-tests-config.php
+		sed $ioption "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR':" $(dirname ${WP_TESTS_INCLUDES_DIR})/wp-tests-config.php
+		sed $ioption "s/youremptytestdbnamehere/$DB_NAME/" $(dirname ${WP_TESTS_INCLUDES_DIR})/wp-tests-config.php
+		sed $ioption "s/yourusernamehere/$DB_USER/" $(dirname ${WP_TESTS_INCLUDES_DIR})/wp-tests-config.php
+		sed $ioption "s/yourpasswordhere/$DB_PASS/" $(dirname ${WP_TESTS_INCLUDES_DIR})/wp-tests-config.php
+		sed $ioption "s|localhost|${DB_HOST}|" $(dirname ${WP_TESTS_INCLUDES_DIR})/wp-tests-config.php
 	fi
 
 }
