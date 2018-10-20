@@ -21,7 +21,8 @@ If you know PHP and would like to start contributing to the plugin, let me know!
 
 A Vagrantfile is provided to set up a box for WordPress development. You need [Vagrant](http://www.vagrantup.com/) installed on your computer.
 
-Fork the repo, clone it locally and do `vagrant up`. You'll have a WordPress instance running on http://127.0.0.1:8080/.
+Fork the repo, clone it locally and do `vagrant up` (on Windows you need to run this command in PowerShell as administrator).
+You'll have a WordPress instance running on http://127.0.0.1:8080/.
 
 WordPress is installed with this information:
 
