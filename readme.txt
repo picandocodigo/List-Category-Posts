@@ -4,7 +4,7 @@ Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts
 Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 4.9.8
-Requires PHP: 5.2.4
+Requires PHP: 5.4
 Stable tag: 0.79
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -212,6 +212,7 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 = 0.79 =
 
+* Requires PHP >= 5.4
 * `categorypage` now suppports `yes` for all post's categories with OR relationship, `all` for AND relationship and `other` to get all categories except current categories (with OR relationship) (thanks @zymeth25! 🎉)
 * Possibly one of the last versions before 1.0.
 * Fixes in current category (thanks @zymeth25! 🎉)
