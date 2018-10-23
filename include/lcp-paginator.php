@@ -28,9 +28,9 @@ class LcpPaginator {
     if (LcpUtils::lcp_show_pagination($params['pagination'])){
       $lcp_paginator = '';
       $pages_count = ceil (
-          $params['posts_count'] /
-          # Avoid dividing by 0 (pointed out by @rhj4)
-          max( array( 1, $params['numberposts'] ) )
+        $params['posts_count'] /
+        # Avoid dividing by 0 (pointed out by @rhj4)
+        max( array( 1, $params['numberposts'] ) )
       );
       $pag_output = '';
       $this->prev_page_num = null;
@@ -72,25 +72,33 @@ class LcpPaginator {
           $params['bookmarks']
         );
 
-          $pag_output .= "<ul class='lcp_paginator'>";
+        $pag_output .= "<ul class='lcp_paginator'>";
 
-          // Add "Previous" link
-          if ($params['page'] > 1){
-            $this->prev_page_num = intval(intval($params['page']) - 1);
-            $pag_output .= $this->lcp_page_link($this->prev_page_num , $params['page'], $params['instance'],
-                                                $params['bookmarks'], $params['previous']);
-          }
+        // Add "Previous" link
+        if ($params['page'] > 1){
+          $this->prev_page_num = intval(intval($params['page']) - 1);
+          $pag_output .= $this->lcp_page_link(
+            $this->prev_page_num,
+            $params['page'],
+            $params['instance'],
+            $params['bookmarks'], $params['previous']
+          );
+        }
 
-          $pag_output .= $lcp_paginator;
+        $pag_output .= $lcp_paginator;
 
-          // Add "Next" link
-          if ($params['page'] < $pages_count){
-            $this->next_page_num = intval($params['page'] + 1);
-            $pag_output .= $this->lcp_page_link($this->next_page_num, $params['page'], $params['instance'],
-                                                $params['bookmarks'], $params['next']);
-          }
+        // Add "Next" link
+        if ($params['page'] < $pages_count){
+          $this->next_page_num = intval($params['page'] + 1);
+          $pag_output .= $this->lcp_page_link(
+            $this->next_page_num,
+            $params['page'],
+            $params['instance'],
+            $params['bookmarks'], $params['next']
+          );
+        }
 
-          $pag_output .= "</ul>";
+        $pag_output .= "</ul>";
       }
       return $pag_output;
     }
@@ -126,9 +134,9 @@ class LcpPaginator {
 
       $link .=  "<li><a href='$page_link' title='$page'";
       if ($page === $this->prev_page_num) {
-          $link .= " class='lcp_prevlink'";
+        $link .= " class='lcp_prevlink'";
       } elseif ($page === $this->next_page_num) {
-          $link .= " class='lcp_nextlink'";
+        $link .= " class='lcp_nextlink'";
       }
       $link .= ">";
       ($char != null) ? ($link .= $char) : ($link .= $page);
