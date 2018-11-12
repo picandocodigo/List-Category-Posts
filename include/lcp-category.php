@@ -65,9 +65,13 @@ class LcpCategory{
     $category = get_category( get_query_var( 'cat' ) );
     if( isset( $category->errors ) && $category->errors["invalid_term"][0] == __("Empty Term.") ){
       global $post;
-      // Since WP 4.9 global $post is nullified in text widgets
-      // when is_singular() is false.
-      if (is_singular()) {
+      /* Since WP 4.9 global $post is nullified in text widgets
+       * when is_singular() is false.
+       *
+       * Added in_the_loop check to make the shortcode work
+       * in posts listed in archives and home page (#358).
+       */
+      if ( is_singular() || in_the_loop() ) {
         $categories = get_the_category($post->ID);
       }
       if ( !empty($categories) ){
