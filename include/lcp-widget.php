@@ -25,6 +25,8 @@ class ListCategoryPostsWidget extends WP_Widget{
       $excludeposts = $post->ID;
     if(!isset($excludeposts))
       $excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
+    if(!isset($includeposts))
+      $includeposts = ($instance['includeposts'] != '') ? $instance['includeposts'] : 0;
     $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
     $category_id = $instance['categoryid'];
     $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
@@ -58,6 +60,7 @@ class ListCategoryPostsWidget extends WP_Widget{
       'excerpt_size' => $excerptsize,
       'exclude' => $exclude,
       'excludeposts' => $excludeposts,
+      'includeposts' => $includeposts,
       'offset' => $offset,
       'catlink' => $showcatlink,
       'thumbnail' => $thumbnail,
@@ -114,6 +117,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['order'] = strip_tags($new_instance['order']);
     $instance['exclude'] = strip_tags($new_instance['exclude']);
     $instance['excludeposts'] = strip_tags($new_instance['excludeposts']);
+    $instance['includeposts'] = strip_tags($new_instance['includeposts']);
     $instance['offset'] = strip_tags($new_instance['offset']);
     $instance['categoryid'] = strip_tags($new_instance['categoryid']);
     $instance['dateformat'] = strip_tags($new_instance['dateformat']);
