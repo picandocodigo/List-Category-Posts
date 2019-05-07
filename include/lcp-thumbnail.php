@@ -43,10 +43,10 @@ class LcpThumbnail{
 
         $lcp_thumbnail = '<img src="' . get_the_post_thumbnail_url($single->ID, $lcp_thumb_size) .'"';
         if ( $lcp_thumb_class != null ) {  // thumbnail class passed as parameter to shortcode
-          $lcp_thumbnail .= 'class="' . $lcp_thumb_class . '" ';
+          $lcp_thumbnail .= ' class="' . $lcp_thumb_class . '" ';
         }
         else { // Otherwise, use this class name
-          $lcp_thumbnail .= 'class="lcp_thumbnail" ';
+          $lcp_thumbnail .= ' class="lcp_thumbnail" ';
         }
         $lcp_thumbnail .= ' alt="' . esc_attr($single->post_title) . '" />';
         
