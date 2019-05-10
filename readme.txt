@@ -79,51 +79,70 @@ Read the **[full documentation](https://github.com/picandocodigo/List-Category-P
 * **custom templates** of your own design, based on a simple PHP example
 
 List 10 latest posts:
+
 `[catlist]`
 
 The default number of listed posts is 10, to modify it you need to specify `numberposts` parameter:
+
 `[catlist numberposts=15]`
 
 List posts from the "Dogs" category:
+
 `[catlist name=Dogs]`
 
 List posts from the category with id `2`:
+
 `[catlist id=2]`
 
 By default only the "post" post type is included. To list pages use:
+
 `[catlist post_type=page]`
+
 and for both posts and pages:
+
 `[catlist post_type="post,page"]`
 
 If we combine the above options we can get a shortcode that lists 15 items, including post and pages, from the "Dogs" category:
+
 `[catlist name=Dogs post_type="post,page" numberposts=15]`
+
 Most of the parameters you will find in the documentation can be used together.
 
 The plugin can detect current post's category and use it for listing:
+
 `[catlist categorypage=yes]`
+
 Same goes for tags:
+
 `[catlist currenttags=yes]`
 
 To show each post's excerpt use:
+
 `[catlist excerpt=yes]`
 
 If you want to show the date, author and comments count next to each post, use:
+
 `[catlist date=yes author=yes comments=yes]`
 
 You can specify html tags and classes for many elements. Let's modify the previous shortcode and wrap dates and authors in tags and classes of our choice:
+
 `[catlist date=yes date_tag=span date_class="my-date" author=yes author_tag=p author_class="my-author" comments=yes]`
+
 [Read more about this feature](https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization)
 
 You can order posts by date:
+
 `[catlist orderby=date]`
+
 You can also use `title`, `author`, `ID`. More options are described in the documentation.
 
 The plugin also supports pagination. You need to specify `numberposts` to tell the plugin how many posts per page you want:
+
 `[catlist pagination=yes numberposts=5]`
+
 See the wiki: [Pagination](https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination) for more information.
 
 Please read the **[full documentation](https://github.com/picandocodigo/List-Category-Posts/wiki)** for detailed documentation of all plugin features, use cases and shortcode parameters.
-
 
 ==Installation==
 
