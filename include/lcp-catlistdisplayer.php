@@ -404,6 +404,9 @@ class CatListDisplayer {
     endif;
 
     $info .= '>' . $text . '</a>';
+    if($single->post_status == 'private'):
+        $info .= '<span class="lcp_private"> private</span>';
+    endif;
 
     return $info;
   }
