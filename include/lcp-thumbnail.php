@@ -41,11 +41,15 @@ class LcpThumbnail{
         $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
                        '" title="' . esc_attr($single->post_title) . '">';
 
-        $lcp_thumbnail .= get_the_post_thumbnail(
-          $single->ID,
-          $lcp_thumb_size,
-          ( $lcp_thumb_class != null ) ? array( 'class' => $lcp_thumb_class ) : null
-        );
+        $lcp_thumbnail = '<img src="' . get_the_post_thumbnail_url($single->ID, $lcp_thumb_size) .'"';
+        if ( $lcp_thumb_class != null ) {  // thumbnail class passed as parameter to shortcode
+          $lcp_thumbnail .= ' class="' . $lcp_thumb_class . '" ';
+        }
+        else { // Otherwise, use this class name
+          $lcp_thumbnail .= ' class="lcp_thumbnail" ';
+        }
+        $lcp_thumbnail .= ' alt="' . esc_attr($single->post_title) . '" />';
+        
         $lcp_thumbnail .= '</a>';
       } else {
         // if thumbnail is requested but not found as featured image, grab first image in the content of the post
