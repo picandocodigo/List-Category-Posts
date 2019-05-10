@@ -230,8 +230,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 = 0.80 =
+
 * Use post title as alt attribute in thumbnails. Thanks @arcticmouse!
-* Dynamic pagination. Thanks @zymeth25!
+* Dynamic pagination padding. Thanks @zymeth25!
+* Bugfix current category for posts displayed in the loop. Thanks @zymeth25!
+* Added "private" text next to a post's title when it's private, thanks to a suggestion by @cmccrone in the support forums. The text is published with the following html: `<span class="lcp_private"> private</span>`, so you can customize the CSS (hide it, change its color, etc.).
 
 = 0.79 =
 
