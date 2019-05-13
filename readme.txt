@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 5.2
 Requires PHP: 5.4
-Stable tag: 0.80.1
+Stable tag: 0.80.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -228,6 +228,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.80.2 =
+
+* Bugfix release: With 0.80, using the post title as alt attribute in thumbnails made a change to use `get_the_post_thumbnail_url`. But thanks to [a post in the support forum](https://wordpress.org/support/topic/since-last-update-thumbnail-size-no-more-work-correct/), I noticed we lost some of the sizing functionality in `get_the_post_thumbnail`. So this version goes back to using get_the_post_thumbnail but keeping the new alt attribute for thumbnails.
 
 = 0.80.1 =
 
