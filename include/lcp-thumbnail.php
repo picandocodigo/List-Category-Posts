@@ -50,6 +50,7 @@ class LcpThumbnail{
                 'class' => ( $lcp_thumb_class != null ) ? $lcp_thumb_class : 'lcp_thumbnail'
             )
         );
+        $lcp_thumbnail .= '</a>';
       } else {
         // if thumbnail is requested but not found as featured image, grab first image in the content of the post
         if ( ($force_thumbnail === 'yes'|| $force_thumbnail === 'true') && preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $imgMatches)) {
