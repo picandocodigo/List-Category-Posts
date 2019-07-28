@@ -51,7 +51,11 @@ class LcpParameters{
     endif;
 
     if($this->utils->lcp_not_empty('author_posts')):
-      $args['author_name'] = $params['author_posts'];
+      if ($params['author_posts'] == 'current_user'){
+        $args['author'] =  wp_get_current_user()->ID;
+      } else {
+        $args['author_name'] = $params['author_posts'];
+      }
     endif;
     // Parameters which need to be checked simply, if they exist, add them to
     // final return array ($args)

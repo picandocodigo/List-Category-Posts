@@ -229,6 +229,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.81 =
+
+* Adds "<span class='lcp_elipsis'>" to the "..." in pagination.
+* Adds 'current_user' as an option to the author_posts parameter to list posts from logged in user.
+
 = 0.80.3 =
 
 * Hopefully final bugfix from alt in thumbnails 🤦🏻
