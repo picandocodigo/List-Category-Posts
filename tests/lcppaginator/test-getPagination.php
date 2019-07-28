@@ -112,7 +112,7 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
                   "<li><a href='http://example.org/?lcp_page0=4#lcp_instance_0' title='4'>4</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=5#lcp_instance_0' title='5'>5</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=6#lcp_instance_0' title='6'>6</a></li>" .
-                  "..." .
+                  "<span class='lcp_elipsis'>...</span>" .
                   "<li><a href='http://example.org/?lcp_page0=20#lcp_instance_0' title='20'>20</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=2#lcp_instance_0' title='2' class='lcp_nextlink'>>></a></li>" .
                   "</ul>";
@@ -130,7 +130,7 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
     $exp_string = "<ul class='lcp_paginator'>" .
                   "<li><a href='http://example.org/?lcp_page0=9#lcp_instance_0' title='9' class='lcp_prevlink'><<</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=1#lcp_instance_0' title='1'>1</a></li>" .
-                  "..." .
+                  "<span class='lcp_elipsis'>...</span>" .
                   "<li><a href='http://example.org/?lcp_page0=5#lcp_instance_0' title='5'>5</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=6#lcp_instance_0' title='6'>6</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=7#lcp_instance_0' title='7'>7</a></li>" .
@@ -142,7 +142,7 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
                   "<li><a href='http://example.org/?lcp_page0=13#lcp_instance_0' title='13'>13</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=14#lcp_instance_0' title='14'>14</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=15#lcp_instance_0' title='15'>15</a></li>" .
-                  "..." .
+                  "<span class='lcp_elipsis'>...</span>" .
                   "<li><a href='http://example.org/?lcp_page0=20#lcp_instance_0' title='20'>20</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=11#lcp_instance_0' title='11' class='lcp_nextlink'>>></a></li>" .
                   "</ul>";
@@ -159,7 +159,7 @@ class Tests_LcpPaginator_GetPagination extends WP_UnitTestCase {
     $exp_string = "<ul class='lcp_paginator'>" .
                   "<li><a href='http://example.org/?lcp_page0=19#lcp_instance_0' title='19' class='lcp_prevlink'><<</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=1#lcp_instance_0' title='1'>1</a></li>" .
-                  "..." .
+                  "<span class='lcp_elipsis'>...</span>" .
                   "<li><a href='http://example.org/?lcp_page0=15#lcp_instance_0' title='15'>15</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=16#lcp_instance_0' title='16'>16</a></li>" .
                   "<li><a href='http://example.org/?lcp_page0=17#lcp_instance_0' title='17'>17</a></li>" .

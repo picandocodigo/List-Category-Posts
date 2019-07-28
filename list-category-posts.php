@@ -212,7 +212,6 @@ function lcp_pagination_css(){
 
 /**
  * TO-DO:
-- Pagination * DONE - Need to add "page" text
 - Add Older Posts at bottom of List Category Post page
 - Simpler template system
 - Exclude child categories
