@@ -51,12 +51,13 @@ then
     cd /var/www
     sudo rm -rf *
     sudo chown www-data:www-data .
-    sudo -u www-data wp core download
+    sudo -u www-data wp core download --version=5.0
     sudo -u www-data wp core config --dbname=wordpress --dbuser=wordpressuser --dbpass=wordpresspass
     sudo -u www-data wp config set WP_DEBUG true --type=constant
     sudo -u www-data wp config set WP_DEBUG_LOG true --type=constant
     sudo -u www-data wp core install --url="http://localhost:8080" --title="Testing the LCP plugin" --admin_user=adminuser --admin_password=adminpass --admin_email="admin@example.com"
     sudo -u www-data wp plugin install wordpress-importer --activate
+    sudo -u www-data wp plugin install classic-editor --activate
     sudo -u www-data wget https://raw.githubusercontent.com/manovotny/wptest/master/wptest.xml
     sudo -u www-data wp import wptest.xml --authors=create
     sudo rm wptest.xml
