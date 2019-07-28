@@ -3,9 +3,9 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 5.2
+Tested up to: 5.2.2
 Requires PHP: 5.4
-Stable tag: 0.80.3
+Stable tag: 0.81
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
