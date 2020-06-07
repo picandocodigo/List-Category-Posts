@@ -3,9 +3,9 @@ Contributors: fernandobt
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 5.2.2
+Tested up to: 5.4.1
 Requires PHP: 5.4
-Stable tag: 0.81
+Stable tag: 0.82
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -228,6 +228,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.82 =
+
+* Adds support for several authors. To select posts from one author, you can use the **author_posts** parameter and use 'user_nicename' (NOT name). Example: `[catlist author_posts="fernando"]`. If you want to select posts from several authors, you need to use the author id instead. You can find the id for each author in `wp-admin/users.php`. It needs to be a comma separated value, example: `[catlist author_posts="1,2"]`
+* Rewrote `excludeposts` function. It wasn't working very well with `this`.
 
 = 0.81 =
 
