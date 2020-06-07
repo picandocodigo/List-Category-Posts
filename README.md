@@ -9,7 +9,7 @@ Usage:
 
 Please visit the [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/) to find out more.
 
-# Want to help with the development?
+# Would you like to help with the development?
 
 The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK), [bibz](https://github.com/bibz), [vacuus](https://github.com/vacuus), [zymeth25](https://github.com/zymeth25) for their contributions and hard work and [every other person](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors) who's contributed to this plugin:+1:
 
@@ -68,7 +68,7 @@ The code needs lots of refactoring and probably some more documentation to be ab
 
 ### Support the plugin
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") or visit my Amazon Wishlist for [books](http://www.amazon.com/gp/registry/wishlist/2HU1JYOF7DX5Q/ "Amazon Wishlist") or [comic books](http://www.amazon.com/registry/wishlist/1LVYAOJAZQOI0/) :)
+If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") or visit [my Amazon Wishlist](https://www.amazon.co.uk/hz/wishlist/ls/21UGAJCP8YEKU?ref_=wl_share) :)
 
 ## License
 __[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__
@@ -76,7 +76,7 @@ __[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__
 ```
 List Category Posts
 
-Copyright (C) 2008-2017  Fernando Briano (email : fernando@picandocodigo.net)
+Copyright (C) 2008-2020  Fernando Briano (email : fernando@picandocodigo.net)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

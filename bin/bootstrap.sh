@@ -51,7 +51,7 @@ then
     cd /var/www
     sudo rm -rf *
     sudo chown www-data:www-data .
-    sudo -u www-data wp core download --version=5.0
+    sudo -u www-data wp core download --version=5.4.1
     sudo -u www-data wp core config --dbname=wordpress --dbuser=wordpressuser --dbpass=wordpresspass
     sudo -u www-data wp config set WP_DEBUG true --type=constant
     sudo -u www-data wp config set WP_DEBUG_LOG true --type=constant
