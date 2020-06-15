@@ -155,7 +155,7 @@ class ListCategoryPosts{
    * @param $atts
    * @param $content
    */
-  static function catlist_func($atts, $content = null) {
+  static function catlist_func($atts) {
     $atts = shortcode_atts(self::default_params(), $atts);
 
     if($atts['numberposts'] == ''){
