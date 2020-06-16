@@ -1,14 +1,16 @@
 <?php
 require_once ( LCP_PATH . 'lcp-utils.php' );
+require_once ( LCP_PATH . 'lcp-date-query.php' );
 
 class LcpParameters{
   // Singleton implementation
   private static $instance = null;
   private $starting_with = null;
-  // $date_query tells us if we need to generate date_query args
-  private $date_query = false;
   private $utils;
   private $params;
+
+  // Use Trait for before/after date queries:
+  use LcpDateQuery;
 
   public static function get_instance(){
     if( !isset( self::$instance ) ){
@@ -23,20 +25,10 @@ class LcpParameters{
     # Essential parameters:
     $args = array(
       'numberposts' => $params['numberposts'],
-      'orderby' => $params['orderby'],
-      'order' => $params['order'],
+      'orderby' => $this->lcp_order_by($params['orderby']),
+      'order' => $this->lcp_order($params['order']),
       'offset' => $params['offset']
     );
-
-    if( get_option('lcp_orderby') && $params['orderby'] === ''){
-      $orderby = array('orderby' => get_option('lcp_orderby'));
-      $args = array_merge($args, $orderby);
-    }
-
-    if( get_option('lcp_order') && $params['order'] === ''){
-      $order = array('order' => get_option('lcp_order'));
-      $args = array_merge($args, $order);
-    }
 
     $this->utils = new LcpUtils($params);
 
@@ -46,9 +38,9 @@ class LcpParameters{
     // Check type, status, parent params
     $args = $this->lcp_types_and_statuses($args);
 
-    if($this->utils->lcp_not_empty('search')):
+    if($this->utils->lcp_not_empty('search')){
       $args['s'] = $params['search'];
-    endif;
+    }
 
     if($this->utils->lcp_not_empty('author_posts')):
       $authors = $params['author_posts'];
@@ -67,67 +59,8 @@ class LcpParameters{
     // final return array ($args)
     $args = $this->lcp_check_basic_params($args);
 
-    // Posts within given date range:
-    if ( $this->utils->lcp_not_empty('after') ) {
-      $this->after = $params['after'];
-      $date_query = true;
-    }
-
-    if ( $this->utils->lcp_not_empty('after_year') ) {
-      $this->after_year = $params['after_year'];
-      $date_query = true;
-    }
-
-    if ( $this->utils->lcp_not_empty('after_month') ) {
-      // after_month should be in the range [1, 12]
-      if ($params['after_month'] >= 1 && $params['after_month'] <= 12) {
-        $this->after_month = $params['after_month'];
-        $date_query = true;
-      }
-    }
-
-    if ( $this->utils->lcp_not_empty('after_day') ) {
-      // after_day should be in the range [1, 31]
-      if ($params['after_day'] >= 1 && $params['after_day'] <= 31) {
-        $this->after_day = $params['after_day'];
-        $date_query = true;
-      }
-    }
-
-    if ( $this->utils->lcp_not_empty('before') ) {
-      if('today' === strtolower($params['before'])) {
-          $this->before = date("Y/m/d");
-      } else {
-          $this->before = $params['before'];
-      }
-      $date_query = true;
-    }
-
-    if ( $this->utils->lcp_not_empty('before_year') ) {
-      $this->before_year = $params['before_year'];
-      $date_query = true;
-    }
-
-    if ( $this->utils->lcp_not_empty('before_month') ) {
-      // before_month should be in the range [1, 12]
-      if ($params['before_month'] >= 1 && $params['before_month'] <= 12) {
-        $this->before_month = $params['before_month'];
-        $date_query = true;
-      }
-    }
-
-    if ( $this->utils->lcp_not_empty('before_day') ) {
-      // before_day should be in the range [1, 31]
-      if ($params['before_day'] >= 1 && $params['before_day'] <= 31) {
-        $this->before_day = $params['before_day'];
-        $date_query = true;
-      }
-    }
-
     // Only generate date_query args if a before/after paramater was found
-    if (isset($date_query) ){
-      $args['date_query'] = $this->create_date_query_args();
-    }
+    $args = $this->create_date_query_args($args, $params);
 
     /*
      * Custom fields 'customfield_name' & 'customfield_value'
@@ -345,61 +278,19 @@ class LcpParameters{
     return $post->ID;
   }
 
-  /*
-   * Create date_query args according to https://codex.wordpress.org/Class_Reference/WP_Query#Date_Parameters
-   * There's probably a better way to check if values exist.
-   * Code should be cleaned up (this is first attempt at a solution).
-   */
-  private function create_date_query_args() {
-    $date_query = array();
 
-    // Keep track of parameters that are set to build the argument array.
-    $params_set = array(
-      'after' => false,
-      'after_year' => false,
-      'after_month' => false,
-      'after_day' => false,
-      'before' => false,
-      'before_year' => false,
-      'before_month' => false,
-      'before_day' => false,
-    );
 
-    // Booleans to track which subarrays should be created.
-    $after = false;
-    $before = false;
-
-    /*
-     *  Check which paramaters are set and find out which subarrays
-     *  should be created.
-     */
-    foreach ($params_set as $key=>$value){
-      if ( property_exists($this, $key) ){
-        $params_set[$key] = true;
-        $trutify = explode('_', $key);
-        $trutify = $trutify[0];
-        ${$trutify} = true;
-      }
+  private function lcp_order_by($orderby) {
+    if( get_option('lcp_orderby') && $orderby === ''){
+      return get_option('lcp_orderby');
     }
+    return $orderby;
+  }
 
-    /*
-     * Build the subarrays.
-     * The after parameter takes priority over after_* parameters.
-     * Similarly, the before parameter takes priority over before_* parameters.
-     */
-    $time_periods = array('before', 'after');
-    foreach ($time_periods as $period){
-      if (${$period}){
-        if ($params_set[$period]) {
-          $date_query[$period] = $this->$period;
-        } else {
-          if ( $params_set[$period . '_year'] )  $date_query[$period]['year']  = $this->{$period . '_year'};
-          if ( $params_set[$period . '_month'] ) $date_query[$period]['month'] = $this->{$period . '_month'};
-          if ( $params_set[$period . '_day'] )   $date_query[$period]['day']   = $this->{$period . '_day'};
-        }
-      }
+  private function lcp_order($order) {
+    if( get_option('lcp_order') && $params['order'] === ''){
+      return get_option('lcp_order');
     }
-
-    return $date_query;
+    return $order;
   }
 }
