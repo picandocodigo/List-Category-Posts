@@ -83,6 +83,7 @@ class ListCategoryPosts{
         'starting_with' => '',
         'thumbnail' => 'no',
         'thumbnail_size' => 'thumbnail',
+        'thumbnail_tag' => '',
         'thumbnail_class' => '',
         'force_thumbnail' => '',
         'title_tag' => '',

@@ -218,7 +218,17 @@ class CatList{
     endif;
   }
 
-
+  public function get_posts_morelink($single, $css_class) {
+    if(!empty($this->params['posts_morelink'])){
+      $href = 'href="' . get_permalink($single->ID) . '"';
+      $class = $css_class ?: "";
+      if ( $class ):
+        $class = 'class="' . $class . '" ';
+      endif;
+      $readmore = $this->params['posts_morelink'];
+      return ' <a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
+    }
+  }
 
   public function get_category_count(){
     if($this->utils->lcp_not_empty('category_count') && $this->params['category_count'] == 'yes'):
@@ -268,6 +278,12 @@ class CatList{
           endforeach;
         endif;
       endforeach;
+
+      // Return a string instead of array if custom fields
+      // are not displayed separately.
+      if ($this->params['customfield_display_separately'] === 'no') {
+        $lcp_customs = implode($this->params['customfield_display_glue'], $lcp_customs);
+      }
 
       return $lcp_customs;
     else:
@@ -330,7 +346,7 @@ class CatList{
 
   public function get_modified_date_to_show($single){
     if ($this->params['date_modified'] == 'yes'):
-      return get_the_modified_time($this->params['dateformat'], $single);
+      return " " . get_the_modified_time($this->params['dateformat'], $single);
     else:
       return null;
     endif;
