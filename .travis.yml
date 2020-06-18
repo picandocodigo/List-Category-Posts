@@ -1,6 +1,10 @@
 # Tell Travis CI we're using PHP
 language: php
 
+# Set up services
+services:
+  - mysql
+
 # Versions of PHP to test against
 php:
   - 5.6
