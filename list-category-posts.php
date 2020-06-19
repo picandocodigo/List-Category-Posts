@@ -143,6 +143,7 @@ class ListCategoryPosts{
         'before_day' => '',
         'tags_as_class' => 'no',
         'pagination_bookmarks' => '',
+        'ol_offset' => ''
       );
     }
     return self::$default_params;

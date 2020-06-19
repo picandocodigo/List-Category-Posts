@@ -107,12 +107,13 @@ class CatListDisplayer {
 
   private function build_output($tag){
     $this->lcp_output .= $this->get_category_link();
-
     $this->lcp_output .= $this->get_category_description();
-
     $this->lcp_output .= $this->get_conditional_title();
 
     $this->lcp_output .= '<' . $tag;
+    if($tag == 'ol' && !empty($this->params['ol_offset'])){
+      $this->lcp_output .= ' start=' . $this->params['ol_offset'];
+    }
 
     // Follow the numner of posts in an ordered list with pagination
     if( $tag == 'ol' && $this->catlist->get_page() > 1 ){
