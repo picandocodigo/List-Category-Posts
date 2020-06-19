@@ -267,17 +267,20 @@ class CatList{
       $custom_fields = get_post_custom( $post_id );
 
       //Loop on custom fields and if there's a value, add it:
-      foreach ( $custom_array as $user_customfield ) :
+      foreach ( $custom_array as $user_customfield ) {
         // Check that the custom field is wanted:
-        if ( isset( $custom_fields[$user_customfield] ) ) :
+        if ( isset( $custom_fields[$user_customfield] )) {
           //Browse through the custom field values:
-          foreach ( $custom_fields[$user_customfield] as $key => $value ) :
-            if ( $this->params['customfield_display_name'] != 'no' )
+          foreach ( $custom_fields[$user_customfield] as $key => $value ) {
+            if ( $this->params['customfield_display_name'] != 'no' && $value !== '' ){
               $value = $user_customfield . $this->params['customfield_display_name_glue'] . $value;
-            $lcp_customs[] = $value;
-          endforeach;
-        endif;
-      endforeach;
+            }
+            if($value != ''){
+              $lcp_customs[] = $value;
+            }
+          }
+        }
+      }
 
       // Return a string instead of array if custom fields
       // are not displayed separately.
