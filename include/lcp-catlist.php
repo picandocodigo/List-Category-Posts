@@ -326,6 +326,11 @@ class CatList{
     return $this->page;
   }
 
+  // Helper method for tests.
+  public function update_page($page) {
+    $this->page = $page;
+  }
+
   public function get_posts_count(){
     return $this->posts_count;
   }
@@ -465,13 +470,13 @@ class CatList{
 
     $tag_string = '<' . $tag;
     if ($tag == 'ol' && !empty($this->params['ol_offset'])) {
-      $this->lcp_output .= ' start=' . $this->params['ol_offset'];
+      $tag_string .= ' start="' . $this->params['ol_offset'] . '"';
     }
 
-    // Follow the numner of posts in an ordered list with pagination
-    if( 'ol' === $tag && $this->page > 1 ){
-      $start = $this->params['number_posts'] * ( $this->page - 1 ) + 1;
-      $tag_string .= ' start="' .  $start . '" ';
+    // Follow the number of posts in an ordered list with pagination.
+    if( 'ol' === $tag && $this->page > 1 ) {
+      $start = $this->get_number_posts() * ( $this->page - 1 ) + 1;
+      $tag_string .= ' start="' .  $start . '"';
     }
     //Give a class to wrapper tag
     $tag_string .= ' class="' . $css_class . '"';
