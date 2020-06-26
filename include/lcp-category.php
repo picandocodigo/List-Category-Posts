@@ -98,14 +98,13 @@ class LcpCategory{
   }
 
   private function or_relationship($name) {
-    $categories = '';
+    $categories = array();
     $catArray = explode(",", $name);
 
     foreach ($catArray as $category){
-      $id = $this->get_category_id_by_name($category);
-      $categories .= $id . ",";
+      $categories[] = $this->get_category_id_by_name($category);
     }
 
-    return $categories;
+    return implode(',',$categories);
   }
 }
