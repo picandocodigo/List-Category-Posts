@@ -14,7 +14,6 @@ require_once ( LCP_PATH . 'lcp-paginator.php' );
 class CatList{
   private $params = array();
   private $lcp_category_id = 0;
-  private $exclude;
   private $page = 1;
   private $posts_count = 0;
   private $instance = 0;
@@ -42,7 +41,6 @@ class CatList{
    * Determine the categories of posts and execute the WP_query
    */
   public function get_posts() {
-    $this->get_lcp_category();
     $this->set_lcp_parameters();
   }
 
@@ -74,7 +72,12 @@ class CatList{
    * Order the parameters and query the DB for posts
    */
   private function set_lcp_parameters(){
-    $args = $this->lcp_categories();
+    $args = LcpCategory::get_instance()->get_lcp_category([
+      'id'               => $this->params['id'],
+      'name'             => $this->params['name'],
+      'categorypage'     => $this->params['categorypage'],
+      'child_categories' => $this->params['child_categories'],
+    ], $this->lcp_category_id);
     $processed_params = LcpParameters::get_instance()->get_query_params($this->params);
     $args = array_merge($args, $processed_params);
     $args = $this->check_pagination($args);
@@ -112,43 +115,6 @@ class CatList{
       }
     }
     return $args;
-  }
-
-  /**
-   * Check if there's one or more categories.
-   * Used in the beginning when setting up the parameters.
-   */
-  private function lcp_categories(){
-    if ( is_array($this->lcp_category_id) ){
-      return array('category__and' => $this->lcp_category_id);
-    } else {
-      if($this->utils->lcp_not_empty('child_categories') &&
-         (($this->params['child_categories'] === 'no' ) ||
-          ($this->params['child_categories'] === 'false') )){
-        return array('category__in'=> $this->lcp_category_id);
-      }
-      return array('cat'=> $this->lcp_category_id);
-    }
-  }
-
-  private function get_lcp_category(){
-    // In a category page:
-    if ( $this->utils->lcp_not_empty('categorypage') &&
-         in_array($this->params['categorypage'], ['yes', 'all', 'other']) ||
-         $this->params['id'] == -1){
-      // Use current category
-      $this->lcp_category_id = LcpCategory::get_instance()->current_category(
-        $this->params['categorypage']
-      );
-    } elseif ( $this->utils->lcp_not_empty('name') ){
-      // Using the category name:
-      $this->lcp_category_id = LcpCategory::get_instance()->with_name($this->params['name']);
-      $this->params['name'] = null;
-    } elseif ( isset($this->params['id']) && $this->params['id'] != '0' ){
-      // Using the id:
-      $this->lcp_category_id = LcpCategory::get_instance()->with_id($this->params['id']);
-    }
-
   }
 
   public function get_category_id(){

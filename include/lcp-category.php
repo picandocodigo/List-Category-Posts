@@ -15,6 +15,59 @@ class LcpCategory{
     return self::$instance;
   }
 
+  public function get_lcp_category($params, &$lcp_category_id) {
+    // Only used when excluded categories are combined with 'and' relationship.
+    $exclude = [];
+    // This will be the value of lcp_category_id which is passed by reference.
+    $categories = 0;
+
+    // In a category page:
+    if ($params['categorypage'] &&
+         in_array($params['categorypage'], ['yes', 'all', 'other']) ||
+         $params['id'] == -1) {
+      // Use current category
+      $categories = $this->current_category($params['categorypage']);
+    } elseif ($params['name']) {
+      // Using the category name:
+      $categories = $this->with_name($params['name']);
+    } elseif ($params['id']) {
+      // Using the id:
+      $categories = $this->with_id($params['id']);
+      // If the 'exclude' array was added, excract it.
+      if (is_array($categories) && array_key_exists('exclude', $categories)) {
+        $exclude = $categories['exclude'];
+        unset($categories['exclude']);
+      }
+    }
+
+    // This is where the lcp_category_id property of CatList is changed.
+    $lcp_category_id = $categories;
+
+    return $this->lcp_categories(
+      $categories, $params['child_categories'], $exclude);
+  }
+
+  /**
+   * Check if there's one or more categories.
+   * Used in the beginning when setting up the parameters.
+   */
+  private function lcp_categories($categories, $child_categories, $exclude) {
+    $args = array();
+
+    if (is_array($categories)) {
+      // Handle excluded categories for the 'and' relationship.
+      if ($exclude) {
+        $args['category__not_in'] = $exclude;
+      }
+      $args['category__and'] = $categories;
+    } else if (in_array($child_categories, ['no', 'false'])) {
+      $args['category__in']= $categories;
+    } else {
+      $args['cat'] = $categories;
+    }
+    return $args;
+  }
+
   /*
    * When the category is set using the `name` parameter.
    */
@@ -27,13 +80,24 @@ class LcpCategory{
     return $this->get_category_id_by_name($name);
   }
 
-  public function with_id($cat_id){
-    if (preg_match('/\+/', $cat_id)){
-      if ( preg_match('/(-[0-9]+)+/', $cat_id, $matches) ){
-        $this->exclude = implode(',', explode("-", ltrim($matches[0], '-') ));
+  public function with_id($cat_id) {
+    if (false !== strpos($cat_id, '+')) {
+      if (false !== strpos($cat_id, '-')) {
+        /*
+         * If the 'and' relationship is used together with excluded
+         * categories (eg. 1+2+3-4-5) we parse it with regex and append an
+         * array of excluded IDs to the returned array.
+         */
+        preg_match('/(?P<in>(\+?[0-9]+)+)(?P<ex>(-[0-9]+)+)/', $cat_id, $matches);
+
+        $cat_id = array_map('intval', explode("+", $matches['in']));
+        $cat_id['exclude'] = implode(',', explode('-', ltrim($matches['ex'], '-')));
+      } else {
+        // Simple 'and' relationship, just convert input into an array.
+        $cat_id = array_map('intval', explode("+", $cat_id));
       }
-      return array_map( 'intval', explode( "+", $cat_id ) );
     }
+    // In all other cases leave user input as is.
     return $cat_id;
   }
 
