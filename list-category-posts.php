@@ -94,7 +94,7 @@ class ListCategoryPosts{
         'post_parent' => '0',
         'post_suffix' => '',
         'show_protected' => 'no',
-        'class' => 'lcp_catlist',
+        'class' => '',
         'conditional_title' => '',
         'conditional_title_tag' => '',
         'conditional_title_class' => '',
