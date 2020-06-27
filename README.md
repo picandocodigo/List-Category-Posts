@@ -38,11 +38,11 @@ You can access the admin dashboard with the following credentials:
 Activate the plugin on
 http://localhost:8080/wp-admin/plugins.php
 
-The plugin code is linked directly on the box, so any change you make on the code is reflected automatically on the Vagrant box's WordPress.
+The plugin code is linked directly on the box, so any change you make on the code is reflected automatically on the Vagrant box's WordPress installation.
 
 ## Testing
 
-PHPUnit has been setup by [bibz](https://github.com/bibz), you can run `phpunit` on the Virtual Machine:
+PHPUnit has been set up by [bibz](https://github.com/bibz), you can run `phpunit` on the Virtual Machine:
 
 ```bash
 vagrant@vagrant-ubuntu-precise-32:/vagrant$ phpunit

@@ -19,43 +19,22 @@ class LcpCategory{
    * When the category is set using the `name` parameter.
    */
   public function with_name($name){
-    $lcp_category_id = null;
-    // AND relationship
-    if ( preg_match('/\+/', $name) ){
-      $categories = array();
-      $cat_array = explode("+", $name);
-
-      foreach ($cat_array as $category){
-        $categories[] = $this->get_category_id_by_name($category);
-      }
-      $lcp_category_id = $categories;
-      // OR relationship
-    } elseif (preg_match('/,/', $name )){
-      $categories = '';
-      $cat_array = explode(",", $name);
-
-      foreach ($cat_array as $category){
-        $id = $this->get_category_id_by_name($category);
-        $categories .= $id . ",";
-      }
-
-      $lcp_category_id = $categories;
-    } else {
-      $lcp_category_id = $this->get_category_id_by_name($name);
+    if ( preg_match('/\+/', $name) ){ // AND relationship
+      return $this->and_relationship($name);
+    } elseif (preg_match('/,/', $name )){ // OR relationship
+      return $this->or_relationship($name);
     }
-    return $lcp_category_id;
+    return $this->get_category_id_by_name($name);
   }
 
-  public function with_id($id){
-    if (preg_match('/\+/', $id)){
-      if ( preg_match('/(-[0-9]+)+/', $id, $matches) ){
+  public function with_id($cat_id){
+    if (preg_match('/\+/', $cat_id)){
+      if ( preg_match('/(-[0-9]+)+/', $cat_id, $matches) ){
         $this->exclude = implode(',', explode("-", ltrim($matches[0], '-') ));
       }
-      $lcp_category_id = array_map( 'intval', explode( "+", $id ) );
-    } else {
-      $lcp_category_id = $id;
+      return array_map( 'intval', explode( "+", $cat_id ) );
     }
-    return $lcp_category_id;
+    return $cat_id;
   }
 
   public function current_category($mode){
@@ -93,18 +72,40 @@ class LcpCategory{
     return $category->cat_ID;
   }
 
+
   /**
    * Get the category id from its name
    * by Eric Celeste / http://eric.clst.org
    */
-  private function get_category_id_by_name($cat_name){
+  private function get_category_id_by_name($category_name){
     //TODO: Support multiple names (this used to work, but not anymore)
     //We check if the name gets the category id, if not, we check the slug.
-    $term = get_term_by('slug', $cat_name, 'category');
+    $term = get_term_by('slug', $category_name, 'category');
     if (!$term){
-      $term = get_term_by('name', $cat_name, 'category');
+      $term = get_term_by('name', $category_name, 'category');
     }
     return ($term) ? $term->term_id : 0;
   }
 
+  private function and_relationship($name){
+    $categories = array();
+    $cat_array = explode("+", $name);
+
+    foreach ($cat_array as $category){
+      $categories[] = $this->get_category_id_by_name($category);
+    }
+    return $categories;
+  }
+
+  private function or_relationship($name) {
+    $categories = '';
+    $catArray = explode(",", $name);
+
+    foreach ($catArray as $category){
+      $id = $this->get_category_id_by_name($category);
+      $categories .= $id . ",";
+    }
+
+    return $categories;
+  }
 }
