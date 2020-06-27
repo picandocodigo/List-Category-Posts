@@ -53,7 +53,7 @@ trait LcpDateQuery{
   private function set_params_values($params){
     $params_set = $this->params_set();
     foreach ($params_set as $key => $value){
-      if ( array_key_exists($key, $params) && $params[$key] > 0){
+      if ( array_key_exists($key, $params) && $params[$key] != false){
         $params_set[$key] = $params[$key];
       }
     }
