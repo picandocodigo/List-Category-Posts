@@ -118,9 +118,9 @@ class LcpCategory{
    *                          array for 'and' relationship.
    */
   public function with_name($name) {
-    if (preg_match('/\+/', $name) ) { // AND relationship
+    if (false !== strpos($name, '+')) { // AND relationship
       return $this->and_relationship($name);
-    } elseif (preg_match('/,/', $name )) { // OR relationship
+    } elseif (false !== strpos($name, ',')) { // OR relationship
       return $this->or_relationship($name);
     }
     return $this->get_category_id_by_name($name);
