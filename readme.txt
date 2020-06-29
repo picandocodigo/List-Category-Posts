@@ -1,11 +1,11 @@
 === List category posts ===
-Contributors: fernandobt
+Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 5.4.1
+Tested up to: 5.4.2
 Requires PHP: 5.4
-Stable tag: 0.82
+Stable tag: 0.83
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,7 +60,10 @@ Some users have made videos on how to use the plugin (thank you, you are awesome
 
 **Support the plugin**
 
-If you've found the plugin useful, consider making a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal").
+Klemens Starybrat has been writing lots of amazing code for this plugin, so if you've found it useful and want to pay it forward, consider sponsoring him on GitHub: https://github.com/sponsors/zymeth25
+
+I have a [PayPal account](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") where you can donate too.
+
 
 **Development**
 
@@ -228,6 +231,19 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.83 =
+
+This is a big release since @zymeth25 and I have been doing lots of refactoring based on maintainability, code quality and testing. It means the code is much cleaner and easier to maintain. So fixing bugs or adding new features should be easier now. If you find any issues, please report them on GitHub (https://github.com/picandocodigo/List-Category-Posts/issues).
+
+* Development: We've refactored a lot of the code in `include`, updated the build, bumped versions, added tests, and more.
+* Bugfix: An issue where `customfield_display_glue` was shown even when the custom field values were empty - https://wordpress.org/support/topic/hide-the-glue-content-if-costum-fields-are-empty
+* Bugfix: Fixed excluded categories when using an `and` relationship.
+* New parameter: `ol_offset`, when you use an ordered list, you can set an offset so the posts will start from that number instead of 1.
+* *Templates system refactor* - The plugin now uses the template system by default. There should be no changes on how the plugin works, but please do let us know if you have any issues. Building templates should be easier now. You can use the included template as an example to start. It's in the plugin's template folder under the name default.php. Be warned, however, that this is the default template the plugin uses to create output so if you change it, you *will change* the plugin's default behavior. When you update the plugin this file will be overwritten so it's best not to edit it but copy it over to another file to create your custom template.
+More information on templates:
+- Pull Request: https://github.com/picandocodigo/List-Category-Posts/pull/411
+- Official docs: https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization#templates
 
 = 0.82 =
 
