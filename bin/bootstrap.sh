@@ -9,7 +9,7 @@ then
     apt-get update
 
     apt-get install -y subversion apache2 php7.2 php7.2-xml php7.2-mysql\
-        php7.2-gd libapache2-mod-php7.2 mysql-server-5.7
+        php7.2-gd libapache2-mod-php7.2 mysql-server-5.7 dos2unix
 fi
 
 # Create the WordPress database and corresponding user
@@ -51,7 +51,7 @@ then
     cd /var/www
     sudo rm -rf *
     sudo chown www-data:www-data .
-    sudo -u www-data wp core download --version=5.4.2
+    sudo -u www-data wp core download --version=latest
     sudo -u www-data wp core config --dbname=wordpress --dbuser=wordpressuser --dbpass=wordpresspass
     sudo -u www-data wp config set WP_DEBUG true --type=constant
     sudo -u www-data wp config set WP_DEBUG_LOG true --type=constant
@@ -77,5 +77,9 @@ fi
 if [ -x /usr/local/bin/phpunit -a -f /var/www/wordpress ];
 then
     cd /var/www/wp-content/plugins/list-category-posts
+
+    # For Windows users make sure the script is in unix format before running bash.
+    dos2unix bin/install-wp-tests.sh
+
     sudo -u www-data WP_TESTS_DIR=/var/www/wp-tests-lib WP_CORE_DIR=/var/www/ bash bin/install-wp-tests.sh wordpress_test root rootpass localhost latest
 fi
