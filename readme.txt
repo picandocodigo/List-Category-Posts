@@ -240,7 +240,10 @@ This is a big release since @zymeth25 and I have been doing lots of refactoring 
 * Bugfix: An issue where `customfield_display_glue` was shown even when the custom field values were empty - https://wordpress.org/support/topic/hide-the-glue-content-if-costum-fields-are-empty
 * Bugfix: Fixed excluded categories when using an `and` relationship.
 * New parameter: `ol_offset`, when you use an ordered list, you can set an offset so the posts will start from that number instead of 1.
-* Templates system refactor - The plugin now uses the template system by default. There should be no changes on how the plugin works, but please do let us know if you have any issues. Building templates should be easier now. More information: https://github.com/picandocodigo/List-Category-Posts/pull/411
+* *Templates system refactor* - The plugin now uses the template system by default. There should be no changes on how the plugin works, but please do let us know if you have any issues. Building templates should be easier now. You can use the included template as an example to start. It's in the plugin's template folder under the name default.php. Be warned, however, that this is the default template the plugin uses to create output so if you change it, you *will change* the plugin's default behavior. When you update the plugin this file will be overwritten so it's best not to edit it but copy it over to another file to create your custom template.
+More information on templates:
+- Pull Request: https://github.com/picandocodigo/List-Category-Posts/pull/411
+- Official docs: https://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization#templates
 
 = 0.82 =
 
