@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 5.4.2
 Requires PHP: 5.4
-Stable tag: 0.83
+Stable tag: 0.83.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,7 +182,7 @@ Then just add a new text widget to your blog and use the shortcode there as the 
 
 **TEMPLATE SYSTEM**
 
-How to customize the way the posts are shown: [Template System](https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System). I am aware the Template System is not the friendliest right now, I'll work on improving this if I ever get the time to work on it.
+How to customize the way the posts are shown: [Template System](https://github.com/picandocodigo/List-Category-Posts/wiki/Template-System).
 
 **NEW FEATURE REQUESTS, BUG FIXES, ENHANCEMENTS**
 
@@ -231,6 +231,10 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.83.1 =
+
+* Fixes bug with order parameter after refactor: https://wordpress.org/support/topic/notice-undefined-variable-params/
 
 = 0.83 =
 
