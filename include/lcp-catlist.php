@@ -18,6 +18,7 @@ class CatList{
   private $posts_count = 0;
   private $instance = 0;
   private $utils;
+  private $wrapper;
 
   /**
    * Constructor gets the shortcode attributes as parameter
@@ -31,6 +32,7 @@ class CatList{
     );
     $this->params = $atts;
     $this->utils = new LcpUtils($this->params);
+    $this->wrapper = LcpWrapper::get_instance();
 
     if ( $this->utils->lcp_not_empty('instance') ){
       $this->instance = $atts['instance'];
@@ -159,10 +161,12 @@ class CatList{
         }
 
         // Do we want the link or just the title?
-        if ($this->params['catlink'] == 'yes'){
-          $cat_string = '<a href="' . $cat_link . '" title="' . $cat_title . '">' .
-                      $cat_string .
-                      $this->get_category_count() .  '</a>';
+        if ($this->params['catlink'] == 'yes') {
+          $cat_string = $this->wrapper->to_html(
+            'a',
+            ['href' => $cat_link, 'title' => $cat_title],
+            $cat_string . $this->get_category_count()
+          );
         }
 
         array_push($link, $cat_string);
@@ -178,9 +182,9 @@ class CatList{
    */
   public function get_morelink() {
     if (!empty($this->params['morelink'])) {
-      $href = 'href="' . get_category_link($this->lcp_category_id) . '"';
+      $props = ['href=' => get_category_link($this->lcp_category_id)];
       $readmore = ($this->params['morelink'] !== '' ? $this->params['morelink'] : 'More posts');
-      return '<a ' . $href . ' >' . $readmore . '</a>';
+      return $this->wrapper->to_html('a', $props, $readmore);
      } else {
       return null;
     }
@@ -188,13 +192,13 @@ class CatList{
 
   public function get_posts_morelink($single, $css_class) {
     if(!empty($this->params['posts_morelink'])) {
-      $href = 'href="' . get_permalink($single->ID) . '"';
+      $props = ['href' => get_permalink($single->ID)];
       $class = $css_class ?: "";
       if ($class) {
-        $class = 'class="' . $class . '" ';
+        $props['class'] = $class;
       }
       $readmore = $this->params['posts_morelink'];
-      return ' <a ' . $href . ' ' . $class . ' >' . $readmore . '</a>';
+      return $this->wrapper->to_html('a', $props, $readmore);
     }
   }
 
@@ -206,7 +210,9 @@ class CatList{
 
   public function get_category_description() {
     if ($this->utils->lcp_not_empty('category_description') && $this->params['category_description'] == 'yes') {
-      return '<p>' . category_description( $this->lcp_category_id) . '</p>';
+      return $this->wrapper->to_html('p', [], category_description(
+        $this->lcp_category_id
+      ));
     }
   }
 
@@ -279,8 +285,11 @@ class CatList{
       if($this->utils->lcp_not_empty('author_posts_link') &&
          $this->params['author_posts_link'] == 'yes') {
         $link = get_author_posts_url($lcp_userdata->ID);
-        return "<a href='" . $link . "' title='" . $author_name .
-          "'>" . $author_name . "</a>";
+        return $this->wrapper->to_html(
+          'a',
+          ['href' => $link, 'title' => $author_name],
+          $author_name
+        );
       } else {
         return $author_name;
       }
@@ -361,8 +370,11 @@ class CatList{
       } else {
         if (empty($this->params['posts_morelink'])) {
           $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
-          $lcp_content .= ' <a href="' . get_permalink($single->ID) . '" title="' . "$lcp_more" . '">' .
-                       $lcp_more . '</a>';
+          $lcp_content .= $this->wrapper->to_html(
+            'a',
+            ['href' => get_permalink($single->ID), 'title' => $lcp_more],
+            $lcp_more
+          );
         }
       }
       return $lcp_content;
@@ -441,30 +453,28 @@ class CatList{
   public function get_outer_tag($tag, $css_class) {
     $css_class = $this->params['class'] ?: $css_class;
 
-    $tag_string = '<' . $tag;
+    $props = [];
     if ($tag == 'ol' && !empty($this->params['ol_offset'])) {
-      $tag_string .= ' start="' . $this->params['ol_offset'] . '"';
+      $props['start'] = $this->params['ol_offset'];
     }
 
     // Follow the number of posts in an ordered list with pagination.
     if('ol' === $tag && $this->page > 1) {
       $start = $this->get_number_posts() * ($this->page - 1) + 1;
-      $tag_string .= ' start="' .  $start . '"';
+      $props['start'] = $start;
     }
     //Give a class to wrapper tag
-    $tag_string .= ' class="' . $css_class . '"';
+    $props['class'] = $css_class;
 
     //Give id to wrapper tag
-    $tag_string .= ' id="lcp_instance_' . $this->instance . '"';
+    $props['id'] = 'lcp_instance_' . $this->instance;
 
-    $tag_string .= '>';
-
-    return $tag_string;
+    return $this->wrapper->to_html($tag, $props, null, false);
   }
 
   public function get_inner_tag($single, $parent, $tag, $css_class='') {
     $class = $css_class;
-    $tag_css = '';
+    $props = [];
     if (is_object( $parent) && is_object($single) &&
         $parent->ID === $single->ID) {
       $class .= 'current';
@@ -479,9 +489,9 @@ class CatList{
       }
     }
     if (!empty($class)) {
-      $tag_css = 'class="' . $class . '"';
+      $props['class'] = $class;
     }
-    return '<'. $tag . ' ' . $tag_css . '>';
+    return $this->wrapper->to_html($tag, $props, null, false);
   }
 
   public function get_pagination() {

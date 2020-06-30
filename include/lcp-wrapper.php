@@ -32,10 +32,10 @@ class LcpWrapper {
       elseif (empty($tag)):
         return $info;
       elseif (!empty($tag) && empty($css_class)) :
-        return '<' . $tag . '>' . $info . '</' . $tag . '>';
+        return $this->to_html($tag, [], $info);
       endif;
       $css_class = sanitize_html_class($css_class);
-      return '<' . $tag . ' class="' . $css_class . '">' . $info . '</' . $tag . '>';
+      return $this->to_html($tag, ['class' => $css_class], $info);
     endif;
   }
 
@@ -61,5 +61,32 @@ class LcpWrapper {
       $wrapped = $this->assign_style($info, $tag, $css_class);
     }
     return $wrapped;
+  }
+
+  /**
+   * Builds HTML elements.
+   *
+   * Wraps $content in HTML tag specified in $tag. If $close is false
+   * the closing tag is omitted (useful when $content is null and we only
+   * want to open the tag). $properties is an associative array with HTML
+   * properties.
+   *
+   * @param  string  $tag        HTML tag (ex. 'p', 'div', 'li').
+   * @param  array   $properties Optional. HTML element properties in
+   *                             `'property_name' => value` format.
+   * @param  string  $content    Optional. HTML element text content.
+   * @param  boolean $close      Optional. If false, closing tag is omitted.
+   * @return string              Generated HTML.
+   */
+  public function to_html($tag, $properties=[], $content=null, $close=true) {
+    $props_str = '';
+    foreach ($properties as $property => $value) {
+      $props_str .= ' ' . $property . '="' . $value . '"';
+    }
+
+    $html = "<{$tag}" . $props_str . ">{$content}";
+    if ($close) $html .= "</{$tag}>";
+
+    return $html;
   }
 }
