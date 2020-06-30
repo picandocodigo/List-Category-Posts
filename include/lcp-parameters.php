@@ -288,7 +288,7 @@ class LcpParameters{
   }
 
   private function lcp_order($order) {
-    if( get_option('lcp_order') && $params['order'] === ''){
+    if( get_option('lcp_order') && $order === '') {
       return get_option('lcp_order');
     }
     return $order;
