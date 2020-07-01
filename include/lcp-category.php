@@ -52,21 +52,20 @@ class LcpCategory{
 
     // In a category page:
     if ($params['categorypage'] &&
-         in_array($params['categorypage'], ['yes', 'all', 'other']) ||
-         $params['id'] == -1) {
+         in_array($params['categorypage'], ['yes', 'all', 'other'])) {
       // Use current category
-      $categories = $this->current_category($params['categorypage']);
+      $categories = $this->current_category($params['categorypage'], $params['id']);
     } elseif ($params['name']) {
       // Using the category name:
       $categories = $this->with_name($params['name']);
     } elseif ($params['id']) {
       // Using the id:
       $categories = $this->with_id($params['id']);
-      // If the 'exclude' array was added, excract it.
-      if (is_array($categories) && array_key_exists('exclude', $categories)) {
-        $exclude = $categories['exclude'];
-        unset($categories['exclude']);
-      }
+    }
+    // If the 'exclude' array was added, excract it.
+    if (is_array($categories) && array_key_exists('exclude', $categories)) {
+      $exclude = $categories['exclude'];
+      unset($categories['exclude']);
     }
 
     // This is where the lcp_category_id property of CatList is changed.
@@ -185,7 +184,7 @@ class LcpCategory{
    * @param  string $mode     Accepts 'all', 'yes', 'other' and empty string.
    * @return int|string|array Category ID(s).
    */
-  public function current_category($mode){
+  public function current_category($mode, $ids){
     // Only single post pages with assigned category and
     // category archives have a 'current category',
     // in all other cases no posts should be returned. (#69)
@@ -201,25 +200,46 @@ class LcpCategory{
       if ( is_singular() || in_the_loop() ) {
         $categories = get_the_category($post->ID);
       }
+
+      $exclude = $this->excluded_ids($ids);
+
       if ( !empty($categories) ){
         $cats = array_map(function($cat) {
           return $cat->cat_ID;
         }, $categories);
-        // AND relationship
-        if ('all' === $mode) return $cats;
+        // AND relationship - do nothing, $cats is what we need
+        // if ('all' === $mode) {
+        //   return $cats;
+        // }
         // OR relationship, default
-        if ('yes' === $mode || '' === $mode) return implode(',', $cats);
+        if ('yes' === $mode || '' === $mode) {
+          $cats = implode(',', $cats);
+        }
         // Exclude current categories
-        if ('other' === $mode) return implode(',', array_map(function($cat) {
-          return "-$cat";
-        }, $cats));
+        if ('other' === $mode) {
+          $cats = implode(',', array_map(function($cat) {
+            return "-$cat";
+          }, $cats));
+        }
       } else {
-        return [0]; // workaround to display no posts
+        $cats = [0]; // workaround to display no posts
       }
     }
-    return $category->cat_ID;
+    return array(
+      $cats,
+      'exclude' => $exclude
+    );
   }
 
+  /**
+   * Given a string of ids, returns a string with the ids prefixed with a minus sign:
+   * e.g.: 1,2,-3,4,-5+6 => -3, -5
+   */
+  private function excluded_ids($ids) {
+    $matches = array();
+    preg_match_all('/(\-[0-9]+)+/', $ids, $matches);
+    return join(',', $matches[1]);
+  }
 
   /**
    * Gets the category id from its name.
