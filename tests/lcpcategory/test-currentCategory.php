@@ -4,9 +4,11 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
 
   protected static $test_post;
   protected static $test_post_2;
+  protected static $test_post_3;
   protected static $test_page;
   protected static $test_cat;
   protected static $test_cat_2;
+  protected static $test_cat_3;
 
   public static function wpSetUpBeforeClass($factory) {
     // Create some random categories
@@ -31,6 +33,11 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
       'name' => 'Lcp test cat 2'
     ));
 
+    self::$test_cat_3 = $factory->term->create(array(
+      'taxonomy' => 'category',
+      'name' => 'Lcp test cat 3'
+    ));
+
     self::$test_post = $factory->post->create(array(
       'post_title' => 'Lcp test post',
       'post_category' => array(self::$test_cat)
@@ -40,6 +47,14 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
     self::$test_post_2 = $factory->post->create(array(
       'post_title' => 'Lcp test post',
       'post_category' => array(self::$test_cat, self::$test_cat_2)
+    ));
+
+    // Post with 3 categories
+    self::$test_post_3 = $factory->post->create(array(
+      'post_title' => 'Lcp test post 3',
+      'post_category' => array(
+        self::$test_cat, self::$test_cat_2, self::$test_cat_3
+      )
     ));
 
     self::$test_page = $factory->post->create(array(
@@ -75,6 +90,32 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
     $this->go_to('/?p=' . self::$test_post_2);
     $this->assertQueryTrue('is_singular', 'is_single');
     $this->assertSame("${cat_ID_1},${cat_ID_2}", $lcpcategory->current_category('yes'));
+  }
+
+  public function test_post_with_excluded_cats() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to('/?p=' . self::$test_post_2);
+    $this->assertQueryTrue('is_singular', 'is_single');
+    // Should produce a string with comma separated IDs, with '-' sign where
+    // necessary.
+    $this->assertSame(
+      self::$test_cat . ',-' . self::$test_cat_2,
+      $lcpcategory->current_category('yes', '-' . self::$test_cat_2)
+    );
+  }
+
+  public function test_post_with_excluded_cats_and_relationship() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to('/?p=' . self::$test_post_3);
+    $this->assertQueryTrue('is_singular', 'is_single');
+    // Should produce a string with comma separated IDs, with '-' sign where
+    // necessary.
+    $this->assertSame(
+      [self::$test_cat, self::$test_cat_2, 'exclude' => [self::$test_cat_3]],
+      $lcpcategory->current_category('all', '-' . self::$test_cat_3)
+    );
   }
 
   public function test_all_mode() {

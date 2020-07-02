@@ -172,6 +172,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
         [
           'categorypage'     => 'yes',
           'child_categories' => 'yes',
+          'id'               => '',
         ]
       )
     );
