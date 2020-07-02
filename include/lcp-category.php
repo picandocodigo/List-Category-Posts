@@ -62,7 +62,7 @@ class LcpCategory{
       // Using the id:
       $categories = $this->with_id($params['id']);
     }
-    // If the 'exclude' array was added, excract it.
+    // If the 'exclude' array was added, extract it.
     if (is_array($categories) && array_key_exists('exclude', $categories)) {
       $exclude = $categories['exclude'];
       unset($categories['exclude']);
@@ -184,7 +184,7 @@ class LcpCategory{
    * @param  string $mode     Accepts 'all', 'yes', 'other' and empty string.
    * @return int|string|array Category ID(s).
    */
-  public function current_category($mode, $ids){
+  public function current_category($mode, $ids=''){
     // Only single post pages with assigned category and
     // category archives have a 'current category',
     // in all other cases no posts should be returned. (#69)

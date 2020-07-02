@@ -77,6 +77,19 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
     $this->assertSame("${cat_ID_1},${cat_ID_2}", $lcpcategory->current_category('yes'));
   }
 
+  public function test_post_with_excluded_cats() {
+    $lcpcategory = LcpCategory::get_instance();
+
+    $this->go_to('/?p=' . self::$test_post_2);
+    $this->assertQueryTrue('is_singular', 'is_single');
+    // Should produce a string with comma separated IDs, with '-' sign where
+    // necessary.
+    $this->assertSame(
+      self::$test_cat . ',-' . self::$test_cat_2,
+      $lcpcategory->current_category('yes', (string) self::$test_cat_2)
+    );
+  }
+
   public function test_all_mode() {
     $lcpcategory = LcpCategory::get_instance();
 
