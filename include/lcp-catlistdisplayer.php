@@ -219,7 +219,7 @@ class CatListDisplayer {
 
   // Link is a parameter here in case you want to use it on a template
   // and not show the links for all the shortcodes using this template:
-  private function get_post_title($single, $tag = null, $css_class = null, $link = true){
+  public function get_post_title($single, $tag = null, $css_class = null, $link = true){
     // Don't do anything if no_post_titles is specified.
     if ( 'yes' === $this->params['no_post_titles'] ) {
       return;
