@@ -22,7 +22,7 @@ class LcpTemplater {
    *
    * @var array
    */
-  private static $paths = null;
+  private static $paths = [];
 
   /**
    * Path to the template file being used.
@@ -81,13 +81,15 @@ class LcpTemplater {
    * @return array Paths to template directory.
    */
   private static function get_template_paths() {
-    if (null === self::$paths) {
-      self::$paths = array_unique(
+    if ([] === self::$paths) {
+      $paths = array_unique(
         [
           get_stylesheet_directory()  . '/list-category-posts/',
           get_template_directory() . '/list-category-posts/',
         ]
       );
+      $paths = array_filter($paths, 'is_dir');
+      self::$paths = $paths;
     }
     return self::$paths;
   }
