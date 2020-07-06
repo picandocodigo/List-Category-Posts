@@ -6,10 +6,14 @@ then
     sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password rootpass'
     sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password rootpass'
 
+    # For PHP 7.4 in Ubuntu 18.
+    sudo add-apt-repository -y ppa:ondrej/php
+
     apt-get update
 
-    apt-get install -y subversion apache2 php7.2 php7.2-xml php7.2-mysql\
-        php7.2-gd libapache2-mod-php7.2 mysql-server-5.7 dos2unix
+    apt-get install -y subversion apache2 php7.4 mysql-server-5.7 dos2unix
+    apt-get install -y php7.4-{xml,readline,opcache,mysql,json,gd}
+
 fi
 
 # Create the WordPress database and corresponding user
