@@ -199,23 +199,26 @@ class CatListDisplayer {
   }
 
   private function get_post_link($single, $text, $class = null){
-    $info = '<a href="' . get_permalink($single->ID) . '"';;
 
-    if ( !empty($class ) ):
-      $info .= ' class="' . $class . '"';
-    endif;
+    $props = ['href' => get_permalink($single->ID)];
 
-    if ( !empty($this->params['link_target']) ):
-      $info .= ' target="' . $this->params['link_target'] . '"';
-    endif;
+    if (!empty($class)) {
+      $props['class'] = $class;
+    }
 
-    $info .= ' title="' . wptexturize($single->post_title) . '"';
-    $info .= '>' . $text . '</a>';
-    if($single->post_status == 'private'):
-        $info .= '<span class="lcp_private"> private</span>';
-    endif;
+    if (!empty($this->params['link_target'])) {
+      $props['target'] = $this->params['link_target'];
+    }
 
-    return $info;
+    $props['title'] = wptexturize($single->post_title);
+
+    $output = $this->wrapper->to_html('a', $props, $text);
+
+    if ($single->post_status == 'private') {
+        $output .= $this->wrapper->wrap(' private', 'span', 'lcp_private');
+    }
+
+    return $output;
   }
 
   // Link is a parameter here in case you want to use it on a template
