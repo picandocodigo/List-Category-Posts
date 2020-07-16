@@ -199,65 +199,60 @@ class CatListDisplayer {
   }
 
   private function get_post_link($single, $text, $class = null){
-    $info = '<a href="' . get_permalink($single->ID) . '" title="' . wptexturize($single->post_title) . '"';
 
-    if ( !empty($this->params['link_target']) ):
-      $info .= ' target="' . $this->params['link_target'] . '"';
-    endif;
+    $props = ['href' => get_permalink($single->ID)];
 
-    if ( !empty($class ) ):
-      $info .= ' class="' . $class . '"';
-    endif;
+    if (!empty($class)) {
+      $props['class'] = $class;
+    }
 
-    $info .= '>' . $text . '</a>';
-    if($single->post_status == 'private'):
-        $info .= '<span class="lcp_private"> private</span>';
-    endif;
+    if (!empty($this->params['link_target'])) {
+      $props['target'] = $this->params['link_target'];
+    }
 
-    return $info;
+    $props['title'] = wptexturize($single->post_title);
+
+    $output = $this->wrapper->to_html('a', $props, $text);
+
+    if ($single->post_status == 'private') {
+        $output .= $this->wrapper->wrap(' private', 'span', 'lcp_private');
+    }
+
+    return $output;
   }
 
   // Link is a parameter here in case you want to use it on a template
   // and not show the links for all the shortcodes using this template:
-  private function get_post_title($single, $tag = null, $css_class = null, $link = true){
+  public function get_post_title($single, $tag = null, $css_class = null, $link = true) {
+
     // Don't do anything if no_post_titles is specified.
-    if ( 'yes' === $this->params['no_post_titles'] ) {
+    if ('yes' === $this->params['no_post_titles']) {
       return;
     }
 
-    $lcp_post_title = apply_filters('the_title', $single->post_title, $single->ID);
+    // Shortcode parameters take precedence.
+    $tag = $this->params['title_tag'] ?: $tag;
+    $css_class = $this->params['title_class'] ?: $css_class;
+    $suffix = $this->params['post_suffix'] ? ' ' . $this->params['post_suffix'] : '';
 
-    $lcp_post_title = $this->lcp_title_limit( $lcp_post_title );
-
-    if ( !empty($this->params['title_tag']) ) {
-      $pre = "<" . $this->params['title_tag'];
-      if (!empty($this->params['title_class'])){
-        $pre .= ' class="' . $this->params['title_class'] . '"';
-      }
-      $pre .= '>';
-      $post = "</" . $this->params['title_tag'] . ">";
-    }else{
-      $pre = $post = '';
+    if (in_array($this->params['link_titles'], ['false', 'no'], true)) {
+      $link = false;
     }
 
-    if ( !$link || ( !empty($this->params['link_titles'] ) &&
-          ( $this->params['link_titles'] === "false" || $this->params['link_titles'] === "no" ) ) ) {
-      return $pre . $lcp_post_title . $post;
+    $post_title = apply_filters('the_title', $single->post_title, $single->ID);
+    $post_title = $this->lcp_title_limit($post_title);
+
+    if (!$link) {
+      $post_title .= $suffix;
+      $output = $this->wrapper->wrap($post_title, $tag, $css_class);
+    } else if (empty($tag)) {
+      $output = $this->get_post_link($single, $post_title, $css_class) . $suffix;
+    } else if (!empty($tag)) {
+      $output = $this->get_post_link($single, $post_title) . $suffix;
+      $output = $this->wrapper->wrap($output, $tag, $css_class);
     }
 
-    $info = $this->get_post_link($single, $lcp_post_title, (!empty($this->params['title_class']) && empty($this->params['title_tag'])) ? $this->params['title_class'] : null);
-
-    if( !empty($this->params['post_suffix']) ):
-      $info .= " " . $this->params['post_suffix'];
-    endif;
-
-    $info = $pre . $info . $post;
-
-    if( $tag !== null || $css_class !== null){
-      $info = $this->wrapper->wrap($info, $tag, $css_class);
-    }
-
-    return $info;
+    return $output;
   }
 
   // Transform the title into the sub string if `title_limit` is present
