@@ -340,7 +340,7 @@ class CatList{
 
   public function get_display_id($single) {
     if (!empty($this->params['display_id']) && $this->params['display_id'] == 'yes') {
-      $lcp_display_output .= $single->ID;
+      return $single->ID;
     }
   }
 
