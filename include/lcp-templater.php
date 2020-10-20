@@ -107,6 +107,10 @@ class LcpTemplater {
     $paths = self::get_template_paths();
 
     foreach ($paths as $path) {
+      if (!is_dir($path)) {
+        continue;
+      }
+
       foreach (scandir($path) as $file) {
         if (! self::validate_template($path, $file)) {
           continue;
