@@ -92,7 +92,7 @@ class CatList{
     global $wp_query;
     $this->posts_count = $wp_query->found_posts;
     remove_all_filters('posts_orderby');
-    remove_filter('posts_where', array( $this, 'starting_with'));
+    remove_filter('posts_where', array(LcpParameters::get_instance(), 'starting_with'));
   }
 
   /* Should I return posts or show that the tag/category or whatever
