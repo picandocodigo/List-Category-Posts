@@ -73,58 +73,42 @@ class LcpParameters{
       );
     }
 
-    if ($this->utils->lcp_not_empty('customfield_compare')
-        && (
-            $this->utils->lcp_not_empty('customfield_greaterthan')
-            || $this->utils->lcp_not_empty('customfield_lessthan')
-        )
-    ) {
+    if ($this->utils->lcp_not_empty('customfield_compare')) {
       $customfield_compare = $params['customfield_compare'];
-      // Default type is CHAR
-      // https://codex.wordpress.org/Class_Reference/WP_Meta_Query
-      $customfield_compare_type = strtoupper(
-        $params['customfield_compare_type'] ?: 'CHAR'
-      );
+
+      // customfield_compare=key,compare,value,type
+
+      $customfield_compare_params = explode(',', $customfield_compare);
+
+      // 'AND' is the default relation, keeping this line
+      // for better readability.
+      $compare_clause = ['relation' => 'AND'];
+
+      $compare_clause_1['key']     = $customfield_compare_params[0];
+      // If not set, defaults to '=' but in this implementation we make it required.
+      $compare_clause_1['compare']   = $customfield_compare_params[1];
+      if (isset($customfield_compare_params[2])) {
+        $compare_clause_1['value'] = $customfield_compare_params[2];
+      }
+      if (isset($customfield_compare_params[3])) {
+        // If not set, defaults to 'CHAR'.
+        $compare_clause_1['type'] = strtoupper($customfield_compare_params[3]);
+      } else {
+        $compare_clause_1['type'] = 'CHAR';
+      }
+
       // Prepare a value formatter to use in customfield comparisons.
       // this returns a function that takes field value as an argument.
       $format_value = call_user_func(
         'LcpUtils::lcp_format_customfield',
-        $customfield_compare_type
+        $compare_clause_1['type']
       );
-      // 'AND' is the default relation, keeping this line
-      // for better readability.
-      $compare_clause = array('relation' => 'AND');
-
-      $customfield_greaterthan = $params['customfield_greaterthan'] ?: null;
-
-      if ($customfield_greaterthan) {
-        $compare_clause_greaterthan = array(
-            'key' => $customfield_compare,
-            'value' => $format_value($customfield_greaterthan),
-            'compare' => '>',
-            'type' => $customfield_compare_type
-        );
-
-        $compare_clause[] = $compare_clause_greaterthan;
-      }
-
-      $customfield_lessthan = $params['customfield_lessthan'] ?: null;
-
-      if ($customfield_lessthan) {
-        $compare_clause_lessthan = array(
-            'key' => $customfield_compare,
-            'value' => $format_value($customfield_lessthan),
-            'compare' => '<',
-            'type' => $customfield_compare_type
-        );
-
-        $compare_clause[] = $compare_clause_lessthan;
-      }
+      $compare_clause[] = $compare_clause_1;
 
       // 'AND' is the default relation, keeping this line
       // for better readability.
       $meta_query['relation'] = 'AND';
-      $meta_query['compare_clause'] = $compare_clause;
+      $meta_query[] = $compare_clause;
     }
 
     //Get private posts
