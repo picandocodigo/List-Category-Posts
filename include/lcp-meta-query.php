@@ -17,41 +17,46 @@ trait LcpMetaQuery {
     }
 
     if ($this->utils->lcp_not_empty('customfield_compare')) {
-      $customfield_compare = $params['customfield_compare'];
 
-      // customfield_compare=key,compare,value,type
-
-      $customfield_compare_params = explode(',', $customfield_compare);
+      // customfield_compare=key,compare,value,type;key,compare,value,type...
+      $compare_queries = explode(';', $params['customfield_compare']);
 
       // 'AND' is the default relation, keeping this line
       // for better readability.
-      $compare_clause = ['relation' => 'AND'];
+      $compare_clauses = ['relation' => 'AND'];
 
-      $compare_clause_1['key']     = $customfield_compare_params[0];
-      // If not set, defaults to '=' but in this implementation we make it required.
-      $compare_clause_1['compare']   = $customfield_compare_params[1];
-      if (isset($customfield_compare_params[2])) {
-        $compare_clause_1['value'] = $customfield_compare_params[2];
-      }
-      if (isset($customfield_compare_params[3])) {
-        // If not set, defaults to 'CHAR'.
-        $compare_clause_1['type'] = strtoupper($customfield_compare_params[3]);
-      } else {
-        $compare_clause_1['type'] = 'CHAR';
-      }
+      foreach ($compare_queries as $query) {
+        $compare_args = explode(',', $query);
+        $compare_clause = [];
 
-      // Prepare a value formatter to use in customfield comparisons.
-      // this returns a function that takes field value as an argument.
-      $format_value = call_user_func(
-        'LcpUtils::lcp_format_customfield',
-        $compare_clause_1['type']
-      );
-      $compare_clause[] = $compare_clause_1;
+        if (isset($compare_args[3])) {
+          // If not set, defaults to 'CHAR'.
+          $compare_clause['type'] = strtoupper($compare_args[3]);
+        } else {
+          $compare_clause['type'] = 'CHAR';
+        }
+
+        // Prepare a value formatter to use in customfield comparisons.
+        // this returns a function that takes field value as an argument.
+        $format_value = call_user_func(
+          'LcpUtils::lcp_format_customfield',
+          $compare_clause['type']
+        );
+
+        $compare_clause['key']     = $compare_args[0];
+        // If not set, defaults to '=' but in this implementation we make it required.
+        $compare_clause['compare'] = $compare_args[1];
+        if (isset($compare_args[2])) {
+          $compare_clause['value'] = $format_value($compare_args[2]);
+        }
+
+        $compare_clauses[] = $compare_clause;
+      }
 
       // 'AND' is the default relation, keeping this line
       // for better readability.
       $meta_query['relation'] = 'AND';
-      $meta_query[] = $compare_clause;
+      $meta_query[] = $compare_clauses;
     }
 
     if ( $this->utils->lcp_not_empty('customfield_orderby') ){
@@ -62,6 +67,7 @@ trait LcpMetaQuery {
       $args['orderby'] = 'orderby_clause';
     }
 
+    // TODO: Is this needed after refactoring???
     // If either select_clause or orderby_clause were added to $meta_query,
     // it needs to be added to args.
     if ( !empty($meta_query) ) {
