@@ -67,7 +67,7 @@ trait LcpMetaQuery {
      * 'customfield_name' & 'customfield_value'
      * should both be defined
      */
-    if( $this->utils->lcp_not_empty('customfield_name') ) {
+    if( $params['customfield_name'] ) {
       $meta_query['select_clause'] = array(
         'key'   => $params['customfield_name'],
         'value' => $params['customfield_value'],
@@ -82,7 +82,7 @@ trait LcpMetaQuery {
    * @param  array  &$meta_query WP_Meta_Query compatible arguments.
    */
   private function check_customfield_orderby($params, &$meta_query) {
-    if ( $this->utils->lcp_not_empty('customfield_orderby') ) {
+    if ( $params['customfield_orderby'] ) {
       $meta_query['orderby_clause'] = array(
         'key' => $params['customfield_orderby'],
         'compare' => 'EXISTS',
@@ -97,7 +97,7 @@ trait LcpMetaQuery {
    * @param  array  &$meta_query WP_Meta_Query compatible arguments.
    */
   private function check_customfield_compare($params, &$meta_query) {
-    if ($this->utils->lcp_not_empty('customfield_compare')) {
+    if ($params['customfield_compare']) {
 
       // customfield_compare=key,compare,value,type;key,compare,value,type...
       $compare_queries = explode(';', $params['customfield_compare']);
