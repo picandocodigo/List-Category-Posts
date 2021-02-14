@@ -1,0 +1,51 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: ['7.3', '7.4']
+        phpunit-versions: ['latest']
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: wordpress_test
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        ini-values: post_max_size=256M, max_execution_time=180
+        coverage: xdebug        
+        tools: php-cs-fixer, phpunit:${{ matrix.phpunit-versions }}
+    # - name: Shutdown Ubuntu MySQL (SUDO)
+    #   run: sudo service mysql stop
+    # - name: Install MySQL
+    #   uses: mirromutth/mysql-action@v1.1
+    #   with:
+    #     # host port: 3800
+    #     # container port: 3307 # Optional, default value is 3306. The port of container
+    #     character set server: 'utf8'
+    #     collation server: 'utf8_general_ci'
+    #     mysql version: '8.0'
+    #     mysql database: 'wordpress_test'
+    #     mysql root password: 'root'
+    #     mysql user: 'wordpressuser'
+    #     mysql password: 'wordpresspass'
+    - name: Install WP Tests
+      run: bash bin/install-wp-tests.sh wordpress_test root localhost:3306
+    - name: Run tests
+      run: phpunit
