@@ -12,6 +12,8 @@ DB_HOST=${4-localhost}
 WP_VERSION=${5-latest}
 SKIP_DB_CREATE=${6-false}
 
+echo "DB_HOST: " . $DB_HOST;
+
 TMPDIR=${TMPDIR-/tmp}
 TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
 WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
@@ -164,6 +166,7 @@ install_db() {
 		fi
 	fi
 
+  echo "EXTRA: " . $EXTRA;
 	# create database
 	if [ $(mysql --user="$DB_USER" --password="$DB_PASS" --execute='show databases;' | grep ^$DB_NAME$) ]
 	then
