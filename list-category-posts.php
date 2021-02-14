@@ -109,6 +109,7 @@ class ListCategoryPosts{
         'customfield_orderby' =>'',
         'customfield_tag' => '',
         'customfield_class' => '',
+        'customfield_compare' => '',
         'taxonomy' => '',
         'taxonomies_and' => '',
         'taxonomies_or' => '',
