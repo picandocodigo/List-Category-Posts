@@ -396,6 +396,7 @@ class CatList{
           preg_match('/[\S\s]+(<!--more(.*?)?-->)[\S\s]+/', $lcp_content, $matches)) {
           $lcp_excerpt = explode($matches[1], $lcp_content);
           $lcp_excerpt = $lcp_excerpt[0];
+          $lcp_excerpt = apply_filters('the_excerpt', $lcp_excerpt);
         } else {
           $lcp_excerpt = $this->lcp_trim_excerpt($lcp_content);
         }
