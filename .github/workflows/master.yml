@@ -8,18 +8,19 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
+    env:
+      WP_TESTS_DIR: /tmp/wordpress-tests-lib
     strategy:
       matrix:
         php-versions: ['7.3', '7.4']
-        phpunit-versions: ['latest']
+        phpunit-versions: ['7.5.20']
     services:
       mysql:
         image: mysql:5.7
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_DATABASE: wordpress_test
         ports:
-          - 3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - name: Checkout
@@ -31,6 +32,7 @@ jobs:
         ini-values: post_max_size=256M, max_execution_time=180
         coverage: xdebug        
         tools: php-cs-fixer, phpunit:${{ matrix.phpunit-versions }}
+        extensions: mysql
     # - name: Shutdown Ubuntu MySQL (SUDO)
     #   run: sudo service mysql stop
     # - name: Install MySQL
@@ -46,6 +48,6 @@ jobs:
     #     mysql user: 'wordpressuser'
     #     mysql password: 'wordpresspass'
     - name: Install WP Tests
-      run: bash bin/install-wp-tests.sh wordpress_test root root localhost:3306
+      run: bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1:3306
     - name: Run tests
       run: phpunit
