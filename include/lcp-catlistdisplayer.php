@@ -14,6 +14,7 @@ class CatListDisplayer {
   private $templater;
   private $params = array();
   private $lcp_output;
+  private $lcp_query;
 
   public function __construct($atts) {
     $this->params = $atts;
@@ -25,11 +26,18 @@ class CatListDisplayer {
   }
 
   public function display(){
-    $this->catlist->save_wp_query();
-    $this->catlist->get_posts();
-    $this->create_output();
-    $this->catlist->restore_wp_query();
-    wp_reset_query();
+    if ('no' === $this->params['main_query']) {
+      $this->lcp_query = $this->catlist->get_posts();
+      $this->create_output();
+      wp_reset_postdata();
+    } else {
+      $this->catlist->save_wp_query();
+      $this->lcp_query = $this->catlist->get_posts();
+      $this->create_output();
+      $this->catlist->restore_wp_query();
+      wp_reset_query();
+    }
+
     return $this->lcp_output;
   }
 

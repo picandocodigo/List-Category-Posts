@@ -59,10 +59,13 @@ $lcp_display_output .= $this->open_outer_tag('ul', 'lcp_catlist');
  * you'll see get_excerpt, get_thumbnail, etc.  You can now pass an
  * html tag as a parameter. This tag will sorround the info you want
  * to display. You can also assign a specific CSS class to each field.
+ *
+ * IMPORTANT: Prior to v0.85 lines 65-67 were different. Make sure your
+ * template is up to date.
 */
 global $post;
-while ( have_posts() ):
-  the_post();
+while ( $this->lcp_query->have_posts() ):
+  $this->lcp_query->the_post();
 
   // Check if protected post should be displayed
   if (!$this->check_show_protected($post)) continue;

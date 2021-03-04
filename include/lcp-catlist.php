@@ -43,7 +43,7 @@ class CatList{
    * Determine the categories of posts and execute the WP_query
    */
   public function get_posts() {
-    $this->set_lcp_parameters();
+     return $this->set_lcp_parameters();
   }
 
   /**
@@ -88,11 +88,21 @@ class CatList{
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
 
-    query_posts($args);
-    global $wp_query;
-    $this->posts_count = $wp_query->found_posts;
+    if ('no' === $this->params['main_query']) {
+      // Use a standard Loop with WP_Query.
+      $lcp_query = new WP_Query($args);
+    } else {
+      // Run as a main query.
+      query_posts($args);
+      global $wp_query;
+      $lcp_query = $wp_query;
+    }
+    $this->posts_count = $lcp_query->found_posts;
+
     remove_all_filters('posts_orderby');
     remove_filter('posts_where', array(LcpParameters::get_instance(), 'starting_with'));
+
+    return $lcp_query;
   }
 
   /* Should I return posts or show that the tag/category or whatever
