@@ -10,7 +10,7 @@ Please visit the [plugin's page on WordPress.org](http://wordpress.org/extend/pl
 
 # Would you like to help with the development?
 
-The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK), [bibz](https://github.com/bibz), [vacuus](https://github.com/vacuus), [zymeth25](https://github.com/zymeth25) for their contributions and hard work and [every other person](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors) who's contributed to this plugin:+1:
+The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK), [bibz](https://github.com/bibz), [vacuus](https://github.com/vacuus), [klemens-st](https://github.com/klemens-st) for their contributions and hard work and [every other person](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors) who's contributed to this plugin:+1:
 
 Sometimes Pull Request take a while for us to review, but we'll eventually get to all of them. If you open a PR, feel free to add your wordpress.org user so if it gets merged I can add you to the list of contributors in the plugin's readme file.
 
@@ -67,7 +67,7 @@ The code needs lots of refactoring and probably some more documentation to be ab
 
 If you've found the plugin useful, consider buying us a beverage :)
 
-- [Klemens Starybrat](https://github.com/zymeth25) has been writing lots of amazing code for this plugin, so if you want to pay it forward, [consider sponsoring him on GitHub](https://github.com/sponsors/zymeth25).
+- [Klemens Starybrat](https://github.com/klemens-st) has been writing lots of amazing code for this plugin, so if you want to pay it forward, [consider sponsoring him on GitHub](https://github.com/sponsors/klemens-st).
 
 - You can also [sponsor me on GitHub](https://github.com/sponsors/picandocodigo), make a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") or visit [my Amazon Wishlist](https://www.amazon.co.uk/hz/wishlist/ls/21UGAJCP8YEKU?ref_=wl_share).
 
