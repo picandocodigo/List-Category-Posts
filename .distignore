@@ -1,0 +1,16 @@
+/.wordpress-org
+/.git
+/.github
+/.distignore
+/.gitignore
+/.gitattributes
+
+LICENSE
+phpunit.xml
+README.md
+
+Vagrantfile
+
+/bin
+/doc
+/tests
