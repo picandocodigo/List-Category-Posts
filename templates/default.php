@@ -96,9 +96,9 @@ while ( have_posts() ):
 
   /**
    * Post content - Example of how to use tag and class parameters:
-   * This will produce:<p class="lcp_content">The content</p>
+   * This will produce:<div class="lcp_content">The content</div>
    */
-  $lcp_display_output .= $this->get_content($post, 'p', 'lcp_content');
+  $lcp_display_output .= $this->get_content($post, 'div', 'lcp_content');
 
   /**
    * Post content - Example of how to use tag and class parameters:
