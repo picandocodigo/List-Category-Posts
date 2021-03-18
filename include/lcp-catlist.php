@@ -210,9 +210,7 @@ class CatList{
 
   public function get_category_description() {
     if ($this->utils->lcp_not_empty('category_description') && $this->params['category_description'] == 'yes') {
-      return $this->wrapper->to_html('p', [], category_description(
-        $this->lcp_category_id
-      ));
+      return get_term_field('description', $this->lcp_category_id, '', 'raw');
     }
   }
 

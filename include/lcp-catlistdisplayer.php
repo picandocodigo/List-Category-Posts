@@ -72,8 +72,8 @@ class CatListDisplayer {
     return $this->catlist->get_category_count();
   }
 
-  public function get_category_description(){
-    return $this->catlist->get_category_description();
+  public function get_category_description($tag = null, $css_class = null) {
+    return $this->content_getter('category_description', null, $tag, $css_class);
   }
 
   private function get_no_posts_text() {
@@ -175,6 +175,9 @@ class CatListDisplayer {
       break;
     case 'customfield':
       $info = $this->catlist->get_custom_fields($this->params['customfield_display'], $post->ID);
+      break;
+    case 'category_description':
+      $info = $this->catlist->get_category_description();
       break;
     case 'date':
       $info = $this->catlist->get_date_to_show($post);
