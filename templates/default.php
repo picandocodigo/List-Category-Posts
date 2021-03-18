@@ -41,7 +41,7 @@ $lcp_display_output = '';
 $lcp_display_output .= $this->get_category_link('strong');
 
 // Show category description:
-$lcp_display_output .= $this->get_category_description();
+$lcp_display_output .= $this->get_category_description('p');
 
 // Show the conditional title:
 $lcp_display_output .= $this->get_conditional_title();

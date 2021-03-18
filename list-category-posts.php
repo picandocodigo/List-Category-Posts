@@ -117,6 +117,8 @@ class ListCategoryPosts{
         'categorypage' => '',
         'category_count' => '',
         'category_description' => 'no',
+        'category_description_tag' => '',
+        'category_description_class' => '',
         'morelink' => '',
         'morelink_class' => '',
         'morelink_tag' => '',
