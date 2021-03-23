@@ -37,6 +37,11 @@ class LcpParameters{
     // Check posts to exclude
     $args = $this->lcp_check_excludes($args);
 
+    // Check posts to include
+    if( $this->utils->lcp_not_empty('includeposts') ){
+      $args['post__in'] = explode(",", $this->params['includeposts']);
+    }
+
     // Check type, status, parent params
     $args = $this->lcp_types_and_statuses($args);
 

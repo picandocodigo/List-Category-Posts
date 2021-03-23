@@ -64,6 +64,7 @@ class ListCategoryPosts{
         'excerpt_class' =>'',
         'exclude' => '0',
         'excludeposts' => '0',
+        'includeposts' => '0',
         'offset' => '0',
         'tags' => '',
         'exclude_tags' => '',
