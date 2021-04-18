@@ -8,6 +8,10 @@ Usage:
 
 Please visit the [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/) to find out more.
 
+# Documentation
+
+The main documentation is hosted in the [GitHub Wiki](https://github.com/picandocodigo/List-Category-Posts/wiki). You can find information there on [how to select which posts to show](https://github.com/picandocodigo/List-Category-Posts/wiki/How-to-select-which-posts-to-show), [pagination](https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination), [HTML & CSS customization](http://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization) and the [template system](http://github.com/picandocodigo/List-Category-Posts/wiki/Template-System) and the [several parameters you can use](https://github.com/picandocodigo/List-Category-Posts/wiki/More-parameters-you-can-use).
+
 # Would you like to help with the development?
 
 The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK), [bibz](https://github.com/bibz), [vacuus](https://github.com/vacuus), [klemens-st](https://github.com/klemens-st) for their contributions and hard work and [every other person](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors) who's contributed to this plugin:+1:
@@ -69,7 +73,7 @@ If you've found the plugin useful, consider buying us a beverage :)
 
 - [Klemens Starybrat](https://github.com/klemens-st) has been writing lots of amazing code for this plugin, so if you want to pay it forward, [consider sponsoring him on GitHub](https://github.com/sponsors/klemens-st).
 
-- You can also [sponsor me on GitHub](https://github.com/sponsors/picandocodigo), make a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") or visit [my Amazon Wishlist](https://www.amazon.co.uk/hz/wishlist/ls/21UGAJCP8YEKU?ref_=wl_share).
+- You can also make a [donation via PayPal](http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support "Donate via PayPal") or visit [my Amazon Wishlist](https://www.amazon.co.uk/hz/wishlist/ls/21UGAJCP8YEKU?ref_=wl_share).
 
 ## License
 __[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__

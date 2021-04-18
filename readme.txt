@@ -3,9 +3,9 @@ Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 5.4.2
+Tested up to: 5.7.1
 Requires PHP: 5.4
-Stable tag: 0.83.1
+Stable tag: 0.84
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,19 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.84.0 =
+
+* **New feature**: Select specific posts by IDs: `[catlist includeposts="2,97"]`. Thanks @hvianna!
+* **New feature:** Advanced customfield filtering with `customfield_compare`, see [the docs](https://github.com/picandocodigo/List-Category-Posts/wiki/How-to-select-which-posts-to-show#other-ways-of-selecting-what-posts-to-show) for instructions.
+* **New feature:** It is now possible to style `category_description` with `category_description_tag` and `category_description_class`.
+* Changed the default wrapper tag for `content=yes` to `<div>` to avoid generating invalid HTML (previously `<p>`).
+* Fixed `excerpt_full` not being run through `the_excerpt` filters (thanks @StefanXRoos!). The filters are now applied same as for `excerpt_yes`. **Please check your setup** if you are using `excerpt_full`.
+* Fixed `display_id` bug, thanks for reporting @fiestoforo!
+* Fixed PHP warnings in WP admin caused by the widget, thanks for reporting @hiskingdomprophecy (#420).
+* Fixed `posts_where` filter not being properly removed when using `starting_with`.
+* Full refactor of HTML generation making it easier to maintain.
+* Upgraded PHP to 7.4 in the Vagrant machine.
 
 = 0.83.1 =
 
