@@ -160,7 +160,8 @@ class ListCategoryPosts{
    * @param $content
    */
   static function catlist_func($atts) {
-    $atts = shortcode_atts(self::default_params(), $atts);
+    // Can be filtered using the shortcode_atts_catlist hook.
+    $atts = shortcode_atts(self::default_params(), $atts, 'catlist');
 
     if($atts['numberposts'] == ''){
       $atts['numberposts'] = get_option('numberposts');
