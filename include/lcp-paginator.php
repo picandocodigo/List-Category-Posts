@@ -101,6 +101,7 @@ class LcpPaginator {
 
         $pag_output .= "</ul>";
       }
+      $pag_output = apply_filters( 'lcp_pagination_html', $pag_output, $params, $pages_count );
       return $pag_output;
     }
   }
