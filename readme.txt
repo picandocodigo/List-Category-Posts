@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 5.7.1
 Requires PHP: 5.4
-Stable tag: 0.84
+Stable tag: 0.84.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.84.1 =
+
+* Filter hook added: `shortcode_atts_catlist`, see [the docs](https://developer.wordpress.org/reference/hooks/shortcode_atts_shortcode/).
+* Filter hook added: `lcp_pagination_html`, see [the source](https://github.com/picandocodigo/List-Category-Posts/blob/90d6cf08aad9c4590e3c06b8ce8d9256f757917f/include/lcp-paginator.php#L104).
 
 = 0.84.0 =
 
