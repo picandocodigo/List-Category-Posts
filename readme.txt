@@ -43,6 +43,11 @@ Great to use WordPress as a CMS, and create pages with several categories posts.
 Klemens Starybrat has created a GUI for List Category Posts. It helps you create a shortcode from a nice visual interface in WordPress' text editor. Check it out:
 [GUI for List Category Posts](https://wordpress.org/plugins/gui-for-lcp/)
 
+**AJAX pagination**
+
+The ajax pagination feature is maintained in an add-on plugin by Klemens Starybrat. Check it out:
+[LCP Ajax Pagination](https://wordpress.org/plugins/lcp-ajax-pagination)
+
 **Widget**
 
 Since WordPress 4.9, [you can use shortcode in text widgets](https://make.wordpress.org/core/2017/10/24/widget-improvements-in-wordpress-4-9/). So you can just add a text widget in Appearence > Widgets and write the List Category Posts shortcode.
