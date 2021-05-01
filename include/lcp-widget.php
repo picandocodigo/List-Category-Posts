@@ -25,7 +25,7 @@ class ListCategoryPostsWidget extends WP_Widget{
       $excludeposts = $post->ID;
     if(!isset($excludeposts))
       $excludeposts = ($instance['excludeposts'] != '') ? $instance['excludeposts'] : 0;
-    if(!isset($includeposts))
+    if(isset($instance['includeposts']))
       $includeposts = ($instance['includeposts'] != '') ? $instance['includeposts'] : 0;
     $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
     $category_id = $instance['categoryid'];
