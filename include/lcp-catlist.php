@@ -182,7 +182,7 @@ class CatList{
    */
   public function get_morelink() {
     if (!empty($this->params['morelink'])) {
-      $props = ['href=' => get_category_link($this->lcp_category_id)];
+      $props = ['href' => get_category_link($this->lcp_category_id)];
       $readmore = ($this->params['morelink'] !== '' ? $this->params['morelink'] : 'More posts');
       return $this->wrapper->to_html('a', $props, $readmore);
      } else {
