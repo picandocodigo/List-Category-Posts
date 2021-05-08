@@ -60,7 +60,7 @@ class CatListDisplayer {
     return '</' . $this->templater->outer_tag . '>';
   }
 
-  private function get_morelink($tag = null, $css_class = null){
+  public function get_morelink($tag = null, $css_class = null){
     return $info = $this->content_getter('morelink', null, $tag, $css_class);
   }
 
