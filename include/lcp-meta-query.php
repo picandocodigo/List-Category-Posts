@@ -83,12 +83,14 @@ trait LcpMetaQuery {
    */
   private function check_customfield_orderby($params, &$meta_query) {
     if ( $params['customfield_orderby'] ) {
-		$type = 'CHAR';
-	    if(isset($params['customfield_type'])){
-	    	$type = strtoupper($params['customfield_type']);
-	    }
 
-	    $meta_query['orderby_clause'] = array(
+      // If not set, defaults to 'CHAR' (as per WP docs).
+	  $type = 'CHAR';
+	  if( isset($params['customfield_type']) ) {
+	    $type = strtoupper($params['customfield_type']);
+	  }
+
+	  $meta_query['orderby_clause'] = array(
         'key' => $params['customfield_orderby'],
         'compare' => 'EXISTS',
         'type' => $type,
