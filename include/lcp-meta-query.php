@@ -89,8 +89,8 @@ trait LcpMetaQuery {
         'compare' => 'EXISTS',
       );
 
-      if( !empty($params['customfield_type']) ) {
-        $meta_query['orderby_clause']['type'] = strtoupper($params['customfield_type']);
+      if( !empty($params['customfield_orderby_type']) ) {
+        $meta_query['orderby_clause']['type'] = strtoupper($params['customfield_orderby_type']);
       }
     }
   }

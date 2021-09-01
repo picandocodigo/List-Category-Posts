@@ -108,7 +108,7 @@ class ListCategoryPosts{
         'customfield_display_name_glue' => ' : ',
         'customfield_display_separately' => 'no',
         'customfield_orderby' => '',
-        'customfield_type' => '',
+        'customfield_orderby_type' => '',
         'customfield_tag' => '',
         'customfield_class' => '',
         'customfield_compare' => '',
