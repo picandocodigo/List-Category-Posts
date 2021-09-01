@@ -93,7 +93,7 @@ class ListCategoryPosts{
         'title_limit' => '0',
         'post_type' => '',
         'post_status' => '',
-        'post_parent' => '0',
+        'post_parent' => '',
         'post_suffix' => '',
         'show_protected' => 'no',
         'class' => '',

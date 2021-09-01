@@ -212,7 +212,7 @@ class LcpParameters{
       $args['post_status'] = explode( ',', $this->params['post_status'] );
     endif;
 
-    if($this->utils->lcp_not_empty('post_parent')):
+    if( '' !== $this->params[ 'post_parent' ] ):
       $args['post_parent'] = $this->params['post_parent'];
     endif;
     return $args;
