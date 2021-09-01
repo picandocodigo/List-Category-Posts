@@ -32,9 +32,9 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
     );
 
     $expected = '<h1><a href="' . get_permalink(self::$test_post)
-                . '" title="Lcp test post">Lcp test post</a></h1>';
+                . '">Lcp test post</a></h1>';
     $expected2 = '<h2><a href="' . get_permalink(self::$test_post)
-                 . '" title="Lcp test post">Lcp test post</a></h2>';
+                 . '">Lcp test post</a></h2>';
 
 
     // Shortcode param.
@@ -56,8 +56,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
     );
 
     $expected = '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' class="my-class"'
-                . ' title="Lcp test post">Lcp test post</a>';
+                . ' class="my-class">Lcp test post</a>';
 
     // Shortcode param.
     $this->assertSame(
@@ -82,7 +81,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
 
     $expected = '<h2 class="my-class">'
                 . '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' title="Lcp test post">Lcp test post</a></h2>';
+                . '>Lcp test post</a></h2>';
 
     // Shortcode params.
     $this->assertSame(
@@ -191,7 +190,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
       )
     );
     $expected = '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' title="Lcp test post">Lcp &hellip;</a>';
+                . '>Lcp &hellip;</a>';
 
     $this->assertSame(
       $expected,
@@ -207,7 +206,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
       )
     );
     $expected = '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' title="Lcp test post">Lcp test post</a> suffix';
+                . '>Lcp test post</a> suffix';
 
     $this->assertSame(
       $expected,
@@ -248,7 +247,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
     );
     $expected = '<h2>'
                 . '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' title="Lcp test post">Lcp test post</a></h2>';
+                . '>Lcp test post</a></h2>';
 
     $this->assertSame(
       $expected,
@@ -259,8 +258,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
       array_merge(self::$atts, ['title_class' => 'my-class'])
     );
     $expected = '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' class="my-class"'
-                . ' title="Lcp test post">Lcp test post</a>';
+                . ' class="my-class">Lcp test post</a>';
 
     $this->assertSame(
       $expected,
@@ -272,8 +270,8 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
         ['title_class' => 'my-class', 'title_tag' => 'h2'])
     );
     $expected = '<h2 class="my-class">'
-                . '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' title="Lcp test post">Lcp test post</a></h2>';
+                . '<a href="' . get_permalink(self::$test_post) .'">'
+                . 'Lcp test post</a></h2>';
 
     $this->assertSame(
       $expected,
@@ -287,8 +285,8 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
       'post_status' => 'private',
       'post_title'  => 'Private post',
     ));
-    $expected = '<a href="' . get_permalink($private_post) .'"'
-                . ' title="Private post">Private post</a>'
+    $expected = '<a href="' . get_permalink($private_post) .'">'
+                . 'Private post</a>'
                 . '<span class="lcp_private"> private</span>';
 
     $this->assertSame(
@@ -303,8 +301,8 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
       array_merge(self::$atts, ['link_target' => '_blank'])
     );
     $expected = '<a href="' . get_permalink(self::$test_post) .'"'
-                . ' target="_blank"'
-                . ' title="Lcp test post">Lcp test post</a>';
+                . ' target="_blank">'
+                . 'Lcp test post</a>';
 
     $this->assertSame(
       $expected,

@@ -24,7 +24,7 @@ class Tests_CatListDisplayer_Display extends WP_UnitTestCase {
 
     $this->assertSame('<ul class="lcp_catlist" id="lcp_instance_0">' .
                       '<li><a href="http://example.org/?p=' . $test_post->ID .
-                      '" title="Test post">Test post</a>' .
+                      '">Test post</a>' .
                       '<p class="test"> (1)</p></li></ul>',
                       $displayer->display());
 
@@ -33,7 +33,7 @@ class Tests_CatListDisplayer_Display extends WP_UnitTestCase {
 
     $this->assertSame('<ul class="lcp_catlist" id="lcp_instance_0">' .
                       '<li><a href="http://example.org/?p=' . $test_post->ID .
-                      '" title="Test post">Test post</a></li></ul>',
+                      '">Test post</a></li></ul>',
                       $displayer->display());
   }
 }
