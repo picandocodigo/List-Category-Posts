@@ -213,8 +213,6 @@ class CatListDisplayer {
       $props['target'] = $this->params['link_target'];
     }
 
-    $props['title'] = wptexturize($single->post_title);
-
     $output = $this->wrapper->to_html('a', $props, $text);
 
     if ($single->post_status == 'private') {
