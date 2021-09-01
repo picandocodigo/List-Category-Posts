@@ -54,8 +54,8 @@ class LcpParameters{
       if ($authors == 'current_user'){
         $args['author'] =  wp_get_current_user()->ID;
       } else {
-        if(preg_match('/,/', $authors)){
-          $args['author__in'] = $authors;
+        if( false !== strpos($authors,',')){
+          $args['author'] = $authors;
         } else {
           $args['author_name'] = $authors;
         }
