@@ -83,8 +83,7 @@ trait LcpMetaQuery {
    */
   private function check_customfield_orderby($params, &$meta_query) {
     if ( $params['customfield_orderby'] ) {
-
-	  $meta_query['orderby_clause'] = array(
+      $meta_query['orderby_clause'] = array(
         'key' => $params['customfield_orderby'],
         'compare' => 'EXISTS',
       );
