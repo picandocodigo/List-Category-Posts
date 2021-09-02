@@ -3,9 +3,9 @@ Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 5.7.1
+Tested up to: 5.8
 Requires PHP: 5.4
-Stable tag: 0.84.2
+Stable tag: 0.85
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -236,6 +236,14 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.85 =
+
+* **New feature**: Support for custom field data types for `customfield_orderby`, use `customfield_orderby_type`. Thanks @vosykapavel!
+* **New feature**: Run LCP in standard secondary loop mode with `main_query=no`. See [the docs](https://github.com/picandocodigo/List-Category-Posts/wiki/More-parameters-you-can-use#other-parameters) and #445.
+* Removed the `target` attribute from `<a>` elements in post titles (#464) .
+* `post_parent=0 post_type=page` now works as expected, displaying only top level pages (#370).
+* Fixed multiple authors by id (#426).
 
 = 0.84.2 =
 
