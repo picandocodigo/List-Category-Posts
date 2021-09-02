@@ -83,10 +83,15 @@ trait LcpMetaQuery {
    */
   private function check_customfield_orderby($params, &$meta_query) {
     if ( $params['customfield_orderby'] ) {
-      $meta_query['orderby_clause'] = array(
+
+	  $meta_query['orderby_clause'] = array(
         'key' => $params['customfield_orderby'],
         'compare' => 'EXISTS',
       );
+
+      if( !empty($params['customfield_orderby_type']) ) {
+        $meta_query['orderby_clause']['type'] = strtoupper($params['customfield_orderby_type']);
+      }
     }
   }
 
