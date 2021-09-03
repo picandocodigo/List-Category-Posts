@@ -73,7 +73,7 @@ fi
 if [ ! -x /usr/local/bin/phpunit ];
 then
     cd /usr/local/bin
-    wget -O phpunit https://phar.phpunit.de/phpunit-6.phar
+    wget -O phpunit https://phar.phpunit.de/phpunit-7.phar
     chmod a+x phpunit
 fi
 
