@@ -164,7 +164,7 @@ class CatList{
         if ($this->params['catlink'] == 'yes') {
           $cat_string = $this->wrapper->to_html(
             'a',
-            ['href' => $cat_link, 'title' => $cat_title],
+            ['href' => $cat_link],
             $cat_string . $this->get_category_count()
           );
         }

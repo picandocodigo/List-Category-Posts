@@ -56,7 +56,7 @@ class CatListDisplayer {
     return $info = $this->content_getter('morelink', null, $tag, $css_class);
   }
 
-  private function get_category_link($tag = 'strong', $css_class = null){
+  public function get_category_link($tag = 'strong', $css_class = null){
     return $this->content_getter('catlink', null, $tag, $css_class);
   }
 
