@@ -50,6 +50,29 @@ class Tests_LcpParameters_CreateMetaQueryArgs extends WP_UnitTestCase {
         ]
       )
     );
+    // With customfield_orderby_type
+    $this->assertSame(
+      [
+        'meta_query' => [
+          'relation' => 'AND',
+          'orderby_clause' => [
+            'key'     => 'test1',
+            'compare' => 'EXISTS',
+            'type'    => 'NUMERIC'
+          ]
+        ],
+        'orderby' => 'orderby_clause'
+      ],
+      self::$lcp_parameters->create_meta_query_args([],
+        [
+          'customfield_name'    => '',
+          'customfield_value'   => '',
+          'customfield_compare' => '',
+          'customfield_orderby' => 'test1',
+          'customfield_orderby_type' => 'numeric'
+        ]
+      )
+    );
   }
 
   public function test_customfield_compare() {
