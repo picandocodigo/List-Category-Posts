@@ -64,7 +64,7 @@ class CatListDisplayer {
     return $this->content_getter('conditional_title', null, $tag, $css_class);
   }
 
-  private function get_pagination(){
+  public function get_pagination(){
     return $this->catlist->get_pagination();
   }
 
