@@ -60,7 +60,7 @@ class CatListDisplayer {
     return $this->content_getter('catlink', null, $tag, $css_class);
   }
 
-  private function get_conditional_title($tag = 'h3', $css_class = null){
+  public function get_conditional_title($tag = 'h3', $css_class = null){
     return $this->content_getter('conditional_title', null, $tag, $css_class);
   }
 
