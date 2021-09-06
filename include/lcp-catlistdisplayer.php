@@ -76,7 +76,7 @@ class CatListDisplayer {
     return $this->content_getter('category_description', null, $tag, $css_class);
   }
 
-  private function get_no_posts_text() {
+  public function get_no_posts_text() {
     return $this->catlist->get_no_posts_text();
   }
 
