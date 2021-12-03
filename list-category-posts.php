@@ -138,6 +138,7 @@ class ListCategoryPosts{
         'instance' => '0',
         'no_post_titles' => 'no',
         'link_titles' => true,
+        'link_current' => '',
         'link_dates' => 'no',
         'after' => '',
         'after_year' => '',
