@@ -46,6 +46,8 @@ Desktop.ini
 ## Misc
 #################
 
+.phpunit.result.cache
+
 # Netbeans project meta data
 nbproject/
 
@@ -57,3 +59,8 @@ nbproject/
 vagrant
 wordpress/
 ubuntu*
+
+# Composer
+vendor/
+composer.json
+composer.lock
