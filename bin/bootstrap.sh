@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-# Update the system and install SVN + PHP7.2 + MySQL 5.7
+# Update the system and install SVN + PHP 8 + MySQL 8
 if [ ! -x /usr/bin/mysql ];
 then
-    sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password password rootpass'
-    sudo debconf-set-selections <<< 'mysql-server-5.7 mysql-server/root_password_again password rootpass'
+    sudo debconf-set-selections <<< 'mysql-server-8.0 mysql-server/root_password password rootpass'
+    sudo debconf-set-selections <<< 'mysql-server-8.0 mysql-server/root_password_again password rootpass'
 
-    # For PHP 7.4 in Ubuntu 18.
+    # For PHP 8.0 in Ubuntu 20.
     sudo add-apt-repository -y ppa:ondrej/php
 
     apt-get update
 
-    apt-get install -y subversion apache2 php7.4 mysql-server-5.7 dos2unix
-    apt-get install -y php7.4-{xml,readline,opcache,mysql,json,gd}
+    apt-get install -y subversion apache2 php8.0 mysql-server dos2unix unzip
+    apt-get install -y php8.0-{xml,readline,opcache,mysql,imagick,zip,mbstring,curl}
 
 fi
 
@@ -69,16 +69,48 @@ then
     sudo touch wordpress
 fi
 
-# Install PHPUnit
-if [ ! -x /usr/local/bin/phpunit ];
+# Install Composer
+if [ ! -x /usr/local/bin/composer ];
 then
     cd /usr/local/bin
-    wget -O phpunit https://phar.phpunit.de/phpunit-7.phar
+
+    EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"
+    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+
+    if [ "$EXPECTED_CHECKSUM" != "$ACTUAL_CHECKSUM" ]
+    then
+        >&2 echo 'ERROR: Invalid installer checksum'
+        rm composer-setup.php
+        exit 1
+    fi
+
+    php composer-setup.php --quiet
+
+    rm composer-setup.php
+    mv composer.phar composer
+fi
+
+# Install PHPUnit & PHPUnit Polyfills
+if [ ! -x /home/vagrant/.config/composer/vendor/bin/phpunit ];
+then
+    sudo -u vagrant composer global require phpunit/phpunit ^7.5 --ignore-platform-reqs --with-all-dependencies
+    # https://make.wordpress.org/core/2021/09/27/changes-to-the-wordpress-core-php-test-suite/#integration-tests-ci-changes
+    sudo -u vagrant composer global require yoast/phpunit-polyfills --ignore-platform-reqs
+
+    sudo -u vagrant echo 'PATH="$PATH:$HOME/.config/composer/vendor/bin"' >> /home/vagrant/.profile
+fi
+
+# Set WP_TESTS_DIR
+if [ ! -x /etc/profile.d/wp-tests-dir.sh ];
+then
+    cd /etc/profile.d
+    echo "export WP_TESTS_DIR=/var/www/wp-tests-lib" > wp-tests-dir.sh
     chmod a+x phpunit
 fi
 
 # Initiate the testing framework
-if [ -x /usr/local/bin/phpunit -a -f /var/www/wordpress ];
+if [ -x /home/vagrant/.config/composer/vendor/bin/phpunit -a -f /var/www/wordpress ];
 then
     cd /var/www/wp-content/plugins/list-category-posts
 
