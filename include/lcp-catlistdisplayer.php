@@ -232,7 +232,8 @@ class CatListDisplayer {
 
   // Link is a parameter here in case you want to use it on a template
   // and not show the links for all the shortcodes using this template:
-  public function get_post_title($single, $tag = null, $css_class = null, $link = true) {
+  public function get_post_title($single, $tag = null, $css_class = null,
+    $link = true, $link_current = true) {
 
     // Don't do anything if no_post_titles is specified.
     if ('yes' === $this->params['no_post_titles']) {
@@ -244,7 +245,13 @@ class CatListDisplayer {
     $css_class = $this->params['title_class'] ?: $css_class;
     $suffix = $this->params['post_suffix'] ? ' ' . $this->params['post_suffix'] : '';
 
-    if (in_array($this->params['link_titles'], ['false', 'no'], true)) {
+    if ('no' === $this->params['link_current']) {
+      $link_current = false;
+    }
+
+    if (in_array($this->params['link_titles'], ['false', 'no'], true)
+      || ((is_object( $this->parent) && is_object($single) && $this->parent->ID === $single->ID)
+        && !$link_current)) {
       $link = false;
     }
 

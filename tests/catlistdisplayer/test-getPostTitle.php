@@ -6,6 +6,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
     'title_tag'      => '',
     'title_class'    => '',
     'link_titles'    => '',
+    'link_current'   => '',
     'title_limit'    => '',
     'post_suffix'    => '',
     'no_post_titles' => '',
@@ -306,6 +307,21 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
 
     $this->assertSame(
       $expected,
+      $displayer->get_post_title(self::$test_post)
+    );
+  }
+
+  public function test_link_current_no() {
+
+    $this->go_to('/?p=' . self::$test_post->ID);
+    $this->assertQueryTrue('is_singular', 'is_single');
+
+    $displayer = new CatListDisplayer(
+      array_merge(self::$atts, ['link_current' => 'no'])
+    );
+
+    $this->assertSame(
+      'Lcp test post',
       $displayer->get_post_title(self::$test_post)
     );
   }
