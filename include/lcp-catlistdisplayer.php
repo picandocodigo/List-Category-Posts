@@ -211,7 +211,7 @@ class CatListDisplayer {
       $css_class = null;
       break;
     case 'posts_tags':
-      $info = $this->catlist->get_posts_tags($post);
+      $info = $this->catlist->get_posts_terms($post, 'tag');
       break;
     }
     return $this->wrapper->wrap($info, $tag, $css_class);

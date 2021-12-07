@@ -289,64 +289,72 @@ class CatList{
   /**
    * Parse posts_tags parameters
    */
-  public function get_posts_tags($single) {
-    // Check if tags should be displayed.
-    if ('yes' !== $this->params['posts_tags'])  {
+  public function get_posts_terms($single, $tax) {
+    // Check if terms should be displayed.
+    if ('yes' !== $this->params["posts_{$tax}s"])  {
       return null;
     }
     // Get parsed parameters.
-    $params = $this->get_posts_tags_params();
+    $params = $this->get_pt_params($tax);
 
-    // Get the post's tags IDs, returns false if post has no tags.
-    $tags = get_the_tags($single->ID);
+    // Get the post's terms IDs, returns false if post has none.
+    $terms = get_the_terms($single->ID, $params['tax_slug']);
 
     // Construct output string based on $params.
     $output = '';
-    if (is_array($tags)) {
+    if (is_array($terms)) {
       $output .= $params['prefix'];
-      $parsed_tags = array();
-      foreach($tags as $tag) {
-        $tag_string = $tag->name;
-        $tag_string = $this->pt_taglink_wrapper($params['taglink'], $tag, $tag_string);
-        $tag_string = $this->pt_inner_wrapper($params['inner'], $tag, $tag_string);
-        $parsed_tags[] = $tag_string;
+      $parsed_terms = array();
+      foreach($terms as $term) {
+        $term_string = $term->name;
+        $term_string = $this->pt_link_wrapper($params['link'], $term, $term_string);
+        $term_string = $this->pt_inner_wrapper(
+          $params['inner'],
+          $tax,
+          $term,
+          $term_string
+        );
+        $parsed_terms[] = $term_string;
       }
-      $output .= implode($params['glue'], $parsed_tags);
+      $output .= implode($params['glue'], $parsed_terms);
       return $output;
     } else {
       return null;
     }
   }
 
-  private function get_posts_tags_params() {
+  private function get_pt_params($tax) {
+    $taxonomies = ['cat' => 'category', 'tag' => 'post_tag'];
+    $slug =  array_key_exists($tax, $taxonomies) ? $taxonomies[$tax] : '';
     return array(
-      'taglink' => 'yes' === $this->params['taglink'] ? true : false,
-      'prefix'  => $this->params['posts_tags_prefix'] ?: null,
-      'glue'    => $this->params['posts_tags_glue'] ?: null,
-      'inner'   => $this->params['posts_tags_inner'] ?: null,
+      'tax_slug' => $slug,
+      'link'     => 'yes' === $this->params["{$tax}link"] ? true : false,
+      'prefix'   => $this->params["posts_{$tax}s_prefix"] ?: null,
+      'glue'     => $this->params["posts_{$tax}s_glue"] ?: null,
+      'inner'    => $this->params["posts_{$tax}s_inner"] ?: null,
     );
   }
 
-  private function pt_taglink_wrapper($taglink, $tag, $tag_string) {
-    if ($taglink) {
-      $tag_string = $this->wrapper->to_html(
+  private function pt_link_wrapper($link, $term, $term_string) {
+    if ($link) {
+      $term_string = $this->wrapper->to_html(
         'a',
-        ['href' => get_tag_link($tag->term_id)],
-        $tag_string
+        ['href' => get_term_link($term->term_id)],
+        $term_string
       );
     }
-    return $tag_string;
+    return $term_string;
   }
 
-  private function pt_inner_wrapper($inner, $tag, $tag_string) {
+  private function pt_inner_wrapper($inner, $tax, $term, $term_string) {
     if ($inner) {
-      $tag_string = $this->wrapper->to_html(
+      $term_string = $this->wrapper->to_html(
         $inner,
-        ['class' => 'tag-' . $tag->slug],
-        $tag_string
+        ['class' => "{$tax}-{$term->slug}"],
+        $term_string
       );
     }
-    return $tag_string;
+    return $term_string;
   }
 
   public function get_author_to_show($single) {
