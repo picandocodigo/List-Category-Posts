@@ -286,6 +286,77 @@ class CatList{
     }
   }
 
+  /**
+   * Parse posts_tags parameters
+   */
+  public function get_posts_terms($single, $tax) {
+    // Check if terms should be displayed.
+    if ('yes' !== $this->params["posts_{$tax}s"])  {
+      return null;
+    }
+    // Get parsed parameters.
+    $params = $this->get_pt_params($tax);
+
+    // Get the post's terms IDs, returns false if post has none.
+    $terms = get_the_terms($single->ID, $params['tax_slug']);
+
+    // Construct output string based on $params.
+    $output = '';
+    if (is_array($terms)) {
+      $output .= $params['prefix'];
+      $parsed_terms = array();
+      foreach($terms as $term) {
+        $term_string = $term->name;
+        $term_string = $this->pt_link_wrapper($params['link'], $term, $term_string);
+        $term_string = $this->pt_inner_wrapper(
+          $params['inner'],
+          $tax,
+          $term,
+          $term_string
+        );
+        $parsed_terms[] = $term_string;
+      }
+      $output .= implode($params['glue'], $parsed_terms);
+      return $output;
+    } else {
+      return null;
+    }
+  }
+
+  private function get_pt_params($tax) {
+    $taxonomies = ['cat' => 'category', 'tag' => 'post_tag'];
+    $slug =  array_key_exists($tax, $taxonomies) ? $taxonomies[$tax] : '';
+    return array(
+      'tax_slug' => $slug,
+      'link'     => 'yes' === $this->params["{$tax}link"] ? true : false,
+      'prefix'   => $this->params["posts_{$tax}s_prefix"] ?: null,
+      'glue'     => $this->params["posts_{$tax}s_glue"] ?: null,
+      'inner'    => $this->params["posts_{$tax}s_inner"] ?: null,
+    );
+  }
+
+  private function pt_link_wrapper($link, $term, $term_string) {
+    if ($link) {
+      $term_string = $this->wrapper->to_html(
+        'a',
+        ['href' => get_term_link($term->term_id)],
+        $term_string
+      );
+    }
+    return $term_string;
+  }
+
+  private function pt_inner_wrapper($inner, $tax, $term, $term_string) {
+    if ($inner) {
+      $term_string = $this->wrapper->to_html(
+        $inner,
+        ['class' => "{$tax}-{$term->slug}"],
+        $term_string
+      );
+    }
+    return $term_string;
+  }
+
   public function get_author_to_show($single) {
     if ($this->params['author'] == 'yes') {
       $lcp_userdata = get_userdata($single->post_author);

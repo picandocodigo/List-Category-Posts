@@ -76,6 +76,9 @@ while ( $this->lcp_query->have_posts() ):
   //Show the title and link to the post:
   $lcp_display_output .= $this->get_post_title($post);
 
+  // Show tags
+  $lcp_display_output .= $this->get_posts_tags($post);
+
   //Show comments:
   $lcp_display_output .= $this->get_comments($post);
 
