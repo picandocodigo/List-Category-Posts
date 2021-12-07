@@ -97,6 +97,16 @@ class LcpParameters{
           // AND relationship
           $args['tag__and'] = $tags;
         }
+      } else {
+        /*
+          Display nothing when a post has no tags.
+          Note that this will not prevent sticky posts
+          from being shown if they match other query parameters,
+          e.g. when no category is specified or a sticky post's
+          category matches the one given in `id` or `name`.
+          #80
+         */
+        $args['post__in'] = [0];
       }
     }
 
