@@ -48,13 +48,13 @@ class Tests_CatListDisplayer_GetPostsTags extends WP_UnitTestCase {
   public function test_should_display_taglink() {
     $displayer = new CatListDisplayer(array_merge(self::$atts, [
       'posts_tags' => 'yes',
-      'taglink' => ''
+      'posts_taglink' => ''
     ]));
     $this->assertSame('Tag1, Tag2, Tag3', $displayer->get_posts_tags(self::$test_post));
 
     $displayer = new CatListDisplayer(array_merge(self::$atts, [
       'posts_tags' => 'yes',
-      'taglink' => 'yes'
+      'posts_taglink' => 'yes'
     ]));
     $actual = $displayer->get_posts_tags(self::$test_post);
 

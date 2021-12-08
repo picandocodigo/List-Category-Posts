@@ -53,7 +53,7 @@ class Tests_CatListDisplayer_GetPostsCats extends WP_UnitTestCase {
   public function test_should_display_catlink() {
     $displayer = new CatListDisplayer(array_merge(self::$atts, [
       'posts_cats' => 'yes',
-      'catlink' => 'yes'
+      'posts_catlink' => 'yes'
     ]));
     $actual = $displayer->get_posts_cats(self::$test_post);
 
