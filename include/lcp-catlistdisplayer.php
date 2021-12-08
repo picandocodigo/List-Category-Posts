@@ -124,6 +124,10 @@ class CatListDisplayer {
     return $this->content_getter('posts_tags', $single, $tag, $css_class);
   }
 
+  public function get_posts_cats($single, $tag = null, $css_class = null){
+    return $this->content_getter('posts_cats', $single, $tag, $css_class);
+  }
+
   private function get_modified_date($single, $tag = null, $css_class = null){
     return $info = $this->content_getter('date_modified', $single, $tag, $css_class);
   }
@@ -212,6 +216,9 @@ class CatListDisplayer {
       break;
     case 'posts_tags':
       $info = $this->catlist->get_posts_terms($post, 'tag');
+      break;
+    case 'posts_cats':
+      $info = $this->catlist->get_posts_terms($post, 'cat');
       break;
     }
     return $this->wrapper->wrap($info, $tag, $css_class);
