@@ -328,7 +328,7 @@ class CatList{
     $slug =  array_key_exists($tax, $taxonomies) ? $taxonomies[$tax] : '';
     return array(
       'tax_slug' => $slug,
-      'link'     => 'yes' === $this->params["{$tax}link"] ? true : false,
+      'link'     => 'yes' === $this->params["posts_{$tax}link"] ? true : false,
       'prefix'   => $this->params["posts_{$tax}s_prefix"] ?: null,
       'glue'     => $this->params["posts_{$tax}s_glue"] ?: null,
       'inner'    => $this->params["posts_{$tax}s_inner"] ?: null,
