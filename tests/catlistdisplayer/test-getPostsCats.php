@@ -39,7 +39,7 @@ class Tests_CatListDisplayer_GetPostsCats extends WP_UnitTestCase {
 
     // Display if set to 'yes', default behaviour.
     $displayer = new CatListDisplayer(array_merge(self::$atts, ['posts_cats' => 'yes']));
-    $this->assertSame('Uncategorized', $displayer->get_posts_cats(self::$test_post));
+    $this->assertSame(' Uncategorized', $displayer->get_posts_cats(self::$test_post));
   }
 
   public function test_should_display_prefix(){
@@ -67,7 +67,7 @@ class Tests_CatListDisplayer_GetPostsCats extends WP_UnitTestCase {
       'posts_cats_glue' => ' GLUE '
     ]));
     $this->assertSame(
-      'Lcp test cat GLUE Lcp test cat 2',
+      ' Lcp test cat GLUE Lcp test cat 2',
       $displayer->get_posts_cats(self::$test_post_2)
     );
   }
@@ -78,7 +78,7 @@ class Tests_CatListDisplayer_GetPostsCats extends WP_UnitTestCase {
       'posts_cats_inner' => 'p'
     ]));
 
-    $expected = '<p class="cat-uncategorized">Uncategorized</p>';
+    $expected = ' <p class="cat-uncategorized">Uncategorized</p>';
     $this->assertSame($expected, $displayer->get_posts_cats(self::$test_post));
   }
 }
