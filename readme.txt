@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 5.8
 Requires PHP: 5.4
-Stable tag: 0.85.1
+Stable tag: 0.86
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -236,6 +236,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.86 =
+
+* **New feature**: use `link_current=no` to prevent the current post from being wrapped in a link.
+* **New feature**: display categories and tags of each post with `posts_cats` and `posts_tags`, a bunch of new parameters have been added to customise this feature, see [the docs](https://github.com/picandocodigo/List-Category-Posts/wiki/More-parameters-you-can-use).
+* Fixed an issue with `currenttags`, when navigating to a post with no tags, no posts are displayed, same as with `categorypage`.
+* Updated the testing environment and CI scripts.
 
 = 0.85.1 =
 
