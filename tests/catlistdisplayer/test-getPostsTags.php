@@ -24,7 +24,7 @@ class Tests_CatListDisplayer_GetPostsTags extends WP_UnitTestCase {
 
     // Display if set to 'yes', default behaviour.
     $displayer = new CatListDisplayer(array_merge(self::$atts, ['posts_tags' => 'yes']));
-    $this->assertSame('Tag1, Tag2, Tag3', $displayer->get_posts_tags(self::$test_post));
+    $this->assertSame(' Tag1, Tag2, Tag3', $displayer->get_posts_tags(self::$test_post));
 
     // Post without any tags
     $no_tags_post = self::factory()->post->create_and_get();
@@ -50,7 +50,7 @@ class Tests_CatListDisplayer_GetPostsTags extends WP_UnitTestCase {
       'posts_tags' => 'yes',
       'posts_taglink' => ''
     ]));
-    $this->assertSame('Tag1, Tag2, Tag3', $displayer->get_posts_tags(self::$test_post));
+    $this->assertSame(' Tag1, Tag2, Tag3', $displayer->get_posts_tags(self::$test_post));
 
     $displayer = new CatListDisplayer(array_merge(self::$atts, [
       'posts_tags' => 'yes',
@@ -69,14 +69,14 @@ class Tests_CatListDisplayer_GetPostsTags extends WP_UnitTestCase {
       'posts_tags' => 'yes',
       'posts_tags_glue' => ''
     ]));
-    $this->assertSame('Tag1Tag2Tag3', $displayer->get_posts_tags(self::$test_post));
+    $this->assertSame(' Tag1Tag2Tag3', $displayer->get_posts_tags(self::$test_post));
 
     $displayer = new CatListDisplayer(array_merge(self::$atts, [
       'posts_tags' => 'yes',
       'posts_tags_glue' => ' GLUE '
     ]));
     $this->assertSame(
-      'Tag1 GLUE Tag2 GLUE Tag3',
+      ' Tag1 GLUE Tag2 GLUE Tag3',
       $displayer->get_posts_tags(self::$test_post)
     );
   }
@@ -86,14 +86,14 @@ class Tests_CatListDisplayer_GetPostsTags extends WP_UnitTestCase {
       'posts_tags' => 'yes',
       'posts_tags_inner' => ''
     ]));
-    $this->assertSame('Tag1, Tag2, Tag3', $displayer->get_posts_tags(self::$test_post));
+    $this->assertSame(' Tag1, Tag2, Tag3', $displayer->get_posts_tags(self::$test_post));
 
     $displayer = new CatListDisplayer(array_merge(self::$atts, [
       'posts_tags' => 'yes',
       'posts_tags_inner' => 'p'
     ]));
 
-    $expected = '<p class="tag-tag1">Tag1</p>, ' .
+    $expected = ' <p class="tag-tag1">Tag1</p>, ' .
       '<p class="tag-tag2">Tag2</p>, <p class="tag-tag3">Tag3</p>';
     $this->assertSame($expected, $displayer->get_posts_tags(self::$test_post));
   }
