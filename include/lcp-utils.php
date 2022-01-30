@@ -58,4 +58,15 @@ class LcpUtils{
       return $value;
     };
   }
+
+  // Adapted from a comment on https://developer.wordpress.org/reference/functions/sanitize_html_class/
+  public static function sanitize_html_classes($classes, $sep = " ") {
+    if(!is_array($classes)) {
+      $classes = explode($sep, $classes);
+    }
+
+    $classes = array_map('sanitize_html_class', $classes);
+
+    return implode(' ', $classes);
+  }
 }

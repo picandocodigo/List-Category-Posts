@@ -39,4 +39,11 @@ class Tests_LcpWrapper_Wrap extends WP_UnitTestCase {
                       '<p class="test">an</p><p class="test">array</p>',
                       $wrapper->wrap($test_array, 'p', 'test'));
   }
+
+  public function test_multiple_classes() {
+    $wrapper = LcpWrapper::get_instance();
+    $this->assertSame(
+      '<span class="test1 test2 test3">test string</span>',
+      $wrapper->wrap($this->test_string, null, 'test1 test2 test3'));
+  }
 }

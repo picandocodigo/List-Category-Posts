@@ -4,6 +4,9 @@
  * defined by the user, both in shortcode parameters (e.g. comments_tag)
  * and in template method calls.
  */
+
+require_once 'lcp-utils.php';
+
 class LcpWrapper {
 
   // Singleton implementation
@@ -34,7 +37,7 @@ class LcpWrapper {
       elseif (!empty($tag) && empty($css_class)) :
         return $this->to_html($tag, [], $info);
       endif;
-      $css_class = sanitize_html_class($css_class);
+      $css_class = LcpUtils::sanitize_html_classes($css_class);
       return $this->to_html($tag, ['class' => $css_class], $info);
     endif;
   }
