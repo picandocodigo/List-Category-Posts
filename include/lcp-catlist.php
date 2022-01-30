@@ -544,7 +544,7 @@ class CatList{
       $props['start'] = $start;
     }
     //Give a class to wrapper tag
-    $props['class'] = $css_class;
+    $props['class'] = LcpUtils::sanitize_html_classes($css_class);
 
     //Give id to wrapper tag
     $props['id'] = 'lcp_instance_' . $this->instance;
