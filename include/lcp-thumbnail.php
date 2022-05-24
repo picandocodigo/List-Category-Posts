@@ -37,8 +37,6 @@ class LcpThumbnail{
       }
 
       if ( has_post_thumbnail($single->ID) ){
-
-
         $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
                          '" title="' . esc_attr($single->post_title) . '">';
 
@@ -52,7 +50,7 @@ class LcpThumbnail{
           )
         );
         $lcp_thumbnail .= '</a>';
-      } else {
+      } elseif ($force_thumbnail === 'yes'|| $force_thumbnail === 'true') {
         $content = get_the_content();
         $thumb_id = $this->get_first_content_image_id($content);;
         if ($thumb_id) {
@@ -67,21 +65,6 @@ class LcpThumbnail{
             )
           );
           $lcp_thumbnail .= '</a>';
-        } else {
-          // if thumbnail is requested but not found as featured image, grab first image in the content of the post
-          if ( ($force_thumbnail === 'yes'|| $force_thumbnail === 'true') && preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $imgMatches)) {
-            $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
-              '" title="' . esc_attr($single->post_title) . '">';
-
-            $lcp_thumbnail .= '<img src="' . esc_url($imgMatches[1]) . '" ';
-            if ( $lcp_thumb_class != null ) {  // thumbnail class passed as parameter to shortcode
-                $lcp_thumbnail .= 'class="' . $lcp_thumb_class . '" ';
-            }
-            else { // Otherwise, use this class name
-              $lcp_thumbnail .= 'class="lcp_thumbnail" ';
-            }
-            $lcp_thumbnail .= ' alt="' . esc_attr($single->post_title) . '" /></a>';
-          }
         }
       }
     } else {
