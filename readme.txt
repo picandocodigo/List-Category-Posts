@@ -3,9 +3,9 @@ Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 5.4
-Stable tag: 0.86.1
+Stable tag: 0.87
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -236,6 +236,12 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.87 =
+
+* **New feature**: use `keep_orderby_filters=yes` to prevent the plugin from removing 'posts_orderby' filters added by other plugins/themes.
+* **New feature**: use `ignore_sticky_posts=yes` to ignore all sticky posts, they will still be displayed as regular posts in normal order if they match your filtering options, though. (#342)
+* **New feature**: use `cat_sticky_posts=yes` to make sticky posts 'stick' when filtering by category. (#423)
 
 = 0.86.1 =
 
