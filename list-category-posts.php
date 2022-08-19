@@ -166,6 +166,7 @@ class ListCategoryPosts{
         'pagination_bookmarks' => '',
         'ol_offset' => '',
         'main_query' => '',
+        'keep_orderby_filters' => '',
       );
     }
     return self::$default_params;

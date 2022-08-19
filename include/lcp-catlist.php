@@ -99,7 +99,9 @@ class CatList{
     }
     $this->posts_count = $lcp_query->found_posts;
 
-    remove_all_filters('posts_orderby');
+    if ( $this->params[ 'keep_orderby_filters' ] !== 'yes' ) {
+      remove_all_filters('posts_orderby');
+    }
     remove_filter('posts_where', array(LcpParameters::get_instance(), 'starting_with'));
 
     return $lcp_query;
