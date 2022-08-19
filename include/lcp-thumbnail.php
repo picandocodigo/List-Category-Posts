@@ -51,30 +51,30 @@ class LcpThumbnail{
             )
         );
         $lcp_thumbnail .= '</a>';
-      } else {
+      } else if ( ($force_thumbnail === 'yes'|| $force_thumbnail === 'true') && preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $imgMatches)) {
         // if thumbnail is requested but not found as featured image, grab first image in the content of the post
-        if ( ($force_thumbnail === 'yes'|| $force_thumbnail === 'true') && preg_match('~<img[^>]*src\s?=\s?[\'"]([^\'"]*)~i',get_the_content(), $imgMatches)) {
-          $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
-                         '" title="' . esc_attr($single->post_title) . '">';
+        $lcp_thumbnail = '<a href="' . esc_url(get_permalink($single->ID)) .
+                        '" title="' . esc_attr($single->post_title) . '">';
 
-          $lcp_thumbnail .= '<img src="' . esc_url($imgMatches[1]) . '" ';
-          if ( $lcp_thumb_class != null ) {  // thumbnail class passed as parameter to shortcode
-            $lcp_thumbnail .= 'class="' . $lcp_thumb_class . '" ';
-          }
-          else { // Otherwise, use this class name
-            $lcp_thumbnail .= 'class="lcp_thumbnail" ';
-          }
-          $lcp_thumbnail .= ' alt="' . esc_attr($single->post_title) . '" /></a>';
+        $lcp_thumbnail .= '<img src="' . esc_url($imgMatches[1]) . '" ';
+        if ( $lcp_thumb_class != null ) {  // thumbnail class passed as parameter to shortcode
+          $lcp_thumbnail .= 'class="' . $lcp_thumb_class . '" ';
         }
+        else { // Otherwise, use this class name
+          $lcp_thumbnail .= 'class="lcp_thumbnail" ';
+        }
+        $lcp_thumbnail .= ' alt="' . esc_attr($single->post_title) . '" /></a>';
+      } else {
+        # Check for a YouTube video thumbnail
+        $lcp_thumbnail = $this->check_youtube_thumbnail($single, $lcp_thumb_class);
       }
-    } else {
-      # Check for a YouTube video thumbnail
-      $lcp_thumbnail = $this->check_youtube_thumbnail($single->content);
     }
     return $lcp_thumbnail;
   }
 
-  private function check_youtube_thumbnail($content){
+  private function check_youtube_thumbnail($single, $lcp_thumb_class){
+    $content = $single->content;
+    
     # youtube.com/watch?v=id
     $yt_pattern = '/([a-zA-Z0-9\-\_]+\.|)youtube\.com\/watch(\?v\=|\/v\/)([a-zA-Z0-9\-\_]{11})([^<\s]*)/';
     # youtube.com/v[id]
@@ -99,7 +99,7 @@ class LcpThumbnail{
         $thmbn_class = ' class="' . $lcp_thumb_class . '" />';
         $lcp_ytimage = preg_replace("/\>/", $thmbn_class, $lcp_ytimage);
       }
-      $lcp_thumbnail .= '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
+      return '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
     }
   }
 }
