@@ -168,6 +168,7 @@ class ListCategoryPosts{
         'main_query' => '',
         'keep_orderby_filters' => '',
         'ignore_sticky_posts' => '',
+        'cat_sticky_posts' => '',
       );
     }
     return self::$default_params;

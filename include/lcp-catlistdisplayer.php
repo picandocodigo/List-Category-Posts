@@ -38,6 +38,9 @@ class CatListDisplayer {
       wp_reset_query();
     }
 
+    // This filter needs to be removed after template code has executed, not before.
+    remove_filter( 'the_posts', [ LcpParameters::get_instance(), 'move_sticky_to_top' ] );
+
     return $this->lcp_output;
   }
 
