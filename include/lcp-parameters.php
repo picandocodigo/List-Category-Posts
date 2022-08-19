@@ -152,7 +152,26 @@ class LcpParameters{
       $args['ignore_sticky_posts'] = true;
     }
 
+    if ( $params[ 'cat_sticky_posts' ] === 'yes' ) {
+      add_filter( 'the_posts', [$this, 'move_sticky_to_top']);
+    }
+
     return $args;
+  }
+
+  public function move_sticky_to_top( $posts ) {
+    $sticky_ids = get_option( 'sticky_posts' );
+    $newposts = [];
+
+    foreach ( $posts as $post ) {
+      if ( in_array( $post->ID, $sticky_ids ) ) {
+        array_unshift( $newposts, $post );
+      } else {
+        $newposts[] = $post;
+      }
+    }
+
+    return $newposts;
   }
 
     private function lcp_check_basic_params($args){
