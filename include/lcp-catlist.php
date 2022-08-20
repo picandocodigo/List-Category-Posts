@@ -88,6 +88,8 @@ class CatList{
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
 
+    do_action( 'lcp_pre_run_query', $args );
+
     if ('no' === $this->params['main_query']) {
       // Use a standard Loop with WP_Query.
       $lcp_query = new WP_Query($args);

@@ -9,6 +9,7 @@ class LcpParameters{
   private $starting_with = null;
   private $utils;
   private $params;
+  private $cat_sticky_posts;
 
   // Use Trait for before/after date queries:
   use LcpDateQuery;
@@ -153,23 +154,28 @@ class LcpParameters{
     }
 
     if ( $params[ 'cat_sticky_posts' ] === 'yes' ) {
-      add_filter( 'the_posts', [$this, 'move_sticky_to_top']);
+      add_action( 'lcp_pre_run_query', [ $this, 'get_cat_sticky_posts' ] );
+      add_filter( 'the_posts', [ $this, 'move_sticky_to_top' ] );
     }
 
     return $args;
   }
 
-  public function move_sticky_to_top( $posts ) {
+  public function get_cat_sticky_posts( $args ) {
     $sticky_ids = get_option( 'sticky_posts' );
-    $newposts = [];
+    $sticky_query = new WP_Query(
+      array_merge( $args, [ 'post__in' => $sticky_ids ] )
+    );
+    $this->cat_sticky_posts = $sticky_query->posts;
+  }
 
-    foreach ( $posts as $post ) {
-      if ( in_array( $post->ID, $sticky_ids ) ) {
-        array_unshift( $newposts, $post );
-      } else {
-        $newposts[] = $post;
-      }
-    }
+  public function move_sticky_to_top( $posts ) {
+    remove_action( 'lcp_pre_run_query', [ $this, 'get_cat_sticky_posts' ] );
+    if ( null == $this->cat_sticky_posts ) return $posts;
+
+    $newposts = array_merge( $this->cat_sticky_posts, $posts );
+
+    $this->cat_sticky_posts = null;
 
     return $newposts;
   }
