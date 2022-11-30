@@ -31,6 +31,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => '',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -43,6 +44,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => 'Dogs',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -59,6 +61,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => '',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -71,6 +74,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => '',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -84,6 +88,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => 'Dogs,Cats',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -100,6 +105,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => '',
           'categorypage'     => '',
           'child_categories' => 'no',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -113,6 +119,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => 'Dogs,Cats',
           'categorypage'     => '',
           'child_categories' => 'no',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -129,6 +136,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => '',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -142,6 +150,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => 'Dogs+Cats',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -157,6 +166,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'name'             => '',
           'categorypage'     => '',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -172,6 +182,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
         [
           'categorypage'     => 'yes',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -181,6 +192,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
         [
           'categorypage'     => 'other',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );
@@ -190,6 +202,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
         [
           'categorypage'     => 'all',
           'child_categories' => 'yes',
+          'main_cat_only'    => '',
         ]
       )
     );

@@ -79,6 +79,7 @@ class CatList{
       'name'             => $this->params['name'],
       'categorypage'     => $this->params['categorypage'],
       'child_categories' => $this->params['child_categories'],
+      'main_cat_only'    => $this->params['main_cat_only'],
     ], $this->lcp_category_id);
     $processed_params = LcpParameters::get_instance()->get_query_params($this->params);
     $args = array_merge($args, $processed_params);
@@ -105,6 +106,7 @@ class CatList{
       remove_all_filters('posts_orderby');
     }
     remove_filter('posts_where', array(LcpParameters::get_instance(), 'starting_with'));
+    remove_filter('posts_results', [ LcpCategory::get_instance(), 'filter_by_main_category' ]);
 
     return $lcp_query;
   }
