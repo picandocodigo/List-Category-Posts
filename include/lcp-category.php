@@ -16,6 +16,13 @@ class LcpCategory{
   }
 
   /**
+   * Used to store the single main category to filter by.
+   *
+   * @var int
+   */
+  private $main_cat;
+
+  /**
    * Parses category related shortcode parameters and returns
    * WP_Query compatible $args array. Also sets $lcp_category_id.
    *
@@ -32,6 +39,7 @@ class LcpCategory{
    *   @type string $name
    *   @type string $categorypage
    *   @type string $child_categories
+   *   @type string $main_cat_only
    * }
    * @param  mixed  &$lcp_category_id Optional. Updated by this method if necessary.
    * @return array                    WP_Query $args array, @see lcp_categories.
@@ -63,6 +71,9 @@ class LcpCategory{
 
     // This is where the lcp_category_id property of CatList is changed.
     $lcp_category_id = $categories;
+
+    // Check if only the main category should be used.
+    $this->check_main_cat_only( $params[ 'main_cat_only' ], $categories );
 
     return $this->lcp_categories(
       $categories, $params['child_categories'], $exclude);
@@ -264,5 +275,77 @@ class LcpCategory{
     }
 
     return implode(',',$categories);
+  }
+
+  /**
+   * Handles the 'main_cat_only' shortcode parameter.
+   * 
+   * When filtering by main category is enabled, adds
+   * a proper filter function to the 'posts_results' hook.
+   * 
+   * @param string $main_cat_only Shortcode parameter value, 'yes' to enable.
+   * @param mixed  $categories    Category ID of the main category to filter by.
+   */
+  private function check_main_cat_only( $main_cat_only, $categories ) {
+    if ( 'yes' === $main_cat_only ) {
+      $this->main_cat = intval( $categories );
+      add_filter( 'posts_results', [ $this, 'filter_by_main_category' ] );
+    }
+  }
+
+  /**
+   * Filter method intended for the 'posts_results' hook.
+   * 
+   * Filters the posts array and returns only those that
+   * have their main/primary category matching the one saved
+   * in the $main_cat private property.
+   * 
+   * @param array $posts WP_Post objects.
+   * @return array       Filtered WP_Post objects.
+   */
+  public function filter_by_main_category( $posts ) {
+    /* array_values is necessary to fix indexes, WordPress expects posts
+       array to have proper numerical indexing but array_filter retains
+       original array's keys.
+     */
+    return array_values( array_filter( $posts, function( $post ) {
+      return $this->get_post_primary_category( $post )->term_id === $this->main_cat;
+    }));
+  }
+
+  /**
+   * Gets the main category of a post.
+   * 
+   * This method accepts a post ID and first tries to get the
+   * primary category (a Yoast SEO feature) of the post. If none is found
+   * it falls back to the first assigned category on the post's category list.
+   * 
+   * @link https://www.lab21.gr/blog/wordpress-get-primary-category-post/
+   * 
+   * @param int $post_id ID of the post to check.
+   * @return mixed       Category ID (int) of the post's main category or null if none found.
+   */
+  private function get_post_primary_category( $post_id ) {
+    $return = null;
+
+    if ( class_exists( 'WPSEO_Primary_Term' ) ) {
+      // Show Primary category by Yoast if it is enabled & set
+      $wpseo_primary_term = new WPSEO_Primary_Term( 'category', $post_id );
+      $primary_term = get_term( $wpseo_primary_term->get_primary_term() ) ;
+
+      if ( !is_wp_error( $primary_term ) ) {
+        $return = $primary_term;
+      }
+    }
+
+    if ( empty( $return ) ) {
+      $categories_list = get_the_terms( $post_id, 'category' );
+
+      if ( !empty( $categories_list ) ) {
+        $return = $categories_list[0];  //get the first category
+      }
+    }
+
+    return $return;
   }
 }
