@@ -91,7 +91,7 @@ class LcpParameters{
     // Current tags
     $currenttags = $params['currenttags'];
     if ( $currenttags === 'yes' || $currenttags === 'all' ) {
-      $tags = $this->lcp_get_current_tags();
+      $tags = $this->lcp_get_current_terms( 'post_tag' );
 
       if ( !empty($tags) ) {
         // OR relationship
@@ -222,15 +222,16 @@ class LcpParameters{
     return $args;
   }
 
-  private function lcp_get_current_tags(){
-    $tags = get_the_tags();
-    $tag_ids = array();
-    if( !empty($tags) ){
-      foreach ($tags as $tag) {
-        array_push($tag_ids, $tag->term_id);
+  // Duplicated in LcpTaxonomies, for now.
+  private function lcp_get_current_terms($taxonomy) {
+    $terms = get_the_terms(0, $taxonomy);
+    $term_ids = array();
+    if( !empty( $terms ) ) {
+      foreach ( $terms as $term ) {
+        array_push( $term_ids, $term->term_id );
       }
     }
-    return $tag_ids;
+    return $term_ids;
   }
 
   public function starting_with($where){

@@ -130,6 +130,7 @@ class ListCategoryPosts{
         'taxonomies_and' => '',
         'taxonomies_or' => '',
         'terms' => '',
+        'currentterms' => '',
         'categorypage' => '',
         'category_count' => '',
         'category_description' => 'no',
