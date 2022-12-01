@@ -3,9 +3,9 @@ Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.4
-Stable tag: 0.87
+Stable tag: 0.88
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -236,6 +236,11 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.88 =
+
+* When filtering by a single category, you can add `main_cat_only=yes` to select only the posts that have this category as their main one (#449).
+* Similar to `currenttags`, `currentterms` has been added to support filtering by current post's custom taxonomy terms (#293).
 
 = 0.87 =
 
