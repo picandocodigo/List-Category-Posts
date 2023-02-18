@@ -5,7 +5,7 @@ Tags: list, categories, posts, cms
 Requires at least: 3.3
 Tested up to: 6.1
 Requires PHP: 5.4
-Stable tag: 0.88
+Stable tag: 0.88.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -236,6 +236,13 @@ Widget built for WordPress 2.8's Widget API, so you need at least WP 2.8 to use 
 Template system has changed. Custom templates should be stored in WordPress theme folder.
 
 == Changelog ==
+
+= 0.88.1 =
+
+* Fixed PHP warnings that appeared when creating a new LCP widget.
+* Upgraded testing environment.
+* Fixed PHP 8.1 deprecation warnings reported by testing suite.
+* Deprecation notice: this is the last version with official support of PHP 5.4. Required PHP version will be raised to 5.6 with the next release.
 
 = 0.88 =
 
