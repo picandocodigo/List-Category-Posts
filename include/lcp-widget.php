@@ -27,7 +27,6 @@ class ListCategoryPostsWidget extends WP_Widget{
     $includeposts = isset($instance['includeposts']) ? $instance['includeposts'] : 0;
     $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
     $category_id = $instance['categoryid'];
-    $dateformat = ($instance['dateformat']) ? $instance['dateformat'] : get_option('date_format');
     $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
     $pagination = ($instance['pagination'] == 'on') ? 'yes' : 'no';
     $showmodifieddate = ($instance['show_modified_date'] == 'on') ? 'yes' : 'no';
@@ -52,7 +51,6 @@ class ListCategoryPostsWidget extends WP_Widget{
       'date' => $showdate,
       'date_modified' => $showmodifieddate,
       'author' => $showauthor,
-      'dateformat' => $dateformat,
       'template' => 'default',
       'excerpt' => $showexcerpt,
       'excerpt_size' => $excerptsize,
@@ -118,7 +116,6 @@ class ListCategoryPostsWidget extends WP_Widget{
     $instance['includeposts'] = strip_tags($new_instance['includeposts']);
     $instance['offset'] = strip_tags($new_instance['offset']);
     $instance['categoryid'] = strip_tags($new_instance['categoryid']);
-    $instance['dateformat'] = strip_tags($new_instance['dateformat']);
     $instance['show_date'] = strip_tags($new_instance['show_date']);
     $instance['show_modified_date'] = strip_tags($new_instance['show_modified_date']);
     $instance['show_excerpt'] = strip_tags($new_instance['show_excerpt']);
