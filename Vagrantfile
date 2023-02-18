@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu/focal64"
+  config.vm.box = "ubuntu/jammy64"
   config.vm.provision :shell, :path => "bin/bootstrap.sh"
   config.vm.network :forwarded_port, guest: 80, host: 8080
 

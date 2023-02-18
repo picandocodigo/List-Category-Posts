@@ -6,13 +6,10 @@ then
     sudo debconf-set-selections <<< 'mysql-server-8.0 mysql-server/root_password password rootpass'
     sudo debconf-set-selections <<< 'mysql-server-8.0 mysql-server/root_password_again password rootpass'
 
-    # For PHP 8.0 in Ubuntu 20.
-    sudo add-apt-repository -y ppa:ondrej/php
-
     apt-get update
 
-    apt-get install -y subversion apache2 php8.0 mysql-server dos2unix unzip
-    apt-get install -y php8.0-{xml,readline,opcache,mysql,imagick,zip,mbstring,curl}
+    apt-get install -y subversion apache2 php8.1 mysql-server dos2unix unzip
+    apt-get install -y php8.1-{xml,readline,opcache,mysql,imagick,zip,mbstring,curl}
 
 fi
 
@@ -94,7 +91,7 @@ fi
 # Install PHPUnit & PHPUnit Polyfills
 if [ ! -x /home/vagrant/.config/composer/vendor/bin/phpunit ];
 then
-    sudo -u vagrant composer global require phpunit/phpunit ^7.5 --ignore-platform-reqs --with-all-dependencies
+    sudo -u vagrant composer global require phpunit/phpunit ~9 --ignore-platform-reqs --with-all-dependencies
     # https://make.wordpress.org/core/2021/09/27/changes-to-the-wordpress-core-php-test-suite/#integration-tests-ci-changes
     sudo -u vagrant composer global require yoast/phpunit-polyfills --ignore-platform-reqs
 
@@ -106,7 +103,6 @@ if [ ! -x /etc/profile.d/wp-tests-dir.sh ];
 then
     cd /etc/profile.d
     echo "export WP_TESTS_DIR=/var/www/wp-tests-lib" > wp-tests-dir.sh
-    chmod a+x phpunit
 fi
 
 # Initiate the testing framework
