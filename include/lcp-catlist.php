@@ -363,7 +363,7 @@ class CatList{
     return $term_string;
   }
 
-  public function get_author_to_show($single) {
+    public function get_author_to_show($single) {
     if ($this->params['author'] == 'yes') {
       $lcp_userdata = get_userdata($single->post_author);
       $author_name =  $lcp_userdata->display_name;
@@ -372,11 +372,11 @@ class CatList{
         $link = get_author_posts_url($lcp_userdata->ID);
         return $this->wrapper->to_html(
           'a',
-          ['href' => $link, 'title' => $author_name],
-          $author_name
+          ['href' => $link, 'title' => " ".$author_name],
+          " ".$author_name
         );
       } else {
-        return $author_name;
+        return " ".$author_name;
       }
     } else {
       return null;
