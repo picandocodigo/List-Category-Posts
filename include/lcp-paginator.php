@@ -116,10 +116,6 @@ class LcpPaginator {
     } else {
       $server_vars = add_magic_quotes($_SERVER);
       $request_uri = $server_vars['REQUEST_URI'];
-      $query = $server_vars['QUERY_STRING'];
-      $amp = ( strpos( $request_uri, "?") ) ? "&" : "";
-      $pattern = "/[&|?]?lcp_page" . preg_quote($lcp_instance) . "=([0-9]+)/";
-      $query = preg_replace($pattern, '', $query);
 
       $url = strtok($request_uri,'?');
       $protocol = "http";
@@ -128,8 +124,13 @@ class LcpPaginator {
         $protocol = "https";
       }
       $http_host = $server_vars['HTTP_HOST'];
-      $page_link = "$protocol://$http_host$url?$query" .
-                   $amp . "lcp_page" . $lcp_instance . "=". $page;
+
+      // Extract, clean and set the matching page parameter.
+      $params = $this->process_query_params($server_vars['QUERY_STRING']);
+      $params["lcp_page" . $lcp_instance] = $page;
+
+      // Set the page link.
+      $page_link = "$protocol://$http_host$url?" . http_build_query($params);
 
       // Append a bookmark if not disabled by 'pagination_bookmarks=no'
       if ($bookmark !== "no") $page_link .= "#lcp_instance_" . $lcp_instance;
@@ -148,5 +149,26 @@ class LcpPaginator {
     // WA: Replace '?&' by '?' to avoid potential redirection problems later on
     $link = str_replace('?&', '?', $link );
     return $link;
+  }
+
+  private function process_query_params($query) {
+    parse_str($query, $params);
+
+    // Filter out all none page parameters.
+    $params = array_filter($params, function ($k) {
+      if (strpos($k, 'page', 0)) {
+          return true;
+      }
+      return false;
+    }, ARRAY_FILTER_USE_KEY);
+
+    // Cleanup page numbers.
+    array_map(function ($v) {
+      $int = intval($v);
+      if ($int) return $int;
+      return 1;
+    }, $params);
+
+    return $params;
   }
 }
