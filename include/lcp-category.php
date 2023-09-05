@@ -179,10 +179,12 @@ class LcpCategory{
    * Also accepts an empty string for compatibility with the widget.
    * Returns a single category ID when used on category archive page,
    * a comma separated string of IDs for the 'or' relationship,
-   * an array of IDs for the 'and' relationship. When no posts should be
-   * displayed it returns `[0]`.
+   * an array of IDs for the 'and' relationship. Also accepts optional
+   * $ids which is used to handle excluded category IDs for 'yes' and 'all'
+   * modes. When no posts should be displayed it returns `[0]`.
    *
    * @param  string $mode     Accepts 'all', 'yes', 'other' and empty string.
+   * @param  string $ids      IDs of excluded categories as in the shortcode.
    * @return int|string|array Category ID(s).
    */
   public function current_category($mode, $ids='') {
@@ -365,6 +367,17 @@ class LcpCategory{
 
     return $return;
   }
+
+  /**
+   * Validates excluded category ids for current categories.
+   * 
+   * This method takes an array of category IDs which users
+   * might use together with `categorypage`. Each id should be prefixed with
+   * a minus sign.
+   * 
+   * @param array $ids   Array of strings or ints.
+   * @return array       Only valid negative integers.
+   */
   private function validate_excluded_ids($ids) {
     $ids = array_map('intval', $ids);
     $ids = array_filter($ids, function($id) {
