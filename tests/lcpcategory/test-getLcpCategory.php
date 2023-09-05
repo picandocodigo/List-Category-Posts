@@ -194,6 +194,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'categorypage'     => 'other',
           'child_categories' => 'yes',
           'main_cat_only'    => '',
+          'id'               => '0',
         ]
       )
     );
@@ -204,6 +205,7 @@ class Tests_LcpCategory_GetLcpCategory extends WP_UnitTestCase {
           'categorypage'     => 'all',
           'child_categories' => 'yes',
           'main_cat_only'    => '',
+          'id'               => '0',
         ]
       )
     );
