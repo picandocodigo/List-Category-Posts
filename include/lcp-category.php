@@ -52,7 +52,8 @@ class LcpCategory{
 
     // In a category page:
     if ($params['categorypage'] &&
-         in_array($params['categorypage'], ['yes', 'all', 'other'])) {
+      in_array($params['categorypage'], ['yes', 'all', 'other']) ||
+      $params['id'] == -1) {
       // Use current category
       $categories = $this->current_category($params['categorypage'], $params['id']);
     } elseif ($params['name']) {
@@ -184,35 +185,46 @@ class LcpCategory{
    * @param  string $mode     Accepts 'all', 'yes', 'other' and empty string.
    * @return int|string|array Category ID(s).
    */
-  public function current_category($mode, $ids=''){
+  public function current_category($mode, $ids='') {
     // Only single post pages with assigned category and
     // category archives have a 'current category',
     // in all other cases no posts should be returned. (#69)
+    
+    // Should be overriden if any categories are found.
+    $cats = [0]; // workaround to display no posts
+    
     $category = get_category( get_query_var( 'cat' ) );
-    if( isset( $category->errors ) && $category->errors["invalid_term"][0] == __("Empty Term.") ){
-      global $post;
+    if( ! ( isset( $category->errors ) && $category->errors["invalid_term"][0] == __("Empty Term.") ) ) {
+      $cats = $category->cat_ID;
+    } else if ( is_singular() || in_the_loop() ) {
       /* Since WP 4.9 global $post is nullified in text widgets
        * when is_singular() is false.
        *
        * Added in_the_loop check to make the shortcode work
        * in posts listed in archives and home page (#358).
        */
-      if ( is_singular() || in_the_loop() ) {
-        $categories = get_the_category($post->ID);
-      }
+      global $post;
+      $categories = get_the_category($post->ID);
 
-      $exclude = $this->excluded_ids($ids);
-
-      if ( !empty($categories) ){
+      if ( !empty($categories) ) {
         $cats = array_map(function($cat) {
           return $cat->cat_ID;
         }, $categories);
-        // AND relationship - do nothing, $cats is what we need
-        // if ('all' === $mode) {
-        //   return $cats;
-        // }
+        // Parse excluded categories if ids are used.
+        if (in_array($mode, ['all', 'yes', '']) && !empty($ids)) {
+          $ids = $this->validate_excluded_ids(explode(',', $ids));
+          // Remove excluded ids from $cats.
+          $cats = array_diff($cats, array_map('abs', $ids));
+        }
+        // AND relationship
+        if ('all' === $mode) {
+          // Handle excluded categories
+          if (!empty($ids)) $cats['exclude'] = array_map('abs', $ids);
+        }
         // OR relationship, default
         if ('yes' === $mode || '' === $mode) {
+          // Handle excluded categories
+          if (!empty($ids)) $cats = array_merge($cats, $ids);
           $cats = implode(',', $cats);
         }
         // Exclude current categories
@@ -221,24 +233,9 @@ class LcpCategory{
             return "-$cat";
           }, $cats));
         }
-      } else {
-        $cats = [0]; // workaround to display no posts
       }
     }
-    return array(
-      $cats,
-      'exclude' => $exclude
-    );
-  }
-
-  /**
-   * Given a string of ids, returns a string with the ids prefixed with a minus sign:
-   * e.g.: 1,2,-3,4,-5+6 => -3, -5
-   */
-  private function excluded_ids($ids) {
-    $matches = array();
-    preg_match_all('/(\-[0-9]+)+/', $ids, $matches);
-    return join(',', $matches[1]);
+    return $cats;
   }
 
   /**
@@ -367,5 +364,16 @@ class LcpCategory{
     }
 
     return $return;
+  }
+  private function validate_excluded_ids($ids) {
+    $ids = array_map('intval', $ids);
+    $ids = array_filter($ids, function($id) {
+      if (is_int($id) && $id < 0) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return $ids;
   }
 }
