@@ -13,6 +13,17 @@ class ListCategoryPostsWidget extends WP_Widget{
 
   function widget($args, $instance) {
     global $post;
+    /* Since WP 4.9 global $post is nullified in text widgets
+     * when is_singular() is false. It should also be nullified in LCP
+     * widgets, otherwise the plugin will mark the last post of the loop
+     * as the current post.
+     * 
+     * https://wordpress.org/support/topic/current-class-is-being-added-to-final-post-in-list/
+     */
+    if ( ! is_singular() ) {
+      $post = null;
+    }
+
     extract( $args );
 
     $title = empty($instance['title']) ? ' ' : apply_filters('widget_title', $instance['title']);
