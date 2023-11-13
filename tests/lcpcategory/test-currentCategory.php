@@ -142,16 +142,6 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
     );
   }
 
-  public function test_empty_string_equals_yes_mode() {
-    $lcpcategory = LcpCategory::get_instance();
-
-    $this->go_to('/?p=' . self::$test_post);
-    $this->assertSame(
-      $lcpcategory->current_category('yes'),
-      $lcpcategory->current_category('')
-    );
-  }
-
   public function test_single_page_with_no_categories() {
     $lcpcategory = LcpCategory::get_instance();
 

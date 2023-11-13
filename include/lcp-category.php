@@ -52,8 +52,7 @@ class LcpCategory{
 
     // In a category page:
     if ($params['categorypage'] &&
-      in_array($params['categorypage'], ['yes', 'all', 'other']) ||
-      $params['id'] == -1) {
+      in_array($params['categorypage'], ['yes', 'all', 'other'])) {
       // Use current category
       $categories = $this->current_category($params['categorypage'], $params['id']);
     } elseif ($params['name']) {
@@ -176,14 +175,13 @@ class LcpCategory{
    * Handles the `categorypage` shortcode parameter with all its modes.
    *
    * This method accepts all valid `categorypage` shortcode parameters.
-   * Also accepts an empty string for compatibility with the widget.
    * Returns a single category ID when used on category archive page,
    * a comma separated string of IDs for the 'or' relationship,
    * an array of IDs for the 'and' relationship. Also accepts optional
    * $ids which is used to handle excluded category IDs for 'yes' and 'all'
    * modes. When no posts should be displayed it returns `[0]`.
    *
-   * @param  string $mode     Accepts 'all', 'yes', 'other' and empty string.
+   * @param  string $mode     Accepts 'all', 'yes', 'other'.
    * @param  string $ids      IDs of excluded categories as in the shortcode.
    * @return int|string|array Category ID(s).
    */
@@ -213,7 +211,7 @@ class LcpCategory{
           return $cat->cat_ID;
         }, $categories);
         // Parse excluded categories if ids are used.
-        if (in_array($mode, ['all', 'yes', '']) && !empty($ids)) {
+        if (in_array($mode, ['all', 'yes']) && !empty($ids)) {
           $ids = $this->validate_excluded_ids(explode(',', $ids));
           // Remove excluded ids from $cats.
           $cats = array_diff($cats, array_map('abs', $ids));
@@ -224,7 +222,7 @@ class LcpCategory{
           if (!empty($ids)) $cats['exclude'] = array_map('abs', $ids);
         }
         // OR relationship, default
-        if ('yes' === $mode || '' === $mode) {
+        if ('yes' === $mode) {
           // Handle excluded categories
           if (!empty($ids)) $cats = array_merge($cats, $ids);
           $cats = implode(',', $cats);
