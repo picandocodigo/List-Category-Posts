@@ -183,10 +183,13 @@ class LcpParameters{
 
       if ($this_index > -1){
         unset($excludeposts[$this_index]);
-        $excludeposts = array_merge(
-          $excludeposts,
-          array($this->lcp_get_current_post_id())
-        );
+        // If we are not on a page/post there is nothing to exclude.
+        if (true === is_singular()) {
+          $excludeposts = array_merge(
+            $excludeposts,
+            array($this->lcp_get_current_post_id())
+          );
+        }
       }
       $excludeposts = array(
         'post__not_in' => $excludeposts
