@@ -60,7 +60,7 @@ class CatListDisplayer {
   }
 
   private function close_outer_tag() {
-    return '</' . $this->templater->outer_tag . '>';
+    return '</' . esc_attr($this->templater->outer_tag) . '>';
   }
 
   public function get_morelink($tag = null, $css_class = null){
@@ -104,7 +104,7 @@ class CatListDisplayer {
   }
 
   private function close_inner_tag() {
-    return '</' . $this->templater->inner_tag . '>';
+    return '</' . esc_attr($this->templater->inner_tag) . '>';
   }
 
   private function get_comments($single, $tag = null, $css_class = null){
@@ -231,14 +231,14 @@ class CatListDisplayer {
 
   private function get_post_link($single, $text, $class = null){
 
-    $props = ['href' => get_permalink($single->ID)];
+    $props = ['href' => esc_url(get_permalink($single->ID))];
 
     if (!empty($class)) {
-      $props['class'] = $class;
+      $props['class'] = esc_attr($class);
     }
 
     if (!empty($this->params['link_target'])) {
-      $props['target'] = $this->params['link_target'];
+      $props['target'] = esc_attr($this->params['link_target']);
     }
 
     $output = $this->wrapper->to_html('a', $props, $text);
@@ -261,7 +261,7 @@ class CatListDisplayer {
     }
 
     // Shortcode parameters take precedence.
-    $tag = $this->params['title_tag'] ?: $tag;
+    $tag = $this->params['title_tag'] ?: esc_attr($tag);
     $css_class = $this->params['title_class'] ?: $css_class;
     $suffix = $this->params['post_suffix'] ? ' ' . $this->params['post_suffix'] : '';
 
@@ -280,11 +280,11 @@ class CatListDisplayer {
 
     if (!$link) {
       $post_title .= $suffix;
-      $output = $this->wrapper->wrap($post_title, $tag, $css_class);
+      $output = $this->wrapper->wrap(wp_kses_data($post_title), $tag, $css_class);
     } else if (empty($tag)) {
-      $output = $this->get_post_link($single, $post_title, $css_class) . $suffix;
+      $output = $this->get_post_link($single, wp_kses_data($post_title), $css_class) . esc_html($suffix);
     } else if (!empty($tag)) {
-      $output = $this->get_post_link($single, $post_title) . $suffix;
+      $output = $this->get_post_link($single, wp_kses_data($post_title)) . esc_html($suffix);
       $output = $this->wrapper->wrap($output, $tag, $css_class);
     }
 

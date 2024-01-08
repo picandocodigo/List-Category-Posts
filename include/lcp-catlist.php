@@ -176,11 +176,13 @@ class CatList{
           $cat_string = $cat_title;
         }
 
+        $cat_string = esc_html($cat_string);
+
         // Do we want the link or just the title?
         if ($this->params['catlink'] == 'yes') {
           $cat_string = $this->wrapper->to_html(
             'a',
-            ['href' => $cat_link],
+            ['href' => esc_url($cat_link)],
             $cat_string . $this->get_category_count()
           );
         }
@@ -198,8 +200,8 @@ class CatList{
    */
   public function get_morelink() {
     if (!empty($this->params['morelink'])) {
-      $props = ['href' => get_category_link($this->lcp_category_id)];
-      $readmore = ($this->params['morelink'] !== '' ? $this->params['morelink'] : 'More posts');
+      $props = ['href' => esc_url(get_category_link($this->lcp_category_id))];
+      $readmore = ($this->params['morelink'] !== '' ? esc_html($this->params['morelink']) : 'More posts');
       return $this->wrapper->to_html('a', $props, $readmore);
      } else {
       return null;
@@ -208,31 +210,31 @@ class CatList{
 
   public function get_posts_morelink($single, $css_class) {
     if(!empty($this->params['posts_morelink'])) {
-      $props = ['href' => get_permalink($single->ID)];
+      $props = ['href' => esc_url(get_permalink($single->ID))];
       $class = $css_class ?: "";
       if ($class) {
-        $props['class'] = $class;
+        $props['class'] = esc_attr($class);
       }
-      $readmore = $this->params['posts_morelink'];
+      $readmore = esc_html($this->params['posts_morelink']);
       return $this->wrapper->to_html('a', $props, $readmore);
     }
   }
 
   public function get_category_count() {
     if($this->utils->lcp_not_empty('category_count') && $this->params['category_count'] == 'yes') {
-      return ' ' . get_category($this->lcp_category_id)->category_count;
+      return ' ' . esc_html(get_category($this->lcp_category_id)->category_count);
     }
   }
 
   public function get_category_description() {
     if ($this->utils->lcp_not_empty('category_description') && $this->params['category_description'] == 'yes') {
-      return get_term_field('description', $this->lcp_category_id, '', 'raw');
+      return esc_html(get_term_field('description', $this->lcp_category_id, '', 'raw'));
     }
   }
 
   public function get_conditional_title() {
     if($this->utils->lcp_not_empty('conditional_title') && $this->get_posts_count() > 0) {
-      return trim($this->params['conditional_title']);
+      return esc_html(trim($this->params['conditional_title']));
     }
   }
 
@@ -265,7 +267,7 @@ class CatList{
               $value = $user_customfield . $this->params['customfield_display_name_glue'] . $value;
             }
             if($value != '') {
-              $lcp_customs[] = $value;
+              $lcp_customs[] = wp_kses_post($value);
             }
           }
         }
@@ -286,7 +288,7 @@ class CatList{
   public function get_comments_count($single) {
     if (isset($this->params['comments']) &&
         $this->params['comments'] == 'yes') {
-      return ' (' . $single->comment_count . ')';
+      return esc_html(' (' . $single->comment_count . ')');
     } else {
       return null;
     }
@@ -309,7 +311,7 @@ class CatList{
     // Construct output string based on $params.
     $output = '';
     if (is_array($terms)) {
-      $output .= $params['prefix'];
+      $output .= esc_html($params['prefix']);
       $parsed_terms = array();
       foreach($terms as $term) {
         $term_string = $term->name;
@@ -345,22 +347,22 @@ class CatList{
     if ($link) {
       $term_string = $this->wrapper->to_html(
         'a',
-        ['href' => get_term_link($term->term_id)],
-        $term_string
+        ['href' => esc_url(get_term_link($term->term_id))],
+        esc_html($term_string)
       );
     }
     return $term_string;
   }
 
-  private function pt_inner_wrapper($inner, $tax, $term, $term_string) {
+  private function pt_inner_wrapper($inner, $tax, $term, $term_string_safe) {
     if ($inner) {
-      $term_string = $this->wrapper->to_html(
+      $term_string_safe = $this->wrapper->to_html(
         $inner,
-        ['class' => "{$tax}-{$term->slug}"],
-        $term_string
+        ['class' => esc_attr("{$tax}-{$term->slug}")],
+        $term_string_safe
       );
     }
-    return $term_string;
+    return $term_string_safe;
   }
 
   public function get_author_to_show($single) {
@@ -372,11 +374,11 @@ class CatList{
         $link = get_author_posts_url($lcp_userdata->ID);
         return $this->wrapper->to_html(
           'a',
-          ['href' => $link, 'title' => $author_name],
+          ['href' => esc_url($link), 'title' => esc_attr($author_name)],
           $author_name
         );
       } else {
-        return $author_name;
+        return esc_html($author_name);
       }
     } else {
       return null;
@@ -409,7 +411,7 @@ class CatList{
   public function get_date_to_show($single) {
     if ($this->params['date'] == 'yes') {
       //by Verex, great idea!
-      return ' ' . get_the_time($this->params['dateformat'], $single);
+      return ' ' . esc_html(get_the_time($this->params['dateformat'], $single));
     } else {
       return null;
     }
@@ -425,14 +427,14 @@ class CatList{
 
   public function get_display_id($single) {
     if (!empty($this->params['display_id']) && $this->params['display_id'] == 'yes') {
-      return $single->ID;
+      return esc_html($single->ID);
     }
   }
 
   public function get_no_posts_text() {
     if (($this->get_posts_count() == 0) &&
         ($this->params["no_posts_text"] != '')) {
-      return $this->params["no_posts_text"];
+      return esc_html($this->params["no_posts_text"]);
     }
   }
 
@@ -457,7 +459,7 @@ class CatList{
           $lcp_more = __('Continue reading &rarr;', 'list-category-posts');
           $lcp_content .= $this->wrapper->to_html(
             'a',
-            ['href' => get_permalink($single->ID), 'title' => $lcp_more],
+            ['href' => esc_url(get_permalink($single->ID)), 'title' => esc_attr($lcp_more)],
             $lcp_more
           );
         }
@@ -541,19 +543,19 @@ class CatList{
 
     $props = [];
     if ($tag == 'ol' && !empty($this->params['ol_offset'])) {
-      $props['start'] = $this->params['ol_offset'];
+      $props['start'] = esc_attr($this->params['ol_offset']);
     }
 
     // Follow the number of posts in an ordered list with pagination.
     if('ol' === $tag && $this->page > 1) {
       $start = $this->get_number_posts() * ($this->page - 1) + 1;
-      $props['start'] = $start;
+      $props['start'] = esc_attr($start);
     }
     //Give a class to wrapper tag
     $props['class'] = LcpUtils::sanitize_html_classes($css_class);
 
     //Give id to wrapper tag
-    $props['id'] = 'lcp_instance_' . $this->instance;
+    $props['id'] = esc_attr('lcp_instance_' . $this->instance);
 
     return $this->wrapper->to_html($tag, $props, null, false);
   }
@@ -570,12 +572,12 @@ class CatList{
       $post_tags = wp_get_post_Tags($single->ID);
       if (!empty($post_tags)) {
         foreach ($post_tags as $post_tag) {
-          $class .= " $post_tag->slug ";
+          $class .= esc_attr(" $post_tag->slug ");
         }
       }
     }
     if (!empty($class)) {
-      $props['class'] = $class;
+      $props['class'] = esc_attr($class);
     }
     return $this->wrapper->to_html($tag, $props, null, false);
   }

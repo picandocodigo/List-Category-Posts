@@ -112,7 +112,7 @@ class LcpPaginator {
     $link = '';
 
     if ($page == $current_page){
-      $link = "<li class='lcp_currentpage'>$current_page</li>";
+      $link = "<li class='lcp_currentpage'>" . esc_html($current_page) . '</li>';
     } else {
       $server_vars = add_magic_quotes($_SERVER);
       $request_uri = $server_vars['REQUEST_URI'];
@@ -134,14 +134,14 @@ class LcpPaginator {
       // Append a bookmark if not disabled by 'pagination_bookmarks=no'
       if ($bookmark !== "no") $page_link .= "#lcp_instance_" . $lcp_instance;
 
-      $link .=  "<li><a href='$page_link' title='$page'";
+      $link .=  "<li><a href='" . esc_url($page_link) . "' title='" . esc_attr($page) . "'";
       if ($page === $this->prev_page_num) {
         $link .= " class='lcp_prevlink'";
       } elseif ($page === $this->next_page_num) {
         $link .= " class='lcp_nextlink'";
       }
       $link .= ">";
-      ($char != null) ? ($link .= $char) : ($link .= $page);
+      ($char != null) ? ($link .= esc_html($char)) : ($link .= esc_html($page));
 
       $link .= "</a></li>";
     }

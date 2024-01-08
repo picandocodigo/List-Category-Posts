@@ -72,7 +72,8 @@ class LcpWrapper {
    * Wraps $content in HTML tag specified in $tag. If $close is false
    * the closing tag is omitted (useful when $content is null and we only
    * want to open the tag). $properties is an associative array with HTML
-   * properties.
+   * properties. Tag can be passed unescaped, all other parameters
+   * are expected to be safe.
    *
    * @param  string  $tag        HTML tag (ex. 'p', 'div', 'li').
    * @param  array   $properties Optional. HTML element properties in
@@ -87,8 +88,8 @@ class LcpWrapper {
       $props_str .= ' ' . $property . '="' . $value . '"';
     }
 
-    $html = "<{$tag}" . $props_str . ">{$content}";
-    if ($close) $html .= "</{$tag}>";
+    $html = '<' . esc_attr($tag) . $props_str . '>' . $content;
+    if ($close) $html .= '</' . esc_attr($tag) . '>';
 
     return $html;
   }

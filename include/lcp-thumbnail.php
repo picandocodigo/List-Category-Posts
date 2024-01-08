@@ -47,7 +47,7 @@ class LcpThumbnail{
             array(
                 'alt' => esc_attr($single->post_title),
                 // If we have a class use it, otherwise use default
-                'class' => ( $lcp_thumb_class != null ) ? $lcp_thumb_class : 'lcp_thumbnail'
+                'class' => ( $lcp_thumb_class != null ) ? esc_attr($lcp_thumb_class) : 'lcp_thumbnail'
             )
         );
         $lcp_thumbnail .= '</a>';
