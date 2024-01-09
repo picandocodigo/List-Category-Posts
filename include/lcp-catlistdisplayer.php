@@ -280,11 +280,11 @@ class CatListDisplayer {
 
     if (!$link) {
       $post_title .= $suffix;
-      $output = $this->wrapper->wrap(wp_kses_data($post_title), $tag, $css_class);
+      $output = $this->wrapper->wrap(wp_kses_post($post_title), $tag, $css_class);
     } else if (empty($tag)) {
-      $output = $this->get_post_link($single, wp_kses_data($post_title), $css_class) . esc_html($suffix);
+      $output = $this->get_post_link($single, wp_kses_post($post_title), $css_class) . esc_html($suffix);
     } else if (!empty($tag)) {
-      $output = $this->get_post_link($single, wp_kses_data($post_title)) . esc_html($suffix);
+      $output = $this->get_post_link($single, wp_kses_post($post_title)) . esc_html($suffix);
       $output = $this->wrapper->wrap($output, $tag, $css_class);
     }
 
