@@ -134,6 +134,9 @@ class LcpPaginator {
       // Append a bookmark if not disabled by 'pagination_bookmarks=no'
       if ($bookmark !== "no") $page_link .= "#lcp_instance_" . $lcp_instance;
 
+      // WA: Replace '?&' by '?' to avoid potential redirection problems later on
+      $page_link = str_replace('?&', '?', $page_link );
+
       $link .=  "<li><a href='" . esc_url($page_link) . "' title='" . esc_attr($page) . "'";
       if ($page === $this->prev_page_num) {
         $link .= " class='lcp_prevlink'";
@@ -145,8 +148,6 @@ class LcpPaginator {
 
       $link .= "</a></li>";
     }
-    // WA: Replace '?&' by '?' to avoid potential redirection problems later on
-    $link = str_replace('?&', '?', $link );
     return $link;
   }
 }
