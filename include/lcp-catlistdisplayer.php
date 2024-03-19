@@ -261,7 +261,7 @@ class CatListDisplayer {
     }
 
     // Shortcode parameters take precedence.
-    $tag = esc_attr($this->params['title_tag']) ?: esc_attr($tag);
+    $tag = tag_escape($this->params['title_tag']) ?: tag_escape($tag);
     $css_class = $this->params['title_class'] ?: $css_class;
     $suffix = $this->params['post_suffix'] ? ' ' . $this->params['post_suffix'] : '';
 
