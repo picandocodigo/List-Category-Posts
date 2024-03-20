@@ -88,8 +88,8 @@ class LcpWrapper {
       $props_str .= ' ' . $property . '="' . $value . '"';
     }
 
-    $html = '<' . esc_attr($tag) . $props_str . '>' . $content;
-    if ($close) $html .= '</' . esc_attr($tag) . '>';
+    $html = '<' . tag_escape($tag) . $props_str . '>' . $content;
+    if ($close) $html .= '</' . tag_escape($tag) . '>';
 
     return $html;
   }
