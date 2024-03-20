@@ -262,7 +262,7 @@ class CatListDisplayer {
 
     // Shortcode parameters take precedence.
     $tag = tag_escape($this->params['title_tag']) ?: tag_escape($tag);
-    $css_class = $this->params['title_class'] ?: $css_class;
+    $css_class = esc_attr($this->params['title_class']) ?: esc_attr($css_class);
     $suffix = $this->params['post_suffix'] ? ' ' . $this->params['post_suffix'] : '';
 
     if ('no' === $this->params['link_current']) {
