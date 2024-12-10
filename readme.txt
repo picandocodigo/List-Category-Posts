@@ -3,9 +3,9 @@ Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 6.4.3
+Tested up to: 6.7.1
 Requires PHP: 5.6
-Stable tag: 0.89.8
+Stable tag: 0.89.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -237,9 +237,13 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
-= 0.89.7 =
+= 0.89.9 =
 
-* Fixes previous release not reporting correct version on Plugin Repository.
+* Fix deprecation notices caused by tag_escape - https://wordpress.org/support/topic/php-deprecated-preg_replace-passing-null-to-parameter-3/
+
+= 0.89.8 =
+
+* Fixes previous release not reporting proper version number on Plugin Repository.
 
 = 0.89.7 =
 
