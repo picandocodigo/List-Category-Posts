@@ -177,6 +177,13 @@ class CatListDisplayer {
       $info = $this->catlist->get_content($post);
       break;
     case 'excerpt':
+      # Security vulnerability fix for Stored Cross-Site Scripting
+      # If a post has this excerpt: alert(/XSS/)
+      # Another post could use  [catlist excerpt_tag='script' excerpt=yes]
+      # and the XSS would be triggered.
+      if ( $tag == 'script' ) {
+        $tag = null;
+      }
       $info = $this->catlist->get_excerpt($post);
       if ( ! empty( $info ) ) {
         $info = preg_replace('/\[.*\]/', '', $info);
