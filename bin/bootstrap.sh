@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-# Update the system and install SVN + PHP 8 + MySQL 8
+# Update the system and install SVN + PHP 8.2 + MySQL 8
 if [ ! -x /usr/bin/mysql ];
 then
     sudo debconf-set-selections <<< 'mysql-server-8.0 mysql-server/root_password password rootpass'
     sudo debconf-set-selections <<< 'mysql-server-8.0 mysql-server/root_password_again password rootpass'
+    sudo add-apt-repository ppa:ondrej/php
 
     apt-get update
 
-    apt-get install -y subversion apache2 php8.1 mysql-server dos2unix unzip
-    apt-get install -y php8.1-{xml,readline,opcache,mysql,imagick,zip,mbstring,curl}
+    apt-get install -y subversion apache2 php8.2 mysql-server dos2unix unzip
+    apt-get install -y php8.2-{xml,readline,opcache,mysql,imagick,zip,mbstring,curl}
 
 fi
 
