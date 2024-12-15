@@ -19,6 +19,8 @@ class CatList{
   private $instance = 0;
   private $utils;
   private $wrapper;
+  private $saved_post;
+  private $saved_wp_query;
 
   /**
    * Constructor gets the shortcode attributes as parameter

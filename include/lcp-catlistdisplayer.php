@@ -10,6 +10,7 @@ require_once 'lcp-templater.php';
 
 class CatListDisplayer {
   public $catlist;
+  private $parent;
   private $wrapper;
   private $templater;
   private $params = array();

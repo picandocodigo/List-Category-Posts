@@ -89,7 +89,7 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
     $cat_ID_2 = self::$test_cat_2;
     $this->go_to('/?p=' . self::$test_post_2);
     $this->assertQueryTrue('is_singular', 'is_single');
-    $this->assertSame("${cat_ID_1},${cat_ID_2}", $lcpcategory->current_category('yes'));
+    $this->assertSame("{$cat_ID_1},{$cat_ID_2}", $lcpcategory->current_category('yes'));
   }
 
   public function test_post_with_excluded_cats() {
@@ -137,7 +137,7 @@ class Tests_LcpCategory_CurrentCategory extends WP_UnitTestCase {
     $this->go_to('/?p=' . self::$test_post_2);
     $this->assertQueryTrue('is_singular', 'is_single');
     $this->assertSame(
-      "-${cat_ID_1},-${cat_ID_2}",
+      "-{$cat_ID_1},-{$cat_ID_2}",
       $lcpcategory->current_category('other')
     );
   }
