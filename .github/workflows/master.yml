@@ -12,7 +12,7 @@ jobs:
       WP_TESTS_DIR: /tmp/wordpress-tests-lib
     strategy:
       matrix:
-        php-versions: ['7.4', '8.0']
+        php-versions: ['7.4', '8.2']
     services:
       mysql:
         image: mysql:8.0
