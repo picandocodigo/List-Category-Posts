@@ -30,7 +30,7 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         ini-values: post_max_size=256M, max_execution_time=180
         coverage: xdebug
-        tools: phpunit-polyfills
+        tools: phpunit:9, phpunit-polyfills
         extensions: mysql
     - name: Install WP Tests
       run: bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1:3306 trunk
