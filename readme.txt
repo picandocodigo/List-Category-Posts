@@ -237,6 +237,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 == Changelog ==
 
+= 0.90.2 =
+
+* Updates fix for stored cross-site scripting from 0.90.0, now applied to all tags. From this version onwards, script is not available to use as a tag when setting an element's tag in the shortcode.
+
 = 0.90.1 =
 
 * Fix PHP 8.2 deprecation notices
