@@ -29,6 +29,15 @@ class LcpWrapper {
    * @return string
    */
   private function assign_style($info, $tag = null, $css_class = null){
+    # Security vulnerability fix for Stored Cross-Site Scripting
+    # If a field stores some malicious JavaScript, it could be displayed with the 'script' tag, so
+    # that tag needs to be excluded.
+    # e.g. If a post has this excerpt: alert(/XSS/) another post could use:
+    # [catlist excerpt_tag='script' excerpt=yes]
+    # and the XSS would be triggered.
+    if ( $tag == 'script' ) {
+      $tag = null;
+    }
     if (!empty($info)):
       if (empty($tag) && !empty($css_class)):
         $tag = "span";
@@ -53,7 +62,6 @@ class LcpWrapper {
    * @return string
    */
   public function wrap($info, $tag=null, $css_class=null) {
-
     $wrapped = '';
 
     if (is_array($info)) {
