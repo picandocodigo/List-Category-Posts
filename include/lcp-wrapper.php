@@ -35,7 +35,7 @@ class LcpWrapper {
     # e.g. If a post has this excerpt: alert(/XSS/) another post could use:
     # [catlist excerpt_tag='script' excerpt=yes]
     # and the XSS would be triggered.
-    if ( !empty( $tag ) && tag_escape( $tag ) == 'script' ) {
+    if ( !empty( $tag ) && strtolower( tag_escape( $tag ) ) == 'script' ) {
       $tag = null;
     }
     if (!empty($info)):
