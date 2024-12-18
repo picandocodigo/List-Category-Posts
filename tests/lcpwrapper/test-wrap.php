@@ -46,4 +46,28 @@ class Tests_LcpWrapper_Wrap extends WP_UnitTestCase {
       '<span class="test1 test2 test3">test string</span>',
       $wrapper->wrap($this->test_string, null, 'test1 test2 test3'));
   }
+
+  public function test_script_tag() {
+    $wrapper = LcpWrapper::get_instance();
+    $this->assertSame(
+      '<span class="test">test string</span>',
+      $wrapper->wrap($this->test_string, 'script', 'test')
+    );
+    $this->assertSame(
+      'test string',
+      $wrapper->wrap($this->test_string, 'script', null)
+    );
+    $this->assertSame(
+      'test string',
+      $wrapper->wrap($this->test_string, 'SCRIPT', null)
+    );
+    $this->assertSame(
+      'test string',
+      $wrapper->wrap($this->test_string, 'sCrIpt', null)
+    );
+    $this->assertSame(
+      'test string',
+      $wrapper->wrap($this->test_string, 's(cript', null)
+    );
+  }
 }
