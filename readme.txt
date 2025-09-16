@@ -3,9 +3,9 @@ Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 6.8.1
+Tested up to: 6.8.2
 Requires PHP: 5.6
-Stable tag: 0.91.0
+Stable tag: 0.92.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -199,6 +199,10 @@ Please check the [FAQ](https://github.com/picandocodigo/List-Category-Posts/blob
 
 == Upgrade Notice ==
 
+= 0.92.0 =
+
+- Template files when using the `template` parameter can only have letters, numbers, `_` and `-` in the name. They also can only be located in the current theme's directory under a `list-category-posts` directory.
+
 = 0.66 =
 Full release notes:
 https://github.com/picandocodigo/List-Category-Posts/releases/tag/0.66
@@ -238,6 +242,11 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 See [CHANGELOG.md](https://github.com/picandocodigo/List-Category-Posts/blob/master/CHANGELOG.md) for full Changelog.
+
+= 0.92.0 =
+
+* Avoids potential SQL injection in `starting_with` parameter - CVE-2025-10163. This solves SQL injection and results in `starting_with` working as per the Wiki, but the previous code also allowed things like `[catlist starting_with="Hello"]` which would return posts starting with "Hello" but not just with "H". This new implementation would return both, because only the first character matters, which is ok because that's what is documented.
+* Improves template file inclusion security. Template files when using the `template` parameter can only have letters, numbers, `_` and `-` in the name. They also can only be located in the current theme's directory under a `list-category-posts` directory.
 
 = 0.91.0 =
 
