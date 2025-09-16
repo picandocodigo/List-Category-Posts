@@ -237,21 +237,31 @@ class LcpParameters{
     return $term_ids;
   }
 
-  public function starting_with($where){
-    $letters = explode(',', $this->starting_with);
+  public function starting_with( $where ) {
+    if ( empty( $this->starting_with ) ) return $where;
 
-    // Support for both utf8 and utf8mb4
     global $wpdb;
-    $wp_posts_prefix = $wpdb->prefix . 'posts';
-    $charset = $wpdb->get_col_charset($wp_posts_prefix, 'post_title');
+    $wp_posts = $wpdb->prefix . 'posts';
 
-    $where .= 'AND (' . $wp_posts_prefix . '.post_title ' .
-      'COLLATE ' . strtoupper($charset) . '_GENERAL_CI LIKE \'' . $letters[0] . "%'";
-    for ($i=1; $i <sizeof($letters); $i++) {
-      $where .= 'OR ' . $wp_posts_prefix . '.post_title ' .
-        'COLLATE ' . strtoupper($charset) . '_GENERAL_CI LIKE \'' . $letters[$i] . "%'";
+    // Whitelist by charset
+    $charset = $wpdb->get_col_charset( $wp_posts, 'post_title' );
+    $charset = in_array( $charset, array( 'utf8', 'utf8mb4' ), true ) ? $charset : 'utf8mb4';
+    $collate = strtoupper( $charset ) . '_GENERAL_CI';
+
+    $letters = array_filter( array_map( 'trim', explode( ',', (string) $this->starting_with ) ) );
+    $clauses = array();
+
+    foreach ( $letters as $letter ) {
+      $first = function_exists( 'mb_substr' ) ? mb_substr( $letter, 0, 1, 'UTF-8' ) : substr( $letter, 0, 1 );
+      $first = preg_replace( '/[\'"\r\n\t]/u', '', (string) $first );
+      if ( $first === '' ) continue;
+      $pattern = $wpdb->esc_like( $first ) . '%';
+      $clauses[] = $wpdb->prepare( "{$wp_posts}.post_title COLLATE {$collate} LIKE %s", $pattern );
     }
-    $where.=')';
+    if ( $clauses ) {
+      $where .= ' AND (' . implode( ' OR ', $clauses ) . ')';
+    }
+
     return $where;
   }
 
@@ -259,8 +269,6 @@ class LcpParameters{
     global $post;
     return $post->ID;
   }
-
-
 
   private function lcp_order_by($orderby) {
     if( get_option('lcp_orderby') && $orderby === ''){
