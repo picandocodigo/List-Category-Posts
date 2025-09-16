@@ -1,5 +1,5 @@
 # List Category Posts
-[![Code Climate](https://codeclimate.com/github/picandocodigo/List-Category-Posts.png)](https://codeclimate.com/github/picandocodigo/List-Category-Posts) [![Tests](https://github.com/picandocodigo/List-Category-Posts/actions/workflows/master.yml/badge.svg)](https://github.com/picandocodigo/List-Category-Posts/actions/workflows/master.yml)
+[![Tests](https://github.com/picandocodigo/List-Category-Posts/actions/workflows/master.yml/badge.svg)](https://github.com/picandocodigo/List-Category-Posts/actions/workflows/master.yml)
 
 List Category Posts is a **[WordPress](http://wordpress.org) plugin** that allows you to list posts from a category into a post/page using the [catlist] shortcode. This shortcode accepts a category name or id, the order in which you want the posts to display, and the number of posts to display. You can use [catlist] as many times as needed with different arguments.
 
