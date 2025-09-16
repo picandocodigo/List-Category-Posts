@@ -189,10 +189,10 @@ class LcpCategory{
     // Only single post pages with assigned category and
     // category archives have a 'current category',
     // in all other cases no posts should be returned. (#69)
-    
+
     // Should be overriden if any categories are found.
     $cats = [0]; // workaround to display no posts
-    
+
     $category = get_category( get_query_var( 'cat' ) );
     if( ! ( isset( $category->errors ) && $category->errors["invalid_term"][0] == __("Empty Term.") ) ) {
       $cats = $category->cat_ID;
