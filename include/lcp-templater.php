@@ -97,7 +97,7 @@ class LcpTemplater {
   /**
    * Gets and returns all available template names.
    *
-   * THis method scans the template directory and outputs all available
+   * This method scans the template directory and outputs all available
    * template names in an array. This is currently only used by the widget.
    *
    * @return array All available template names (without .php extension).
@@ -131,7 +131,6 @@ class LcpTemplater {
    * @return bool         Is the template a proper php file.
    */
   private static function validate_template($path, $file) {
-    $file = str_replace('../', '', $file);
     return (substr($file, -4) == '.php' ) && is_file($path . $file) &&
       is_readable($path . $file);
   }
@@ -151,8 +150,17 @@ class LcpTemplater {
     // Get templates paths and  search for the php file.
     $paths = self::get_template_paths();
     foreach($paths as $path) {
-      if (self::validate_template($path, $param . '.php')) {
-        $template = $path . $param . '.php';
+      $file = $param . ".php";
+      $regexp = '/([a-zA-Z0-9-_]+\.php)/';
+      preg_match($regexp, $file, $matches);
+      if (empty($matches)) {
+        continue;
+      } else {
+        $file = $matches[0];
+      }
+
+      if (self::validate_template($path, $file)) {
+        $template = $path . $file;
         break;
       }
     }
