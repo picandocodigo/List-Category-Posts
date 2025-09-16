@@ -9,8 +9,8 @@ then
 
     apt-get update
 
-    apt-get install -y subversion apache2 php8.2 mysql-server dos2unix unzip
-    apt-get install -y php8.2-{xml,readline,opcache,mysql,imagick,zip,mbstring,curl}
+    apt-get install -y subversion apache2 php8.3 mysql-server dos2unix unzip
+    apt-get install -y php8.3-{xml,readline,opcache,mysql,imagick,zip,mbstring,curl}
 
 fi
 
