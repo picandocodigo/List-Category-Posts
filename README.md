@@ -8,6 +8,8 @@ Usage:
 
 Please visit the [plugin's page on WordPress.org](http://wordpress.org/extend/plugins/list-category-posts/) to find out more.
 
+This project source code is also available in [Codeberg](https://codeberg.org/picandocodigo/list-category-posts).
+
 # Documentation
 
 The main documentation is hosted in the [GitHub Wiki](https://github.com/picandocodigo/List-Category-Posts/wiki). You can find information there on [how to select which posts to show](https://github.com/picandocodigo/List-Category-Posts/wiki/How-to-select-which-posts-to-show), [pagination](https://github.com/picandocodigo/List-Category-Posts/wiki/Pagination), [HTML & CSS customization](http://github.com/picandocodigo/List-Category-Posts/wiki/HTML-&-CSS-Customization) and the [template system](http://github.com/picandocodigo/List-Category-Posts/wiki/Template-System) and the [several parameters you can use](https://github.com/picandocodigo/List-Category-Posts/wiki/More-parameters-you-can-use).

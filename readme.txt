@@ -72,9 +72,9 @@ I have a [PayPal account](http://picandocodigo.net/programacion/wordpress/list-c
 
 **Development**
 
-Development is being tracked on [GitHub](https://github.com/picandocodigo/List-Category-Posts). Fork it, code, make a pull request, suggest improvements, etc. over there. I dream of the day all of the WordPress plugins will be hosted on Git :)
+Development is being tracked on [Codeberg](https://codeberg.org/picandocodigo/list-category-posts) and [GitHub](https://github.com/picandocodigo/List-Category-Posts). Fork it, code, make a pull request, suggest improvements, etc. over there. I dream of the day all of the WordPress plugins will be hosted on Git :)
 
-Since the documentation on how to use the plugin has passed wordpress.org's character limit, the text was cut. I've since started using [a wiki](https://github.com/picandocodigo/List-Category-Posts/wiki) for more comfortable reading and maintaining. Please check it out, suggestions are welcome on GitHub issues!
+Since the documentation on how to use the plugin has passed wordpress.org's character limit, the text was cut. You can find the complete documentation on [the wiki](https://github.com/picandocodigo/List-Category-Posts/wiki). It's also more comfortable to read and maintain than a txt file. Please check it out, suggestions are welcome on Codeberg/GitHub issues!
 
 ==Instructions on how to use the plugin==
 
