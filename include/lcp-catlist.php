@@ -91,6 +91,9 @@ class CatList{
     // http://core.trac.wordpress.org/browser/tags/3.7.1/src/wp-includes/post.php#L1686
     $args['posts_per_page'] = $args['numberposts'];
 
+    if (isset($args['post_status'])){
+      $args['post_status'] = $this->sanitize_status($args['post_status']);
+    }
     do_action( 'lcp_pre_run_query', $args );
 
     if ('no' === $this->params['main_query']) {
@@ -452,6 +455,8 @@ class CatList{
         // get_extended - get content split by <!--more-->
         $lcp_extended = get_extended($single->post_content);
         $lcp_content = $lcp_extended['main'];
+        $lcp_content = apply_filters('the_content', $lcp_content);
+        $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
       }
 
       if ($this->params['content'] == 'full') {
@@ -602,5 +607,19 @@ class CatList{
           'previous'    => $this->params['pagination_prev'],
     );
     return LcpPaginator::get_instance()->get_pagination($paginator_params);
+  }
+
+  // Sanitizes the statuses for post_status. Checks if current user is either editor or
+  // admininstrator. Other users can't see draft or private posts.
+  private function sanitize_status($statuses){
+    if (in_array('private', $statuses) || in_array('draft', $statuses)) {
+      if ( !( current_user_can('editor') || current_user_can('administrator')) ) {
+        $private_index = array_search('private', $statuses);
+        unset($statuses[$private_index]);
+        $draft_index = array_search('draft', $statuses);
+        unset($statuses[$draft_index]);
+      }
+    }
+    return implode(',', $statuses);
   }
 }
