@@ -444,16 +444,21 @@ class CatList{
     if (isset($this->params['content']) &&
         ($this->params['content'] =='yes' || $this->params['content'] == 'full') &&
         $single->post_content){
-      // get_extended - get content split by <!--more-->
-      $lcp_extended = get_extended($single->post_content);
-      $lcp_content = $lcp_extended['main'];
-      $lcp_content = apply_filters('the_content', $lcp_content);
-      $lcp_content = str_replace(']]>', ']]&gt', $lcp_content);
+      // If the post is password protected, set the password form in the content.
+      if (post_password_required($single)) {
+        $lcp_content = get_the_password_form($single);
+        return $lcp_content;
+      } else {
+        // get_extended - get content split by <!--more-->
+        $lcp_extended = get_extended($single->post_content);
+        $lcp_content = $lcp_extended['main'];
+      }
 
       if ($this->params['content'] == 'full') {
         $lcp_extended_content = str_replace(
           ']]>',
-          ']]&gt', apply_filters('the_content', $lcp_extended['extended'])
+          ']]&gt',
+          apply_filters('the_content', $lcp_extended['extended'])
         );
         $lcp_content .= $lcp_extended_content;
       } else {
@@ -468,7 +473,7 @@ class CatList{
       }
       return $lcp_content;
     } else {
-        return null;
+      return null;
     }
   }
 
