@@ -3,9 +3,9 @@ Contributors: fernandobt, zymeth25
 Donate Link: http://picandocodigo.net/programacion/wordpress/list-category-posts-wordpress-plugin-english/#support
 Tags: list, categories, posts, cms
 Requires at least: 3.3
-Tested up to: 6.8.2
+Tested up to: 6.8.3
 Requires PHP: 5.6
-Stable tag: 0.92.0
+Stable tag: 0.93.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -242,6 +242,14 @@ Template system has changed. Custom templates should be stored in WordPress them
 == Changelog ==
 
 See [CHANGELOG.md](https://github.com/picandocodigo/List-Category-Posts/blob/master/CHANGELOG.md) for full Changelog.
+
+= 0.93.0 =
+
+* Don't skip password protected filter when showing content.
+* Sanitize post_status so some posts are only shown if user is Editor or Administrator.
+* Addresses reported vulnerability: CVE-2025-11377, Authenticated (Contributor+) Information Exposure. Severity Score: 4.3 (Medium). CVSS Vector: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N. Organization: Wordfence. Vulnerability Researcher(s): Athiwat Tiprasaharn (Jitlada)
+
+This is a low risk vulnerability that could potentially be executed by an authenticated attacker, with contributor-level access and above. But it should be fixed with this version.
 
 = 0.92.0 =
 
