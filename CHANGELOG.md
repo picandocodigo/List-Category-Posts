@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 0.93.0
+
+* Don't skip password protected filter when showing content.
+* Sanitize post_status so some posts are only shown if user is Editor or Administrator.
+* Addresses reported vulnerability: `CVE-2025-11377, Authenticated (Contributor+) Information Exposure`. `
+  * CVSS Severity Score: 4.3 (Medium)
+  * CVSS Vector: CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:N
+  * Organization: Wordfence
+  * Vulnerability Researcher(s): Athiwat Tiprasaharn (Jitlada)
+
+This is a low risk vulnerability that could potentially be executed by an authenticated attacker, with contributor-level access and above. But it should be fixed with this version.
+
 ## 0.92.0
 
 * Avoids potential SQL injection in `starting_with` parameter - CVE-2025-10163. This solves SQL injection and results in `starting_with` working as per the Wiki, but the previous code also allowed things like `[catlist starting_with="Hello"]` which would return posts starting with "Hello" but not just with "H". This new implementation would return both, because only the first character matters, which is ok because that's what is documented.
