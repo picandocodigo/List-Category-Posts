@@ -615,9 +615,13 @@ class CatList{
     if (in_array('private', $statuses) || in_array('draft', $statuses)) {
       if ( !( current_user_can('editor') || current_user_can('administrator')) ) {
         $private_index = array_search('private', $statuses);
-        unset($statuses[$private_index]);
+        if ($private_index !== false) {
+          unset($statuses[$private_index]);
+        }
         $draft_index = array_search('draft', $statuses);
-        unset($statuses[$draft_index]);
+        if ($draft_index !== false) {
+          unset($statuses[$draft_index]);
+        }
       }
     }
     return implode(',', $statuses);
