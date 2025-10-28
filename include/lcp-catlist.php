@@ -92,7 +92,12 @@ class CatList{
     $args['posts_per_page'] = $args['numberposts'];
 
     if (isset($args['post_status'])){
-      $args['post_status'] = $this->sanitize_status($args['post_status']);
+      $statuses = $this->sanitize_status($args['post_status']);
+      if ($statuses !== '') {
+        $args['post_status'] = $statuses;
+      } else {
+        unset($args['post_status']);
+      }
     }
     do_action( 'lcp_pre_run_query', $args );
 
@@ -614,16 +619,8 @@ class CatList{
   private function sanitize_status($statuses){
     if (in_array('private', $statuses) || in_array('draft', $statuses)) {
       if ( !( current_user_can('editor') || current_user_can('administrator')) ) {
-        $private_index = array_search('private', $statuses);
-        if ($private_index !== false) {
-          unset($statuses[$private_index]);
-        }
-        $draft_index = array_search('draft', $statuses);
-        if ($draft_index !== false) {
-          unset($statuses[$draft_index]);
-        }
+        return implode(',', array_diff($statuses, array('private', 'draft')));
       }
     }
-    return implode(',', $statuses);
   }
 }
