@@ -620,6 +620,8 @@ class CatList{
     if (in_array('private', $statuses) || in_array('draft', $statuses)) {
       if ( !( current_user_can('editor') || current_user_can('administrator')) ) {
         return implode(',', array_diff($statuses, array('private', 'draft')));
+      } else {
+        return $statuses;
       }
     }
   }
