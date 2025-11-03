@@ -243,6 +243,10 @@ Template system has changed. Custom templates should be stored in WordPress them
 
 See [CHANGELOG.md](https://github.com/picandocodigo/List-Category-Posts/blob/master/CHANGELOG.md) for full Changelog.
 
+= 0.93.1 =
+
+* Fixes a bug with `post_status` introduced in `sanitize_status`. Thanks Galen Charlton (@gmcharlt) for the catch and fix!
+
 = 0.93.0 =
 
 * Don't skip password protected filter when showing content.

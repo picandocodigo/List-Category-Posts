@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.93.1
+
+* Fixes a bug with `post_status` introduced in `sanitize_status`. Thanks Galen Charlton (@gmcharlt) for the catch and fix!
+
 ## 0.93.0
 
 * Don't skip password protected filter when showing content.
