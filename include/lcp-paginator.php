@@ -116,7 +116,11 @@ class LcpPaginator {
     } else {
       $server_vars = add_magic_quotes($_SERVER);
       $request_uri = $server_vars['REQUEST_URI'];
-      $query = $server_vars['QUERY_STRING'];
+      if(array_key_exists('QUERY_STRING', $server_vars) && null !== $server_vars['QUERY_STRING'] ) {
+        $query = $server_vars['QUERY_STRING'];
+      } else {
+        $query = null;
+      }
       $amp = ( strpos( $request_uri, "?") ) ? "&" : "";
       $pattern = "/[&|?]?lcp_page" . preg_quote($lcp_instance) . "=([0-9]+)/";
       $query = preg_replace($pattern, '', $query);
