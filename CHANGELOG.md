@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 0.94.0
+
+* Addresses CVE-2026-0553.
+* Addresses potential debug warning: `Undefined array key QUERY_STRING`. Report: https://wordpress.org/support/topic/php-8-4-issue-2/
+* Escapes html for thumbnail class.
+
 ## 0.93.1
 
 * Fixes a bug with `post_status` introduced in `sanitize_status`. Thanks Galen Charlton (@gmcharlt) for the catch and fix!
