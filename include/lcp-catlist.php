@@ -344,10 +344,10 @@ class CatList{
   private function get_pt_params($tax) {
     $taxonomies = ['cat' => 'category', 'tag' => 'post_tag'];
     $slug =  array_key_exists($tax, $taxonomies) ? $taxonomies[$tax] : '';
-    if ($this->params["posts_{$tax}s_inner"] == 'script' ) {
+    if ( !empty( $this->params["posts_{$tax}s_inner"] ) &&
+         strtolower( tag_escape( $this->params["posts_{$tax}s_inner"] ) ) == 'script' ) {
       $this->params["posts_{$tax}s_inner"] = null;
     }
-    $this->params["posts_{$tax}s_inner"] = sanitize_text_field($this->params["posts_{$tax}s_inner"]);
     return array(
       'tax_slug' => $slug,
       'link'     => 'yes' === $this->params["posts_{$tax}link"] ? true : false,
