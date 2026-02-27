@@ -238,7 +238,7 @@ function lcp_pagination_css(){
   } elseif ( @file_exists( get_template_directory() . '/lcp_paginator.css' ) ) {
     $css_file = get_template_directory_uri() . '/lcp_paginator.css';
   } else {
-    $css_file = plugin_dir_url(__FILE__) . '/lcp_paginator.css';
+    $css_file = plugin_dir_url(__FILE__) . 'lcp_paginator.css';
   }
 
   wp_enqueue_style( 'lcp_paginator', $css_file);
