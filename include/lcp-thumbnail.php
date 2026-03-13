@@ -89,16 +89,17 @@ class LcpThumbnail{
       $youtubeurl = $matches[0];
 
       if ($youtubeurl){
-        $imageurl = "http://i.ytimg.com/vi/{$matches[3]}/1.jpg";
+        $imageurl = "https://i.ytimg.com/vi/{$matches[3]}/1.jpg";
       }
 
-      $lcp_ytimage = '<img src="' . $imageurl . '" alt="' . $single->post_title . '" />';
+      $lcp_ytimage = '<img src="' . esc_url($imageurl) .
+        '" alt="' . esc_attr($single->post_title) . '" />';
 
       if ($lcp_thumb_class != null){
         $thmbn_class = ' class="' . LcpUtils::sanitize_html_classes($lcp_thumb_class) . '" />';
         $lcp_ytimage = preg_replace("/\>/", $thmbn_class, $lcp_ytimage);
       }
-      return '<a href="' . get_permalink($single->ID).'">' . $lcp_ytimage . '</a>';
+      return '<a href="' . esc_url(get_permalink($single->ID)) . '">' . $lcp_ytimage . '</a>';
     }
   }
 }
