@@ -297,11 +297,22 @@ class CatListDisplayer {
   private function lcp_title_limit( $lcp_post_title ){
     if ( !empty($this->params['title_limit']) && $this->params['title_limit'] !== "0" ){
       $title_limit = intval($this->params['title_limit']);
-      if( function_exists('mb_strlen') && function_exists('mb_substr') && mb_strlen($lcp_post_title) > $title_limit ){
-        $lcp_post_title = mb_substr($lcp_post_title, 0, $title_limit) . "&hellip;";
+      // Safe multibyte path
+      if( function_exists('mb_strlen') && function_exists('mb_substr') ) {
+        if( mb_strlen($lcp_post_title) > $title_limit ){
+          $lcp_post_title = mb_substr($lcp_post_title, 0, $title_limit) . "&hellip;";
+        }
       } else {
-        if( strlen($lcp_post_title) > $title_limit ){
-          $lcp_post_title = substr($lcp_post_title, 0, $title_limit) . "&hellip;";
+        // Fallback: use iconv if available
+        if( function_exists('iconv_strlen') && function_exists('iconv_substr')) {
+          if( iconv_strlen($lcp_post_title, 'UTF-8') > $title_limit ){
+            $lcp_post_title = iconv_substr($lcp_post_title, 0, $title_limit, 'UTF-8') . "&hellip;";
+          }
+        } else {
+          // Last resort: byte-based (may corrupt multibyte chars)
+          if( strlen($lcp_post_title) > $title_limit ){
+            $lcp_post_title = substr($lcp_post_title, 0, $title_limit) . "&hellip;";
+          }
         }
       }
     }
