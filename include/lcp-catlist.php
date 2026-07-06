@@ -93,12 +93,13 @@ class CatList{
 
     if (isset($args['post_status'])){
       $statuses = $this->sanitize_status($args['post_status']);
-      if ($statuses !== '') {
-        $args['post_status'] = $statuses;
-      } else {
+      if (count($statuses) === 0 ) {
         unset($args['post_status']);
+      } else {
+        $args['post_status'] = $statuses;
       }
     }
+    $args['perm'] = 'readable';
     do_action( 'lcp_pre_run_query', $args );
 
     if ('no' === $this->params['main_query']) {
@@ -621,10 +622,9 @@ class CatList{
   // Sanitizes the statuses for post_status. Checks if current user is either editor or
   // admininstrator. Other users can't see draft or private posts.
   private function sanitize_status($statuses){
-    if (in_array('private', $statuses) || in_array('draft', $statuses)) {
-      if ( !( current_user_can('editor') || current_user_can('administrator')) ) {
-        return implode(',', array_diff($statuses, array('private', 'draft')));
-      }
+    $public = array('publish');
+    if ( !( current_user_can('editor') || current_user_can('administrator')) ) {
+      $statuses = array_intersect($statuses, $public);
     }
     return $statuses;
   }
