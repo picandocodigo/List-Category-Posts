@@ -16,11 +16,13 @@ The main documentation is hosted in the [GitHub Wiki](https://github.com/picando
 
 # Would you like to help with the development?
 
-The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK), [bibz](https://github.com/bibz), [vacuus](https://github.com/vacuus), [klemens-st](https://github.com/klemens-st) for their contributions and hard work and [every other person](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors) who's contributed to this plugin:+1:
+The evolution of this plugin wouldn't be possible without the help of [these awesome contributors](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors). Special thanks to [Sophist](https://github.com/Sophist-UK), [bibz](https://github.com/bibz), [vacuus](https://github.com/vacuus), [klemens-st](https://github.com/klemens-st) for their contributions and hard work and [every other person](https://github.com/picandocodigo/List-Category-Posts/graphs/contributors) who's contributed to this plugin :+1:
 
 Sometimes Pull Request take a while for us to review, but we'll eventually get to all of them. If you open a PR, feel free to add your wordpress.org user so if it gets merged I can add you to the list of contributors in the plugin's readme file.
 
 # Development
+
+## Vagrant
 
 A Vagrantfile is provided to set up a box for WordPress development. You need [Vagrant](http://www.vagrantup.com/) installed on your computer.
 
@@ -42,6 +44,10 @@ Activate the plugin on
 http://localhost:8080/wp-admin/plugins.php
 
 The plugin code is linked directly on the box, so any change you make on the code is reflected automatically on the Vagrant box's WordPress installation.
+
+## Docker compose
+
+A docker compose [file](./docker-compose.yml) is also provided. You can run `docker compose up` on the root directory of the project and this will run WordPress with mariadb in docker containers. Access WordPress on `localhost:8080` and log in with user `wordpress` and password `wordpress`.
 
 ## Testing
 
@@ -83,7 +89,7 @@ __[GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)__
 ```
 List Category Posts
 
-Copyright (C) 2008-2020  Fernando Briano (email : fernando@picandocodigo.net)
+Copyright (C) 2008-2026  Fernando Briano (email : fernando@picandocodigo.net)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
