@@ -1,10 +1,14 @@
 # CHANGELOG
 
+## 0.96.0
+
+* Addresses potential security vulnerability CVE-2026-12434
+
 ## 0.95.0
 
 * Bugfix: Removes double slash in pagination code. Fixes [#531](https://github.com/picandocodigo/List-Category-Posts/issues/531).
 * Addresses potential security vulnerability CVE-2026-3005
-* Bugfix: lcp_title_limit corrupts multibyte characters in fallback path. Fixes [#549](https://github.com/picandocodigo/List-Category-Posts/issues/549). Thanks @jmingau for the report and fix!
+* Bugfix: `lcp_title_limit` corrupts multibyte characters in fallback path. Fixes [#549](https://github.com/picandocodigo/List-Category-Posts/issues/549). Thanks @jmingau for the report and fix!
 
 ## 0.94.0
 
