@@ -39,8 +39,8 @@ class ListCategoryPostsWidget extends WP_Widget{
     $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
     $category_id = $instance['categoryid'];
     $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
-    $pagination = ($instance['pagination'] == 'on') ? 'yes' : 'no';
-    $showmodifieddate = ($instance['show_modified_date'] == 'on') ? 'yes' : 'no';
+    $pagination = (isset($instance['pagination']) && $instance['pagination'] == 'on') ? 'yes' : 'no';
+    $showmodifieddate = (isset($instance['show_modified_date']) && $instance['show_modified_date'] == 'on') ? 'yes' : 'no';
     $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
     $excerptsize = (empty($instance['excerpt_size']) ? 55 : $instance['excerpt_size']);
     $showauthor = ($instance['show_author'] == 'on') ? 'yes' : 'no';
