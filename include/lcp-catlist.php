@@ -622,7 +622,7 @@ class CatList{
   // Sanitizes the statuses for post_status. Checks if current user is either editor or
   // admininstrator. Other users can't see draft or private posts.
   private function sanitize_status($statuses){
-    $public = array('publish');
+    $public = array('publish', 'future');
     if ( !( current_user_can('editor') || current_user_can('administrator')) ) {
       $statuses = array_intersect($statuses, $public);
     }
