@@ -36,4 +36,18 @@ class Tests_CatListDisplayer_Display extends WP_UnitTestCase {
                       '">Test post</a></li></ul>',
                       $displayer->display());
   }
+
+    public function test_post_id(){
+        $test_post = self::factory()->post->create_and_get(array(
+            'post_title' => 'Test post'
+        ));
+        $params = array('post_id' => 'yes');
+        $displayer = new CatListDisplayer(array_merge(ListCategoryPosts::default_params(), $params));
+        $this->assertSame('<ul class="lcp_catlist" id="lcp_instance_0">' .
+                          '<li><a href="http://example.org/?p=' . $test_post->ID .
+                          '" id="post_' . $test_post->ID .
+                          '">Test post</a>' .
+                          '</li></ul>',
+                          $displayer->display());
+    }
 }

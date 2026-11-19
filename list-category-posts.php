@@ -171,6 +171,7 @@ class ListCategoryPosts{
         'ignore_sticky_posts' => '',
         'cat_sticky_posts' => '',
         'main_cat_only' => '',
+        'post_id' => 'no'
       );
     }
     return self::$default_params;

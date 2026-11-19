@@ -17,7 +17,7 @@ class ListCategoryPostsWidget extends WP_Widget{
      * when is_singular() is false. It should also be nullified in LCP
      * widgets, otherwise the plugin will mark the last post of the loop
      * as the current post.
-     * 
+     *
      * https://wordpress.org/support/topic/current-class-is-being-added-to-final-post-in-list/
      */
     if ( ! is_singular() ) {
