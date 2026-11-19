@@ -231,7 +231,6 @@ class CatListDisplayer {
   }
 
   private function get_post_link($single, $text, $class = null){
-
     $props = ['href' => esc_url(get_permalink($single->ID))];
 
     if (!empty($class)) {
@@ -240,6 +239,9 @@ class CatListDisplayer {
 
     if (!empty($this->params['link_target'])) {
       $props['target'] = esc_attr($this->params['link_target']);
+    }
+    if (isset($this->params['post_id']) && $this->params['post_id'] == 'yes') {
+        $props['id'] = 'post_' . $single->ID;
     }
 
     $output = $this->wrapper->to_html('a', $props, $text);

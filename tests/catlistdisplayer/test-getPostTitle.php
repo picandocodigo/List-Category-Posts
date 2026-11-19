@@ -191,7 +191,7 @@ class Tests_CatListDisplayer_GetPostTitle extends WP_UnitTestCase {
       )
     );
     $expected = '<a href="' . get_permalink(self::$test_post) .'"'
-                . '>Lcp &hellip;</a>';
+                . '>Lcp …</a>';
 
     $this->assertSame(
       $expected,

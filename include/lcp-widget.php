@@ -17,7 +17,7 @@ class ListCategoryPostsWidget extends WP_Widget{
      * when is_singular() is false. It should also be nullified in LCP
      * widgets, otherwise the plugin will mark the last post of the loop
      * as the current post.
-     * 
+     *
      * https://wordpress.org/support/topic/current-class-is-being-added-to-final-post-in-list/
      */
     if ( ! is_singular() ) {
@@ -39,8 +39,8 @@ class ListCategoryPostsWidget extends WP_Widget{
     $offset = (is_numeric($instance['offset'])) ? $instance['offset'] : 0;
     $category_id = $instance['categoryid'];
     $showdate = ($instance['show_date'] == 'on') ? 'yes' : 'no';
-    $pagination = ($instance['pagination'] == 'on') ? 'yes' : 'no';
-    $showmodifieddate = ($instance['show_modified_date'] == 'on') ? 'yes' : 'no';
+    $pagination = (isset($instance['pagination']) && $instance['pagination'] == 'on') ? 'yes' : 'no';
+    $showmodifieddate = (isset($instance['show_modified_date']) && $instance['show_modified_date'] == 'on') ? 'yes' : 'no';
     $showexcerpt = ($instance['show_excerpt'] == 'on') ? 'yes' : 'no';
     $excerptsize = (empty($instance['excerpt_size']) ? 55 : $instance['excerpt_size']);
     $showauthor = ($instance['show_author'] == 'on') ? 'yes' : 'no';
